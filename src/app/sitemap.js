@@ -1,22 +1,24 @@
 export default function sitemap() {
-  return [
-    {
-      url: 'https://merlinflow.in',
-      lastModified: new Date(),
-      changeFrequency: 'yearly',
-      priority: 1,
-    },
-    {
-      url: 'https://merlinflow.in/products',
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: 'https://merlinflow.in/privacy-policy',
-      lastModified: new Date(),
-      changeFrequency: 'yearly',
-      priority: 0.5,
-    },
-  ]
+  const baseUrl = 'https://merlinflow.in';
+  
+  const routes = [
+    '',
+    '/about',
+    '/products',
+    '/features',
+    '/how-it-works',
+    '/integrations',
+    '/security',
+    '/pricing',
+    '/testimonials',
+    '/contact',
+    '/privacy-policy'
+  ];
+
+  return routes.map((route) => ({
+    url: `${baseUrl}${route}`,
+    lastModified: new Date(),
+    changeFrequency: route === '' ? 'yearly' : 'monthly',
+    priority: route === '' ? 1 : 0.8,
+  }));
 }
