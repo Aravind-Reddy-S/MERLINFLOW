@@ -61,7 +61,6 @@ export default function Navbar() {
             <button className="mobile-toggle" onClick={() => setMobileOpen(true)}>
               <Menu size={28} />
             </button>
-          </div>
         </div>
       </nav>
 
