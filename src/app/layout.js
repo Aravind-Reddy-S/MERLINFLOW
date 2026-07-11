@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 import AccessibilityWidget from "../components/AccessibilityWidget";
 
 import Preloader from "../components/Preloader";
-
+import Script from "next/script";
 export const metadata = {
   metadataBase: new URL("https://merlinflow.in"),
   title: "MerlinFlow Technologies | Premium SaaS Solutions",
@@ -52,7 +52,18 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" data-theme="light" suppressHydrationWarning>
       <head>
-
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-4GNDXYJLZ0"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){window.dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-4GNDXYJLZ0');
+          `}
+        </Script>
       </head>
       <body>
         <Preloader />
