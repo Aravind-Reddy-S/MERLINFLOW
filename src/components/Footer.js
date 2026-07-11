@@ -54,6 +54,7 @@ export default function Footer() {
               <li><a href="#about" onClick={(e) => handleLinkClick(e, '#about')}>About Us</a></li>
               <li><a href="#testimonials" onClick={(e) => handleLinkClick(e, '#testimonials')}>Success Stories</a></li>
               <li><a href="#contact" onClick={(e) => handleLinkClick(e, '#contact')}>FAQ</a></li>
+              <li><a href="/blog">Blog</a></li>
               <li><a href="#contact" onClick={(e) => handleLinkClick(e, '#contact')}>Contact</a></li>
               <li><a href="/privacy-policy">Privacy Policy</a></li>
             </ul>
