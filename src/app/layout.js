@@ -52,6 +52,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" data-theme="light" suppressHydrationWarning>
       <head>
+      </head>
+      <body>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-4GNDXYJLZ0"
           strategy="afterInteractive"
@@ -64,8 +66,6 @@ export default function RootLayout({ children }) {
             gtag('config', 'G-4GNDXYJLZ0');
           `}
         </Script>
-      </head>
-      <body>
         <Preloader />
         <div id="main-content">
           <Navbar />
