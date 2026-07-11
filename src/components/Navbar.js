@@ -30,7 +30,6 @@ export default function Navbar() {
     { name: "How It Works", href: "#how-it-works" },
     { name: "Integrations", href: "#integrations" },
     { name: "Pricing", href: "#pricing" },
-    { name: "Blog", href: "/blog" },
     { name: "Contact", href: "#contact" },
   ];
 
