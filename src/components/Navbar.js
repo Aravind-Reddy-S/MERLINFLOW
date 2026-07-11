@@ -56,24 +56,7 @@ export default function Navbar() {
             />
           </a>
 
-          {/* Desktop Nav */}
-          <div className="desktop-nav">
-            {navLinks.map((link) => (
-              <a 
-                key={link.name} 
-                href={link.href} 
-                onClick={(e) => handleLinkClick(e, link.href)}
-                className="nav-link"
-              >
-                {link.name}
-              </a>
-            ))}
-          </div>
 
-          <div className="nav-actions">
-            <Link href="/dashboard" className="primary-btn dashboard-btn">
-              Dashboard
-            </Link>
             {/* Mobile Toggle */}
             <button className="mobile-toggle" onClick={() => setMobileOpen(true)}>
               <Menu size={28} />
@@ -288,28 +271,9 @@ export default function Navbar() {
           padding-left: 1.25rem;
         }
 
-        @media (max-width: 1024px) {
-          .desktop-nav {
-            display: none;
-          }
-        }
 
-        @media (min-width: 1025px) {
-          .mobile-toggle {
-            display: none;
-          }
-        }
 
-        :global(.dashboard-btn) {
-          padding: 0.6rem 1.25rem;
-          font-size: 0.95rem;
-        }
 
-        @media (max-width: 640px) {
-          :global(.dashboard-btn) {
-            display: none; /* Hide on very small screens to save space */
-          }
-        }
       `}</style>
     </>
   );
