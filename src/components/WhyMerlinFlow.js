@@ -135,6 +135,7 @@ export default function WhyMerlinFlow() {
         .advantages-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
+          grid-auto-rows: 1fr;
           gap: 2rem;
           max-width: 1200px;
           margin: 0 auto;
@@ -150,6 +151,7 @@ export default function WhyMerlinFlow() {
           background: var(--glass-bg);
           backdrop-filter: blur(12px);
           border-radius: 20px;
+          height: 100%;
         }
 
         .advantage-card:hover {
@@ -191,6 +193,12 @@ export default function WhyMerlinFlow() {
         @media (max-width: 768px) {
           .advantages-grid {
             grid-template-columns: 1fr;
+          }
+          
+          .advantage-card {
+            align-items: center;
+            text-align: center;
+            padding: 2rem 1.5rem;
           }
         }
       `}</style>

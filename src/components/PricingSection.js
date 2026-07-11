@@ -82,10 +82,10 @@ export default function PricingSection() {
   // Unique entrance animations for each card based on index
   const getCardAnimation = (index) => {
     switch(index) {
-      case 0: return { initial: { opacity: 0, x: -50 }, whileInView: { opacity: 1, x: 0 } };
-      case 1: return { initial: { opacity: 0, y: 50, scale: 0.9 }, whileInView: { opacity: 1, y: 0, scale: 1 } };
-      case 2: return { initial: { opacity: 0, y: -50, scale: 0.9 }, whileInView: { opacity: 1, y: 0, scale: 1 } };
-      case 3: return { initial: { opacity: 0, x: 50 }, whileInView: { opacity: 1, x: 0 } };
+      case 0: return { initial: { opacity: 0, y: 30 }, whileInView: { opacity: 1, y: 0 } };
+      case 1: return { initial: { opacity: 0, y: 30, scale: 0.9 }, whileInView: { opacity: 1, y: 0, scale: 1 } };
+      case 2: return { initial: { opacity: 0, y: 30, scale: 0.9 }, whileInView: { opacity: 1, y: 0, scale: 1 } };
+      case 3: return { initial: { opacity: 0, y: 30 }, whileInView: { opacity: 1, y: 0 } };
       default: return { initial: { opacity: 0, y: 30 }, whileInView: { opacity: 1, y: 0 } };
     }
   };
@@ -174,7 +174,7 @@ export default function PricingSection() {
 
       <style jsx global>{`
         .pricing-section {
-          padding: 6rem 2rem;
+          padding: 6rem 0;
           background: transparent;
           border-bottom: 1px solid var(--glass-border);
           overflow: hidden; /* Ensure animations don't cause scrollbars */
@@ -209,6 +209,7 @@ export default function PricingSection() {
         .pricing-grid {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
+          grid-auto-rows: 1fr;
           gap: 2rem;
           max-width: 1400px;
           margin: 0 auto;
@@ -224,6 +225,7 @@ export default function PricingSection() {
           flex-direction: column;
           backdrop-filter: blur(12px);
           transition: background 0.3s ease;
+          height: 100%;
         }
 
         .pricing-card.popular {
@@ -247,7 +249,9 @@ export default function PricingSection() {
           letter-spacing: 1px;
           text-transform: uppercase;
           box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
-          white-space: nowrap;
+          width: 90%;
+          max-width: 200px;
+          text-align: center;
         }
 
         .pricing-header {
@@ -278,7 +282,8 @@ export default function PricingSection() {
           font-size: 0.95rem;
           line-height: 1.5;
           margin-bottom: 1.5rem;
-          height: 60px;
+          min-height: 60px;
+          height: auto;
         }
 
         .price-tag {
@@ -378,6 +383,25 @@ export default function PricingSection() {
           .pricing-grid {
             grid-template-columns: 1fr;
             max-width: 450px;
+          }
+          
+          .pricing-card {
+            align-items: center;
+            text-align: center;
+          }
+          
+          .pricing-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          }
+          
+          .pricing-features {
+            align-items: center;
+          }
+          
+          .feature-item {
+            justify-content: center;
           }
         }
       `}</style>

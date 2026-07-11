@@ -277,13 +277,18 @@ export default function AccessibilityWidget() {
       </AnimatePresence>
 
       {!isOpen && (
-        <button 
+        <motion.button 
           className="a11y-trigger"
           onClick={() => setIsOpen(true)}
           aria-label="Toggle Accessibility Menu"
+          drag
+          dragMomentum={false}
+          whileDrag={{ scale: 1.1 }}
+          whileHover={{ scale: 1.05, y: -4 }}
+          style={{ touchAction: "none" }}
         >
           <Accessibility size={32} strokeWidth={2.5} color="white" />
-        </button>
+        </motion.button>
       )}
 
       

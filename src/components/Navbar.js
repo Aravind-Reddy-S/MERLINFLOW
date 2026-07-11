@@ -46,16 +46,12 @@ export default function Navbar() {
     <>
       <nav className={`navbar ${isScrolled ? "scrolled" : ""}`}>
         <div className="container nav-content">
-          <a href="#hero" onClick={(e) => handleLinkClick(e, '#hero')} className="logo" style={{ display: 'flex', alignItems: 'center' }}>
+          <a href="#hero" onClick={(e) => handleLinkClick(e, '#hero')} className="logo-link">
             <Image 
               src={merlinflowLogo}
               alt="MerlinFlow Logo"
               height={65}
-              style={{ 
-                width: 'auto', 
-                objectFit: 'contain',
-                transform: 'scale(1.3)'
-              }}
+              className="navbar-logo-img"
               priority
             />
           </a>
@@ -162,6 +158,25 @@ export default function Navbar() {
           display: flex;
           align-items: center;
           gap: 1rem;
+        }
+
+        .logo-link {
+          display: flex;
+          align-items: center;
+        }
+
+        :global(.navbar-logo-img) {
+          width: auto;
+          object-fit: contain;
+          transform: scale(1.3);
+          transform-origin: left center;
+        }
+
+        @media (max-width: 768px) {
+          :global(.navbar-logo-img) {
+            transform: scale(1);
+            height: 45px;
+          }
         }
 
         .nav-link {

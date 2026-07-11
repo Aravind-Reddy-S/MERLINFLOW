@@ -25,12 +25,12 @@ export default function Hero() {
             transition={{ delay: 0.2, duration: 0.8, ease: "backOut" }}
             style={{ marginBottom: "2rem", display: "inline-block" }}
           >
-            <span className="glass-panel" style={{ padding: "0.5rem 1rem", fontSize: "0.875rem", fontWeight: 500, letterSpacing: "1px", textTransform: "uppercase", color: "var(--primary)" }}>
+            <span className="glass-panel" style={{ display: "inline-block", padding: "0.5rem 1rem", fontSize: "0.875rem", fontWeight: 500, letterSpacing: "1px", textTransform: "uppercase", color: "var(--primary)", lineHeight: "1.5" }}>
               Introducing MerlinFlow Technologies
             </span>
           </motion.div>
 
-          <h1 style={{ fontSize: "clamp(2.5rem, 4vw, 4rem)", fontWeight: 800, lineHeight: 1.2, marginBottom: "1.5rem" }}>
+          <h1 style={{ fontSize: "clamp(2.5rem, 4vw, 4rem)", fontWeight: 800, lineHeight: 1.2, marginBottom: "1.5rem", wordBreak: "break-word" }}>
             Innovation at <span className="text-gradient">every step.</span>
           </h1>
 
@@ -59,9 +59,9 @@ export default function Hero() {
           {isDemoOpen && (
             <motion.div 
               className="hero-demo-panel glass-panel"
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 50 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
                 {!selectedERP ? (
@@ -264,6 +264,7 @@ export default function Hero() {
           gap: 1.5rem;
           justify-content: center;
           align-items: center;
+          flex-wrap: wrap;
         }
         
         .hero-container::before {
@@ -310,6 +311,10 @@ export default function Hero() {
         }
 
         .btn-primary {
+          display: inline-flex;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
           background: var(--primary);
           color: #ffffff;
           border: none;
@@ -329,6 +334,10 @@ export default function Hero() {
         }
 
         .btn-secondary {
+          display: inline-flex;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
           background: transparent;
           color: var(--text-color);
           border: 1px solid var(--glass-border);
@@ -362,17 +371,33 @@ export default function Hero() {
         }
 
         @media (max-width: 1024px) {
-          .hero-grid {
-            grid-template-columns: 1fr;
+          .hero-grid, .hero-grid.demo-active {
+            grid-template-columns: 1fr !important;
             text-align: center;
           }
-          .hero-buttons {
+          .hero-grid.demo-active .hero-buttons {
             justify-content: center;
+          }
+          .hero-buttons {
+            flex-direction: column !important;
+            width: 100% !important;
+            gap: 1rem !important;
+          }
+          .btn-primary, .btn-secondary {
+            width: 100% !important;
+            max-width: 300px;
           }
           .hero-text-content {
             display: flex;
             flex-direction: column;
             align-items: center;
+            width: 100%;
+          }
+        }
+
+        @media (max-width: 600px) {
+          .demo-options-grid {
+            grid-template-columns: 1fr;
           }
         }
       `}</style>

@@ -162,6 +162,7 @@ export default function IndustryFeatures() {
         .features-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
+          grid-auto-rows: 1fr;
           gap: 2rem;
         }
 
@@ -172,6 +173,7 @@ export default function IndustryFeatures() {
           flex-direction: column;
           align-items: center;
           text-align: center;
+          height: 100%;
         }
 
         .feature-card:hover {
@@ -199,6 +201,8 @@ export default function IndustryFeatures() {
         .feature-desc {
           color: var(--text-muted);
           line-height: 1.6;
+          min-height: 50px;
+          height: auto;
         }
         @media (max-width: 1024px) {
           .features-grid {

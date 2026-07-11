@@ -99,9 +99,10 @@ export default function ProductsOverview() {
 
       <style jsx global>{`
         .products-section {
-          padding: 6rem 2rem;
+          padding: 6rem 0;
           background: transparent;
           position: relative;
+          overflow: hidden;
         }
 
         .section-header-top {
@@ -133,6 +134,7 @@ export default function ProductsOverview() {
         .products-grid {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
+          grid-auto-rows: 1fr;
           gap: 2rem;
           max-width: 1200px;
           margin: 0 auto;
@@ -148,6 +150,7 @@ export default function ProductsOverview() {
           border-radius: 16px;
           border: 1px solid #cbd5e1;
           box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+          height: 100%;
         }
 
         .prod-header {
@@ -218,6 +221,33 @@ export default function ProductsOverview() {
         @media (max-width: 768px) {
           .products-grid {
             grid-template-columns: 1fr;
+          }
+          
+          .prod-card {
+            align-items: center;
+            text-align: center;
+            padding: 2rem 1.5rem;
+          }
+          
+          .prod-header {
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+          }
+
+          .prod-title-group {
+            align-items: center;
+          }
+          
+          .prod-desc {
+            text-align: center;
+          }
+          
+          :global(.prod-btn) {
+            width: 100%;
+            font-size: 0.9rem;
+            padding: 0.8rem 1rem;
+            white-space: normal;
           }
         }
       `}</style>

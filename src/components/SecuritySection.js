@@ -91,6 +91,7 @@ export default function SecuritySection() {
         .features-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
+          grid-auto-rows: 1fr;
           gap: 1.5rem;
           max-width: 1200px;
           margin: 0 auto;
@@ -168,6 +169,18 @@ export default function SecuritySection() {
         @media (max-width: 640px) {
           .features-grid {
             grid-template-columns: 1fr;
+          }
+          
+          .sec-feature {
+            align-items: center;
+            text-align: center;
+            padding: 2rem 1.5rem;
+          }
+          
+          .sec-header {
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
           }
         }
       `}</style>

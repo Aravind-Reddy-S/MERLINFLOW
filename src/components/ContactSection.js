@@ -93,7 +93,7 @@ export default function ContactSection() {
 
         {/* Right Column */}
         <div className="contact-right">
-          <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="form-card">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="form-card">
             
             {isSubmitted ? (
                <div className="success-state">
@@ -181,11 +181,12 @@ export default function ContactSection() {
 
       <style jsx global>{`
         .contact-new-section {
-          padding: 6rem 2rem;
+          padding: 6rem 0;
           background: #fafafa;
           min-height: 100vh;
           display: flex;
           align-items: center;
+          overflow: hidden;
         }
 
         .contact-container {
@@ -252,6 +253,7 @@ export default function ContactSection() {
           color: #1a1a1a;
           font-weight: 500;
           text-decoration: none;
+          word-break: break-all;
         }
 
         .faq-divider {
@@ -518,12 +520,45 @@ export default function ContactSection() {
             gap: 4rem;
           }
           
+          .contact-left {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          }
+          
+          .contact-pills {
+            align-items: center;
+            width: 100%;
+            max-width: 450px;
+          }
+          
+          .contact-pill {
+            width: 100%;
+            justify-content: center;
+          }
+          
+          .faq-list {
+            width: 100%;
+            max-width: 500px;
+          }
+          
+          .faq-q {
+            text-align: left;
+          }
+          
           .form-card {
             padding: 2rem;
           }
         }
         
         @media (max-width: 600px) {
+          .contact-new-section {
+            padding: 4rem 0;
+          }
+          .form-card {
+            padding: 1.5rem;
+          }
           .input-row {
             grid-template-columns: 1fr;
           }

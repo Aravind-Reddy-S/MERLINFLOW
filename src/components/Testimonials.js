@@ -209,9 +209,10 @@ export default function Testimonials() {
 
       <style jsx global>{`
         .testimonials-section {
-          padding: 3rem 2rem;
+          padding: 3rem 0;
           background: transparent;
           position: relative;
+          overflow: hidden;
         }
 
         .section-header {
@@ -240,6 +241,8 @@ export default function Testimonials() {
           scroll-behavior: smooth;
           scroll-snap-type: x mandatory;
           -webkit-overflow-scrolling: touch;
+          width: 100%;
+          max-width: 100%;
         }
         
         .testimonials-grid::-webkit-scrollbar {
@@ -257,7 +260,7 @@ export default function Testimonials() {
         }
 
         .testimonial-card {
-          flex: 0 0 350px;
+          flex: 0 0 min(350px, 85vw);
           scroll-snap-align: center;
           padding: 1.5rem;
           position: relative;

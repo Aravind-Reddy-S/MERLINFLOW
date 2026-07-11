@@ -22,8 +22,8 @@ export default function IntegrationsSection() {
         <div className="layout-grid">
           
           <motion.div 
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6 }}
             className="text-content"
@@ -68,9 +68,10 @@ export default function IntegrationsSection() {
 
       <style jsx global>{`
         .integrations-section {
-          padding: 4rem 2rem;
+          padding: 4rem 0;
           background: transparent;
           position: relative;
+          overflow: hidden;
         }
 
         .layout-grid {
@@ -114,6 +115,7 @@ export default function IntegrationsSection() {
         .integrations-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
+          grid-auto-rows: 1fr;
           gap: 1rem;
         }
 
@@ -127,6 +129,7 @@ export default function IntegrationsSection() {
           text-align: center;
           transition: all 0.3s;
           cursor: pointer;
+          height: 100%;
         }
 
         .integration-card:hover {
@@ -187,6 +190,14 @@ export default function IntegrationsSection() {
         @media (max-width: 640px) {
           .integrations-grid {
             grid-template-columns: repeat(2, 1fr);
+            width: 100%;
+            margin: 0 auto;
+            justify-content: center;
+          }
+          
+          .integration-card {
+            min-height: 180px;
+            width: 100%;
           }
         }
       `}</style>
