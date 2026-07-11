@@ -6,8 +6,37 @@ import AccessibilityWidget from "../components/AccessibilityWidget";
 import Preloader from "../components/Preloader";
 
 export const metadata = {
+  metadataBase: new URL("https://merlinflow.in"),
   title: "MerlinFlow Technologies | Premium SaaS Solutions",
-  description: "Next-generation ERP solutions for Education, Health, and Hospitality.",
+  description: "Next-generation ERP solutions for Education, Health, and Hospitality. Empowering businesses with innovative technology.",
+  keywords: ["ERP", "SaaS", "Education ERP", "Health ERP", "Hospitality ERP", "MerlinFlow", "MerlinFlow Technologies", "Software", "Business Solutions", "Cloud ERP"],
+  authors: [{ name: "MerlinFlow Technologies" }],
+  creator: "MerlinFlow Technologies",
+  publisher: "MerlinFlow Technologies",
+  openGraph: {
+    title: "MerlinFlow Technologies | Premium SaaS Solutions",
+    description: "Next-generation ERP solutions for Education, Health, and Hospitality.",
+    url: "https://merlinflow.in",
+    siteName: "MerlinFlow Technologies",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "MerlinFlow Technologies | Premium SaaS Solutions",
+    description: "Next-generation ERP solutions for Education, Health, and Hospitality.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 export const viewport = {
