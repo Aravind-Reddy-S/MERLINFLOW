@@ -17,6 +17,8 @@
   pointer-events: auto;
   overflow: visible;
   z-index: 10;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 /* Wing Image Split Styling */
@@ -54,6 +56,8 @@
   /* Feather the hard edges of the square image into transparency */
   -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
   mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .left-door {
@@ -69,6 +73,9 @@
   top: 0;
   height: 100vh;
   overflow: hidden;
+  isolation: isolate;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .left-door-visuals {
