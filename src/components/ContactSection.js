@@ -253,7 +253,8 @@ export default function ContactSection() {
           color: #1a1a1a;
           font-weight: 500;
           text-decoration: none;
-          word-break: break-all;
+          word-break: break-word;
+          overflow-wrap: break-word;
         }
 
         .faq-divider {
@@ -536,6 +537,13 @@ export default function ContactSection() {
           .contact-pill {
             width: 100%;
             justify-content: center;
+            flex-direction: column;
+            padding: 1.5rem;
+            gap: 0.8rem;
+          }
+          
+          .pill-content {
+            align-items: center;
           }
           
           .faq-list {
