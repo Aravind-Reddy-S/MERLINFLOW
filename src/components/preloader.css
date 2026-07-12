@@ -82,14 +82,14 @@
   left: 0;
   width: 51vw;
   background: radial-gradient(circle at right center, #14112e 0%, #050505 100%);
-  clip-path: polygon(0 0, 98% 0, 100% 10%, 98% 20%, 100% 30%, 98% 40%, 100% 50%, 98% 60%, 100% 70%, 98% 80%, 100% 90%, 98% 100%, 0 100%);
+  clip-path: polygon(0 0, 97% 0, 100% 10%, 97% 20%, 100% 30%, 97% 40%, 100% 50%, 97% 60%, 100% 70%, 97% 80%, 100% 90%, 97% 100%, 0 100%);
 }
 
 .right-door-visuals {
   right: 0;
   width: 51vw;
   background: radial-gradient(circle at left center, #14112e 0%, #030208 100%);
-  clip-path: polygon(100% 0, 100% 100%, 2% 100%, 4% 90%, 2% 80%, 4% 70%, 2% 60%, 4% 50%, 2% 40%, 4% 30%, 2% 20%, 4% 10%, 2% 0);
+  clip-path: polygon(100% 0, 100% 100%, 0% 100%, 3% 90%, 0% 80%, 3% 70%, 0% 60%, 3% 50%, 0% 40%, 3% 30%, 0% 20%, 3% 10%, 0% 0);
 }
 
 .global-percentage-container {
