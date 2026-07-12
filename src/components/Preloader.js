@@ -65,22 +65,23 @@ export default function Preloader() {
             initial={{ x: 0 }}
             exit={{ x: "-100%", transition: { duration: 1.0, ease: [0.76, 0, 0.24, 1] } }}
           >
-            {/* WING IMAGE (LEFT HALF) */}
-            <div className="wing-image-container left-wing-image">
-              <img src="/images/preloader_logo.png" alt="Logo Left" />
+            <div className="door-visuals left-door-visuals">
+              {/* FALCON LOGO (LEFT HALF) */}
+              <div className="wing-image-container left-wing-image">
+                <img src="/images/falcon_wings.png" alt="Falcon Left" className="falcon-logo" />
+              </div>
             </div>
 
             {/* TEXT (LEFT HALF) */}
             <div className="text-split-container left-text-container">
               <div className="brand-group">
-                <div className="full-word">
-                  <span className="brand-char">O</span>
+                <div className="half-word left-half">
+                  <span className="brand-char">M</span>
+                  <span className="brand-char">E</span>
                   <span className="brand-char">R</span>
-                  <span className="brand-char">Y</span>
-                  <span className="brand-char">O</span>
                   <span className="brand-char">L</span>
+                  <span className="brand-char">I</span>
                 </div>
-                <div className="brand-subtitle">TECHNOLOGIES PVT LTD</div>
               </div>
             </div>
           </motion.div>
@@ -91,22 +92,23 @@ export default function Preloader() {
             initial={{ x: 0 }}
             exit={{ x: "100%", transition: { duration: 1.0, ease: [0.76, 0, 0.24, 1] } }}
           >
-            {/* WING IMAGE (RIGHT HALF) */}
-            <div className="wing-image-container right-wing-image">
-              <img src="/images/preloader_logo.png" alt="Logo Right" />
+            <div className="door-visuals right-door-visuals">
+              {/* FALCON LOGO (RIGHT HALF) */}
+              <div className="wing-image-container right-wing-image">
+                <img src="/images/falcon_wings.png" alt="Falcon Right" className="falcon-logo" />
+              </div>
             </div>
 
             {/* TEXT (RIGHT HALF) */}
             <div className="text-split-container right-text-container">
               <div className="brand-group">
-                <div className="full-word">
-                  <span className="brand-char">O</span>
-                  <span className="brand-char">R</span>
-                  <span className="brand-char">Y</span>
-                  <span className="brand-char">O</span>
+                <div className="half-word right-half">
+                  <span className="brand-char">N</span>
+                  <span className="brand-char">F</span>
                   <span className="brand-char">L</span>
+                  <span className="brand-char">O</span>
+                  <span className="brand-char">W</span>
                 </div>
-                <div className="brand-subtitle">TECHNOLOGIES PVT LTD</div>
               </div>
             </div>
           </motion.div>

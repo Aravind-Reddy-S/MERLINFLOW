@@ -8,13 +8,15 @@
 }
 
 .door {
-  position: relative;
+  position: absolute;
+  top: 0;
   width: 50vw;
   height: 100vh;
   display: flex;
   align-items: center;
   pointer-events: auto;
-  overflow: hidden; /* This is crucial to cut the wing image in exactly half! */
+  overflow: visible;
+  z-index: 10;
 }
 
 /* Wing Image Split Styling */
@@ -55,15 +57,32 @@
 }
 
 .left-door {
-  background-color: #050505; /* Deep dark grey */
-  justify-content: flex-end;
-  /* padding removed to merge text */
+  left: 0;
 }
 
 .right-door {
-  background-color: #030208; /* Deep midnight blue */
-  justify-content: flex-start;
-  /* padding removed to merge text */
+  right: 0;
+}
+
+.door-visuals {
+  position: absolute;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.left-door-visuals {
+  left: 0;
+  width: 51vw;
+  background: radial-gradient(circle at right center, #14112e 0%, #050505 100%);
+  clip-path: polygon(0 0, calc(100% - 1vw) 0, 100% 10%, calc(100% - 1vw) 20%, 100% 30%, calc(100% - 1vw) 40%, 100% 50%, calc(100% - 1vw) 60%, 100% 70%, calc(100% - 1vw) 80%, 100% 90%, calc(100% - 1vw) 100%, 0 100%);
+}
+
+.right-door-visuals {
+  right: 0;
+  width: 51vw;
+  background: radial-gradient(circle at left center, #14112e 0%, #030208 100%);
+  clip-path: polygon(100% 0, 100% 100%, 1vw 100%, 2vw 90%, 1vw 80%, 2vw 70%, 1vw 60%, 2vw 50%, 1vw 40%, 2vw 30%, 1vw 20%, 2vw 10%, 1vw 0);
 }
 
 .global-percentage-container {
@@ -94,25 +113,19 @@
 
 /* Text Split Styling */
 .text-split-container {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 100vw;
-  height: 100vh;
   display: flex;
   align-items: center;
   z-index: 10; /* Above wings */
   pointer-events: none;
+  width: 100%;
 }
 
 .left-text-container {
-  left: 0;
-  justify-content: center;
+  justify-content: flex-end;
 }
 
 .right-text-container {
-  right: 0;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .brand-group {
@@ -135,16 +148,16 @@
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
-.full-word {
+.half-word {
   display: flex;
   /* Deep black 3D shadow to separate text from bright wings */
   filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.9));
 }
 
 .brand-char {
-  font-size: 140px; /* MASSIVE, PREMIUM TYPOGRAPHY */
+  font-size: 80px; /* Reduced to fit 10 letters (MERLINFLOW) */
   font-weight: 800; /* Bold, commanding presence */
-  letter-spacing: -4px;
+  letter-spacing: -2px;
   
   /* Premium Metallic Chrome Gradient */
   background: linear-gradient(
@@ -164,11 +177,25 @@
   animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.full-word .brand-char:nth-child(1) { animation-delay: 0.1s; }
-.full-word .brand-char:nth-child(2) { animation-delay: 0.2s; }
-.full-word .brand-char:nth-child(3) { animation-delay: 0.3s; }
-.full-word .brand-char:nth-child(4) { animation-delay: 0.4s; }
-.full-word .brand-char:nth-child(5) { animation-delay: 0.5s; }
+.half-word .brand-char:nth-child(1) { animation-delay: 0.05s; }
+.half-word .brand-char:nth-child(2) { animation-delay: 0.10s; }
+.half-word .brand-char:nth-child(3) { animation-delay: 0.15s; }
+.half-word .brand-char:nth-child(4) { animation-delay: 0.20s; }
+.half-word .brand-char:nth-child(5) { animation-delay: 0.25s; }
+
+.falcon-logo {
+  height: 70vh;
+  max-width: 800px;
+  object-fit: contain;
+  opacity: 0.3;
+  mix-blend-mode: screen;
+  animation: pulseLogo 3s ease-in-out infinite alternate;
+}
+
+@keyframes pulseLogo {
+  0% { transform: scale(0.95); opacity: 0.1; filter: blur(4px) drop-shadow(0 0 20px rgba(37, 99, 235, 0)); }
+  100% { transform: scale(1.05); opacity: 0.4; filter: blur(0px) drop-shadow(0 0 50px rgba(37, 99, 235, 0.8)); }
+}
 
 @keyframes slideUpFade {
   to {
@@ -185,9 +212,21 @@
 
 @media (max-width: 768px) {
   .brand-char {
-    font-size: 48px;
+    font-size: 40px;
   }
-  .percentage-container {
-    right: 140px;
+  .falcon-logo {
+    height: 50vh;
+  }
+  .global-percentage-container {
+    bottom: 30%;
+  }
+}
+
+@media (max-width: 480px) {
+  .brand-char {
+    font-size: 8.5vw;
+  }
+  .falcon-logo {
+    height: 40vh;
   }
 }
