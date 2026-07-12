@@ -49,7 +49,13 @@
   height: 100%;
   max-width: 1000px;
   object-fit: contain;
+  /* Removed drop-shadow which was adding a glowing box around the image bounds! */
   mix-blend-mode: screen;
+  /* Crush the dark pixels to pure black so mix-blend-mode: screen perfectly hides them */
+  filter: contrast(1.3) brightness(0.85);
+  /* Feather the hard edges of the square image into transparency */
+  -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+  mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
   will-change: transform;
   transform: translateZ(0);
 }
@@ -76,25 +82,25 @@
   left: 0;
   width: 51vw;
   background: radial-gradient(circle at right center, #14112e 0%, #050505 100%);
-  clip-path: polygon(0 0, 97% 0, 100% 10%, 97% 20%, 100% 30%, 97% 40%, 100% 50%, 97% 60%, 100% 70%, 97% 80%, 100% 90%, 97% 100%, 0 100%);
+  clip-path: polygon(0 0, 98% 0, 100% 10%, 98% 20%, 100% 30%, 98% 40%, 100% 50%, 98% 60%, 100% 70%, 98% 80%, 100% 90%, 98% 100%, 0 100%);
 }
 
 .right-door-visuals {
   right: 0;
   width: 51vw;
   background: radial-gradient(circle at left center, #14112e 0%, #030208 100%);
-  clip-path: polygon(100% 0, 100% 100%, 0% 100%, 3% 90%, 0% 80%, 3% 70%, 0% 60%, 3% 50%, 0% 40%, 3% 30%, 0% 20%, 3% 10%, 0% 0);
+  clip-path: polygon(100% 0, 100% 100%, 2% 100%, 4% 90%, 2% 80%, 4% 70%, 2% 60%, 4% 50%, 2% 40%, 4% 30%, 2% 20%, 4% 10%, 2% 0);
 }
 
 .global-percentage-container {
   position: absolute;
-  bottom: 25%;
+  bottom: 25%; /* Placed under the word */
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   align-items: baseline;
   color: rgba(255, 255, 255, 0.5);
-  z-index: 999;
+  z-index: 999; /* Above everything */
 }
 
 .percentage-number {
@@ -116,7 +122,7 @@
 .text-split-container {
   display: flex;
   align-items: center;
-  z-index: 10;
+  z-index: 10; /* Above wings */
   pointer-events: none;
   width: 100%;
 }
@@ -136,28 +142,31 @@
 }
 
 .brand-subtitle {
-  font-size: 14px;
-  letter-spacing: 16px;
-  color: rgba(255, 255, 255, 0.7);
-  font-weight: 300;
-  margin-top: -10px;
-  margin-right: -16px;
+  font-size: 14px; /* Sleek, small size */
+  letter-spacing: 16px; /* Extreme tracking for cinematic look */
+  color: rgba(255, 255, 255, 0.7); /* Slightly muted white */
+  font-weight: 300; /* Light weight */
+  margin-top: -10px; /* Tuck it up under the massive text */
+  margin-right: -16px; /* Compensate for tracking to keep it mathematically centered */
   opacity: 0;
   transform: translateY(10px);
   animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  animation-delay: 0.7s;
+  animation-delay: 0.7s; /* Fades in smoothly right after the main word finishes */
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
 .half-word {
   display: flex;
-  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.8));
+  /* Deep black 3D shadow to separate text from bright wings */
+  filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.9));
 }
 
 .brand-char {
-  font-size: 80px;
-  font-weight: 800;
+  font-size: 80px; /* Reduced to fit 10 letters (MERLINFLOW) */
+  font-weight: 800; /* Bold, commanding presence */
   letter-spacing: -2px;
+  
+  /* Premium Metallic Chrome Gradient */
   background: linear-gradient(
     180deg, 
     #ffffff 0%, 
@@ -169,6 +178,7 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
+
   transform: translateY(20px);
   opacity: 0;
   animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -190,8 +200,8 @@
 }
 
 @keyframes pulseLogo {
-  0% { transform: scale(0.95); opacity: 0.2; }
-  100% { transform: scale(1.05); opacity: 0.5; }
+  0% { transform: scale(0.95); opacity: 0.1; filter: blur(4px) drop-shadow(0 0 20px rgba(37, 99, 235, 0)); }
+  100% { transform: scale(1.05); opacity: 0.4; filter: blur(0px) drop-shadow(0 0 50px rgba(37, 99, 235, 0.8)); }
 }
 
 @keyframes slideUpFade {
