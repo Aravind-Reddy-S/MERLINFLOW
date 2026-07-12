@@ -46,6 +46,7 @@ export default function Preloader() {
     <AnimatePresence>
       {isLoading && (
         <motion.div 
+          key="preloader"
           className="preloader-container"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, transition: { duration: 0.1, delay: 0.9 } }} // container hides after doors slide
@@ -63,7 +64,7 @@ export default function Preloader() {
           <motion.div
             className="door left-door"
             initial={{ x: 0 }}
-            exit={{ x: "-100%", transition: { duration: 1.0, ease: [0.76, 0, 0.24, 1] } }}
+            exit={{ x: "-60vw", transition: { duration: 1.0, ease: [0.76, 0, 0.24, 1] } }}
           >
             <div className="door-visuals left-door-visuals">
               {/* FALCON LOGO (LEFT HALF) */}
@@ -90,7 +91,7 @@ export default function Preloader() {
           <motion.div
             className="door right-door"
             initial={{ x: 0 }}
-            exit={{ x: "100%", transition: { duration: 1.0, ease: [0.76, 0, 0.24, 1] } }}
+            exit={{ x: "60vw", transition: { duration: 1.0, ease: [0.76, 0, 0.24, 1] } }}
           >
             <div className="door-visuals right-door-visuals">
               {/* FALCON LOGO (RIGHT HALF) */}
