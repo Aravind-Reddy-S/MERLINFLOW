@@ -42,27 +42,27 @@ export default function ContactSection() {
             
             <div className="contact-pills">
               <div className="contact-pill">
-                <div className="pill-icon"><Phone size={16} color="#4f46e5" /></div>
-                <div className="pill-content">
+                <div className="pill-header">
+                  <div className="pill-icon"><Phone size={16} color="#4f46e5" /></div>
                   <span className="pill-label">CALL OR WHATSAPP</span>
-                  <a href="tel:+918374373753" className="pill-value">+91 83743 73753</a>
                 </div>
+                <a href="tel:+918374373753" className="pill-value">+91 83743 73753</a>
               </div>
               
               <div className="contact-pill">
-                <div className="pill-icon"><Mail size={16} color="#4f46e5" /></div>
-                <div className="pill-content">
+                <div className="pill-header">
+                  <div className="pill-icon"><Mail size={16} color="#4f46e5" /></div>
                   <span className="pill-label">EMAIL US</span>
-                  <a href="mailto:merlinflowtechnologies@gmail.com" className="pill-value">merlinflowtechnologies@gmail.com</a>
                 </div>
+                <a href="mailto:merlinflowtechnologies@gmail.com" className="pill-value">merlinflowtechnologies@gmail.com</a>
               </div>
               
               <div className="contact-pill">
-                <div className="pill-icon"><MapPin size={16} color="#4f46e5" /></div>
-                <div className="pill-content">
+                <div className="pill-header">
+                  <div className="pill-icon"><MapPin size={16} color="#4f46e5" /></div>
                   <span className="pill-label">OUR LOCATION</span>
-                  <span className="pill-value">Warangal, Telangana</span>
                 </div>
+                <span className="pill-value">Warangal, Telangana</span>
               </div>
             </div>
             
@@ -215,13 +215,20 @@ export default function ContactSection() {
 
         .contact-pill {
           display: flex;
-          align-items: center;
-          gap: 1rem;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.8rem;
           background: #ffffff;
           border: 1px solid #eaeaea;
           border-radius: 12px;
-          padding: 1rem 1.25rem;
+          padding: 1.5rem;
           box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+        }
+
+        .pill-header {
+          display: flex;
+          align-items: center;
+          gap: 0.8rem;
         }
 
         .pill-icon {
@@ -235,21 +242,15 @@ export default function ContactSection() {
           flex-shrink: 0;
         }
 
-        .pill-content {
-          display: flex;
-          flex-direction: column;
-          gap: 0.15rem;
-        }
-
         .pill-label {
-          font-size: 0.7rem;
+          font-size: 0.75rem;
           font-weight: 700;
           color: #888;
           letter-spacing: 0.05em;
         }
 
         .pill-value {
-          font-size: 0.95rem;
+          font-size: 1.05rem;
           color: #1a1a1a;
           font-weight: 500;
           text-decoration: none;
@@ -536,14 +537,13 @@ export default function ContactSection() {
           
           .contact-pill {
             width: 100%;
-            justify-content: center;
-            flex-direction: column;
+            align-items: center;
+            text-align: center;
             padding: 1.5rem;
-            gap: 0.8rem;
           }
           
-          .pill-content {
-            align-items: center;
+          .pill-header {
+            justify-content: center;
           }
           
           .faq-list {
