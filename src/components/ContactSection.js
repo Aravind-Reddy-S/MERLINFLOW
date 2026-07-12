@@ -54,7 +54,7 @@ export default function ContactSection() {
                   <div className="pill-icon"><Mail size={16} color="#4f46e5" /></div>
                   <span className="pill-label">EMAIL US</span>
                 </div>
-                <a href="mailto:merlinflowtechnologies@gmail.com" className="pill-value">merlinflowtechnologies@gmail.com</a>
+                <a href="mailto:hello@merlinflow.in" className="pill-value">hello@merlinflow.in</a>
               </div>
               
               <div className="contact-pill">

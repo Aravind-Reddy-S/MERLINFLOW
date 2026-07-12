@@ -54,7 +54,7 @@ export default function Testimonials() {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("https://formsubmit.co/ajax/merlinflowtechnologies@gmail.com", {
+      const response = await fetch("https://formsubmit.co/ajax/hello@merlinflow.in", {
         method: "POST",
         headers: { 
           'Content-Type': 'application/json',
