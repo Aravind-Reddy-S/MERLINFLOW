@@ -1,46 +1,35 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue, useTransform, animate } from "framer-motion";
 import "./preloader.css";
 
 export default function Preloader() {
-  const [progress, setProgress] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  
+  // Use highly-optimized Framer Motion values instead of React state for 60fps mobile performance
+  const count = useMotionValue(0);
+  const rounded = useTransform(count, (latest) => Math.round(latest));
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
 
-    const duration = 2000;
-    const interval = 20;
-    const steps = duration / interval;
-    let currentStep = 0;
-
-    const timer = setInterval(() => {
-      currentStep++;
-      const rawProgress = (currentStep / steps);
-      // easeOut function for smoother counter
-      const easedProgress = rawProgress === 1 ? 1 : 1 - Math.pow(2, -10 * rawProgress);
-      
-      const newProgress = Math.min(Math.floor(easedProgress * 100), 100);
-      setProgress(newProgress);
-
-      if (currentStep >= steps) {
-        clearInterval(timer);
-        setProgress(100);
-        
+    const controls = animate(count, 100, {
+      duration: 2,
+      ease: "easeOut",
+      onComplete: () => {
         setTimeout(() => {
           setIsLoading(false);
           document.body.style.overflow = "auto";
         }, 600);
       }
-    }, interval);
+    });
 
     return () => {
-      clearInterval(timer);
+      controls.stop();
       document.body.style.overflow = "auto";
     };
-  }, []);
+  }, [count]);
 
   return (
     <AnimatePresence>
@@ -56,7 +45,7 @@ export default function Preloader() {
             className="global-percentage-container"
             exit={{ opacity: 0, y: 20, transition: { duration: 0.4 } }}
           >
-            <span className="percentage-number">{progress}</span>
+            <motion.span className="percentage-number">{rounded}</motion.span>
             <span className="percentage-symbol">%</span>
           </motion.div>
 
