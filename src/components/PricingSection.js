@@ -6,75 +6,75 @@ import { Check, X, ShoppingCart, Hotel, GraduationCap, Hospital } from "lucide-r
 export default function PricingSection() {
   const plans = [
     {
-      name: "E-Commerce Integration",
-      desc: "Perfect for scaling online stores connecting to basic accounting.",
-      price: "$3,500",
-      period: "/annum",
+      name: "E-Commerce Platform",
+      desc: "Automated 1-click checkout, WhatsApp NDR defense, and multi-courier logistics for D2C brands.",
+      price: "₹1,599",
+      period: "/month",
       popular: false,
       icon: ShoppingCart,
       color: "#a855f7",
       bgLight: "#faf5ff",
       features: [
-        { text: "Shopify & WooCommerce Sync", included: true },
-        { text: "Up to 50,000 orders/year", included: true },
-        { text: "Inventory & CRM Sync", included: true },
-        { text: "Standard Email Support", included: true },
-        { text: "Custom API Workflows", included: true },
-        { text: "Dedicated Account Manager", included: true },
+        { text: "Up to 1,000 orders / month", included: true },
+        { text: "1-Click Accelerated Checkout", included: true },
+        { text: "Shiprocket Direct API Logistics", included: true },
+        { text: "WhatsApp Order Alerts & NDR Defense", included: true },
+        { text: "Real-time Multi-Channel Inventory", included: true },
+        { text: "Automated GST Invoicing", included: true },
       ]
     },
     {
-      name: "Hotel ERP Integration",
-      desc: "Connect Property Management Systems to booking engines.",
-      price: "$7,500",
-      period: "/annum",
+      name: "Restaurant ERP (POS + KDS)",
+      desc: "Smart QR table ordering, live kitchen display sync, and high-speed cashier billing.",
+      price: "₹1,599",
+      period: "/month",
       popular: false,
       icon: Hotel,
       color: "#f97316",
       bgLight: "#fff7ed",
       features: [
-        { text: "Opera & Mews Integration", included: true },
-        { text: "Real-time Booking Sync", included: true },
-        { text: "Restaurant & POS Sync", included: true },
-        { text: "Priority Phone Support", included: true },
-        { text: "Custom API Workflows", included: true },
-        { text: "Dedicated Account Manager", included: true },
+        { text: "Digital Menu & QR Table Ordering", included: true },
+        { text: "High-Speed Counter POS & Dynamic UPI", included: true },
+        { text: "Kitchen Display System (KDS) Live Sync", included: true },
+        { text: "Recipe & Raw Stock Depletion", included: true },
+        { text: "WhatsApp E-Bills & Table Booking", included: true },
+        { text: "24/7 Priority Support & Onboarding", included: true },
       ]
     },
     {
-      name: "Educational ERP",
-      desc: "Unified systems for schools and universities (SIS & LMS).",
-      price: "$5,500",
-      period: "/annum",
-      popular: false,
+      name: "School IMS (EdTech OS)",
+      desc: "Complete school automation — attendance voice calls, digital fee POS, and parent WhatsApp diary.",
+      price: "₹21",
+      period: "/student/mo",
+      popular: true,
       icon: GraduationCap,
       color: "#3b82f6",
       bgLight: "#eff6ff",
       features: [
-        { text: "Canvas & Blackboard Sync", included: true },
-        { text: "Student Record Management", included: true },
-        { text: "Automated Fee Collection", included: true },
-        { text: "Parent Portal Integration", included: true },
-        { text: "Custom API Workflows", included: true },
-        { text: "Dedicated Account Manager", included: true },
+        { text: "Student & Staff Master Profiles", included: true },
+        { text: "Smart Attendance & Voice Call Alerts", included: true },
+        { text: "Digital Fee POS & Printable Receipts", included: true },
+        { text: "Parent WhatsApp Daily Diary & Homework", included: true },
+        { text: "Examination & Report Card Generator", included: true },
+        { text: "Bus GPS Transport Tracking & RFID", included: true },
       ]
     },
     {
-      name: "Hospital ERP",
-      desc: "Secure integration for healthcare, EMR, and patient billing.",
-      price: "$12,500",
-      period: "/annum",
+      name: "Medical ERP (Pharmacy OS)",
+      desc: "Zero-expiry radar, 5-second barcode billing, and 1-click GSTR-1/3B filing for retail chemists.",
+      price: "₹1,250",
+      period: "/store/mo",
       popular: false,
       icon: Hospital,
       color: "#10b981",
       bgLight: "#ecfdf5",
       features: [
-        { text: "Epic & Cerner Integration", included: true },
-        { text: "HIPAA Compliant Data Flow", included: true },
-        { text: "Insurance Claims Sync", included: true },
-        { text: "24/7 Dedicated Support", included: true },
-        { text: "Custom API Workflows", included: true },
-        { text: "Dedicated Account Manager", included: true },
+        { text: "10,000+ Medicine Master Database", included: true },
+        { text: "30/60/90-Day Expiry Radar & Batch Lock", included: true },
+        { text: "Sub-5s Lightning Barcode Billing POS", included: true },
+        { text: "Low Stock Alerts & Supplier PO Drafts", included: true },
+        { text: "Multi-Store Central Inventory Sync", included: true },
+        { text: "One-Click GSTR-1, 3B & HSN Export", included: true },
       ]
     }
   ];
@@ -102,10 +102,10 @@ export default function PricingSection() {
         >
           <div className="badge">Transparent Pricing</div>
           <h2 style={{ fontSize: "3rem", fontWeight: 700, marginBottom: "1rem" }}>
-            Annual Plans for every <span className="text-gradient">Industry.</span>
+            Affordable Plans for Every <span className="text-gradient">Industry.</span>
           </h2>
           <p style={{ color: "var(--text-muted)", fontSize: "1.1rem", maxWidth: "800px", margin: "0 auto 2rem auto", lineHeight: "1.6" }}>
-            Whether you are managing e-commerce transactions, hotel bookings, student records, or sensitive patient data, our integration tiers are built to scale with your annual requirements.
+            Whether you are running an e-commerce brand, restaurant, school, or pharmacy, our all-in-one software suites are priced affordably in Indian Rupees to scale with your business.
           </p>
         </motion.div>
 
