@@ -2698,6 +2698,72 @@ export default function RestaurantErpView() {
             line-height: 1.15 !important;
           }
 
+          .dashboard-preview-wrapper {
+            padding: 1.25rem 0.85rem !important;
+            border-radius: 18px !important;
+            margin-top: 1rem !important;
+          }
+
+          .dash-metrics-row {
+            grid-template-columns: 1fr !important;
+            gap: 0.75rem !important;
+            margin-bottom: 1.25rem !important;
+          }
+
+          .dash-metric-card {
+            padding: 1rem !important;
+            border-radius: 14px !important;
+          }
+
+          .dash-metric-value {
+            font-size: 1.4rem !important;
+          }
+
+          .table-grid-section {
+            padding: 1rem 0.75rem !important;
+            border-radius: 14px !important;
+          }
+
+          .table-grid-header {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 0.65rem !important;
+            margin-bottom: 1rem !important;
+          }
+
+          .table-legend {
+            display: flex !important;
+            flex-wrap: wrap !important;
+            gap: 0.5rem 0.85rem !important;
+            font-size: 0.72rem !important;
+            width: 100% !important;
+          }
+
+          .table-boxes-grid {
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 0.45rem !important;
+          }
+
+          .table-status-cell {
+            padding: 0.6rem 0.25rem !important;
+            border-radius: 10px !important;
+          }
+
+          .table-num {
+            font-size: 0.85rem !important;
+            font-weight: 800 !important;
+            margin-bottom: 0.1rem !important;
+          }
+
+          .table-val {
+            font-size: 0.68rem !important;
+            font-weight: 700 !important;
+          }
+
+          .table-time {
+            font-size: 0.58rem !important;
+          }
+
           .comparison-table-wrapper {
             overflow-x: auto !important;
             -webkit-overflow-scrolling: touch !important;
@@ -2718,14 +2784,9 @@ export default function RestaurantErpView() {
             font-size: 0.78rem !important;
           }
 
-          .cards-grid-3, .cards-grid-4, .roadmap-cards-grid, .dash-metrics-row, .kds-cards-grid {
+          .cards-grid-3, .cards-grid-4, .roadmap-cards-grid, .kds-cards-grid {
             grid-template-columns: 1fr !important;
             gap: 0.85rem !important;
-          }
-
-          .table-boxes-grid {
-            grid-template-columns: repeat(2, 1fr) !important;
-            gap: 0.5rem !important;
           }
 
           .calculator-panel-box {
