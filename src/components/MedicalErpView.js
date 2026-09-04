@@ -3810,8 +3810,8 @@ export default function MedicalErpView() {
 
           .stats-strip {
             display: grid !important;
-            grid-template-columns: repeat(3, 1fr) !important;
-            gap: 0.35rem !important;
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 0.5rem !important;
             width: 100% !important;
             max-width: 100% !important;
             padding: 0.85rem 0.5rem !important;
@@ -3821,17 +3821,17 @@ export default function MedicalErpView() {
           }
 
           .stat-card {
-            padding: 0.2rem !important;
+            padding: 0.35rem !important;
             text-align: center !important;
           }
 
           .stat-number {
-            font-size: clamp(1.1rem, 3.8vw, 1.4rem) !important;
+            font-size: clamp(1.15rem, 4vw, 1.45rem) !important;
             font-weight: 800 !important;
           }
 
           .stat-label {
-            font-size: 0.6rem !important;
+            font-size: 0.65rem !important;
             line-height: 1.15 !important;
           }
 
@@ -3872,6 +3872,29 @@ export default function MedicalErpView() {
             font-size: 0.72rem !important;
             flex-shrink: 0 !important;
             white-space: nowrap !important;
+          }
+
+          .dashboard-top-row {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 0.45rem !important;
+          }
+
+          .kpi-cards-grid {
+            grid-template-columns: 1fr !important;
+            gap: 0.5rem !important;
+          }
+
+          .pos-search-mock {
+            font-size: 0.72rem !important;
+            padding: 0.45rem 0.65rem !important;
+          }
+
+          .btn-live-launch {
+            width: 100% !important;
+            justify-content: center !important;
+            font-size: 0.78rem !important;
+            padding: 0.6rem 0.8rem !important;
           }
 
           .section-padding {

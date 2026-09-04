@@ -2657,26 +2657,43 @@ export default function RestaurantErpView() {
           .hero-stats-grid {
             display: grid !important;
             grid-template-columns: repeat(2, 1fr) !important;
-            gap: 0.5rem !important;
+            gap: 0.65rem !important;
             width: 100% !important;
             max-width: 100% !important;
-            padding: 0.85rem 0.5rem !important;
             margin: 0 auto !important;
             box-sizing: border-box !important;
+          }
+
+          .stat-card {
+            padding: 1rem 0.65rem !important;
             border-radius: 14px !important;
-          }
-
-          .hero-stat-box {
-            padding: 0.75rem !important;
             text-align: center !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            box-sizing: border-box !important;
           }
 
-          .hero-stat-num {
-            font-size: clamp(1.1rem, 3.8vw, 1.4rem) !important;
+          .stat-icon-box {
+            width: 36px !important;
+            height: 36px !important;
+            border-radius: 10px !important;
+            margin-bottom: 0.4rem !important;
+          }
+
+          .stat-num {
+            font-size: clamp(1.2rem, 4vw, 1.55rem) !important;
             font-weight: 800 !important;
+            margin-bottom: 0.2rem !important;
           }
 
-          .hero-stat-label {
+          .stat-label {
+            font-size: 0.78rem !important;
+            line-height: 1.2 !important;
+            margin-bottom: 0.15rem !important;
+          }
+
+          .stat-sub {
             font-size: 0.65rem !important;
             line-height: 1.15 !important;
           }
