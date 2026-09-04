@@ -2377,7 +2377,7 @@ export default function MedicalErpView() {
 
         .module-large-card {
           background: #ffffff;
-          border: 1.5px solid #e2e8f0;
+          border: 1.5px solid #cbd5e1;
           border-radius: 20px;
           padding: 1.6rem;
           display: flex;
@@ -2385,15 +2385,15 @@ export default function MedicalErpView() {
           justify-content: space-between;
           gap: 1.25rem;
           transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -2px rgba(0, 0, 0, 0.02);
+          box-shadow: 0 4px 12px -2px rgba(15, 23, 42, 0.07), 0 2px 6px -1px rgba(15, 23, 42, 0.04);
           position: relative;
           overflow: hidden;
         }
 
         .module-large-card:hover {
-          border-color: #cbd5e1;
+          border-color: #059669;
           transform: translateY(-5px);
-          box-shadow: 0 16px 28px -6px rgba(15, 23, 42, 0.1), 0 6px 10px -4px rgba(0, 0, 0, 0.04);
+          box-shadow: 0 20px 32px -8px rgba(5, 150, 105, 0.16), 0 8px 16px -6px rgba(15, 23, 42, 0.08);
         }
 
         .module-large-card:hover::before {
@@ -2731,7 +2731,7 @@ export default function MedicalErpView() {
 
         .role-internal-card {
           background: #ffffff;
-          border: 1.5px solid #e2e8f0;
+          border: 1.5px solid #cbd5e1;
           border-radius: 18px;
           padding: 1.5rem;
           display: flex;
@@ -2739,15 +2739,15 @@ export default function MedicalErpView() {
           justify-content: space-between;
           gap: 1.25rem;
           transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+          box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
           position: relative;
           overflow: hidden;
         }
 
         .role-internal-card:hover {
-          border-color: #a7f3d0;
+          border-color: #059669;
           transform: translateY(-5px);
-          box-shadow: 0 16px 32px -8px rgba(16, 185, 129, 0.12), 0 4px 12px rgba(0, 0, 0, 0.04);
+          box-shadow: 0 16px 32px -8px rgba(16, 185, 129, 0.16), 0 4px 12px rgba(0, 0, 0, 0.04);
         }
 
         .internal-card-main {
