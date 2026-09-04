@@ -485,9 +485,9 @@ export default function SchoolImsView() {
   };
 
   return (
-    <div className="school-ims-page">
+    <div className="school-ims-page" style={{ paddingTop: "5.5rem" }}>
       {/* Top Breadcrumb & Sub Navigation */}
-      <div className="sticky-subnav">
+      <div className="sticky-subnav" style={{ position: "sticky", top: "76px", zIndex: 900 }}>
         <div className="container subnav-container">
           <Link href="/#products" className="back-link">
             <ArrowLeft size={16} /> Back to Products

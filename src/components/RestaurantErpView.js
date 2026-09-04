@@ -348,9 +348,9 @@ export default function RestaurantErpView() {
   };
 
   return (
-    <div className="restaurant-erp-page">
+    <div className="restaurant-erp-page" style={{ paddingTop: "5.5rem" }}>
       {/* Top Breadcrumb & Sub Navigation */}
-      <div className="sticky-subnav">
+      <div className="sticky-subnav" style={{ position: "sticky", top: "76px", zIndex: 900 }}>
         <div className="container subnav-container">
           <Link href="/#products" className="back-link">
             <ArrowLeft size={16} /> Back to Products
@@ -1057,7 +1057,7 @@ export default function RestaurantErpView() {
         <ContactSection />
       </div>
 
-      <style jsx>{`
+      <style jsx global>{`
         .restaurant-erp-page {
           min-height: 100vh;
           background-color: #ffffff;

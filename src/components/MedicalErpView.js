@@ -703,9 +703,9 @@ export default function MedicalErpView() {
   };
 
   return (
-    <div className="medical-erp-page">
+    <div className="medical-erp-page" style={{ paddingTop: "5.5rem" }}>
       {/* Top Breadcrumb & Sub Navigation */}
-      <div className="sticky-subnav">
+      <div className="sticky-subnav" style={{ position: "sticky", top: "76px", zIndex: 900 }}>
         <div className="container subnav-container">
           <Link href="/#products" className="back-link">
             <ArrowLeft size={16} /> Back to Products
@@ -1615,7 +1615,7 @@ export default function MedicalErpView() {
         <ContactSection />
       </div>
 
-      <style jsx>{`
+      <style jsx global>{`
         .medical-erp-page {
           background-color: #ffffff;
           color: #0f172a;
