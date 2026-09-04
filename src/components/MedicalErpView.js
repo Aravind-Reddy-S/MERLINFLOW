@@ -591,6 +591,22 @@ export default function MedicalErpView() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleExperienceRolePortal = (roleIndex) => {
+    if (roleIndex === 0) {
+      setPreviewTab("inventory");
+    } else if (roleIndex === 1) {
+      setPreviewTab("pos");
+    } else {
+      setPreviewTab("inventory");
+    }
+    const el = document.getElementById("overview");
+    if (el) {
+      const yOffset = -70;
+      const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
+
   const scrollToSection = (sectionId) => {
     setActiveTab(sectionId);
     if (sectionId === "overview") {
@@ -1032,7 +1048,7 @@ export default function MedicalErpView() {
             <h2 className="section-title">Tailored Portals for Your Entire Ecosystem</h2>
             <p className="section-desc">Each stakeholder gets a customized interface optimized for their exact daily operational workflows.</p>
 
-            {/* Role Switcher Pills */}
+            {/* Role Switcher Tabs */}
             <div className="role-switcher-tabs">
               {roleSolutions.map((role, idx) => (
                 <button
@@ -1040,8 +1056,10 @@ export default function MedicalErpView() {
                   className={`role-tab-pill ${activeRole === idx ? 'active' : ''}`}
                   onClick={() => setActiveRole(idx)}
                 >
-                  <span className="role-tab-icon">{role.icon}</span>
-                  <span className="role-tab-name">{role.title}</span>
+                  <div className="role-tab-left">
+                    <span className="role-tab-icon">{role.icon}</span>
+                    <span className="role-tab-name">{role.title}</span>
+                  </div>
                   <span className="role-tab-badge">{role.badge}</span>
                 </button>
               ))}
@@ -1077,11 +1095,17 @@ export default function MedicalErpView() {
 
               <div className="role-portal-action">
                 <button 
-                  onClick={scrollToContact} 
+                  onClick={() => handleExperienceRolePortal(activeRole)} 
                   className="role-request-btn" 
                   style={{ background: roleSolutions[activeRole].color }}
                 >
-                  Request {roleSolutions[activeRole].title} Demo <ArrowRight size={16} />
+                  <Sparkles size={16} /> Experience {roleSolutions[activeRole].title} Demo <ArrowRight size={16} />
+                </button>
+                <button 
+                  onClick={scrollToContact} 
+                  className="role-contact-secondary-btn"
+                >
+                  Book Walkthrough
                 </button>
               </div>
             </div>
@@ -2437,41 +2461,55 @@ export default function MedicalErpView() {
 
         /* STAKEHOLDER ROLE SOLUTIONS */
         .role-switcher-tabs {
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
           gap: 1rem;
-          margin-top: 2rem;
-          flex-wrap: wrap;
+          max-width: 1060px;
+          margin: 2.25rem auto 0;
         }
 
         .role-tab-pill {
-          display: inline-flex;
+          display: flex;
           align-items: center;
+          justify-content: space-between;
           gap: 0.75rem;
-          padding: 0.75rem 1.4rem;
-          border-radius: 50px;
+          padding: 0.9rem 1.25rem;
+          border-radius: 16px;
           background: #ffffff;
-          border: 1px solid #e2e8f0;
-          font-size: 0.95rem;
+          border: 1.5px solid #e2e8f0;
+          font-size: 0.92rem;
           font-weight: 700;
           color: #475569;
           cursor: pointer;
           transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
           box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+          text-align: left;
+        }
+
+        .role-tab-left {
+          display: flex;
+          align-items: center;
+          gap: 0.65rem;
+        }
+
+        .role-tab-name {
+          font-size: 0.92rem;
+          font-weight: 700;
+          color: inherit;
         }
 
         .role-tab-pill:hover {
           background: #f8fafc;
           border-color: #cbd5e1;
           transform: translateY(-2px);
+          box-shadow: 0 6px 16px rgba(0,0,0,0.04);
         }
 
         .role-tab-pill.active {
           background: #0f172a;
           color: #ffffff;
           border-color: #0f172a;
-          box-shadow: 0 8px 20px rgba(15, 23, 42, 0.2);
+          box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.25);
           transform: translateY(-2px);
         }
 
@@ -2480,26 +2518,28 @@ export default function MedicalErpView() {
         }
 
         .role-tab-badge {
-          font-size: 0.7rem;
+          font-size: 0.68rem;
           font-weight: 800;
           letter-spacing: 0.04em;
-          background: rgba(0, 0, 0, 0.06);
-          padding: 0.2rem 0.6rem;
+          background: #f1f5f9;
+          color: #64748b;
+          padding: 0.25rem 0.6rem;
           border-radius: 50px;
+          white-space: nowrap;
         }
 
         .role-tab-pill.active .role-tab-badge {
-          background: rgba(255, 255, 255, 0.18);
+          background: rgba(255, 255, 255, 0.15);
           color: #6ee7b7;
         }
 
         .role-portal-container {
-          background: #ffffff;
-          border: 1px solid #e2e8f0;
+          background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+          border: 1.5px solid #e2e8f0;
           border-radius: 28px;
-          padding: 3rem;
+          padding: 3rem 2.75rem;
           margin-top: 2.5rem;
-          box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+          box-shadow: 0 20px 50px -15px rgba(15, 23, 42, 0.08);
         }
 
         .role-portal-top {
@@ -2507,29 +2547,32 @@ export default function MedicalErpView() {
           align-items: flex-start;
           justify-content: space-between;
           gap: 2.5rem;
-          padding-bottom: 2.5rem;
-          border-bottom: 1px solid #f1f5f9;
-          margin-bottom: 2.5rem;
+          padding-bottom: 2.25rem;
+          border-bottom: 1.5px solid #e2e8f0;
+          margin-bottom: 2.25rem;
           flex-wrap: wrap;
         }
 
         .role-portal-info {
+          flex: 1;
+          min-width: 320px;
           max-width: 760px;
         }
 
         .role-badge {
           display: inline-block;
-          font-size: 0.75rem;
+          font-size: 0.72rem;
           font-weight: 800;
-          letter-spacing: 0.05em;
+          letter-spacing: 0.06em;
           padding: 0.3rem 0.85rem;
           border-radius: 50px;
           border: 1px solid;
           margin-bottom: 0.85rem;
+          text-transform: uppercase;
         }
 
         .role-portal-heading {
-          font-size: 2.2rem;
+          font-size: 2.25rem;
           font-weight: 900;
           color: #0f172a;
           margin-bottom: 0.4rem;
@@ -2537,21 +2580,22 @@ export default function MedicalErpView() {
         }
 
         .role-portal-tagline {
-          font-size: 1.1rem;
+          font-size: 1.05rem;
           font-weight: 700;
           margin-bottom: 0.85rem;
         }
 
         .role-portal-desc {
-          font-size: 1rem;
-          color: #64748b;
-          line-height: 1.6;
+          font-size: 0.98rem;
+          color: #475569;
+          line-height: 1.65;
           margin: 0;
         }
 
         .role-portal-action {
           display: flex;
-          align-items: center;
+          flex-direction: column;
+          gap: 0.75rem;
           align-self: center;
         }
 
@@ -2560,21 +2604,43 @@ export default function MedicalErpView() {
           align-items: center;
           gap: 0.6rem;
           color: #ffffff;
-          padding: 0.95rem 2rem;
-          border-radius: 14px;
+          padding: 0.9rem 1.8rem;
+          border-radius: 12px;
           font-weight: 700;
-          font-size: 1rem;
+          font-size: 0.95rem;
           border: none;
           cursor: pointer;
-          transition: all 0.2s;
+          transition: all 0.2s ease;
           box-shadow: 0 4px 16px rgba(0,0,0,0.12);
           white-space: nowrap;
         }
 
         .role-request-btn:hover {
-          filter: brightness(0.92);
+          filter: brightness(1.08);
           transform: translateY(-2px);
           box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+        }
+
+        .role-contact-secondary-btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          background: #ffffff;
+          color: #475569;
+          border: 1.5px solid #cbd5e1;
+          padding: 0.75rem 1.5rem;
+          border-radius: 12px;
+          font-weight: 700;
+          font-size: 0.88rem;
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+
+        .role-contact-secondary-btn:hover {
+          background: #f1f5f9;
+          color: #0f172a;
+          border-color: #94a3b8;
+          transform: translateY(-1px);
         }
 
         /* 6 SMALL INTERNAL CARDS GRID */
@@ -2587,22 +2653,22 @@ export default function MedicalErpView() {
         .role-internal-card {
           background: #ffffff;
           border: 1.5px solid #e2e8f0;
-          border-radius: 20px;
-          padding: 1.6rem;
+          border-radius: 18px;
+          padding: 1.5rem;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
           gap: 1.25rem;
           transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -2px rgba(0, 0, 0, 0.02);
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
           position: relative;
           overflow: hidden;
         }
 
         .role-internal-card:hover {
-          border-color: #cbd5e1;
+          border-color: #a7f3d0;
           transform: translateY(-5px);
-          box-shadow: 0 16px 28px -6px rgba(15, 23, 42, 0.1), 0 6px 10px -4px rgba(0, 0, 0, 0.04);
+          box-shadow: 0 16px 32px -8px rgba(16, 185, 129, 0.12), 0 4px 12px rgba(0, 0, 0, 0.04);
         }
 
         .internal-card-main {
