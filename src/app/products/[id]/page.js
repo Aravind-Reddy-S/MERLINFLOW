@@ -5,9 +5,10 @@ import { ShoppingCart, GraduationCap, Hospital, Hotel, ArrowLeft, CheckCircle2 }
 import Link from "next/link";
 import { use } from "react";
 import ContactSection from "../../../components/ContactSection";
+import SchoolImsView from "../../../components/SchoolImsView";
 import { notFound } from "next/navigation";
 
-// Data mapping for all 4 products
+// Data mapping for all products
 const PRODUCT_DATA = {
   edu: {
     name: "School IMS",
@@ -22,6 +23,14 @@ const PRODUCT_DATA = {
       { title: "Assignment Repository", desc: "Digital dropbox engine for homework submission with real-time countdown alerts, dynamic file validations, and evaluation alerts." },
       { title: "Result & Progress Analytics", desc: "Interactive performance analytics engine tracking historical progress charts across major examination cycles." }
     ]
+  },
+  "school-ims": {
+    name: "School IMS",
+    tag: "Education, Simplified",
+    desc: "Complete school information management — attendance, fees, exams, reports, parent communication, and complaint management.",
+    icon: GraduationCap,
+    color: "#3b82f6",
+    bgLight: "#eff6ff",
   },
   health: {
     name: "Medical ERP",
@@ -69,7 +78,13 @@ const PRODUCT_DATA = {
 
 export default function ProductPage({ params }) {
   const unwrappedParams = use(params);
-  const product = PRODUCT_DATA[unwrappedParams.id];
+  const id = unwrappedParams.id;
+
+  if (id === "edu" || id === "school-ims") {
+    return <SchoolImsView />;
+  }
+
+  const product = PRODUCT_DATA[id];
 
   if (!product) {
     notFound();
