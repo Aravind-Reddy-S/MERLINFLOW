@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { ShoppingCart, GraduationCap, Hospital, Hotel, ArrowLeft, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
-import { use } from "react";
+import { use, useEffect } from "react";
 import ContactSection from "../../../components/ContactSection";
 import SchoolImsView from "../../../components/SchoolImsView";
 import MedicalErpView from "../../../components/MedicalErpView";
@@ -84,6 +84,10 @@ const PRODUCT_DATA = {
 export default function ProductPage({ params }) {
   const unwrappedParams = use(params);
   const id = unwrappedParams.id;
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, [id]);
 
   if (id === "edu" || id === "school-ims") {
     return <SchoolImsView />;

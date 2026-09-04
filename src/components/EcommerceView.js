@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   ShoppingCart, Truck, Zap, Package, RefreshCw, 
@@ -24,6 +24,10 @@ export default function EcommerceView() {
   const [isYearlyPricing, setIsYearlyPricing] = useState(false);
   const [openFaq, setOpenFaq] = useState(0);
   const [activeIndustry, setActiveIndustry] = useState(0);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, []);
 
   // Live order simulation data
   const liveOrders = [

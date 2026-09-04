@@ -444,6 +444,9 @@ export default function SchoolImsView() {
   ];
 
   useEffect(() => {
+    // Ensure the page always loads at the top
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+
     const handleScroll = () => {
       const sections = ['overview', 'modules', 'solutions', 'pricing', 'security'];
       const scrollPos = window.scrollY + 140;

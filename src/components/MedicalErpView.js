@@ -571,6 +571,8 @@ export default function MedicalErpView() {
   ];
 
   useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+
     const handleScroll = () => {
       const sections = ['overview', 'modules', 'solutions', 'roadmap', 'calculator', 'compare', 'pricing', 'security'];
       const scrollPos = window.scrollY + 140;

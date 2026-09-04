@@ -89,7 +89,7 @@ export default function ProductsOverview() {
               
               <p className="prod-desc">{product.desc}</p>
               
-              <Link href={`/products/${product.id}`} className="prod-btn" style={{ backgroundColor: product.color }}>
+              <Link href={`/products/${product.id}`} scroll={true} className="prod-btn" style={{ backgroundColor: product.color }}>
                 {product.btnText} <ArrowRight size={16} />
               </Link>
             </motion.div>
