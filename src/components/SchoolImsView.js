@@ -149,6 +149,55 @@ export default function SchoolImsView() {
     triggerToast(`🚌 Bus #04 GPS Ping Updated: Approaching ${nextStopName} (Speed: 38 km/h). Parent tracking synced!`);
   };
 
+  const handleExperienceRolePortal = (roleIndex) => {
+    const roleToTabMap = {
+      0: "cockpit",    // Management & Principals
+      1: "students",   // Teachers & Academic Staff
+      2: "transport",  // Parents & Students
+      3: "fees",       // Accountants & Administrators
+    };
+    const targetTab = roleToTabMap[roleIndex] || "cockpit";
+    setDemoTab(targetTab);
+    
+    // Smoothly scroll to the interactive demo hero
+    const el = document.getElementById("overview");
+    if (el) {
+      const yOffset = -70;
+      const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+    
+    const roleTitles = [
+      "Management & Principals Cockpit",
+      "Teachers & Academic Staff SIS",
+      "Parents & Students Smart Fleet & Portal",
+      "Accountants & Administrators Fee Automation"
+    ];
+    const roleName = roleTitles[roleIndex] || "Portal";
+    triggerToast(`🚀 Loaded ${roleName} Live Demo! Test the interactive controls.`);
+  };
+
+  const handleModuleClick = (modName) => {
+    let targetTab = "cockpit";
+    if (modName.includes("Fee") || modName.includes("Collection") || modName.includes("Invoicing")) {
+      targetTab = "fees";
+    } else if (modName.includes("Student") || modName.includes("Grading") || modName.includes("Report") || modName.includes("Exam") || modName.includes("Academic")) {
+      targetTab = "students";
+    } else if (modName.includes("Transport") || modName.includes("GPS") || modName.includes("Bus")) {
+      targetTab = "transport";
+    } else if (modName.includes("Attendance") || modName.includes("Biometric") || modName.includes("RFID") || modName.includes("Gate")) {
+      targetTab = "attendance";
+    }
+    setDemoTab(targetTab);
+    const el = document.getElementById("overview");
+    if (el) {
+      const yOffset = -70;
+      const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+    triggerToast(`✨ Loaded "${modName}" module in interactive simulator!`);
+  };
+
   // 45+ Purpose-Built Modules categorized internally
   const moduleCategories = [
     {
@@ -1092,6 +1141,9 @@ export default function SchoolImsView() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.25, delay: idx * 0.02 }}
                       className="module-large-card"
+                      onClick={() => handleModuleClick(mod.name)}
+                      style={{ cursor: "pointer" }}
+                      title={`Click to test ${mod.name} in live simulator`}
                     >
                       <div className="mod-large-icon">{mod.icon}</div>
                       <h3 className="mod-large-name">{mod.name}</h3>
@@ -1148,9 +1200,22 @@ export default function SchoolImsView() {
                 ))}
               </ul>
 
-              <button onClick={scrollToContact} className="role-request-btn" style={{ background: roleSolutions[activeRole].color }}>
-                Experience {roleSolutions[activeRole].title} Portal <ArrowRight size={16} />
-              </button>
+              <div className="role-actions-row">
+                <button 
+                  onClick={() => handleExperienceRolePortal(activeRole)} 
+                  className="role-request-btn" 
+                  style={{ background: roleSolutions[activeRole].color }}
+                >
+                  <Sparkles size={16} /> Experience {roleSolutions[activeRole].title} Live Demo <ArrowRight size={16} />
+                </button>
+                <button 
+                  onClick={scrollToContact} 
+                  className="role-contact-sub-btn"
+                  title="Request customized institutional deployment consultation"
+                >
+                  Book Custom Walkthrough
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -2932,6 +2997,14 @@ export default function SchoolImsView() {
           color: #334155;
         }
 
+        .role-actions-row {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          flex-wrap: wrap;
+          margin-top: 1.5rem;
+        }
+
         .role-request-btn {
           display: inline-flex;
           align-items: center;
@@ -2943,12 +3016,35 @@ export default function SchoolImsView() {
           font-size: 0.92rem;
           border: none;
           cursor: pointer;
-          transition: transform 0.2s;
+          transition: all 0.2s ease;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
         }
 
         .role-request-btn:hover {
           transform: translateY(-2px);
           filter: brightness(1.1);
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
+        }
+
+        .role-contact-sub-btn {
+          display: inline-flex;
+          align-items: center;
+          background: #ffffff;
+          color: #475569;
+          border: 1.5px solid #cbd5e1;
+          padding: 0.8rem 1.4rem;
+          border-radius: 12px;
+          font-weight: 700;
+          font-size: 0.9rem;
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+
+        .role-contact-sub-btn:hover {
+          background: #f8fafc;
+          color: #0f172a;
+          border-color: #94a3b8;
+          transform: translateY(-1px);
         }
 
         /* PRICING PLANS */
