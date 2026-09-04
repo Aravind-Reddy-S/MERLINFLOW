@@ -1521,8 +1521,9 @@ export default function SchoolImsView() {
 
         /* HERO SECTION */
         .hero-section {
-          padding: 3.5rem 0 5rem;
+          padding: 5.25rem 0 5rem;
           position: relative;
+          background: radial-gradient(circle at 85% 15%, rgba(37, 99, 235, 0.04) 0%, rgba(255, 255, 255, 0) 50%);
         }
 
         .hero-grid {
