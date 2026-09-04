@@ -3587,20 +3587,28 @@ export default function SchoolImsView() {
         @media (max-width: 768px) {
           .school-ims-page {
             padding-top: 4.5rem !important;
+            width: 100% !important;
+            max-width: 100vw !important;
+            overflow-x: hidden !important;
           }
 
           .sticky-subnav {
             position: relative !important;
             top: auto !important;
             z-index: 20 !important;
-            box-shadow: none;
-            background: #ffffff;
-            border-bottom: 1px solid #e2e8f0;
+            box-shadow: none !important;
+            background: #ffffff !important;
+            border-bottom: 1px solid #e2e8f0 !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
           }
 
           .subnav-container {
-            padding: 0.5rem 0.75rem;
-            gap: 0.5rem;
+            padding: 0.5rem 0.75rem !important;
+            gap: 0.5rem !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+            justify-content: space-between !important;
           }
 
           .subnav-tabs {
@@ -3608,123 +3616,327 @@ export default function SchoolImsView() {
           }
 
           .subnav-cta-btn {
-            padding: 0.4rem 0.85rem;
-            font-size: 0.78rem;
+            padding: 0.4rem 0.75rem !important;
+            font-size: 0.78rem !important;
           }
 
           .hero-section {
-            padding: 2.5rem 0 3.5rem;
+            padding: 2.25rem 0 3rem !important;
+            overflow: hidden !important;
+            width: 100% !important;
+          }
+
+          .hero-grid {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 2.25rem !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            margin: 0 !important;
           }
 
           .hero-text-col {
-            width: 100%;
-            max-width: 100%;
+            width: 100% !important;
+            max-width: 100% !important;
+            box-sizing: border-box !important;
+            text-align: center !important;
+          }
+
+          .hero-badge {
+            margin: 0 auto 1.25rem auto !important;
+            font-size: 0.72rem !important;
+            padding: 0.35rem 0.85rem !important;
+            max-width: 95% !important;
+          }
+
+          .hero-heading {
+            font-size: clamp(1.45rem, 5vw, 2.1rem) !important;
+            line-height: 1.25 !important;
+            word-break: break-word !important;
+            overflow-wrap: break-word !important;
+            hyphens: auto !important;
+            margin: 0 auto 1.2rem auto !important;
+            max-width: 100% !important;
+          }
+
+          .highlight-text {
+            display: inline !important;
+          }
+
+          .hero-subtitle {
+            font-size: 0.95rem !important;
+            line-height: 1.55 !important;
+            margin: 0 auto 1.75rem auto !important;
+            max-width: 100% !important;
           }
 
           .hero-cta-group {
-            flex-direction: column;
-            width: 100%;
-            gap: 0.75rem;
+            display: flex !important;
+            flex-direction: column !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            gap: 0.75rem !important;
+            margin: 0 auto 2rem auto !important;
           }
 
           .btn-primary, .btn-secondary {
-            width: 100%;
-            justify-content: center;
+            width: 100% !important;
+            justify-content: center !important;
+            font-size: 0.9rem !important;
+            padding: 0.8rem 1.25rem !important;
+            box-sizing: border-box !important;
           }
 
           .stats-strip {
-            width: 100%;
-            max-width: 100%;
-            padding: 1rem;
+            display: grid !important;
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 0.35rem !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            padding: 0.85rem 0.5rem !important;
+            margin: 0 auto !important;
+            box-sizing: border-box !important;
+            border-radius: 14px !important;
+          }
+
+          .stat-card {
+            padding: 0.2rem !important;
+          }
+
+          .stat-number {
+            font-size: clamp(1.1rem, 3.8vw, 1.4rem) !important;
+            font-weight: 800 !important;
+          }
+
+          .stat-label {
+            font-size: 0.6rem !important;
+            line-height: 1.15 !important;
+          }
+
+          .stat-divider {
+            display: none !important;
+          }
+
+          .hero-demo-col {
+            width: 100% !important;
+            max-width: 100% !important;
+            box-sizing: border-box !important;
           }
 
           .browser-window {
-            width: 100%;
-            max-width: 100%;
-            margin: 0 auto;
-            border-radius: 14px;
+            width: 100% !important;
+            max-width: 100% !important;
+            height: auto !important;
+            min-height: 480px !important;
+            margin: 0 auto !important;
+            border-radius: 14px !important;
+            box-sizing: border-box !important;
+            overflow: hidden !important;
           }
 
-          .browser-body.school-demo-container {
-            padding: 1rem 0.75rem;
+          .browser-header {
+            padding: 0.5rem 0.75rem !important;
+            gap: 0.5rem !important;
           }
 
-          .demo-nav-bar {
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            white-space: nowrap;
-            padding: 0.4rem 0.5rem;
+          .traffic-lights {
+            gap: 4px !important;
           }
 
-          .demo-tab-btn {
-            padding: 0.35rem 0.65rem;
-            font-size: 0.7rem;
-            flex-shrink: 0;
+          .traffic-lights .dot {
+            width: 8px !important;
+            height: 8px !important;
           }
 
-          .demo-action-bar {
-            flex-direction: column;
-            width: 100%;
-          }
-
-          .demo-action-btn {
-            width: 100%;
-            justify-content: center;
+          .browser-url-bar {
+            padding: 0.3rem 0.5rem !important;
+            font-size: 0.68rem !important;
           }
 
           .browser-url-bar .url-badge-group {
-            display: none;
+            display: none !important;
+          }
+
+          .demo-nav-bar {
+            overflow-x: auto !important;
+            -webkit-overflow-scrolling: touch !important;
+            white-space: nowrap !important;
+            padding: 0.35rem 0.5rem !important;
+            gap: 0.3rem !important;
+          }
+
+          .demo-tab-btn {
+            padding: 0.3rem 0.6rem !important;
+            font-size: 0.68rem !important;
+            flex-shrink: 0 !important;
+          }
+
+          .browser-body.school-demo-container {
+            padding: 0.85rem 0.65rem !important;
+            box-sizing: border-box !important;
+          }
+
+          .demo-pane {
+            padding: 0.75rem 0.5rem !important;
+            gap: 0.75rem !important;
+          }
+
+          .demo-pane-header {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 0.35rem !important;
+          }
+
+          .demo-kpi-grid {
+            grid-template-columns: 1fr !important;
+            gap: 0.5rem !important;
+            width: 100% !important;
+          }
+
+          .demo-action-bar {
+            flex-direction: column !important;
+            width: 100% !important;
+            gap: 0.5rem !important;
+          }
+
+          .demo-action-btn {
+            width: 100% !important;
+            justify-content: center !important;
+            font-size: 0.72rem !important;
+            padding: 0.45rem 0.65rem !important;
+          }
+
+          .demo-activity-box {
+            padding: 0.65rem 0.75rem !important;
           }
 
           .section-padding {
-            padding: 3.5rem 0;
-            scroll-margin-top: 80px;
+            padding: 3rem 0 !important;
+            scroll-margin-top: 80px !important;
           }
 
           .section-header-center {
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem !important;
           }
 
           .section-title {
-            font-size: clamp(1.75rem, 5.5vw, 2.4rem);
+            font-size: clamp(1.5rem, 5vw, 2.2rem) !important;
           }
 
-          .comparison-table-wrapper {
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            border-radius: 14px;
-            margin: 0 -0.5rem;
-            width: calc(100% + 1rem);
+          .category-filters {
+            gap: 0.4rem !important;
+            justify-content: flex-start !important;
+            overflow-x: auto !important;
+            -webkit-overflow-scrolling: touch !important;
+            flex-wrap: nowrap !important;
+            padding-bottom: 6px !important;
           }
 
-          .comparison-table {
-            min-width: 540px;
+          .cat-pill {
+            white-space: nowrap !important;
+            flex-shrink: 0 !important;
+            font-size: 0.78rem !important;
+            padding: 0.4rem 0.85rem !important;
           }
 
-          .comparison-table th, .comparison-table td {
-            padding: 0.85rem 0.9rem;
-            font-size: 0.8rem;
+          .category-group-block {
+            padding: 1.25rem 1rem !important;
+            border-radius: 16px !important;
           }
 
           .modules-grid-large, .sec-grid-cards {
-            grid-template-columns: 1fr;
+            grid-template-columns: 1fr !important;
+            gap: 0.85rem !important;
+          }
+
+          .module-large-card {
+            padding: 1.25rem !important;
+            border-radius: 16px !important;
+          }
+
+          .roles-layout {
+            grid-template-columns: 1fr !important;
+            gap: 1.5rem !important;
+          }
+
+          .roles-nav-pills {
+            flex-direction: row !important;
+            overflow-x: auto !important;
+            -webkit-overflow-scrolling: touch !important;
+            gap: 0.5rem !important;
+            padding-bottom: 6px !important;
+          }
+
+          .role-nav-btn {
+            white-space: nowrap !important;
+            flex-shrink: 0 !important;
+            padding: 0.6rem 1rem !important;
+            font-size: 0.82rem !important;
+          }
+
+          .role-detail-card {
+            padding: 1.5rem 1.15rem !important;
+            border-radius: 18px !important;
+          }
+
+          .role-actions-row {
+            flex-direction: column !important;
+            width: 100% !important;
+            gap: 0.65rem !important;
+          }
+
+          .role-request-btn, .role-contact-sub-btn {
+            width: 100% !important;
+            justify-content: center !important;
+          }
+
+          .comparison-table-wrapper {
+            overflow-x: auto !important;
+            -webkit-overflow-scrolling: touch !important;
+            border-radius: 14px !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            margin: 0 !important;
+            box-sizing: border-box !important;
+          }
+
+          .comparison-table {
+            min-width: 480px !important;
+            width: 100% !important;
+          }
+
+          .comparison-table th, .comparison-table td {
+            padding: 0.75rem 0.65rem !important;
+            font-size: 0.78rem !important;
+          }
+
+          .pricing-cards-grid {
+            grid-template-columns: 1fr !important;
+            max-width: 100% !important;
+            gap: 1.25rem !important;
+          }
+
+          .pricing-card {
+            padding: 1.5rem 1.15rem !important;
+            border-radius: 18px !important;
           }
 
           .cta-box {
-            padding: 2.5rem 1.25rem;
+            padding: 2.25rem 1.15rem !important;
+            border-radius: 18px !important;
           }
 
           .cta-heading {
-            font-size: clamp(1.75rem, 5vw, 2.2rem);
+            font-size: clamp(1.5rem, 5vw, 2rem) !important;
           }
         }
 
         @media (max-width: 480px) {
           .demo-kpi-grid {
-            grid-template-columns: 1fr;
+            grid-template-columns: 1fr !important;
           }
           .student-subjects-grid {
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(2, 1fr) !important;
           }
         }
       `}</style>
