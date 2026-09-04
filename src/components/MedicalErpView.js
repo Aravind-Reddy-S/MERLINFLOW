@@ -1538,8 +1538,8 @@ export default function MedicalErpView() {
                 <button onClick={scrollToContact} className="btn-white">
                   Schedule Free Walkthrough <ArrowRight size={16} />
                 </button>
-                <a href="tel:+917892654731" className="btn-call-outline">
-                  <Phone size={16} /> Call +91 7892654731
+                <a href="tel:+918374373753" className="btn-call-outline">
+                  <Phone size={16} /> Call +91 83743 73753
                 </a>
               </div>
             </div>

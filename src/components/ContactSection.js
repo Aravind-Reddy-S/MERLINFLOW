@@ -65,7 +65,10 @@ export default function ContactSection() {
                   <div className="pill-icon"><Phone size={16} color="#4f46e5" /></div>
                   <span className="pill-label">CALL OR WHATSAPP</span>
                 </div>
-                <a href="tel:+918374373753" className="pill-value">+91 83743 73753</a>
+                <div className="pill-phones-stack" style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}>
+                  <a href="tel:+918374373753" className="pill-value">+91 83743 73753</a>
+                  <a href="tel:+918247716878" className="pill-value">+91 82477 16878</a>
+                </div>
               </div>
               
               <div className="contact-pill">
@@ -79,9 +82,9 @@ export default function ContactSection() {
               <div className="contact-pill">
                 <div className="pill-header">
                   <div className="pill-icon"><MapPin size={16} color="#4f46e5" /></div>
-                  <span className="pill-label">OUR LOCATION</span>
+                  <span className="pill-label">OUR ADDRESS</span>
                 </div>
-                <span className="pill-value">Warangal, Telangana</span>
+                <span className="pill-value">Bollepalli, Gudur, Mahabubabad, Telangana, 506134.</span>
               </div>
             </div>
             

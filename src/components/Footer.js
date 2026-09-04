@@ -33,9 +33,15 @@ export default function Footer() {
                 }}
               />
             </div>
-            <p style={{ color: "var(--text-muted)", marginBottom: "2rem", marginTop: "-1rem", maxWidth: "400px", lineHeight: "1.6" }}>
+            <p style={{ color: "var(--text-muted)", marginBottom: "1.25rem", marginTop: "-1rem", maxWidth: "400px", lineHeight: "1.6" }}>
               The Operating System for modern Educational Institutions and Enterprises. Unify your workflows, automate complex processes, and unlock unprecedented growth with our state-of-the-art, secure SaaS platform.
             </p>
+            <div style={{ color: "var(--text-muted)", fontSize: "0.88rem", marginBottom: "2rem", lineHeight: "1.6" }}>
+              <p style={{ margin: "0 0 0.35rem 0" }}>📍 Bollepalli, Gudur, Mahabubabad, Telangana, 506134.</p>
+              <p style={{ margin: 0 }}>
+                📞 <a href="tel:+918374373753" style={{ color: "var(--text-muted)", textDecoration: "none" }}>+91 83743 73753</a> &nbsp;|&nbsp; <a href="tel:+918247716878" style={{ color: "var(--text-muted)", textDecoration: "none" }}>+91 82477 16878</a>
+              </p>
+            </div>
           </div>
 
           {/* Links Columns */}
