@@ -32,41 +32,49 @@ export default function MedicalErpView() {
       title: "Inventory & Stock Control",
       subtitle: "Core pharmacy stock management, medicine catalog & zero-expiry loss",
       badgeColor: "linear-gradient(135deg, #10b981, #059669)",
+      badgeBg: "#ecfdf5",
+      badgeBorder: "#a7f3d0",
+      badgeText: "#059669",
       modules: [
         { 
           name: "Medicine Master", 
           desc: "Centralized database for all medicines with generic salt composition, batch numbers, HSN codes, and category tags.", 
           icon: <Pill size={24} color="#059669" />,
           iconBg: "#ecfdf5",
-          borderColor: "#a7f3d0"
+          borderColor: "#a7f3d0",
+          tags: ["HSN & GST Ready", "Generic Salt Search", "Batch Master"]
         },
         { 
           name: "Expiry Radar & Batch Tracking", 
           desc: "Proactive 30/60/90-day expiry notifications with automated batch blocking to eliminate dead stock.", 
           icon: <History size={24} color="#0d9488" />,
           iconBg: "#f0fdfa",
-          borderColor: "#99f6e4"
+          borderColor: "#99f6e4",
+          tags: ["30/60/90d Alerts", "Auto Batch Lock", "Zero Deadstock"]
         },
         { 
           name: "Low Stock & Smart Reorder", 
           desc: "Never run out of essential life-saving drugs with predictive threshold alerts and automated vendor PO drafts.", 
           icon: <Activity size={24} color="#ea580c" />,
           iconBg: "#fff7ed",
-          borderColor: "#fed7aa"
+          borderColor: "#fed7aa",
+          tags: ["Predictive Alerts", "Vendor PO Drafts", "Min/Max Levels"]
         },
         { 
           name: "Supplier Ledger Management", 
           desc: "Manage purchase orders, track supplier credit balances, procurement timelines, and accounts payable ledgers.", 
           icon: <Truck size={24} color="#2563eb" />,
           iconBg: "#eff6ff",
-          borderColor: "#bfdbfe"
+          borderColor: "#bfdbfe",
+          tags: ["Accounts Payable", "Credit Khata", "PO Tracking"]
         },
         { 
           name: "Purchase & Breakage Returns", 
           desc: "Process and reconcile returns to distributors for damaged, near-expiry, or recalled medicine batches in one click.", 
           icon: <FileText size={24} color="#7c3aed" />,
           iconBg: "#faf5ff",
-          borderColor: "#e9d5ff"
+          borderColor: "#e9d5ff",
+          tags: ["1-Click Returns", "Distributor Credit", "Breakage Reconcile"]
         }
       ]
     },
@@ -75,41 +83,49 @@ export default function MedicalErpView() {
       title: "Sales & Invoicing (POS)",
       subtitle: "Lightning-fast barcode checkout, customer credit accounts & schedule drug records",
       badgeColor: "linear-gradient(135deg, #0d9488, #0284c7)",
+      badgeBg: "#f0fdfa",
+      badgeBorder: "#99f6e4",
+      badgeText: "#0d9488",
       modules: [
         { 
           name: "Fast Barcode Billing (POS)", 
           desc: "Complete counter checkout in under 5 seconds with barcode scanning, auto GST computation, and instant thermal printing.", 
           icon: <Receipt size={24} color="#059669" />,
           iconBg: "#ecfdf5",
-          borderColor: "#a7f3d0"
+          borderColor: "#a7f3d0",
+          tags: ["< 5s Checkout", "Auto GST Split", "Thermal Print"]
         },
         { 
           name: "Sales & Gross Margin Analytics", 
           desc: "Identify fast-moving medicines, peak counter hours, daily net revenue, and gross profit margins in real time.", 
           icon: <BarChart3 size={24} color="#2563eb" />,
           iconBg: "#eff6ff",
-          borderColor: "#bfdbfe"
+          borderColor: "#bfdbfe",
+          tags: ["Gross Margin %", "Fast-Moving Drugs", "Daily P&L"]
         },
         { 
           name: "Patient Profiles & Credit Accounts", 
           desc: "Maintain customer purchase history, manage chronic medication refill lists, and track credit balance khata.", 
           icon: <Users size={24} color="#ea580c" />,
           iconBg: "#fff7ed",
-          borderColor: "#fed7aa"
+          borderColor: "#fed7aa",
+          tags: ["Patient Khata", "Chronic Refills", "Purchase History"]
         },
         { 
           name: "Schedule H/H1 Prescription Records", 
           desc: "Digitally attach and record doctor prescriptions for Schedule H, H1, and narcotic drugs for complete regulatory audits.", 
           icon: <Stethoscope size={24} color="#e11d48" />,
           iconBg: "#fef2f2",
-          borderColor: "#fecaca"
+          borderColor: "#fecaca",
+          tags: ["Doctor Rx Attach", "Narcotic Audit", "Govt Compliant"]
         },
         { 
           name: "Multi-Mode Split Payments", 
           desc: "Accept split transactions across UPI (PhonePe, GPay, Paytm), credit/debit cards, patient credit, and cash seamlessly.", 
           icon: <CreditCard size={24} color="#7c3aed" />,
           iconBg: "#faf5ff",
-          borderColor: "#e9d5ff"
+          borderColor: "#e9d5ff",
+          tags: ["Dynamic QR Code", "Split Payments", "UPI & Cards"]
         }
       ]
     },
@@ -118,34 +134,41 @@ export default function MedicalErpView() {
       title: "Admin, Multi-Store & Compliance",
       subtitle: "Business administration, tax audit preparedness & enterprise data security",
       badgeColor: "linear-gradient(135deg, #f59e0b, #d97706)",
+      badgeBg: "#fffbeb",
+      badgeBorder: "#fde68a",
+      badgeText: "#d97706",
       modules: [
         { 
           name: "Granular Role-Based Access (RBAC)", 
           desc: "Configure role-specific permissions for Pharmacists, Store Managers, and Billing Cashiers with immutable audit logs.", 
           icon: <ShieldCheck size={24} color="#059669" />,
           iconBg: "#ecfdf5",
-          borderColor: "#a7f3d0"
+          borderColor: "#a7f3d0",
+          tags: ["Staff Permissions", "Manager Override", "Audit Trail"]
         },
         { 
           name: "Multi-Branch & Warehouse Sync", 
           desc: "Synchronize stock levels, manage inter-branch transfers, and view consolidated sales across all your pharmacy outlets.", 
           icon: <Globe size={24} color="#0d9488" />,
           iconBg: "#f0fdfa",
-          borderColor: "#99f6e4"
+          borderColor: "#99f6e4",
+          tags: ["Inter-Store Transfer", "Consolidated P&L", "Chain Control"]
         },
         { 
           name: "Automated Cloud Data Backups", 
           desc: "Automated daily cloud backups with 256-bit encrypted snapshots ensuring zero data loss and business continuity.", 
           icon: <Database size={24} color="#2563eb" />,
           iconBg: "#eff6ff",
-          borderColor: "#bfdbfe"
+          borderColor: "#bfdbfe",
+          tags: ["Daily Auto Backup", "256-bit AES", "Zero Loss"]
         },
         { 
           name: "One-Click GST & Tax Returns", 
           desc: "Generate pre-formatted GSTR-1, GSTR-3B, and HSN summary spreadsheets ready for instant CA upload.", 
           icon: <FileText size={24} color="#ea580c" />,
           iconBg: "#fff7ed",
-          borderColor: "#fed7aa"
+          borderColor: "#fed7aa",
+          tags: ["GSTR-1 & 3B", "HSN Breakdown", "CA Upload Ready"]
         }
       ]
     },
@@ -154,20 +177,25 @@ export default function MedicalErpView() {
       title: "Future-Ready & Modern Retail",
       subtitle: "Tele-doctor consultations, doorstep delivery & omnichannel pharmacy",
       badgeColor: "linear-gradient(135deg, #8b5cf6, #ec4899)",
+      badgeBg: "#faf5ff",
+      badgeBorder: "#e9d5ff",
+      badgeText: "#7c3aed",
       modules: [
         { 
           name: "Tele-Consultation Kiosk", 
           desc: "Connect walk-in customers with certified online physicians directly from your pharmacy counter console.", 
           icon: <PhoneCall size={24} color="#7c3aed" />,
           iconBg: "#faf5ff",
-          borderColor: "#e9d5ff"
+          borderColor: "#e9d5ff",
+          tags: ["Doctor Video Call", "Instant Rx Print", "Counter Kiosk"]
         },
         { 
           name: "Doorstep Delivery & Dispatch Tracker", 
           desc: "Organize home deliveries, assign delivery staff, send WhatsApp status alerts, and collect digital COD receipts.", 
           icon: <Truck size={24} color="#e11d48" />,
           iconBg: "#fef2f2",
-          borderColor: "#fecaca"
+          borderColor: "#fecaca",
+          tags: ["WhatsApp Tracking", "Rider App", "Digital COD"]
         }
       ]
     }
@@ -192,7 +220,8 @@ export default function MedicalErpView() {
           icon: <BarChart3 size={20} color="#059669" />,
           iconBg: "#ecfdf5",
           borderColor: "#a7f3d0",
-          tag: "REAL-TIME"
+          tag: "REAL-TIME",
+          highlights: ["Counter Metrics", "Gross Margins", "Daily P&L"]
         },
         {
           title: "Expiry Radar & Loss Prevention",
@@ -200,7 +229,8 @@ export default function MedicalErpView() {
           icon: <History size={20} color="#0d9488" />,
           iconBg: "#f0fdfa",
           borderColor: "#99f6e4",
-          tag: "PROFIT SAVER"
+          tag: "PROFIT SAVER",
+          highlights: ["30/60/90d Watchdog", "Batch Freeze", "Zero Loss"]
         },
         {
           title: "Multi-Store & Chain Sync",
@@ -208,7 +238,8 @@ export default function MedicalErpView() {
           icon: <Database size={20} color="#0284c7" />,
           iconBg: "#f0f9ff",
           borderColor: "#bae6fd",
-          tag: "CENTRAL SYNC"
+          tag: "CENTRAL SYNC",
+          highlights: ["Inter-Branch Routes", "Central Stock", "Chain Reports"]
         },
         {
           title: "1-Click GST Return Filing",
@@ -216,7 +247,8 @@ export default function MedicalErpView() {
           icon: <FileText size={20} color="#7c3aed" />,
           iconBg: "#faf5ff",
           borderColor: "#e9d5ff",
-          tag: "TAX READY"
+          tag: "TAX READY",
+          highlights: ["GSTR-1 & 3B", "HSN Breakdown", "Instant Export"]
         },
         {
           title: "Supplier Ledger Reconciliation",
@@ -224,7 +256,8 @@ export default function MedicalErpView() {
           icon: <Receipt size={20} color="#d97706" />,
           iconBg: "#fffbeb",
           borderColor: "#fde68a",
-          tag: "FINANCIALS"
+          tag: "FINANCIALS",
+          highlights: ["Statement Match", "Credit Terms", "Payment Alerts"]
         },
         {
           title: "Granular RBAC Staff Security",
@@ -232,7 +265,8 @@ export default function MedicalErpView() {
           icon: <ShieldCheck size={20} color="#e11d48" />,
           iconBg: "#fef2f2",
           borderColor: "#fecaca",
-          tag: "AUDIT LOGS"
+          tag: "AUDIT LOGS",
+          highlights: ["Tamper-Proof Logs", "Role Overrides", "Safe Billing"]
         }
       ]
     },
@@ -250,7 +284,8 @@ export default function MedicalErpView() {
           icon: <Receipt size={20} color="#059669" />,
           iconBg: "#ecfdf5",
           borderColor: "#a7f3d0",
-          tag: "FAST POS"
+          tag: "FAST POS",
+          highlights: ["Barcode Scanner", "Auto Batch", "Thermal Print"]
         },
         {
           title: "Smart Generic Salt Engine",
@@ -258,7 +293,8 @@ export default function MedicalErpView() {
           icon: <Sparkles size={20} color="#0d9488" />,
           iconBg: "#f0fdfa",
           borderColor: "#99f6e4",
-          tag: "SMART AI"
+          tag: "SMART AI",
+          highlights: ["Molecule Search", "Salt Matching", "Instant Alternates"]
         },
         {
           title: "Automated Batch Expiry Lock",
@@ -266,7 +302,8 @@ export default function MedicalErpView() {
           icon: <Lock size={20} color="#e11d48" />,
           iconBg: "#fef2f2",
           borderColor: "#fecaca",
-          tag: "SAFETY"
+          tag: "SAFETY",
+          highlights: ["POS Safety Gate", "Zero Expired Billed", "Regulatory Safe"]
         },
         {
           title: "Schedule H/H1 Rx Vault",
@@ -274,7 +311,8 @@ export default function MedicalErpView() {
           icon: <FileCheck size={20} color="#7c3aed" />,
           iconBg: "#faf5ff",
           borderColor: "#e9d5ff",
-          tag: "COMPLIANCE"
+          tag: "COMPLIANCE",
+          highlights: ["Doctor Info Attach", "Patient Records", "Audit Compliant"]
         },
         {
           title: "Multi-Mode Split Payments",
@@ -282,7 +320,8 @@ export default function MedicalErpView() {
           icon: <CreditCard size={20} color="#0284c7" />,
           iconBg: "#f0f9ff",
           borderColor: "#bae6fd",
-          tag: "PAYMENTS"
+          tag: "PAYMENTS",
+          highlights: ["Dynamic QR", "Cards & Khata", "Split Billing"]
         },
         {
           title: "WhatsApp Digital Invoices",
@@ -290,7 +329,8 @@ export default function MedicalErpView() {
           icon: <Phone size={20} color="#16a34a" />,
           iconBg: "#f0fdf4",
           borderColor: "#bbf7d0",
-          tag: "PAPERLESS"
+          tag: "PAPERLESS",
+          highlights: ["Paperless GST", "Dosage Info", "Instant Send"]
         }
       ]
     },
@@ -308,7 +348,8 @@ export default function MedicalErpView() {
           icon: <Zap size={20} color="#059669" />,
           iconBg: "#ecfdf5",
           borderColor: "#a7f3d0",
-          tag: "AUTO REORDER"
+          tag: "AUTO REORDER",
+          highlights: ["Min/Max Levels", "Auto Drafts", "Direct PDF/Email"]
         },
         {
           title: "Supplier Credit & Ledger Books",
@@ -316,7 +357,8 @@ export default function MedicalErpView() {
           icon: <Receipt size={20} color="#0d9488" />,
           iconBg: "#f0fdfa",
           borderColor: "#99f6e4",
-          tag: "TRANSPARENT"
+          tag: "TRANSPARENT",
+          highlights: ["Credit Khata", "Invoice History", "Payment Alerts"]
         },
         {
           title: "Chronic Refill Notifications",
@@ -324,7 +366,8 @@ export default function MedicalErpView() {
           icon: <Clock size={20} color="#0284c7" />,
           iconBg: "#f0f9ff",
           borderColor: "#bae6fd",
-          tag: "RETENTION"
+          tag: "RETENTION",
+          highlights: ["WhatsApp Alerts", "Recurring Meds", "Patient Reminders"]
         },
         {
           title: "Customer Loyalty Rewards",
@@ -332,7 +375,8 @@ export default function MedicalErpView() {
           icon: <Award size={20} color="#d97706" />,
           iconBg: "#fffbeb",
           borderColor: "#fde68a",
-          tag: "LOYALTY"
+          tag: "LOYALTY",
+          highlights: ["Reward Points", "Cashback Khata", "Repeat Discounts"]
         },
         {
           title: "Doorstep Delivery Tracker",
@@ -340,7 +384,8 @@ export default function MedicalErpView() {
           icon: <Truck size={20} color="#7c3aed" />,
           iconBg: "#faf5ff",
           borderColor: "#e9d5ff",
-          tag: "DISPATCH"
+          tag: "DISPATCH",
+          highlights: ["Rider Dispatch", "Live Tracking", "Digital COD"]
         },
         {
           title: "Digitized Prescription Archive",
@@ -348,7 +393,8 @@ export default function MedicalErpView() {
           icon: <FileText size={20} color="#e11d48" />,
           iconBg: "#fef2f2",
           borderColor: "#fecaca",
-          tag: "ACCESSIBLE"
+          tag: "ACCESSIBLE",
+          highlights: ["Lifetime Receipts", "Dosage History", "Secure Link"]
         }
       ]
     }
@@ -929,7 +975,7 @@ export default function MedicalErpView() {
                       transition={{ duration: 0.25, delay: idx * 0.03 }}
                       className="module-large-card"
                     >
-                      <div>
+                      <div className="module-card-top-content">
                         <div className="card-top-row">
                           <div 
                             className="mod-large-icon" 
@@ -937,11 +983,43 @@ export default function MedicalErpView() {
                           >
                             {mod.icon}
                           </div>
-                          <span className="mod-category-badge">{category.id}</span>
+                          <span 
+                            className="mod-category-badge"
+                            style={{ 
+                              background: category.badgeBg || '#f1f5f9',
+                              borderColor: category.badgeBorder || '#e2e8f0',
+                              color: category.badgeText || '#64748b'
+                            }}
+                          >
+                            {category.id}
+                          </span>
                         </div>
-                        <h3 className="mod-large-name">{mod.name}</h3>
+                        
+                        <div className="module-card-body">
+                          <h3 className="mod-large-name">{mod.name}</h3>
+                          <p className="mod-large-desc">{mod.desc}</p>
+                        </div>
+
+                        {mod.tags && mod.tags.length > 0 && (
+                          <div className="module-card-tags">
+                            {mod.tags.map((tag, tIdx) => (
+                              <span key={tIdx} className="module-feature-tag">
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        )}
                       </div>
-                      <p className="mod-large-desc">{mod.desc}</p>
+
+                      <div className="module-card-footer">
+                        <div className="module-status-indicator">
+                          <span className="module-status-dot" style={{ background: mod.borderColor || '#10b981' }}></span>
+                          <span className="module-status-text">Included in Suite</span>
+                        </div>
+                        <div className="module-card-arrow">
+                          <ArrowRight size={13} />
+                        </div>
+                      </div>
                     </motion.div>
                   ))}
                 </div>
@@ -1017,22 +1095,51 @@ export default function MedicalErpView() {
             <div className="role-internal-cards-grid">
               {roleSolutions[activeRole].internalCards.map((card, i) => (
                 <div key={i} className="role-internal-card">
-                  <div className="internal-card-top-row">
-                    <div 
-                      className="internal-card-icon" 
-                      style={{ background: card.iconBg, borderColor: card.borderColor }}
-                    >
-                      {card.icon}
+                  <div className="internal-card-main">
+                    <div className="internal-card-top-row">
+                      <div 
+                        className="internal-card-icon" 
+                        style={{ background: card.iconBg, borderColor: card.borderColor }}
+                      >
+                        {card.icon}
+                      </div>
+                      <span 
+                        className="internal-card-tag" 
+                        style={{ 
+                          color: roleSolutions[activeRole].color,
+                          background: `${roleSolutions[activeRole].color}12`,
+                          borderColor: `${roleSolutions[activeRole].color}33`
+                        }}
+                      >
+                        {card.tag}
+                      </span>
                     </div>
-                    <span 
-                      className="internal-card-tag" 
-                      style={{ color: roleSolutions[activeRole].color }}
-                    >
-                      {card.tag}
-                    </span>
+
+                    <div className="internal-card-body">
+                      <h4 className="internal-card-title">{card.title}</h4>
+                      <p className="internal-card-desc">{card.desc}</p>
+                    </div>
+
+                    {card.highlights && card.highlights.length > 0 && (
+                      <div className="internal-card-highlights">
+                        {card.highlights.map((item, hIdx) => (
+                          <span key={hIdx} className="internal-highlight-tag">
+                            {item}
+                          </span>
+                        ))}
+                      </div>
+                    )}
                   </div>
-                  <h4 className="internal-card-title">{card.title}</h4>
-                  <p className="internal-card-desc">{card.desc}</p>
+
+                  <div className="internal-card-footer">
+                    <span className="internal-card-status">
+                      <span className="internal-card-dot" style={{ background: roleSolutions[activeRole].color }}></span>
+                      <span>Verified Capability</span>
+                    </span>
+                    <div className="internal-card-arrow" style={{ color: roleSolutions[activeRole].color }}>
+                      <ArrowRight size={13} />
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -2112,61 +2219,20 @@ export default function MedicalErpView() {
         }
 
         .category-group-block {
-          background: #ffffff;
-          border: 1px solid #e2e8f0;
-          border-radius: 24px;
-          padding: 2rem;
-          box-shadow: 0 4px 20px rgba(0,0,0,0.02);
-        }
-
-        .category-group-header {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          margin-bottom: 2rem;
-          padding-bottom: 1rem;
-          border-bottom: 1px solid #e2e8f0;
-          flex-wrap: wrap;
-          gap: 1rem;
-        }
-
-        .category-group-info {
-          display: flex;
-          align-items: center;
-          gap: 1.25rem;
-          flex-wrap: wrap;
-        }
-
-        .category-badge-pill {
-          padding: 0.4rem 1.25rem;
-          border-radius: 50px;
-          color: #ffffff;
-          font-weight: 700;
-          font-size: 0.95rem;
-          letter-spacing: -0.01em;
-          box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-
-        .category-group-desc {
-          font-size: 0.95rem;
-          color: #64748b;
-          margin: 0;
-        }
-
-        .category-group-block {
           background: transparent;
           border: none;
           padding: 0;
           box-shadow: none;
-          margin-bottom: 2rem;
+          margin-bottom: 3.5rem;
         }
 
         .category-group-header {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          margin-bottom: 1.5rem;
-          padding-left: 0.5rem;
+          margin-bottom: 2rem;
+          padding-bottom: 1.25rem;
+          border-bottom: 1px solid #e2e8f0;
           flex-wrap: wrap;
           gap: 1rem;
         }
@@ -2207,70 +2273,85 @@ export default function MedicalErpView() {
         /* MODULES GRID LARGE */
         .modules-grid-large {
           display: grid;
-          grid-template-columns: repeat(4, 1fr);
+          grid-template-columns: repeat(3, 1fr);
           gap: 1.5rem;
         }
 
         .module-large-card {
           background: #ffffff;
-          border: 1px solid #e2e8f0;
+          border: 1.5px solid #e2e8f0;
           border-radius: 20px;
-          padding: 1.75rem;
+          padding: 1.6rem;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
-          box-shadow: 0 4px 16px rgba(0,0,0,0.03), 0 1px 3px rgba(0,0,0,0.02);
+          gap: 1.25rem;
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -2px rgba(0, 0, 0, 0.02);
           position: relative;
+          overflow: hidden;
         }
 
         .module-large-card:hover {
-          border-color: #10b981;
-          transform: translateY(-6px);
-          box-shadow: 0 16px 36px rgba(16, 185, 129, 0.12), 0 2px 6px rgba(0,0,0,0.04);
+          border-color: #cbd5e1;
+          transform: translateY(-5px);
+          box-shadow: 0 16px 28px -6px rgba(15, 23, 42, 0.1), 0 6px 10px -4px rgba(0, 0, 0, 0.04);
+        }
+
+        .module-large-card:hover::before {
+          opacity: 1;
+        }
+
+        .module-card-top-content {
+          display: flex;
+          flex-direction: column;
         }
 
         .card-top-row {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          margin-bottom: 1.25rem;
+          margin-bottom: 1.1rem;
         }
 
         .mod-large-icon {
-          width: 50px;
-          height: 50px;
+          width: 48px;
+          height: 48px;
           border-radius: 14px;
           display: flex;
           align-items: center;
           justify-content: center;
           border: 1px solid;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-          transition: transform 0.2s;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+          transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .module-large-card:hover .mod-large-icon {
-          transform: scale(1.08);
+          transform: scale(1.08) rotate(2deg);
         }
 
         .mod-category-badge {
-          font-size: 0.65rem;
+          font-size: 0.68rem;
           font-weight: 800;
           text-transform: uppercase;
-          letter-spacing: 0.05em;
-          color: #64748b;
-          background: #f1f5f9;
-          border: 1px solid #e2e8f0;
-          padding: 0.2rem 0.6rem;
+          letter-spacing: 0.06em;
+          border: 1px solid;
+          padding: 0.25rem 0.65rem;
           border-radius: 50px;
+          line-height: 1;
+        }
+
+        .module-card-body {
+          margin-bottom: 0.25rem;
         }
 
         .mod-large-name {
-          font-size: 1.15rem;
+          font-size: 1.12rem;
           font-weight: 800;
           color: #0f172a;
-          margin-bottom: 0.5rem;
-          line-height: 1.3;
+          margin-bottom: 0.45rem;
+          line-height: 1.35;
+          letter-spacing: -0.01em;
           transition: color 0.2s;
         }
 
@@ -2283,7 +2364,80 @@ export default function MedicalErpView() {
           color: #64748b;
           line-height: 1.55;
           margin: 0;
-          font-weight: 500;
+          font-weight: 450;
+        }
+
+        .module-card-tags {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.4rem;
+          margin-top: 0.9rem;
+        }
+
+        .module-feature-tag {
+          font-size: 0.72rem;
+          font-weight: 600;
+          color: #475569;
+          background: #f8fafc;
+          border: 1px solid #e2e8f0;
+          padding: 0.2rem 0.55rem;
+          border-radius: 6px;
+          letter-spacing: -0.01em;
+          transition: all 0.2s;
+        }
+
+        .module-large-card:hover .module-feature-tag {
+          background: #ffffff;
+          border-color: #cbd5e1;
+        }
+
+        .module-card-footer {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding-top: 0.9rem;
+          border-top: 1px solid #f1f5f9;
+          margin-top: auto;
+        }
+
+        .module-status-indicator {
+          display: flex;
+          align-items: center;
+          gap: 0.45rem;
+        }
+
+        .module-status-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+        }
+
+        .module-status-text {
+          font-size: 0.72rem;
+          font-weight: 600;
+          color: #64748b;
+          letter-spacing: 0.01em;
+        }
+
+        .module-card-arrow {
+          width: 26px;
+          height: 26px;
+          border-radius: 50%;
+          background: #f8fafc;
+          border: 1px solid #e2e8f0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #64748b;
+          transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .module-large-card:hover .module-card-arrow {
+          background: #059669;
+          border-color: #059669;
+          color: #ffffff;
+          transform: translateX(3px);
         }
 
         /* STAKEHOLDER ROLE SOLUTIONS */
@@ -2436,29 +2590,36 @@ export default function MedicalErpView() {
         }
 
         .role-internal-card {
-          background: #f8fafc;
-          border: 1px solid #e2e8f0;
+          background: #ffffff;
+          border: 1.5px solid #e2e8f0;
           border-radius: 20px;
           padding: 1.6rem;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+          gap: 1.25rem;
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -2px rgba(0, 0, 0, 0.02);
           position: relative;
+          overflow: hidden;
         }
 
         .role-internal-card:hover {
-          background: #ffffff;
           border-color: #cbd5e1;
           transform: translateY(-5px);
-          box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+          box-shadow: 0 16px 28px -6px rgba(15, 23, 42, 0.1), 0 6px 10px -4px rgba(0, 0, 0, 0.04);
+        }
+
+        .internal-card-main {
+          display: flex;
+          flex-direction: column;
         }
 
         .internal-card-top-row {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          margin-bottom: 1.15rem;
+          margin-bottom: 1.1rem;
         }
 
         .internal-card-icon {
@@ -2470,30 +2631,35 @@ export default function MedicalErpView() {
           align-items: center;
           justify-content: center;
           box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-          transition: transform 0.2s;
+          transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .role-internal-card:hover .internal-card-icon {
-          transform: scale(1.08);
+          transform: scale(1.08) rotate(2deg);
         }
 
         .internal-card-tag {
           font-size: 0.68rem;
           font-weight: 800;
-          letter-spacing: 0.05em;
+          letter-spacing: 0.06em;
           text-transform: uppercase;
-          background: #ffffff;
-          border: 1px solid #e2e8f0;
+          border: 1px solid;
           padding: 0.25rem 0.65rem;
           border-radius: 50px;
+        }
+
+        .internal-card-body {
+          margin-bottom: 0.25rem;
         }
 
         .internal-card-title {
           font-size: 1.1rem;
           font-weight: 800;
           color: #0f172a;
-          margin-bottom: 0.5rem;
+          margin-bottom: 0.45rem;
           line-height: 1.35;
+          letter-spacing: -0.01em;
+          transition: color 0.2s;
         }
 
         .internal-card-desc {
@@ -2501,7 +2667,72 @@ export default function MedicalErpView() {
           color: #64748b;
           line-height: 1.55;
           margin: 0;
-          font-weight: 500;
+          font-weight: 450;
+        }
+
+        .internal-card-highlights {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.35rem;
+          margin-top: 0.85rem;
+        }
+
+        .internal-highlight-tag {
+          font-size: 0.7rem;
+          font-weight: 600;
+          color: #475569;
+          background: #f8fafc;
+          border: 1px solid #e2e8f0;
+          padding: 0.18rem 0.5rem;
+          border-radius: 6px;
+          letter-spacing: -0.01em;
+          transition: all 0.2s;
+        }
+
+        .role-internal-card:hover .internal-highlight-tag {
+          background: #f1f5f9;
+          border-color: #cbd5e1;
+        }
+
+        .internal-card-footer {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding-top: 0.85rem;
+          border-top: 1px solid #f1f5f9;
+          margin-top: auto;
+        }
+
+        .internal-card-status {
+          display: flex;
+          align-items: center;
+          gap: 0.45rem;
+          font-size: 0.72rem;
+          font-weight: 600;
+          color: #64748b;
+        }
+
+        .internal-card-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+        }
+
+        .internal-card-arrow {
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          background: #f8fafc;
+          border: 1px solid #e2e8f0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .role-internal-card:hover .internal-card-arrow {
+          transform: translateX(3px);
+          background: #f1f5f9;
         }
 
         /* ROADMAP GRID */
@@ -2513,18 +2744,18 @@ export default function MedicalErpView() {
 
         .roadmap-card {
           background: #ffffff;
-          border: 1px solid #e2e8f0;
+          border: 1.5px solid #e2e8f0;
           border-radius: 20px;
           padding: 2rem;
           position: relative;
-          box-shadow: 0 4px 15px rgba(0,0,0,0.02);
-          transition: all 0.25s;
+          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -2px rgba(0, 0, 0, 0.02);
+          transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .roadmap-card:hover {
-          border-color: #059669;
-          transform: translateY(-4px);
-          box-shadow: 0 12px 30px rgba(5, 150, 105, 0.08);
+          border-color: #cbd5e1;
+          transform: translateY(-5px);
+          box-shadow: 0 16px 28px -6px rgba(15, 23, 42, 0.1), 0 6px 10px -4px rgba(0, 0, 0, 0.04);
         }
 
         .roadmap-step-num {

@@ -7,6 +7,8 @@ import { use } from "react";
 import ContactSection from "../../../components/ContactSection";
 import SchoolImsView from "../../../components/SchoolImsView";
 import MedicalErpView from "../../../components/MedicalErpView";
+import RestaurantErpView from "../../../components/RestaurantErpView";
+import EcommerceView from "../../../components/EcommerceView";
 import { notFound } from "next/navigation";
 
 // Data mapping for all products
@@ -89,6 +91,14 @@ export default function ProductPage({ params }) {
 
   if (id === "health" || id === "medical-erp") {
     return <MedicalErpView />;
+  }
+
+  if (id === "stay" || id === "restaurant-erp" || id === "restaurant") {
+    return <RestaurantErpView />;
+  }
+
+  if (id === "ecommerce" || id === "e-commerce") {
+    return <EcommerceView />;
   }
 
   const product = PRODUCT_DATA[id];

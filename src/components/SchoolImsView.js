@@ -1166,11 +1166,12 @@ export default function SchoolImsView() {
         }
 
         .category-group-block {
-          background: rgba(255, 255, 255, 0.6);
-          border: 1px solid #e2e8f0;
+          background: #f8fafc;
+          border: 1.5px solid #e2e8f0;
           border-radius: 24px;
-          padding: 2rem;
-          box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+          padding: 2.25rem;
+          box-shadow: 0 4px 20px -4px rgba(15, 23, 42, 0.04);
+          margin-bottom: 2.5rem;
         }
 
         .category-group-header {
@@ -1178,7 +1179,7 @@ export default function SchoolImsView() {
           align-items: center;
           justify-content: space-between;
           margin-bottom: 2rem;
-          padding-bottom: 1rem;
+          padding-bottom: 1.25rem;
           border-bottom: 1px solid #e2e8f0;
           flex-wrap: wrap;
           gap: 1rem;
@@ -1226,17 +1227,22 @@ export default function SchoolImsView() {
 
         .module-large-card {
           background: #ffffff;
-          border: 1px solid #e2e8f0;
-          border-radius: 18px;
+          border: 1.5px solid #e2e8f0;
+          border-radius: 20px;
           padding: 1.75rem;
-          transition: all 0.25s ease;
-          box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          gap: 1.25rem;
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(0, 0, 0, 0.02);
+          position: relative;
         }
 
         .module-large-card:hover {
           border-color: #2563eb;
-          transform: translateY(-4px);
-          box-shadow: 0 12px 30px rgba(37, 99, 235, 0.09);
+          transform: translateY(-6px);
+          box-shadow: 0 20px 30px -10px rgba(37, 99, 235, 0.16), 0 10px 15px -5px rgba(0, 0, 0, 0.05);
         }
 
         .mod-large-icon {
