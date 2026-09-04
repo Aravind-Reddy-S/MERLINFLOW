@@ -46,7 +46,7 @@ export default function TeamSection() {
           className="section-header"
         >
           <div className="badge">Leadership</div>
-          <h2 style={{ fontSize: "2.5rem", fontWeight: 700, marginBottom: "1rem" }}>
+          <h2 style={{ fontSize: "clamp(1.75rem, 4.5vw, 2.5rem)", fontWeight: 700, marginBottom: "1rem" }}>
             Meet the <span className="text-gradient">Innovators</span>
           </h2>
           <p style={{ color: "var(--text-muted)", fontSize: "1.1rem", maxWidth: "600px", margin: "0 auto" }}>
@@ -83,14 +83,14 @@ export default function TeamSection() {
 
       <style jsx>{`
         .team-section {
-          padding: 6rem 2rem;
+          padding: 5rem 0;
           background: transparent;
           position: relative;
         }
 
         .section-header {
           text-align: center;
-          margin-bottom: 4rem;
+          margin-bottom: 3.5rem;
         }
 
         .badge {
@@ -108,7 +108,7 @@ export default function TeamSection() {
         .team-grid {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
-          gap: 2rem;
+          gap: 1.5rem;
           max-width: 1200px;
           margin: 0 auto;
         }
@@ -120,6 +120,9 @@ export default function TeamSection() {
         }
 
         @media (max-width: 600px) {
+          .team-section {
+            padding: 3.5rem 0;
+          }
           .team-grid {
             grid-template-columns: 1fr;
           }

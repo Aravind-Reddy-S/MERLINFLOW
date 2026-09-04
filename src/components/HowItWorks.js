@@ -43,7 +43,7 @@ export default function HowItWorks() {
           className="section-header-top"
         >
           <div className="badge">Simple Onboarding</div>
-          <h2 style={{ fontSize: "3rem", fontWeight: 700, marginBottom: "1rem", textAlign: "center" }}>
+          <h2 style={{ fontSize: "clamp(1.85rem, 4.5vw, 3rem)", fontWeight: 700, marginBottom: "1rem", textAlign: "center" }}>
             How It <span className="text-gradient">Works</span>
           </h2>
           <p style={{ color: "var(--text-muted)", fontSize: "1.1rem", maxWidth: "800px", margin: "0 auto 3rem auto", lineHeight: "1.6", textAlign: "center" }}>
@@ -80,7 +80,7 @@ export default function HowItWorks() {
 
       <style jsx global>{`
         .how-section {
-          padding: 6rem 2rem;
+          padding: 6rem 0;
           background: transparent;
           position: relative;
         }
@@ -189,6 +189,15 @@ export default function HowItWorks() {
           .how-steps-container {
             flex-direction: column;
             gap: 1.5rem;
+          }
+        }
+
+        @media (max-width: 640px) {
+          .how-section {
+            padding: 4rem 0;
+          }
+          .how-step {
+            padding: 2rem 1.25rem;
           }
         }
       `}</style>

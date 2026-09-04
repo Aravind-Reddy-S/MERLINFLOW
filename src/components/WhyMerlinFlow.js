@@ -48,7 +48,7 @@ export default function WhyMerlinFlow() {
           className="section-header-top"
         >
           <div className="badge">Platform-wide advantages</div>
-          <h2 style={{ fontSize: "3rem", fontWeight: 700, marginBottom: "1rem" }}>
+          <h2 style={{ fontSize: "clamp(1.85rem, 4.5vw, 3rem)", fontWeight: 700, marginBottom: "1rem" }}>
             Why <span className="text-gradient">MERLINFLOW</span>
           </h2>
           <p style={{ color: "var(--text-muted)", fontSize: "1.1rem", maxWidth: "800px", margin: "0 auto 3rem auto", lineHeight: "1.6" }}>
@@ -79,7 +79,7 @@ export default function WhyMerlinFlow() {
 
       <style jsx global>{`
         .why-section {
-          padding: 6rem 2rem;
+          padding: 6rem 0;
           background: transparent;
           border-bottom: 1px solid var(--glass-border);
           position: relative;
@@ -191,14 +191,18 @@ export default function WhyMerlinFlow() {
         }
 
         @media (max-width: 768px) {
+          .why-section {
+            padding: 4rem 0;
+          }
           .advantages-grid {
             grid-template-columns: 1fr;
+            gap: 1.5rem;
           }
           
           .advantage-card {
             align-items: center;
             text-align: center;
-            padding: 2rem 1.5rem;
+            padding: 2rem 1.25rem;
           }
         }
       `}</style>

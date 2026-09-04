@@ -58,7 +58,7 @@ export default function ProductsOverview() {
           viewport={{ once: true, margin: "-100px" }}
           className="section-header-top"
         >
-          <h2 style={{ fontSize: "2.5rem", fontWeight: 700, marginBottom: "1rem", textAlign: "center" }}>
+          <h2 style={{ fontSize: "clamp(1.75rem, 4vw, 2.5rem)", fontWeight: 700, marginBottom: "1rem", textAlign: "center" }}>
             Our <span className="text-gradient">Products</span>
           </h2>
           <p style={{ color: "var(--text-muted)", fontSize: "1.1rem", maxWidth: "800px", margin: "0 auto 3rem auto", textAlign: "center", lineHeight: "1.6" }}>

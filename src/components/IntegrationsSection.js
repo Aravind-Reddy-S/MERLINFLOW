@@ -170,7 +170,7 @@ export default function IntegrationsSection() {
             transition={{ duration: 0.6 }}
             className="text-content"
           >
-            <h2 style={{ fontSize: "2.5rem", fontWeight: 700, marginBottom: "1rem" }}>
+            <h2 style={{ fontSize: "clamp(1.75rem, 4.5vw, 2.5rem)", fontWeight: 700, marginBottom: "1rem" }}>
               Plays nicely with <span className="text-gradient">everyone.</span>
             </h2>
             <p style={{ color: "var(--text-muted)", fontSize: "1.1rem", marginBottom: "2rem" }}>

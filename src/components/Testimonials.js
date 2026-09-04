@@ -83,7 +83,7 @@ export default function Testimonials() {
           className="section-header"
         >
           <div className="badge">Success Stories</div>
-          <h2 style={{ fontSize: "2.5rem", fontWeight: 700, marginBottom: "1rem" }}>
+          <h2 style={{ fontSize: "clamp(1.75rem, 4.5vw, 2.5rem)", fontWeight: 700, marginBottom: "1rem" }}>
             Don't just take <span className="text-gradient">our word for it.</span>
           </h2>
         </motion.div>

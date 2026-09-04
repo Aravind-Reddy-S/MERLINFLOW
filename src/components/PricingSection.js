@@ -101,7 +101,7 @@ export default function PricingSection() {
           className="section-header-top"
         >
           <div className="badge">Transparent Pricing</div>
-          <h2 style={{ fontSize: "3rem", fontWeight: 700, marginBottom: "1rem" }}>
+          <h2 style={{ fontSize: "clamp(1.85rem, 4.5vw, 2.75rem)", fontWeight: 700, marginBottom: "1rem" }}>
             Affordable Plans for Every <span className="text-gradient">Industry.</span>
           </h2>
           <p style={{ color: "var(--text-muted)", fontSize: "1.1rem", maxWidth: "800px", margin: "0 auto 2rem auto", lineHeight: "1.6" }}>
@@ -380,28 +380,49 @@ export default function PricingSection() {
         }
 
         @media (max-width: 640px) {
+          .pricing-section {
+            padding: 4rem 0;
+          }
+          
           .pricing-grid {
             grid-template-columns: 1fr;
-            max-width: 450px;
+            max-width: 100%;
+            gap: 1.5rem;
           }
           
           .pricing-card {
-            align-items: center;
-            text-align: center;
+            padding: 2rem 1.25rem;
+            border-radius: 20px;
           }
           
           .pricing-header {
             display: flex;
             flex-direction: column;
             align-items: center;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+          }
+
+          .amount {
+            font-size: clamp(2rem, 6vw, 2.5rem);
           }
           
           .pricing-features {
-            align-items: center;
+            align-items: flex-start;
+            text-align: left;
+            margin-bottom: 2rem;
+            gap: 1rem;
           }
           
           .feature-item {
-            justify-content: center;
+            justify-content: flex-start;
+            font-size: 0.9rem;
+          }
+
+          .plan-btn {
+            padding: 0.85rem;
+            font-size: 0.95rem;
           }
         }
       `}</style>

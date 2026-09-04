@@ -30,7 +30,7 @@ export default function Hero() {
             </span>
           </motion.div>
 
-          <h1 style={{ fontSize: "clamp(2.5rem, 4vw, 4rem)", fontWeight: 800, lineHeight: 1.2, marginBottom: "1.5rem", wordBreak: "break-word" }}>
+          <h1 style={{ fontSize: "clamp(2rem, 5vw, 3.75rem)", fontWeight: 800, lineHeight: 1.2, marginBottom: "1.5rem", wordBreak: "break-word" }}>
             Innovation at <span className="text-gradient">every step.</span>
           </h1>
 
@@ -395,9 +395,26 @@ export default function Hero() {
           }
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 640px) {
+          .hero-container {
+            padding-top: 6.5rem;
+            padding-bottom: 3rem;
+            min-height: auto;
+          }
+          .hero-demo-panel {
+            padding: 1.25rem !important;
+            width: 100% !important;
+            max-width: 100% !important;
+          }
           .demo-options-grid {
             grid-template-columns: 1fr;
+            gap: 0.75rem;
+          }
+          .btn-primary, .btn-secondary {
+            width: 100% !important;
+            max-width: 100% !important;
+            padding: 0.85rem 1.5rem !important;
+            font-size: 0.95rem !important;
           }
         }
       `}</style>

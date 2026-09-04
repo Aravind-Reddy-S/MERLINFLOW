@@ -40,7 +40,7 @@ export default function FAQ() {
           className="section-header"
         >
           <div className="badge">Got Questions?</div>
-          <h2 style={{ fontSize: "2.5rem", fontWeight: 700, marginBottom: "1rem" }}>
+          <h2 style={{ fontSize: "clamp(1.75rem, 4.5vw, 2.5rem)", fontWeight: 700, marginBottom: "1rem" }}>
             Frequently Asked <span className="text-gradient">Questions</span>
           </h2>
         </motion.div>
@@ -84,13 +84,13 @@ export default function FAQ() {
 
       <style jsx global>{`
         .faq-section {
-          padding: 3rem 2rem;
+          padding: 4rem 0;
           background: transparent;
         }
 
         .section-header {
           text-align: center;
-          margin-bottom: 4rem;
+          margin-bottom: 3rem;
         }
 
         .badge {
@@ -126,10 +126,11 @@ export default function FAQ() {
           background: transparent;
           border: none;
           color: var(--text-color);
-          font-size: 1.1rem;
+          font-size: 1.05rem;
           font-weight: 600;
           text-align: left;
           cursor: pointer;
+          gap: 1rem;
           transition: background 0.3s;
         }
 
@@ -137,8 +138,8 @@ export default function FAQ() {
           background: rgba(255, 255, 255, 0.02);
         }
 
-        .text-primary { color: var(--primary); }
-        .text-muted { color: var(--text-muted); }
+        .text-primary { color: var(--primary); flex-shrink: 0; }
+        .text-muted { color: var(--text-muted); flex-shrink: 0; }
 
         .faq-answer-wrapper {
           overflow: hidden;
@@ -148,7 +149,21 @@ export default function FAQ() {
           padding: 0 2rem 1.5rem 2rem;
           color: var(--text-muted);
           line-height: 1.6;
-          font-size: 1rem;
+          font-size: 0.98rem;
+        }
+
+        @media (max-width: 640px) {
+          .faq-section {
+            padding: 3rem 0;
+          }
+          .faq-question {
+            padding: 1.25rem 1rem;
+            font-size: 0.95rem;
+          }
+          .faq-answer {
+            padding: 0 1rem 1.25rem 1rem;
+            font-size: 0.9rem;
+          }
         }
       `}</style>
     </section>

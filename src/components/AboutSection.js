@@ -79,7 +79,7 @@ export default function AboutSection() {
 
       <style jsx>{`
         .section-container {
-          padding: 6rem 2rem;
+          padding: 5rem 0;
           position: relative;
           background: transparent;
           min-height: 80vh;
@@ -104,6 +104,7 @@ export default function AboutSection() {
         @media (max-width: 992px) {
           .about-grid-main {
             grid-template-columns: 1fr;
+            gap: 2.5rem;
           }
         }
 
@@ -112,7 +113,7 @@ export default function AboutSection() {
           display: flex;
           flex-direction: column;
           align-items: center;
-          margin-bottom: 5rem;
+          margin-bottom: 3.5rem;
         }
 
         .badge {
@@ -127,21 +128,17 @@ export default function AboutSection() {
           border: 1px solid rgba(59, 130, 246, 0.2);
         }
 
-
-
-
-
         .features-list {
           display: flex;
           flex-direction: column;
-          gap: 1.5rem;
+          gap: 1.25rem;
         }
 
         .feature-item {
           display: flex;
           gap: 1rem;
           align-items: flex-start;
-          padding: 1.5rem;
+          padding: 1.5rem 1.25rem;
           background: var(--bg-alpha-light);
           border: 1px solid var(--glass-border);
           border-radius: 16px;
@@ -150,20 +147,33 @@ export default function AboutSection() {
 
         .feature-item:hover {
           background: var(--bg-alpha-hover);
-          transform: translateX(10px);
+          transform: translateY(-3px);
         }
 
         .feature-item h4 {
           color: var(--text-color);
           font-size: 1.1rem;
           font-weight: 600;
-          margin-bottom: 0.5rem;
+          margin-bottom: 0.35rem;
         }
 
         .feature-item p {
           color: var(--text-muted);
           font-size: 0.95rem;
           line-height: 1.5;
+        }
+
+        @media (max-width: 640px) {
+          .section-container {
+            padding: 3.5rem 0;
+            min-height: auto;
+          }
+          .section-header-top {
+            margin-bottom: 2rem;
+          }
+          .feature-item {
+            padding: 1.25rem 1rem;
+          }
         }
       `}</style>
     </section>

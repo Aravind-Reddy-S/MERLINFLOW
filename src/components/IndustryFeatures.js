@@ -54,7 +54,7 @@ export default function IndustryFeatures() {
       <div className="container">
         <div className="section-header">
           <div className="badge">Industry Solutions</div>
-          <h2 style={{ fontSize: "2.5rem", fontWeight: 700, marginBottom: "1rem" }}>
+          <h2 style={{ fontSize: "clamp(1.75rem, 4.5vw, 2.5rem)", fontWeight: 700, marginBottom: "1rem" }}>
             Built for <span className="text-gradient">Every Business</span>
           </h2>
           <p style={{ color: "var(--text-muted)", fontSize: "1.1rem", maxWidth: "600px", margin: "0 auto" }}>
@@ -99,14 +99,14 @@ export default function IndustryFeatures() {
 
       <style jsx global>{`
         .features-section {
-          padding: 3rem 2rem;
+          padding: 4rem 0;
           position: relative;
           background: transparent;
         }
 
         .section-header {
           text-align: center;
-          margin-bottom: 4rem;
+          margin-bottom: 3rem;
         }
 
         .badge {
@@ -125,20 +125,21 @@ export default function IndustryFeatures() {
           display: flex;
           justify-content: center;
           flex-wrap: wrap;
-          gap: 1rem;
-          margin-bottom: 3rem;
+          gap: 0.75rem;
+          margin-bottom: 2.5rem;
         }
 
         .tab-button {
           display: flex;
           align-items: center;
           gap: 0.5rem;
-          padding: 0.75rem 1.5rem;
+          padding: 0.65rem 1.25rem;
           background: rgba(255, 255, 255, 0.05);
           border: 1px solid var(--glass-border);
           border-radius: 50px;
           color: var(--text-muted);
           font-weight: 600;
+          font-size: 0.92rem;
           cursor: pointer;
           transition: all 0.3s;
         }
@@ -156,24 +157,25 @@ export default function IndustryFeatures() {
         }
 
         .tab-content-wrapper {
-          min-height: 400px;
+          min-height: 380px;
         }
 
         .features-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           grid-auto-rows: 1fr;
-          gap: 2rem;
+          gap: 1.5rem;
         }
 
         .feature-card {
-          padding: 2rem 2rem;
+          padding: 2rem 1.5rem;
           transition: transform 0.3s;
           display: flex;
           flex-direction: column;
           align-items: center;
           text-align: center;
           height: 100%;
+          border-radius: 18px;
         }
 
         .feature-card:hover {
@@ -188,22 +190,24 @@ export default function IndustryFeatures() {
           display: flex;
           align-items: center;
           justify-content: center;
-          margin: 0 auto 1.5rem auto;
+          margin: 0 auto 1.25rem auto;
         }
 
         .feature-title {
-          font-size: 1.25rem;
+          font-size: 1.2rem;
           font-weight: 600;
-          margin-bottom: 1rem;
+          margin-bottom: 0.75rem;
           color: var(--text-color);
         }
 
         .feature-desc {
           color: var(--text-muted);
           line-height: 1.6;
+          font-size: 0.95rem;
           min-height: 50px;
           height: auto;
         }
+
         @media (max-width: 1024px) {
           .features-grid {
             grid-template-columns: repeat(2, 1fr);
@@ -212,6 +216,14 @@ export default function IndustryFeatures() {
         @media (max-width: 640px) {
           .features-grid {
             grid-template-columns: 1fr;
+            gap: 1.25rem;
+          }
+          .feature-card {
+            padding: 1.5rem 1.25rem;
+          }
+          .tab-button {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
           }
         }
       `}</style>

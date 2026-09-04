@@ -25,7 +25,7 @@ export default function SecuritySection() {
           className="section-header-top"
         >
           <div className="badge">Enterprise Security</div>
-          <h2 style={{ fontSize: "3rem", fontWeight: 700, marginBottom: "1rem" }}>
+          <h2 style={{ fontSize: "clamp(1.85rem, 4.5vw, 3rem)", fontWeight: 700, marginBottom: "1rem" }}>
             Your data is our <span className="text-gradient">Fort Knox.</span>
           </h2>
           <p style={{ color: "var(--text-muted)", fontSize: "1.1rem", maxWidth: "800px", margin: "0 auto 2rem auto", lineHeight: "1.6" }}>
@@ -56,7 +56,7 @@ export default function SecuritySection() {
 
       <style jsx global>{`
         .security-section {
-          padding: 4rem 2rem;
+          padding: 5rem 0;
           background: transparent;
           border-top: 1px solid var(--glass-border);
           border-bottom: 1px solid var(--glass-border);
@@ -67,7 +67,7 @@ export default function SecuritySection() {
           display: flex;
           flex-direction: column;
           align-items: center;
-          margin-bottom: 5rem;
+          margin-bottom: 3.5rem;
         }
 
         .badge {
@@ -167,14 +167,23 @@ export default function SecuritySection() {
         }
         
         @media (max-width: 640px) {
+          .security-section {
+            padding: 4rem 0;
+          }
+
+          .section-header-top {
+            margin-bottom: 2.5rem;
+          }
+
           .features-grid {
             grid-template-columns: 1fr;
+            gap: 1.25rem;
           }
           
           .sec-feature {
             align-items: center;
             text-align: center;
-            padding: 2rem 1.5rem;
+            padding: 1.75rem 1.25rem;
           }
           
           .sec-header {

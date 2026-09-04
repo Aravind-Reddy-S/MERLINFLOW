@@ -22,7 +22,7 @@ export default function StatsSection() {
           className="section-header"
         >
           <div className="badge">Built to Scale</div>
-          <h2 style={{ fontSize: "2.5rem", fontWeight: 700, marginBottom: "1rem" }}>
+          <h2 style={{ fontSize: "clamp(1.75rem, 4.5vw, 2.5rem)", fontWeight: 700, marginBottom: "1rem" }}>
             Accelerating <span className="text-gradient">Growth</span>
           </h2>
           <p style={{ color: "var(--text-muted)", fontSize: "1.1rem", maxWidth: "600px", margin: "0 auto" }}>
@@ -52,13 +52,13 @@ export default function StatsSection() {
 
       <style jsx global>{`
         .stats-section {
-          padding: 3rem 2rem;
+          padding: 4rem 0;
           background: linear-gradient(to bottom, rgba(59, 130, 246, 0.02), transparent);
         }
 
         .section-header {
           text-align: center;
-          margin-bottom: 4rem;
+          margin-bottom: 3rem;
         }
 
         .badge {
@@ -75,17 +75,18 @@ export default function StatsSection() {
 
         .stats-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-          gap: 1rem;
+          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+          gap: 1.25rem;
         }
 
         .stat-card {
-          padding: 2.5rem 2rem;
+          padding: 2.25rem 1.5rem;
           display: flex;
           flex-direction: column;
           align-items: center;
           text-align: center;
           transition: transform 0.3s;
+          border-radius: 18px;
         }
 
         .stat-card:hover {
@@ -102,11 +103,11 @@ export default function StatsSection() {
           display: flex;
           align-items: center;
           justify-content: center;
-          margin-bottom: 1.5rem;
+          margin-bottom: 1.25rem;
         }
 
         .stat-number {
-          font-size: 3rem;
+          font-size: clamp(2.25rem, 6vw, 3rem);
           font-weight: 800;
           color: var(--text-color);
           line-height: 1;
@@ -117,8 +118,14 @@ export default function StatsSection() {
 
         .stat-label {
           color: var(--text-muted);
-          font-size: 1rem;
+          font-size: 0.95rem;
           font-weight: 500;
+        }
+
+        @media (max-width: 500px) {
+          .stats-grid {
+            grid-template-columns: 1fr;
+          }
         }
       `}</style>
     </section>
