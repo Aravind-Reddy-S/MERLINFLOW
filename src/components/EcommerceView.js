@@ -306,7 +306,7 @@ export default function EcommerceView() {
       </div>
 
       {/* Top Breadcrumb & Sub Navigation */}
-      <div className="sticky-subnav" style={{ position: "sticky", top: "76px", zIndex: 900 }}>
+      <div className="sticky-subnav">
         <div className="container subnav-container">
           <Link href="/#products" className="back-link">
             <ArrowLeft size={16} /> Back to Products
@@ -2632,8 +2632,25 @@ export default function EcommerceView() {
         }
 
         @media (max-width: 768px) {
+          .sticky-subnav {
+            position: relative !important;
+            top: auto !important;
+            z-index: 20 !important;
+          }
+          .subnav-tabs {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            max-width: 100%;
+            padding-bottom: 4px;
+          }
+          .subnav-tab {
+            white-space: nowrap;
+            flex-shrink: 0;
+          }
           .hero-title {
-            font-size: 2.5rem;
+            font-size: clamp(1.85rem, 5.5vw, 2.5rem);
+            word-break: break-word;
+            overflow-wrap: break-word;
           }
           .hero-description {
             font-size: 1.05rem;

@@ -485,9 +485,9 @@ export default function SchoolImsView() {
   };
 
   return (
-    <div className="school-ims-page" style={{ paddingTop: "5.5rem" }}>
+    <div className="school-ims-page">
       {/* Top Breadcrumb & Sub Navigation */}
-      <div className="sticky-subnav" style={{ position: "sticky", top: "76px", zIndex: 900 }}>
+      <div className="sticky-subnav">
         <div className="container subnav-container">
           <Link href="/#products" className="back-link">
             <ArrowLeft size={16} /> Back to Products
@@ -1561,17 +1561,19 @@ export default function SchoolImsView() {
 
         .hero-heading {
           font-family: var(--font-heading);
-          font-size: 3.1rem;
+          font-size: clamp(1.85rem, 5.5vw, 3.1rem);
           font-weight: 800;
-          line-height: 1.15;
+          line-height: 1.18;
           color: #0f172a;
-          margin-bottom: 1.5rem;
+          margin-bottom: 1.25rem;
           letter-spacing: -0.02em;
+          word-break: break-word;
+          overflow-wrap: break-word;
         }
 
         .highlight-text {
           color: #2563eb;
-          display: block;
+          display: inline;
         }
 
         .hero-subtitle {
@@ -3284,12 +3286,14 @@ export default function SchoolImsView() {
           background: #ffffff;
           border-radius: 20px;
           border: 1px solid #cbd5e1;
-          overflow: hidden;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
           box-shadow: 0 10px 30px rgba(0,0,0,0.03);
         }
 
         .comparison-table {
           width: 100%;
+          min-width: 560px;
           border-collapse: collapse;
           text-align: left;
         }
@@ -3580,29 +3584,147 @@ export default function SchoolImsView() {
           }
         }
 
-        @media (max-width: 640px) {
-          .hero-heading {
-            font-size: 2.2rem;
+        @media (max-width: 768px) {
+          .school-ims-page {
+            padding-top: 4.5rem !important;
           }
 
-          .modules-grid-large {
-            grid-template-columns: 1fr;
+          .sticky-subnav {
+            position: relative !important;
+            top: auto !important;
+            z-index: 20 !important;
+            box-shadow: none;
+            background: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
           }
 
-          .sec-grid-cards {
+          .subnav-container {
+            padding: 0.5rem 0.75rem;
+            gap: 0.5rem;
+          }
+
+          .subnav-tabs {
+            display: none !important;
+          }
+
+          .subnav-cta-btn {
+            padding: 0.4rem 0.85rem;
+            font-size: 0.78rem;
+          }
+
+          .hero-section {
+            padding: 2.5rem 0 3.5rem;
+          }
+
+          .hero-text-col {
+            width: 100%;
+            max-width: 100%;
+          }
+
+          .hero-cta-group {
+            flex-direction: column;
+            width: 100%;
+            gap: 0.75rem;
+          }
+
+          .btn-primary, .btn-secondary {
+            width: 100%;
+            justify-content: center;
+          }
+
+          .stats-strip {
+            width: 100%;
+            max-width: 100%;
+            padding: 1rem;
+          }
+
+          .browser-window {
+            width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
+            border-radius: 14px;
+          }
+
+          .browser-body.school-demo-container {
+            padding: 1rem 0.75rem;
+          }
+
+          .demo-nav-bar {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            white-space: nowrap;
+            padding: 0.4rem 0.5rem;
+          }
+
+          .demo-tab-btn {
+            padding: 0.35rem 0.65rem;
+            font-size: 0.7rem;
+            flex-shrink: 0;
+          }
+
+          .demo-action-bar {
+            flex-direction: column;
+            width: 100%;
+          }
+
+          .demo-action-btn {
+            width: 100%;
+            justify-content: center;
+          }
+
+          .browser-url-bar .url-badge-group {
+            display: none;
+          }
+
+          .section-padding {
+            padding: 3.5rem 0;
+            scroll-margin-top: 80px;
+          }
+
+          .section-header-center {
+            margin-bottom: 2.5rem;
+          }
+
+          .section-title {
+            font-size: clamp(1.75rem, 5.5vw, 2.4rem);
+          }
+
+          .comparison-table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            border-radius: 14px;
+            margin: 0 -0.5rem;
+            width: calc(100% + 1rem);
+          }
+
+          .comparison-table {
+            min-width: 540px;
+          }
+
+          .comparison-table th, .comparison-table td {
+            padding: 0.85rem 0.9rem;
+            font-size: 0.8rem;
+          }
+
+          .modules-grid-large, .sec-grid-cards {
             grid-template-columns: 1fr;
           }
 
           .cta-box {
-            padding: 3rem 1.5rem;
+            padding: 2.5rem 1.25rem;
           }
 
           .cta-heading {
-            font-size: 2rem;
+            font-size: clamp(1.75rem, 5vw, 2.2rem);
           }
+        }
 
-          .subnav-tabs {
-            display: none;
+        @media (max-width: 480px) {
+          .demo-kpi-grid {
+            grid-template-columns: 1fr;
+          }
+          .student-subjects-grid {
+            grid-template-columns: repeat(2, 1fr);
           }
         }
       `}</style>
