@@ -3341,24 +3341,30 @@ export default function SchoolImsView() {
           margin: 0;
         }
 
-        /* CTA BANNER */
+        /* CTA BANNER (CLEAN FROSTED GLASS / LIGHT AESTHETIC) */
         .cta-banner-section {
-          padding: 4rem 0;
+          padding: 4.5rem 0;
         }
 
         .cta-box {
-          background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+          background: radial-gradient(circle at 90% 10%, rgba(59, 130, 246, 0.12), transparent 45%),
+                      radial-gradient(circle at 10% 90%, rgba(99, 102, 241, 0.08), transparent 45%),
+                      linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #eff6ff 100%);
           border-radius: 28px;
           padding: 4.5rem 3rem;
           text-align: center;
-          color: #ffffff;
-          box-shadow: 0 25px 60px rgba(15, 23, 42, 0.2);
+          color: #0f172a;
+          border: 1.5px solid #dbeafe;
+          box-shadow: 0 25px 60px -15px rgba(37, 99, 235, 0.12), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+          position: relative;
+          overflow: hidden;
         }
 
         .cta-pill {
           display: inline-block;
-          background: rgba(255, 255, 255, 0.1);
-          border: 1px solid rgba(255, 255, 255, 0.2);
+          background: #eff6ff;
+          border: 1px solid #bfdbfe;
+          color: #2563eb;
           border-radius: 50px;
           padding: 0.35rem 1rem;
           font-size: 0.75rem;
@@ -3371,16 +3377,18 @@ export default function SchoolImsView() {
           font-family: var(--font-heading);
           font-size: 2.75rem;
           font-weight: 800;
+          color: #0f172a;
           margin-bottom: 1rem;
           line-height: 1.2;
+          letter-spacing: -0.01em;
         }
 
         .cta-sub {
           font-size: 1.1rem;
-          color: #cbd5e1;
-          max-width: 600px;
+          color: #475569;
+          max-width: 620px;
           margin: 0 auto 2.5rem;
-          line-height: 1.6;
+          line-height: 1.65;
         }
 
         .cta-btns {
@@ -3394,46 +3402,52 @@ export default function SchoolImsView() {
           display: inline-flex;
           align-items: center;
           gap: 0.5rem;
-          background: #ffffff;
-          color: #0f172a;
+          background: #2563eb;
+          color: #ffffff;
           font-weight: 700;
           font-size: 0.95rem;
-          padding: 0.9rem 2rem;
+          padding: 0.95rem 2.2rem;
           border-radius: 12px;
           border: none;
           cursor: pointer;
-          transition: all 0.2s;
+          transition: all 0.2s ease;
+          box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.35);
         }
 
         .btn-white:hover {
-          background: #f1f5f9;
+          background: #1d4ed8;
           transform: translateY(-2px);
+          box-shadow: 0 15px 30px -5px rgba(37, 99, 235, 0.45);
         }
 
         .btn-outline-white {
           display: inline-flex;
           align-items: center;
-          background: transparent;
-          color: #ffffff;
+          background: #ffffff;
+          color: #1e293b;
           font-weight: 700;
           font-size: 0.95rem;
-          padding: 0.9rem 1.8rem;
+          padding: 0.95rem 2rem;
           border-radius: 12px;
-          border: 1px solid rgba(255, 255, 255, 0.3);
+          border: 1.5px solid #cbd5e1;
           text-decoration: none;
-          transition: all 0.2s;
+          transition: all 0.2s ease;
+          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
         }
 
         .btn-outline-white:hover {
-          background: rgba(255, 255, 255, 0.08);
+          background: #f8fafc;
+          border-color: #94a3b8;
+          transform: translateY(-2px);
         }
 
         .cta-footnote {
           font-size: 0.78rem;
-          color: #94a3b8;
+          color: #64748b;
           text-transform: uppercase;
-          letter-spacing: 0.05em;
-          margin-top: 2rem;
+          letter-spacing: 0.06em;
+          font-weight: 600;
+          margin-top: 2.2rem;
         }
 
         /* RESPONSIVE */
