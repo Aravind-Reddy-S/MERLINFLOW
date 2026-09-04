@@ -2,6 +2,7 @@
 
 import { FaFacebook, FaLinkedin, FaYoutube, FaInstagram } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
+import Link from "next/link";
 import merlinflowLogo from "../../public/images/company.png";
 
 export default function Footer() {
@@ -39,13 +40,13 @@ export default function Footer() {
 
           {/* Links Columns */}
           <div className="footer-links">
-            <h3>Product</h3>
+            <h3>Products & Ecosystem</h3>
             <ul>
-              <li><a href="#products" onClick={(e) => handleLinkClick(e, '#products')}>Products</a></li>
-              <li><a href="#how-it-works" onClick={(e) => handleLinkClick(e, '#how-it-works')}>How It Works</a></li>
-              <li><a href="#features" onClick={(e) => handleLinkClick(e, '#features')}>Features</a></li>
+              <li><Link href="/products/edu">School IMS</Link></li>
+              <li><Link href="/products/health">Medical ERP</Link></li>
+              <li><Link href="/products/stay">Restaurant ERP</Link></li>
+              <li><Link href="/products/ecommerce">E-commerce Platform</Link></li>
               <li><a href="#integrations" onClick={(e) => handleLinkClick(e, '#integrations')}>Integrations</a></li>
-              <li><a href="#security" onClick={(e) => handleLinkClick(e, '#security')}>Security</a></li>
               <li><a href="#pricing" onClick={(e) => handleLinkClick(e, '#pricing')}>Pricing</a></li>
             </ul>
           </div>

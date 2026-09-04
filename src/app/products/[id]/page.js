@@ -6,6 +6,7 @@ import Link from "next/link";
 import { use } from "react";
 import ContactSection from "../../../components/ContactSection";
 import SchoolImsView from "../../../components/SchoolImsView";
+import MedicalErpView from "../../../components/MedicalErpView";
 import { notFound } from "next/navigation";
 
 // Data mapping for all products
@@ -39,12 +40,14 @@ const PRODUCT_DATA = {
     icon: Hospital,
     color: "#10b981",
     bgLight: "#ecfdf5",
-    features: [
-      { title: "Patient Management", desc: "Complete digital registration, patient profiling, medical history timelines, and automated insurance verification workflows." },
-      { title: "Centralized Pharmacy", desc: "End-to-end medicine inventory tracking, barcode dispensing, stock management, and automated expiry alerts." },
-      { title: "Advanced Billing Engine", desc: "Automated OPD/IPD charge calculations, discount management, insurance split billing, and integrated online payments." },
-      { title: "Smart Laboratory Module", desc: "Integrated test booking, real-time sample tracking, digitized report uploads, and seamless machine integration." }
-    ]
+  },
+  "medical-erp": {
+    name: "Medical ERP",
+    tag: "Healthcare, Digitized",
+    desc: "Advanced ERP for medical shops and pharmacies. Inventory tracking, automated billing, expiry management, and GST compliance.",
+    icon: Hospital,
+    color: "#10b981",
+    bgLight: "#ecfdf5",
   },
   stay: {
     name: "Restaurant ERP",
@@ -82,6 +85,10 @@ export default function ProductPage({ params }) {
 
   if (id === "edu" || id === "school-ims") {
     return <SchoolImsView />;
+  }
+
+  if (id === "health" || id === "medical-erp") {
+    return <MedicalErpView />;
   }
 
   const product = PRODUCT_DATA[id];
