@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   GraduationCap, Users, Bell, BookOpen, IndianRupee, 
@@ -268,6 +268,39 @@ export default function SchoolImsView() {
     }
   ];
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['overview', 'modules', 'solutions', 'pricing', 'security'];
+      const scrollPos = window.scrollY + 140;
+      for (const s of sections) {
+        const el = document.getElementById(s);
+        if (el) {
+          const top = el.offsetTop;
+          const height = el.offsetHeight;
+          if (scrollPos >= top && scrollPos < top + height) {
+            setActiveTab(s);
+          }
+        }
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToSection = (sectionId) => {
+    setActiveTab(sectionId);
+    if (sectionId === "overview") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+    const el = document.getElementById(sectionId);
+    if (el) {
+      const yOffset = -70; // offset for sticky subnav
+      const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
+
   const scrollToContact = () => {
     const el = document.getElementById("contact");
     if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -285,31 +318,31 @@ export default function SchoolImsView() {
           <div className="subnav-tabs">
             <button 
               className={`subnav-tab ${activeTab === 'overview' ? 'active' : ''}`}
-              onClick={() => setActiveTab('overview')}
+              onClick={() => scrollToSection('overview')}
             >
               Overview
             </button>
             <button 
               className={`subnav-tab ${activeTab === 'modules' ? 'active' : ''}`}
-              onClick={() => setActiveTab('modules')}
+              onClick={() => scrollToSection('modules')}
             >
               45+ Modules
             </button>
             <button 
               className={`subnav-tab ${activeTab === 'solutions' ? 'active' : ''}`}
-              onClick={() => setActiveTab('solutions')}
+              onClick={() => scrollToSection('solutions')}
             >
               Role Solutions
             </button>
             <button 
               className={`subnav-tab ${activeTab === 'pricing' ? 'active' : ''}`}
-              onClick={() => setActiveTab('pricing')}
+              onClick={() => scrollToSection('pricing')}
             >
               Pricing Plans
             </button>
             <button 
               className={`subnav-tab ${activeTab === 'security' ? 'active' : ''}`}
-              onClick={() => setActiveTab('security')}
+              onClick={() => scrollToSection('security')}
             >
               Security
             </button>
@@ -322,7 +355,7 @@ export default function SchoolImsView() {
       </div>
 
       {/* Hero Section */}
-      <section className="hero-section">
+      <section id="overview" className="hero-section">
         <div className="container hero-container">
           <div className="hero-grid">
             {/* Left Hero Content */}
@@ -347,23 +380,38 @@ export default function SchoolImsView() {
                 <button onClick={scrollToContact} className="btn-primary">
                   Request Access <ArrowRight size={18} />
                 </button>
-                <button onClick={() => setActiveTab('modules')} className="btn-secondary">
+                <button onClick={() => scrollToSection('modules')} className="btn-secondary">
                   <LayoutGrid size={18} /> Explore 45+ Modules
                 </button>
               </div>
 
               <div className="stats-strip">
-                <div className="stat-card">
+                <div 
+                  className="stat-card" 
+                  onClick={() => scrollToSection('modules')} 
+                  style={{ cursor: "pointer" }}
+                  title="Click to view 45+ modules"
+                >
                   <div className="stat-number">45+</div>
                   <div className="stat-label">Integrated Modules</div>
                 </div>
                 <div className="stat-divider"></div>
-                <div className="stat-card">
+                <div 
+                  className="stat-card"
+                  onClick={() => scrollToSection('solutions')}
+                  style={{ cursor: "pointer" }}
+                  title="Click to view role solutions"
+                >
                   <div className="stat-number">100%</div>
                   <div className="stat-label">Paperless Campus</div>
                 </div>
                 <div className="stat-divider"></div>
-                <div className="stat-card">
+                <div 
+                  className="stat-card"
+                  onClick={() => scrollToSection('pricing')}
+                  style={{ cursor: "pointer" }}
+                  title="Click to view pricing plans"
+                >
                   <div className="stat-number">₹0</div>
                   <div className="stat-label">Setup Cost</div>
                 </div>
