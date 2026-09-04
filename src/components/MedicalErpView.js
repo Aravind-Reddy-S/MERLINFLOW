@@ -182,45 +182,174 @@ export default function MedicalErpView() {
       title: "Pharmacy Owners & Directors",
       tag: "Strategic Control & Complete Financial Clarity",
       desc: "Gain total visibility into your pharmacy operations. Make informed business decisions with real-time revenue analytics, inventory health, and automated tax audits.",
-      icon: <Target className="w-8 h-8 text-emerald-600" />,
+      icon: <Target className="w-5 h-5 text-emerald-600" />,
       color: "#059669",
       badge: "EXECUTIVE PORTAL",
-      highlights: [
-        "Executive Dashboard with real-time gross margins and sales velocity",
-        "Automated expiry reduction alerts to protect business profitability",
-        "Centralized multi-store inventory sync and stock transfer logs",
-        "One-click GST return exports (GSTR-1, GSTR-3B, HSN breakdown)",
-        "Audit-ready ledger reconciliation for suppliers and bank accounts"
+      internalCards: [
+        {
+          title: "Executive Revenue Dashboard",
+          desc: "Live visibility into counter sales, peak billing hours, fast-moving medicines, and net profit margins.",
+          icon: <BarChart3 size={20} color="#059669" />,
+          iconBg: "#ecfdf5",
+          borderColor: "#a7f3d0",
+          tag: "REAL-TIME"
+        },
+        {
+          title: "Expiry Radar & Loss Prevention",
+          desc: "Proactive 30/60/90-day alert watchdog with automated batch lock to prevent dead stock write-offs.",
+          icon: <History size={20} color="#0d9488" />,
+          iconBg: "#f0fdfa",
+          borderColor: "#99f6e4",
+          tag: "PROFIT SAVER"
+        },
+        {
+          title: "Multi-Store & Chain Sync",
+          desc: "Synchronize inventory levels across branch stores, route inter-branch transfers, and review consolidated P&L.",
+          icon: <Database size={20} color="#0284c7" />,
+          iconBg: "#f0f9ff",
+          borderColor: "#bae6fd",
+          tag: "CENTRAL SYNC"
+        },
+        {
+          title: "1-Click GST Return Filing",
+          desc: "Automated GSTR-1, GSTR-3B, and HSN-wise tax breakdown spreadsheets ready for instant CA upload.",
+          icon: <FileText size={20} color="#7c3aed" />,
+          iconBg: "#faf5ff",
+          borderColor: "#e9d5ff",
+          tag: "TAX READY"
+        },
+        {
+          title: "Supplier Ledger Reconciliation",
+          desc: "Track distributor invoices, payment credit terms, credit notes, and supplier statement reconciliation.",
+          icon: <Receipt size={20} color="#d97706" />,
+          iconBg: "#fffbeb",
+          borderColor: "#fde68a",
+          tag: "FINANCIALS"
+        },
+        {
+          title: "Granular RBAC Staff Security",
+          desc: "Control access permissions for billing cashiers, store managers, and accountants with tamper-proof audit trails.",
+          icon: <ShieldCheck size={20} color="#e11d48" />,
+          iconBg: "#fef2f2",
+          borderColor: "#fecaca",
+          tag: "AUDIT LOGS"
+        }
       ]
     },
     {
       title: "Pharmacists & Cashiers",
       tag: "Zero Billing Errors & Rapid Counter Checkouts",
       desc: "Eliminate long customer queues and manual errors. Focus on patient care and rapid dispensing with lightning-fast barcode search and automated generic salt lookups.",
-      icon: <UserCheck className="w-8 h-8 text-teal-600" />,
+      icon: <UserCheck className="w-5 h-5 text-teal-600" />,
       color: "#0d9488",
       badge: "POS & DISPENSARY",
-      highlights: [
-        "Lightning-fast barcode scanner integration with sub-second lookups",
-        "Generic salt substitute recommendation engine during stock-outs",
-        "Automated batch expiry blocking preventing sale of outdated meds",
-        "Schedule H & H1 digital prescription attachment workflows",
-        "Instant thermal receipt generation and WhatsApp invoice dispatch"
+      internalCards: [
+        {
+          title: "Sub-5s Fast Barcode Billing",
+          desc: "Lightning-fast barcode scanner integration with sub-second lookups, auto-batch selection, and instant thermal print.",
+          icon: <Receipt size={20} color="#059669" />,
+          iconBg: "#ecfdf5",
+          borderColor: "#a7f3d0",
+          tag: "FAST POS"
+        },
+        {
+          title: "Smart Generic Salt Engine",
+          desc: "Instant molecule substitute recommendations when brand names are out of stock to preserve counter sales.",
+          icon: <Sparkles size={20} color="#0d9488" />,
+          iconBg: "#f0fdfa",
+          borderColor: "#99f6e4",
+          tag: "SMART AI"
+        },
+        {
+          title: "Automated Batch Expiry Lock",
+          desc: "Built-in POS safety lock strictly blocks expired or recalled medicine batches from being scanned or billed.",
+          icon: <Lock size={20} color="#e11d48" />,
+          iconBg: "#fef2f2",
+          borderColor: "#fecaca",
+          tag: "SAFETY"
+        },
+        {
+          title: "Schedule H/H1 Rx Vault",
+          desc: "Digitally capture doctor prescriptions, patient details, and medical registration numbers for drug compliance.",
+          icon: <FileCheck size={20} color="#7c3aed" />,
+          iconBg: "#faf5ff",
+          borderColor: "#e9d5ff",
+          tag: "COMPLIANCE"
+        },
+        {
+          title: "Multi-Mode Split Payments",
+          desc: "Accept split transactions across UPI QR codes, debit/credit cards, cash, and customer khata credit in one bill.",
+          icon: <CreditCard size={20} color="#0284c7" />,
+          iconBg: "#f0f9ff",
+          borderColor: "#bae6fd",
+          tag: "PAYMENTS"
+        },
+        {
+          title: "WhatsApp Digital Invoices",
+          desc: "Dispatch paperless GST invoices directly to customer WhatsApp numbers with dosage instructions attached.",
+          icon: <Phone size={20} color="#16a34a" />,
+          iconBg: "#f0fdf4",
+          borderColor: "#bbf7d0",
+          tag: "PAPERLESS"
+        }
       ]
     },
     {
-      title: "Suppliers & Customers",
+      title: "Suppliers & Patients",
       tag: "Smooth Procurement & Rewarding Patient Experience",
       desc: "Keep your medicine supply chain resilient and customers loyal with automated purchase orders, digital records, and flexible split payments.",
-      icon: <Heart className="w-8 h-8 text-cyan-600" />,
+      icon: <Heart className="w-5 h-5 text-cyan-600" />,
       color: "#0284c7",
       badge: "SUPPLY & PATIENT",
-      highlights: [
-        "Automated Purchase Orders generated from predictive low-stock alerts",
-        "Supplier payment ledgers and credit balance tracking",
-        "Patient chronic medication refill reminders via SMS & WhatsApp",
-        "Transparent digital receipts and loyalty reward points",
-        "Instant split payment checkout (UPI, Cards, Cash, Credit Ledger)"
+      internalCards: [
+        {
+          title: "Automated Vendor PO Generator",
+          desc: "Auto-generate purchase order drafts to distributors when medicine stock reaches minimum safety threshold.",
+          icon: <Zap size={20} color="#059669" />,
+          iconBg: "#ecfdf5",
+          borderColor: "#a7f3d0",
+          tag: "AUTO REORDER"
+        },
+        {
+          title: "Supplier Credit & Ledger Books",
+          desc: "Full transparency on purchase orders, credit notes, due balances, and automated payment milestone alerts.",
+          icon: <Receipt size={20} color="#0d9488" />,
+          iconBg: "#f0fdfa",
+          borderColor: "#99f6e4",
+          tag: "TRANSPARENT"
+        },
+        {
+          title: "Chronic Refill Notifications",
+          desc: "Automated SMS and WhatsApp reminders for recurring diabetic, hypertensive, and monthly prescription refills.",
+          icon: <Clock size={20} color="#0284c7" />,
+          iconBg: "#f0f9ff",
+          borderColor: "#bae6fd",
+          tag: "RETENTION"
+        },
+        {
+          title: "Customer Loyalty Rewards",
+          desc: "Reward repeat pharmacy customers with loyalty cashback points redeemable on future medicine orders.",
+          icon: <Award size={20} color="#d97706" />,
+          iconBg: "#fffbeb",
+          borderColor: "#fde68a",
+          tag: "LOYALTY"
+        },
+        {
+          title: "Doorstep Delivery Tracker",
+          desc: "Assign delivery staff, track real-time fulfillment status, and collect contactless digital COD receipts.",
+          icon: <Truck size={20} color="#7c3aed" />,
+          iconBg: "#faf5ff",
+          borderColor: "#e9d5ff",
+          tag: "DISPATCH"
+        },
+        {
+          title: "Digitized Prescription Archive",
+          desc: "Patients access lifetime medicine receipts and clear doctor dosage instructions via secure mobile links.",
+          icon: <FileText size={20} color="#e11d48" />,
+          iconBg: "#fef2f2",
+          borderColor: "#fecaca",
+          tag: "ACCESSIBLE"
+        }
       ]
     }
   ];
@@ -829,54 +958,85 @@ export default function MedicalErpView() {
             <div className="pill-tag"><Users size={14} /> DESIGNED FOR EVERY ROLE</div>
             <h2 className="section-title">Tailored Portals for Your Entire Ecosystem</h2>
             <p className="section-desc">Each stakeholder gets a customized interface optimized for their exact daily operational workflows.</p>
-          </div>
 
-          <div className="roles-layout">
-            <div className="roles-nav-pills">
+            {/* Role Switcher Pills */}
+            <div className="role-switcher-tabs">
               {roleSolutions.map((role, idx) => (
                 <button
                   key={idx}
-                  className={`role-nav-btn ${activeRole === idx ? 'active' : ''}`}
+                  className={`role-tab-pill ${activeRole === idx ? 'active' : ''}`}
                   onClick={() => setActiveRole(idx)}
                 >
-                  <div className="role-btn-icon">{role.icon}</div>
-                  <div className="role-btn-text">
-                    <span className="role-title">{role.title}</span>
-                    <span className="role-tag">{role.badge}</span>
-                  </div>
+                  <span className="role-tab-icon">{role.icon}</span>
+                  <span className="role-tab-name">{role.title}</span>
+                  <span className="role-tab-badge">{role.badge}</span>
                 </button>
               ))}
             </div>
+          </div>
 
-            <div className="role-content-display">
-              <div className="role-detail-card">
-                <div className="role-card-header">
-                  <span className="role-badge" style={{ color: roleSolutions[activeRole].color, borderColor: `${roleSolutions[activeRole].color}33` }}>
-                    {roleSolutions[activeRole].badge}
-                  </span>
-                  <h3 className="role-heading">{roleSolutions[activeRole].title}</h3>
-                  <p className="role-tagline">{roleSolutions[activeRole].tag}</p>
+          {/* Active Role Portal Card with Small Internal Cards */}
+          <motion.div 
+            key={activeRole}
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+            className="role-portal-container"
+          >
+            <div className="role-portal-top">
+              <div className="role-portal-info">
+                <div 
+                  className="role-badge" 
+                  style={{ 
+                    color: roleSolutions[activeRole].color, 
+                    borderColor: `${roleSolutions[activeRole].color}33`, 
+                    background: `${roleSolutions[activeRole].color}12` 
+                  }}
+                >
+                  {roleSolutions[activeRole].badge}
                 </div>
-                <p className="role-paragraph">{roleSolutions[activeRole].desc}</p>
+                <h3 className="role-portal-heading">{roleSolutions[activeRole].title}</h3>
+                <p className="role-portal-tagline" style={{ color: roleSolutions[activeRole].color }}>
+                  {roleSolutions[activeRole].tag}
+                </p>
+                <p className="role-portal-desc">{roleSolutions[activeRole].desc}</p>
+              </div>
 
-                <div className="role-highlights-box">
-                  <h4 className="highlights-title">Key Capabilities & Workflows</h4>
-                  <ul className="highlights-list">
-                    {roleSolutions[activeRole].highlights.map((item, i) => (
-                      <li key={i} className="highlight-item">
-                        <Check size={16} className="check-icon" style={{ color: roleSolutions[activeRole].color }} />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <button onClick={scrollToContact} className="role-request-btn" style={{ background: roleSolutions[activeRole].color }}>
+              <div className="role-portal-action">
+                <button 
+                  onClick={scrollToContact} 
+                  className="role-request-btn" 
+                  style={{ background: roleSolutions[activeRole].color }}
+                >
                   Request {roleSolutions[activeRole].title} Demo <ArrowRight size={16} />
                 </button>
               </div>
             </div>
-          </div>
+
+            {/* 6 Small Internal Cards Grid */}
+            <div className="role-internal-cards-grid">
+              {roleSolutions[activeRole].internalCards.map((card, i) => (
+                <div key={i} className="role-internal-card">
+                  <div className="internal-card-top-row">
+                    <div 
+                      className="internal-card-icon" 
+                      style={{ background: card.iconBg, borderColor: card.borderColor }}
+                    >
+                      {card.icon}
+                    </div>
+                    <span 
+                      className="internal-card-tag" 
+                      style={{ color: roleSolutions[activeRole].color }}
+                    >
+                      {card.tag}
+                    </span>
+                  </div>
+                  <h4 className="internal-card-title">{card.title}</h4>
+                  <p className="internal-card-desc">{card.desc}</p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -2127,86 +2287,85 @@ export default function MedicalErpView() {
         }
 
         /* STAKEHOLDER ROLE SOLUTIONS */
-        .roles-layout {
-          display: grid;
-          grid-template-columns: 320px 1fr;
-          gap: 2.5rem;
-          align-items: start;
-        }
-
-        .roles-nav-pills {
-          display: flex;
-          flex-direction: column;
-          gap: 0.75rem;
-        }
-
-        .role-nav-btn {
-          display: flex;
-          align-items: center;
-          gap: 1rem;
-          padding: 1.25rem;
-          border-radius: 18px;
-          background: #f8fafc;
-          border: 1px solid #e2e8f0;
-          text-align: left;
-          cursor: pointer;
-          transition: all 0.2s;
-        }
-
-        .role-nav-btn:hover {
-          background: #ffffff;
-          border-color: #cbd5e1;
-          transform: translateX(4px);
-        }
-
-        .role-nav-btn.active {
-          background: #ffffff;
-          border-color: #059669;
-          box-shadow: 0 8px 24px rgba(5, 150, 105, 0.12);
-        }
-
-        .role-btn-icon {
-          width: 44px;
-          height: 44px;
-          border-radius: 12px;
-          background: #ffffff;
-          border: 1px solid #e2e8f0;
+        .role-switcher-tabs {
           display: flex;
           align-items: center;
           justify-content: center;
-          flex-shrink: 0;
+          gap: 1rem;
+          margin-top: 2rem;
+          flex-wrap: wrap;
         }
 
-        .role-btn-text {
-          display: flex;
-          flex-direction: column;
-          gap: 0.2rem;
-        }
-
-        .role-title {
-          font-size: 0.95rem;
-          font-weight: 700;
-          color: #0f172a;
-        }
-
-        .role-tag {
-          font-size: 0.75rem;
-          font-weight: 700;
-          color: #059669;
-          text-transform: uppercase;
-          letter-spacing: 0.04em;
-        }
-
-        .role-detail-card {
+        .role-tab-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.75rem;
+          padding: 0.75rem 1.4rem;
+          border-radius: 50px;
           background: #ffffff;
           border: 1px solid #e2e8f0;
-          border-radius: 24px;
-          padding: 2.5rem;
-          box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+          font-size: 0.95rem;
+          font-weight: 700;
+          color: #475569;
+          cursor: pointer;
+          transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+          box-shadow: 0 2px 8px rgba(0,0,0,0.02);
         }
 
-        .role-card-header {
-          margin-bottom: 1.5rem;
+        .role-tab-pill:hover {
+          background: #f8fafc;
+          border-color: #cbd5e1;
+          transform: translateY(-2px);
+        }
+
+        .role-tab-pill.active {
+          background: #0f172a;
+          color: #ffffff;
+          border-color: #0f172a;
+          box-shadow: 0 8px 20px rgba(15, 23, 42, 0.2);
+          transform: translateY(-2px);
+        }
+
+        .role-tab-pill.active .role-tab-icon svg {
+          color: #34d399 !important;
+        }
+
+        .role-tab-badge {
+          font-size: 0.7rem;
+          font-weight: 800;
+          letter-spacing: 0.04em;
+          background: rgba(0, 0, 0, 0.06);
+          padding: 0.2rem 0.6rem;
+          border-radius: 50px;
+        }
+
+        .role-tab-pill.active .role-tab-badge {
+          background: rgba(255, 255, 255, 0.18);
+          color: #6ee7b7;
+        }
+
+        .role-portal-container {
+          background: #ffffff;
+          border: 1px solid #e2e8f0;
+          border-radius: 28px;
+          padding: 3rem;
+          margin-top: 2.5rem;
+          box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+        }
+
+        .role-portal-top {
+          display: flex;
+          align-items: flex-start;
+          justify-content: space-between;
+          gap: 2.5rem;
+          padding-bottom: 2.5rem;
+          border-bottom: 1px solid #f1f5f9;
+          margin-bottom: 2.5rem;
+          flex-wrap: wrap;
+        }
+
+        .role-portal-info {
+          max-width: 760px;
         }
 
         .role-badge {
@@ -2214,70 +2373,37 @@ export default function MedicalErpView() {
           font-size: 0.75rem;
           font-weight: 800;
           letter-spacing: 0.05em;
-          padding: 0.3rem 0.8rem;
+          padding: 0.3rem 0.85rem;
           border-radius: 50px;
           border: 1px solid;
-          margin-bottom: 0.75rem;
+          margin-bottom: 0.85rem;
         }
 
-        .role-heading {
-          font-size: 2rem;
-          font-weight: 800;
+        .role-portal-heading {
+          font-size: 2.2rem;
+          font-weight: 900;
           color: #0f172a;
-          margin-bottom: 0.35rem;
+          margin-bottom: 0.4rem;
+          letter-spacing: -0.02em;
         }
 
-        .role-tagline {
-          font-size: 1.05rem;
-          font-weight: 600;
-          color: #059669;
+        .role-portal-tagline {
+          font-size: 1.1rem;
+          font-weight: 700;
+          margin-bottom: 0.85rem;
         }
 
-        .role-paragraph {
+        .role-portal-desc {
           font-size: 1rem;
-          color: #475569;
+          color: #64748b;
           line-height: 1.6;
-          margin-bottom: 2rem;
-        }
-
-        .role-highlights-box {
-          background: #f8fafc;
-          border: 1px solid #e2e8f0;
-          border-radius: 16px;
-          padding: 1.75rem;
-          margin-bottom: 2rem;
-        }
-
-        .highlights-title {
-          font-size: 0.95rem;
-          font-weight: 800;
-          color: #0f172a;
-          text-transform: uppercase;
-          letter-spacing: 0.04em;
-          margin-bottom: 1rem;
-        }
-
-        .highlights-list {
-          list-style: none;
-          padding: 0;
           margin: 0;
-          display: flex;
-          flex-direction: column;
-          gap: 0.75rem;
         }
 
-        .highlight-item {
+        .role-portal-action {
           display: flex;
-          align-items: flex-start;
-          gap: 0.75rem;
-          font-size: 0.95rem;
-          color: #334155;
-          line-height: 1.4;
-        }
-
-        .check-icon {
-          flex-shrink: 0;
-          margin-top: 2px;
+          align-items: center;
+          align-self: center;
         }
 
         .role-request-btn {
@@ -2285,18 +2411,97 @@ export default function MedicalErpView() {
           align-items: center;
           gap: 0.6rem;
           color: #ffffff;
-          padding: 0.9rem 2rem;
+          padding: 0.95rem 2rem;
           border-radius: 14px;
           font-weight: 700;
           font-size: 1rem;
           border: none;
           cursor: pointer;
           transition: all 0.2s;
+          box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+          white-space: nowrap;
         }
 
         .role-request-btn:hover {
           filter: brightness(0.92);
           transform: translateY(-2px);
+          box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+        }
+
+        /* 6 SMALL INTERNAL CARDS GRID */
+        .role-internal-cards-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 1.5rem;
+        }
+
+        .role-internal-card {
+          background: #f8fafc;
+          border: 1px solid #e2e8f0;
+          border-radius: 20px;
+          padding: 1.6rem;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+          position: relative;
+        }
+
+        .role-internal-card:hover {
+          background: #ffffff;
+          border-color: #cbd5e1;
+          transform: translateY(-5px);
+          box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+        }
+
+        .internal-card-top-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 1.15rem;
+        }
+
+        .internal-card-icon {
+          width: 44px;
+          height: 44px;
+          border-radius: 12px;
+          border: 1px solid;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+          transition: transform 0.2s;
+        }
+
+        .role-internal-card:hover .internal-card-icon {
+          transform: scale(1.08);
+        }
+
+        .internal-card-tag {
+          font-size: 0.68rem;
+          font-weight: 800;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+          background: #ffffff;
+          border: 1px solid #e2e8f0;
+          padding: 0.25rem 0.65rem;
+          border-radius: 50px;
+        }
+
+        .internal-card-title {
+          font-size: 1.1rem;
+          font-weight: 800;
+          color: #0f172a;
+          margin-bottom: 0.5rem;
+          line-height: 1.35;
+        }
+
+        .internal-card-desc {
+          font-size: 0.85rem;
+          color: #64748b;
+          line-height: 1.55;
+          margin: 0;
+          font-weight: 500;
         }
 
         /* ROADMAP GRID */
@@ -3096,8 +3301,8 @@ export default function MedicalErpView() {
             grid-template-columns: repeat(2, 1fr);
           }
 
-          .roles-layout {
-            grid-template-columns: 1fr;
+          .role-internal-cards-grid {
+            grid-template-columns: repeat(2, 1fr);
           }
 
           .roadmap-grid {
@@ -3134,6 +3339,24 @@ export default function MedicalErpView() {
 
           .modules-grid-large {
             grid-template-columns: 1fr;
+          }
+
+          .role-internal-cards-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .role-portal-container {
+            padding: 1.75rem;
+          }
+
+          .role-portal-top {
+            flex-direction: column;
+            align-items: flex-start;
+          }
+
+          .role-request-btn {
+            width: 100%;
+            justify-content: center;
           }
 
           .roadmap-grid {
