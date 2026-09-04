@@ -8,123 +8,233 @@ import {
   Server, Smartphone, Activity, FileCheck, ArrowRight, 
   LayoutGrid, Target, UserCheck, Heart, ClipboardList, 
   CheckCircle2, ExternalLink, FileText, Sparkles, 
-  Clock, ArrowLeft, Check, Layers
+  Clock, ArrowLeft, Check, Layers, Bus, Library, Bed, 
+  Package, Stethoscope, CreditCard, TrendingUp, 
+  FileSpreadsheet, AlertTriangle, ChevronDown, Phone,
+  HelpCircle, Award, Crown, Zap, Radio, Globe, BarChart3
 } from "lucide-react";
 import Link from "next/link";
 import ContactSection from "./ContactSection";
 
 export default function SchoolImsView() {
+  const [activeTab, setActiveTab] = useState("overview"); // overview, modules, solutions, pricing, security
+  const [moduleCategory, setModuleCategory] = useState("all");
+  const [isYearlyPricing, setIsYearlyPricing] = useState(false);
+  const [openFaq, setOpenFaq] = useState(0);
   const [activeRole, setActiveRole] = useState(0);
 
-  const features = [
+  // Categorized 45+ Modules
+  const allModules = [
+    // Core
+    { id: 1, category: "core", name: "Student Profiles", desc: "Comprehensive demographic, biometric, academic history, and family records.", icon: <GraduationCap size={22} color="#2563eb" /> },
+    { id: 2, category: "core", name: "Staff Administration", desc: "Track teacher qualifications, biometric logs, payroll, and workload assignments.", icon: <Users size={22} color="#059669" /> },
+    { id: 3, category: "core", name: "Attendance Automation", desc: "Multi-session attendance with automated parent absence voice phone calls.", icon: <UserCheck size={22} color="#ea580c" /> },
+    { id: 4, category: "core", name: "Fees & Collections", desc: "Multi-head fee setup, online UPI/card checkout, installment plans, and automated receipts.", icon: <IndianRupee size={22} color="#e11d48" /> },
+    { id: 5, category: "core", name: "Examinations & Grading", desc: "CBSE/ICSE/State board grading formulas, custom report card generation, and rank lists.", icon: <ClipboardList size={22} color="#7c3aed" /> },
+    { id: 6, category: "core", name: "Timetable Generator", desc: "Auto-generate conflict-free schedules for classes, substitute teachers, and labs.", icon: <Calendar size={22} color="#d97706" /> },
+    { id: 7, category: "core", name: "Digital Diary & Notes", desc: "Daily classroom notes, assignment uploads, file attachments, and submission tracking.", icon: <BookOpen size={22} color="#2563eb" /> },
+    { id: 8, category: "core", name: "Circulars & Notices", desc: "Broadcast urgent school alerts, holiday notices, and circulars with read receipts.", icon: <Bell size={22} color="#059669" /> },
+    { id: 9, category: "core", name: "Teacher-Parent Chat", desc: "Enable secure, direct messaging between staff and parents for academic support.", icon: <MessageSquare size={22} color="#ea580c" /> },
+    { id: 10, category: "core", name: "Transport & GPS", desc: "Optimize routes, track live school bus GPS locations, and manage driver logs.", icon: <Bus size={22} color="#e11d48" /> },
+    { id: 11, category: "core", name: "Library Management", desc: "Barcode catalog inventory, book issue/return tracking, and overdue fine management.", icon: <Library size={22} color="#7c3aed" /> },
+    { id: 12, category: "core", name: "Hostel & Dormitory", desc: "Allocate rooms, track room readiness, and monitor warden logs and visitor entries.", icon: <Bed size={22} color="#d97706" /> },
+    { id: 13, category: "core", name: "Inventory & Assets", desc: "Track school furniture, laboratory equipment procurement, and stock levels.", icon: <Package size={22} color="#2563eb" /> },
+    { id: 14, category: "core", name: "Certificates & TCs", desc: "One-click generation of Transfer Certificates, Bonafides, and Character certificates.", icon: <FileText size={22} color="#059669" /> },
+    { id: 15, category: "core", name: "Smart ID Cards", desc: "Design and print high-resolution QR/Barcode identification cards for staff and students.", icon: <CreditCard size={22} color="#ea580c" /> },
+    { id: 16, category: "core", name: "Infirmary & Health", desc: "Maintain medical checkup logs, vaccination histories, and emergency contacts.", icon: <Stethoscope size={22} color="#e11d48" /> },
+
+    // Academic & Insights
+    { id: 17, category: "academic", name: "Performance Analytics", desc: "Analyze student academic trends and subject-wise progress over terms.", icon: <TrendingUp size={22} color="#2563eb" /> },
+    { id: 18, category: "academic", name: "Digital Report Cards", desc: "Generate customizable term reports and CBSE/ICSE transcripts with digital signatures.", icon: <FileSpreadsheet size={22} color="#059669" /> },
+    { id: 19, category: "academic", name: "Teacher Feedback Matrix", desc: "Collect structured teacher feedback on student behavior, attentiveness, and soft skills.", icon: <MessageSquare size={22} color="#ea580c" /> },
+    { id: 20, category: "academic", name: "Discipline & Merits", desc: "Log disciplinary incidents, merits, and positive reinforcement awards.", icon: <AlertTriangle size={22} color="#e11d48" /> },
+    { id: 21, category: "academic", name: "Lesson Plan Repository", desc: "Standardize curriculum delivery with shared lesson plans and digital media resources.", icon: <BookOpen size={22} color="#7c3aed" /> },
+    { id: 22, category: "academic", name: "Assignments Dropbox", desc: "Digital homework submission with countdown alerts and teacher grading.", icon: <CheckCircle2 size={22} color="#d97706" /> },
+    { id: 23, category: "academic", name: "Syllabus Tracker", desc: "Monitor chapter completion progress against academic calendar milestones.", icon: <Activity size={22} color="#2563eb" /> },
+    { id: 24, category: "academic", name: "Question Bank & Tests", desc: "Create randomized question papers and online assessment quizzes.", icon: <HelpCircle size={22} color="#059669" /> },
+
+    // Admin & Finance
+    { id: 25, category: "finance", name: "Automated Fee Ledger", desc: "Real-time ledger tracking with discounts, sibling concessions, and scholarship waivers.", icon: <IndianRupee size={22} color="#059669" /> },
+    { id: 26, category: "finance", name: "Online Payment Gateway", desc: "Zero-failure smart checkout for UPI, NetBanking, Debit/Credit Cards & EMI.", icon: <CreditCard size={22} color="#2563eb" /> },
+    { id: 27, category: "finance", name: "Staff Payroll & TDS", desc: "Automated monthly salary calculation with PF, ESI, TDS, and salary slip PDF downloads.", icon: <Users size={22} color="#ea580c" /> },
+    { id: 28, category: "finance", name: "Expense & Petty Cash", desc: "Record day-to-day administrative expenses, receipts, and department budget caps.", icon: <FileSpreadsheet size={22} color="#e11d48" /> },
+    { id: 29, category: "finance", name: "Multi-Branch Consolidation", desc: "Manage multiple school branches or trust institutions under a single master admin.", icon: <Globe size={22} color="#7c3aed" /> },
+    { id: 30, category: "finance", name: "Audit & GST Reports", desc: "One-click export of financial statements, balance sheets, and tax audits.", icon: <FileCheck size={22} color="#d97706" /> },
+
+    // Hardware & Integrations
+    { id: 31, category: "hardware", name: "Voice Attendance Calls", desc: "Instant automated voice phone calls dispatched to parents upon student absence.", icon: <Phone size={22} color="#2563eb" /> },
+    { id: 32, category: "hardware", name: "Official WhatsApp Bot", desc: "Verified WhatsApp Business notifications for fee dues, homework, and exam marks.", icon: <MessageSquare size={22} color="#059669" /> },
+    { id: 33, category: "hardware", name: "Biometric Machine Sync", desc: "Direct LAN/Cloud sync with facial recognition and fingerprint hardware devices.", icon: <Lock size={22} color="#ea580c" /> },
+    { id: 34, category: "hardware", name: "GPS Bus Tracking", desc: "Live vehicle tracking with speed alerts, geofencing, and parent arrival push alerts.", icon: <Bus size={22} color="#e11d48" /> },
+    { id: 35, category: "hardware", name: "RFID Turnstiles & Gate", desc: "Automated student entry/exit logging with instant SMS trigger to parents.", icon: <Radio size={22} color="#7c3aed" /> },
+    { id: 36, category: "hardware", name: "SMS Broadcast Gateway", desc: "High-throughput DLT-registered SMS broadcasting with custom sender ID.", icon: <Bell size={22} color="#d97706" /> }
+  ];
+
+  const filteredModules = moduleCategory === "all" 
+    ? allModules 
+    : allModules.filter(m => m.category === moduleCategory);
+
+  const roleSolutions = [
     {
-      title: "Voice Attendance Alerts",
-      desc: "Instant automated calls to parents for absence, ensuring 100% student safety and real-time confirmation.",
-      icon: <Bell className="w-6 h-6 text-blue-600" />,
+      title: "Management & Principals",
+      tag: "Strategic Visibility & Institutional Control",
+      desc: "Gain total visibility into your institution. Make informed strategic decisions with real-time financial, attendance, and academic analytics.",
+      icon: <Target className="w-8 h-8 text-blue-600" />,
       color: "#2563eb",
-      bg: "rgba(37, 99, 235, 0.08)"
+      badge: "EXECUTIVE SUITE",
+      highlights: [
+        "Executive Dashboard with real-time institutional KPIs",
+        "Staff productivity, biometric time logs, and leave approvals",
+        "Financial cash flow reports, fee collection vs outstanding balance",
+        "CBSE, ICSE, and State Board compliance-ready audits",
+        "Multi-branch administrative overview from a single login"
+      ]
     },
     {
-      title: "Daily Digital Diary",
-      desc: "Teachers share homework, syllabus updates, and class notes directly to the parent mobile app in real time.",
-      icon: <BookOpen className="w-6 h-6 text-teal-600" />,
+      title: "Teachers & Academic Staff",
+      tag: "Zero Paperwork & Effortless Classroom Management",
+      desc: "Eliminate repetitive administrative paperwork. Focus more on teaching and mentoring students with streamlined grading and digital attendance.",
+      icon: <UserCheck className="w-8 h-8 text-teal-600" />,
       color: "#0d9488",
-      bg: "rgba(13, 148, 136, 0.08)"
+      badge: "TEACHER PORTAL",
+      highlights: [
+        "One-click digital attendance register from mobile or desktop",
+        "Rapid marks entry with automatic GPA and grade calculations",
+        "Digital lesson plans, assignment sharing, and homework tracking",
+        "Direct parent communication portal for academic reviews",
+        "Conflict-free timetable access and substitute teacher alerts"
+      ]
     },
     {
-      title: "Smart Fee Management",
-      desc: "Track pending dues, automate WhatsApp/SMS reminders, and accept secure online UPI and card payments.",
-      icon: <IndianRupee className="w-6 h-6 text-amber-600" />,
+      title: "Parents & Students",
+      tag: "Total Transparency & 24/7 Academic Connectedness",
+      desc: "Stay connected to the school journey anytime, anywhere with dedicated mobile access to grades, attendance, fee payments, and announcements.",
+      icon: <Heart className="w-8 h-8 text-purple-600" />,
+      color: "#9333ea",
+      badge: "MOBILE APP",
+      highlights: [
+        "Real-time attendance alerts and automated voice calls on absence",
+        "Instant online fee payment with downloadable tax receipts",
+        "Subject-wise term performance analytics and exam scorecards",
+        "Daily digital diary with homework and teacher remarks",
+        "Live school bus GPS tracking with pickup and drop-off alerts"
+      ]
+    },
+    {
+      title: "Accountants & Administrators",
+      tag: "Error-Free Billing & Automated Ledger Reconciliation",
+      desc: "Automate complex multi-head fee schedules, concessions, and vendor accounting with real-time banking integration.",
+      icon: <IndianRupee className="w-8 h-8 text-amber-600" />,
       color: "#d97706",
-      bg: "rgba(217, 119, 6, 0.08)"
-    },
-    {
-      title: "Timetable & Exam Alerts",
-      desc: "Generate conflict-free schedules and keep everyone informed about test dates, syllabus, and score cards.",
-      icon: <Calendar className="w-6 h-6 text-orange-600" />,
-      color: "#ea580c",
-      bg: "rgba(234, 88, 12, 0.08)"
-    },
-    {
-      title: "Teacher-Parent Chat",
-      desc: "Secure, direct messaging channel between educators and guardians for personalized academic progress.",
-      icon: <MessageSquare className="w-6 h-6 text-purple-600" />,
-      color: "#9333ea",
-      bg: "rgba(147, 51, 234, 0.08)"
-    },
-    {
-      title: "Student Safety & Insurance",
-      desc: "Comprehensive safety records and student insurance coverage ensuring complete peace of mind.",
-      icon: <ShieldCheck className="w-6 h-6 text-emerald-600" />,
-      color: "#059669",
-      bg: "rgba(5, 150, 105, 0.08)"
-    }
-  ];
-
-  const roleData = [
-    {
-      role: "Management & Principals",
-      desc: "Gain total visibility into your institution. Make informed strategic decisions with real-time analytics.",
-      icon: <Target className="w-7 h-7 text-blue-600" />,
-      color: "#2563eb",
-      points: [
-        "Centralized Institutional Dashboard",
-        "Staff Productivity & Attendance Tracking",
-        "Automated Financial & Audit Reports",
-        "Board & Government Inspection Ready"
-      ]
-    },
-    {
-      role: "Teachers & Staff",
-      desc: "Eliminate repetitive administrative paperwork. Focus more on teaching and inspiring students.",
-      icon: <UserCheck className="w-7 h-7 text-teal-600" />,
-      color: "#0d9488",
-      points: [
-        "One-Click Digital Attendance Register",
-        "Fast Marks & Grade Card Entry",
-        "Digital Lesson Planning & Homework Sync",
-        "Direct Parent Communication Portal"
-      ]
-    },
-    {
-      role: "Parents & Students",
-      desc: "Stay connected to the academic journey anytime, anywhere with dedicated mobile access.",
-      icon: <Heart className="w-7 h-7 text-purple-600" />,
-      color: "#9333ea",
-      points: [
-        "Live Attendance & Bus GPS Tracking",
-        "Instant Online Fee Payment & Receipts",
-        "Subject-wise Performance Analytics",
-        "Instant Exam Schedules & Circulars"
+      badge: "FINANCE HUB",
+      highlights: [
+        "Custom fee structure configurer for tuition, transport, and lab fees",
+        "Instant payment reconciliation via UPI, cards, and bank transfers",
+        "Automated WhatsApp and SMS reminders for overdue fee installments",
+        "Staff payroll calculation with PF, ESI, and tax deductions",
+        "1-click export of audit-ready balance sheets and Tally sync"
       ]
     }
   ];
 
-  const modules = [
-    { name: "Student Profiles", desc: "Comprehensive demographic, biometric, academic history, and family records.", icon: <GraduationCap size={22} color="#2563eb" /> },
-    { name: "Staff Administration", desc: "Manage teacher qualifications, biometric logs, payroll, and workload allocations.", icon: <Users size={22} color="#059669" /> },
-    { name: "Attendance Automation", desc: "Multi-session biometric and manual attendance with automated parent phone alerts.", icon: <UserCheck size={22} color="#ea580c" /> },
-    { name: "Fees & Collections", desc: "Multi-head fee setup, online checkout, installment plans, and automated receipts.", icon: <IndianRupee size={22} color="#e11d48" /> },
-    { name: "Examinations & Grading", desc: "CBE/CBSE/State board grading formulas, custom report card generation, and rank lists.", icon: <ClipboardList size={22} color="#7c3aed" /> },
-    { name: "Timetable Engine", desc: "Auto-generate conflict-free timetables for classes, substitute teachers, and labs.", icon: <Calendar size={22} color="#d97706" /> },
-    { name: "Digital Diary & Homework", desc: "Daily classroom notes, assignment uploads, file attachments, and submission tracking.", icon: <BookOpen size={22} color="#2563eb" /> },
-    { name: "Circulars & Broadcasts", desc: "Broadcast urgent school alerts, holiday notices, and circulars with read receipts.", icon: <Bell size={22} color="#059669" /> }
+  const pricingPlans = [
+    {
+      name: "Basic",
+      desc: "Perfect for small schools starting their digital transformation.",
+      monthlyPrice: 19,
+      yearlyPrice: 16,
+      icon: <GraduationCap className="w-6 h-6 text-slate-600" />,
+      popular: false,
+      btnBg: "#0f172a",
+      features: [
+        "Student & Staff Profiles",
+        "Attendance Tracking & Absence SMS",
+        "Fee Collection & Printable Receipts",
+        "Examination & Report Card Generator",
+        "Parent Mobile Web Portal",
+        "Basic Reports & Data Export",
+        "Email Support within 24 hours"
+      ]
+    },
+    {
+      name: "Standard",
+      desc: "Most popular for growing schools wanting complete automation.",
+      monthlyPrice: 25,
+      yearlyPrice: 21,
+      icon: <Award className="w-6 h-6 text-emerald-600" />,
+      popular: true,
+      popularBadge: "MOST POPULAR",
+      btnBg: "linear-gradient(135deg, #059669, #10b981)",
+      features: [
+        "Everything in Basic",
+        "Automated Voice Phone Calls on Absence",
+        "Daily Digital Diary & Homework Sync",
+        "Direct Teacher-Parent WhatsApp Messaging",
+        "Transport & GPS Vehicle Tracking",
+        "Library & Book Inventory Module",
+        "Hostel & Room Allocation System",
+        "Priority Phone & WhatsApp Support",
+        "Full Staff Onboarding & Training Included"
+      ]
+    },
+    {
+      name: "Premium",
+      desc: "For leading institutions needing multi-branch control & bespoke features.",
+      monthlyPrice: 29,
+      yearlyPrice: 24,
+      icon: <Crown className="w-6 h-6 text-amber-600" />,
+      popular: false,
+      popularBadge: "BEST VALUE",
+      btnBg: "linear-gradient(135deg, #d97706, #ea580c)",
+      features: [
+        "Everything in Standard",
+        "Multi-Branch & Trust Central Dashboard",
+        "Custom Branded Mobile App (Play Store & App Store)",
+        "Biometric Machine LAN/Cloud Direct Sync",
+        "RFID Turnstile & Smart Gate Automation",
+        "Custom REST API & Webhooks Access",
+        "Dedicated Account Manager & On-site Support",
+        "Unlimited Cloud File Storage & Backups",
+        "99.99% High-Availability SLA Guarantee"
+      ]
+    }
   ];
 
-  const workflowSteps = [
-    { step: "01", title: "Admission Inquiry", desc: "Parents submit digital applications via the school portal", icon: <Users size={24} /> },
-    { step: "02", title: "Document Review", desc: "Administrative staff verifies certificates and eligibility", icon: <FileText size={24} /> },
-    { step: "03", title: "Enrollment Confirmed", desc: "Student ID, roll number, and parent credentials auto-generated", icon: <CheckCircle2 size={24} /> },
-    { step: "04", title: "Academic Journey", desc: "Live timetable, attendance, homework, and fee ledger active", icon: <GraduationCap size={24} /> }
+  const comparisonRows = [
+    { feature: "Per-Student Pricing", merlin: "₹19 - ₹25 / mo", others: "₹50k - ₹2L / year upfront", sheets: "Free (High human cost)" },
+    { feature: "Automated Voice Calls on Absence", merlin: "✓ Included", others: "✕ Extra ₹20,000 add-on", sheets: "✕ Not possible" },
+    { feature: "Branded Parent Mobile Apps", merlin: "✓ Native iOS & Android", others: "△ Clunky WebView only", sheets: "✕ None" },
+    { feature: "Setup & Onboarding Cost", merlin: "✓ ₹0 Free Setup", others: "✕ ₹25,000+ Setup fee", sheets: "✕ Manual setup" },
+    { feature: "Hardware Biometric Sync", merlin: "✓ Direct Cloud/LAN", others: "△ Third-party sync tool", sheets: "✕ Manual entry" },
+    { feature: "Online Fee UPI Checkout", merlin: "✓ Instant zero-delay", others: "△ 3-5 days batch settlement", sheets: "✕ Cash/Cheque only" },
+    { feature: "Data Security & Daily Backups", merlin: "✓ AES-256 Cloud Mirror", others: "△ Local PC storage risk", sheets: "✕ High loss risk" }
   ];
 
-  const securityPoints = [
-    { title: "Role-Based Access Control (RBAC)", desc: "Ensure staff, teachers, and accountants only access data relevant to their role.", icon: <Lock size={22} color="#2563eb" /> },
-    { title: "Daily Automated Cloud Backups", desc: "All school databases are mirrored every 24 hours with zero data loss guarantee.", icon: <Server size={22} color="#2563eb" /> },
-    { title: "Bank-Grade AES-256 Encryption", desc: "End-to-end encrypted student PII and fee transaction records in transit and at rest.", icon: <Shield size={22} color="#2563eb" /> },
-    { title: "Compliance & Audit Ready", desc: "Fully aligned with CBSE, ICSE, state boards, and educational privacy standards.", icon: <FileCheck size={22} color="#2563eb" /> },
-    { title: "Packaged Mobile Apps", desc: "Custom branded iOS & Android apps ready for immediate App Store and Play Store deployment.", icon: <Smartphone size={22} color="#2563eb" /> },
-    { title: "99.99% High Availability", desc: "Cloud infrastructure guaranteeing ultra-fast load times even on result declaration days.", icon: <Activity size={22} color="#2563eb" /> }
+  const faqs = [
+    {
+      q: "How is the pricing calculated for our school?",
+      a: "Our pricing is simple and transparent: ₹X per student per month. For example, if you have 500 students on the Standard plan (₹25/student), your fee is ₹12,500/month. There are no hidden fees, no software maintenance costs, and no surprise add-on charges."
+    },
+    {
+      q: "Is there a free trial before we commit?",
+      a: "Yes! We offer a full 14-day free trial on all plans. No credit card or upfront payment is required. Our team helps you upload sample student and staff data so you can test everything with real classroom scenarios."
+    },
+    {
+      q: "How long does onboarding and training take?",
+      a: "Most schools go live within 24 to 48 hours. Our dedicated onboarding specialists assist you with bulk importing student records, configuring fee structures, setting up class timetables, and conducting a live staff training session."
+    },
+    {
+      q: "Can we integrate our existing biometric devices and GPS trackers?",
+      a: "Yes. MerlinFlow School IMS seamlessly integrates with all major biometric attendance machines (Essl, Realtime, ZKTeco, Mantra) and vehicle GPS tracking hardware via our plug-and-play API connectors."
+    },
+    {
+      q: "Can parents pay fees online using UPI or NetBanking?",
+      a: "Absolutely. Parents receive a secure payment link on their mobile app and WhatsApp. They can pay via Google Pay, PhonePe, Paytm, credit/debit cards, or net banking, and an instant GST-compliant tax receipt is generated automatically."
+    },
+    {
+      q: "Can we switch or upgrade our plan later?",
+      a: "Yes. You can upgrade, downgrade, or adjust student counts at any time based on your admissions cycle. Changes take effect from the next billing period."
+    }
   ];
 
   const scrollToContact = () => {
@@ -132,25 +242,59 @@ export default function SchoolImsView() {
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
-  const scrollToModules = () => {
-    const el = document.getElementById("modules-suite");
-    if (el) el.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
     <div className="school-ims-page">
-      {/* Top Breadcrumb */}
-      <div className="container top-nav-container">
-        <Link href="/#products" className="back-link">
-          <ArrowLeft size={16} /> Back to All Products
-        </Link>
+      {/* Top Breadcrumb & Sub Navigation */}
+      <div className="sticky-subnav">
+        <div className="container subnav-container">
+          <Link href="/#products" className="back-link">
+            <ArrowLeft size={16} /> Back to Products
+          </Link>
+
+          <div className="subnav-tabs">
+            <button 
+              className={`subnav-tab ${activeTab === 'overview' ? 'active' : ''}`}
+              onClick={() => setActiveTab('overview')}
+            >
+              Overview
+            </button>
+            <button 
+              className={`subnav-tab ${activeTab === 'modules' ? 'active' : ''}`}
+              onClick={() => setActiveTab('modules')}
+            >
+              45+ Modules
+            </button>
+            <button 
+              className={`subnav-tab ${activeTab === 'solutions' ? 'active' : ''}`}
+              onClick={() => setActiveTab('solutions')}
+            >
+              Role Solutions
+            </button>
+            <button 
+              className={`subnav-tab ${activeTab === 'pricing' ? 'active' : ''}`}
+              onClick={() => setActiveTab('pricing')}
+            >
+              Pricing Plans
+            </button>
+            <button 
+              className={`subnav-tab ${activeTab === 'security' ? 'active' : ''}`}
+              onClick={() => setActiveTab('security')}
+            >
+              Security
+            </button>
+          </div>
+
+          <button onClick={scrollToContact} className="subnav-cta-btn">
+            Request Demo <ArrowRight size={14} />
+          </button>
+        </div>
       </div>
 
       {/* Hero Section */}
       <section className="hero-section">
         <div className="container hero-container">
           <div className="hero-grid">
-            {/* Left Content */}
+            {/* Left Hero Content */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -172,24 +316,30 @@ export default function SchoolImsView() {
                 <button onClick={scrollToContact} className="btn-primary">
                   Request Access <ArrowRight size={18} />
                 </button>
-                <button onClick={scrollToModules} className="btn-secondary">
-                  <LayoutGrid size={18} /> Explore Platform
+                <button onClick={() => setActiveTab('modules')} className="btn-secondary">
+                  <LayoutGrid size={18} /> Explore 45+ Modules
                 </button>
               </div>
 
-              <div className="trust-badges">
-                <div className="trust-item">
-                  <div className="trust-icon"><ShieldCheck size={20} color="#059669" /></div>
-                  <span>Enterprise Security</span>
+              <div className="stats-strip">
+                <div className="stat-card">
+                  <div className="stat-number">45+</div>
+                  <div className="stat-label">Integrated Modules</div>
                 </div>
-                <div className="trust-item">
-                  <div className="trust-icon"><Clock size={20} color="#2563eb" /></div>
-                  <span>99.99% Uptime</span>
+                <div className="stat-divider"></div>
+                <div className="stat-card">
+                  <div className="stat-number">100%</div>
+                  <div className="stat-label">Paperless Campus</div>
+                </div>
+                <div className="stat-divider"></div>
+                <div className="stat-card">
+                  <div className="stat-number">₹0</div>
+                  <div className="stat-label">Setup Cost</div>
                 </div>
               </div>
             </motion.div>
 
-            {/* Right Interactive Live Preview */}
+            {/* Right Interactive Live Preview Window */}
             <motion.div 
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -208,16 +358,16 @@ export default function SchoolImsView() {
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className="browser-url-bar"
-                    title="Open live demo in new tab"
+                    title="Open live interactive demo in a new tab"
                   >
-                    <span>https://demo.merlinflow.in/school</span>
+                    <span>https://default.nexsyrus.com</span>
                     <ExternalLink size={12} className="ext-icon" />
                   </a>
                 </div>
                 <div className="browser-body">
                   <iframe 
                     src="https://default.nexsyrus.com" 
-                    title="MerlinFlow School IMS Live Demo" 
+                    title="MerlinFlow School IMS Live System Demo" 
                     className="demo-iframe"
                     sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
                   />
@@ -228,254 +378,300 @@ export default function SchoolImsView() {
         </div>
       </section>
 
-      {/* Proven Features Grid */}
-      <section className="section-padding bg-light">
+      {/* 45+ Modules Suite Section */}
+      <section id="modules" className="section-padding bg-light">
         <div className="container">
           <div className="section-header-center">
-            <h2 className="section-title">Proven Features for Modern Schools</h2>
-            <p className="section-desc">Practical, battle-tested tools that solve real daily academic and administrative challenges.</p>
-          </div>
+            <div className="pill-tag"><Layers size={14} /> COMPLETE SUITE</div>
+            <h2 className="section-title">45+ Purpose-Built Modules</h2>
+            <p className="section-desc">Modular, customizable, and seamlessly synchronized across web and mobile.</p>
 
-          <div className="features-grid">
-            {features.map((feat, i) => (
-              <motion.div 
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                className="feature-card-modern"
-              >
-                <div className="feat-icon-box" style={{ background: feat.bg }}>
-                  {feat.icon}
-                </div>
-                <h3 className="feat-title">{feat.title}</h3>
-                <p className="feat-desc">{feat.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Smart Dashboards Section */}
-      <section className="section-padding">
-        <div className="container">
-          <div className="section-header-center">
-            <h2 className="section-title">Smart Dashboards for Better Decisions</h2>
-            <p className="section-desc">Get a clear, real-time view of your school's health. From attendance trends to fee collection status, everything is at your fingertips.</p>
-          </div>
-
-          <div className="dashboard-preview-grid">
-            {/* Left Mockup Dashboard Card */}
-            <div className="principal-card-widget">
-              <div className="widget-header">
-                <div>
-                  <h4 className="widget-title">Principal's Live Overview</h4>
-                  <span className="widget-sub">Today's Real-time Activity</span>
-                </div>
-                <div className="admin-badge">ADMIN</div>
-              </div>
-
-              <div className="metrics-row">
-                <div className="metric-box blue-metric">
-                  <div className="metric-top">
-                    <span className="metric-label">ATTENDANCE</span>
-                    <Users size={16} color="#2563eb" />
-                  </div>
-                  <div className="metric-val">94.8%</div>
-                  <span className="metric-trend">↑ 2.4% vs last week</span>
-                </div>
-
-                <div className="metric-box green-metric">
-                  <div className="metric-top">
-                    <span className="metric-label">FEE RECOVERY</span>
-                    <IndianRupee size={16} color="#059669" />
-                  </div>
-                  <div className="metric-val">₹4.85L</div>
-                  <span className="metric-trend green-trend">Collected today</span>
-                </div>
-              </div>
-
-              <div className="events-box">
-                <div className="events-title">
-                  <Calendar size={14} /> UPCOMING EVENTS & ALERTS
-                </div>
-                <div className="event-item">
-                  <div className="event-date"><span>12</span><span>SEP</span></div>
-                  <div>
-                    <div className="event-name">Parent-Teacher Conference (Std I - X)</div>
-                    <div className="event-time">09:30 AM - Main Auditorium</div>
-                  </div>
-                </div>
-                <div className="event-item">
-                  <div className="event-date"><span>15</span><span>SEP</span></div>
-                  <div>
-                    <div className="event-name">Mid-Term Assessment Cycle Begins</div>
-                    <div className="event-time">Automated Hall Tickets Generated</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Value Points */}
-            <div className="dashboard-benefits">
-              <div className="benefit-item">
-                <div className="benefit-icon"><Activity size={24} color="#2563eb" /></div>
-                <div>
-                  <h3>Data-Driven Strategic Insights</h3>
-                  <p>Eliminate manual spreadsheets. Visualize student enrollment patterns, faculty workload balance, and multi-branch cash flows in one unified screen.</p>
-                </div>
-              </div>
-              <div className="benefit-item">
-                <div className="benefit-icon"><Users size={24} color="#7c3aed" /></div>
-                <div>
-                  <h3>Role-Specific Views & Permissions</h3>
-                  <p>Principals view high-level institutional health, accountants manage fee collection ledgers, and teachers manage grades and attendance seamlessly.</p>
-                </div>
-              </div>
-              <div className="benefit-item">
-                <div className="benefit-icon"><Smartphone size={24} color="#059669" /></div>
-                <div>
-                  <h3>Direct Mobile App Notification Engine</h3>
-                  <p>Send instant push notifications and voice alerts directly to parents' smartphones with 100% verified receipt logs.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Designed for Every Role */}
-      <section className="section-padding bg-light">
-        <div className="container">
-          <div className="section-header-center">
-            <h2 className="section-title">Designed for Every Role</h2>
-            <p className="section-desc">A unified platform that adapts to the specific needs of your entire school ecosystem.</p>
-          </div>
-
-          <div className="roles-grid">
-            {roleData.map((item, i) => (
-              <motion.div 
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="role-card-modern"
-              >
-                <div className="role-icon-header">
-                  <div className="role-icon-circle">{item.icon}</div>
-                  <h3 className="role-name">{item.role}</h3>
-                  <p className="role-desc">{item.desc}</p>
-                </div>
-                <ul className="role-points">
-                  {item.points.map((pt, idx) => (
-                    <li key={idx}>
-                      <Check size={16} color={item.color} />
-                      <span>{pt}</span>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Complete Module Suite */}
-      <section id="modules-suite" className="section-padding">
-        <div className="container">
-          <div className="section-header-center">
-            <h2 className="section-title">Complete 45+ Module Suite</h2>
-            <p className="section-desc">Everything required to operate an institution with zero friction from admission to alumni management.</p>
-          </div>
-
-          <div className="modules-grid">
-            {modules.map((mod, i) => (
-              <motion.div 
-                key={i}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
-                className="module-card-item"
-              >
-                <div className="mod-icon-wrapper">
-                  {mod.icon}
-                </div>
-                <h4 className="mod-name">{mod.name}</h4>
-                <p className="mod-desc">{mod.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Streamline Complex Workflows */}
-      <section className="section-padding bg-light">
-        <div className="container">
-          <div className="section-header-center">
-            <h2 className="section-title">Streamline Complex Workflows</h2>
-            <p className="section-desc">From initial inquiry to graduation, MerlinFlow connects every phase of the student lifecycle.</p>
-          </div>
-
-          <div className="workflow-steps-grid">
-            {workflowSteps.map((step, idx) => (
-              <div key={idx} className="workflow-step-card">
-                <div className="step-number">{step.step}</div>
-                <div className="step-icon-circle">{step.icon}</div>
-                <h3 className="step-title">{step.title}</h3>
-                <p className="step-desc">{step.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Bank-Grade Security Section */}
-      <section className="section-padding">
-        <div className="container">
-          <div className="security-section-grid">
-            <div className="sec-left">
-              <div className="sec-badge">
-                <Shield size={14} color="#2563eb" />
-                <span>BANK-GRADE SECURITY & INFRASTRUCTURE</span>
-              </div>
-              <h2 className="sec-heading">Uncompromising Data Protection & High Availability</h2>
-              <p className="sec-sub">Schools handle sensitive child and financial records daily. MerlinFlow is built with a strict Zero-Trust security architecture to protect your institution's reputation.</p>
-              <button onClick={scrollToContact} className="btn-primary">
-                Request Security Whitepaper <ArrowRight size={16} />
-              </button>
-            </div>
-
-            <div className="sec-right-grid">
-              {securityPoints.map((pt, i) => (
-                <div key={i} className="sec-point-card">
-                  <div className="sec-pt-icon">{pt.icon}</div>
-                  <h4 className="sec-pt-title">{pt.title}</h4>
-                  <p className="sec-pt-desc">{pt.desc}</p>
-                </div>
+            {/* Category Filter Pills */}
+            <div className="category-filters">
+              {[
+                { id: "all", label: "All Modules (36+)" },
+                { id: "core", label: "Core Operations" },
+                { id: "academic", label: "Academic & Insights" },
+                { id: "finance", label: "Finance & Admin" },
+                { id: "hardware", label: "Hardware & IoT" }
+              ].map(cat => (
+                <button 
+                  key={cat.id}
+                  className={`cat-pill ${moduleCategory === cat.id ? 'active' : ''}`}
+                  onClick={() => setModuleCategory(cat.id)}
+                >
+                  {cat.label}
+                </button>
               ))}
             </div>
           </div>
+
+          <div className="modules-grid-large">
+            {filteredModules.map((mod) => (
+              <motion.div 
+                key={mod.id}
+                layout
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.2 }}
+                className="module-large-card"
+              >
+                <div className="mod-large-icon">{mod.icon}</div>
+                <h3 className="mod-large-name">{mod.name}</h3>
+                <p className="mod-large-desc">{mod.desc}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* CTA Banner */}
+      {/* Stakeholder Role Solutions */}
+      <section id="solutions" className="section-padding">
+        <div className="container">
+          <div className="section-header-center">
+            <div className="pill-tag"><Users size={14} /> DESIGNED FOR EVERY ROLE</div>
+            <h2 className="section-title">Tailored Portals for Your Entire Ecosystem</h2>
+            <p className="section-desc">Each stakeholder gets a customized dashboard optimized for their exact responsibilities.</p>
+          </div>
+
+          <div className="roles-layout">
+            <div className="roles-nav-pills">
+              {roleSolutions.map((r, idx) => (
+                <button 
+                  key={idx}
+                  className={`role-nav-btn ${activeRole === idx ? 'active' : ''}`}
+                  onClick={() => setActiveRole(idx)}
+                >
+                  {r.title}
+                </button>
+              ))}
+            </div>
+
+            <div className="role-detail-card">
+              <div className="role-detail-header">
+                <div className="role-icon-box">{roleSolutions[activeRole].icon}</div>
+                <div>
+                  <span className="role-badge-tag">{roleSolutions[activeRole].badge}</span>
+                  <h3 className="role-detail-title">{roleSolutions[activeRole].title}</h3>
+                  <p className="role-detail-tag">{roleSolutions[activeRole].tag}</p>
+                </div>
+              </div>
+              <p className="role-detail-desc">{roleSolutions[activeRole].desc}</p>
+              
+              <div className="role-highlights-title">KEY CAPABILITIES & WORKFLOWS</div>
+              <ul className="role-highlights-list">
+                {roleSolutions[activeRole].highlights.map((h, i) => (
+                  <li key={i}>
+                    <CheckCircle2 size={18} color={roleSolutions[activeRole].color} />
+                    <span>{h}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <button onClick={scrollToContact} className="role-request-btn" style={{ background: roleSolutions[activeRole].color }}>
+                Experience {roleSolutions[activeRole].title} Portal <ArrowRight size={16} />
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Plans Section */}
+      <section id="pricing" className="section-padding bg-light">
+        <div className="container">
+          <div className="section-header-center">
+            <div className="pill-tag"><CreditCard size={14} /> TRANSPARENT PRICING</div>
+            <h2 className="section-title">Simple, Honest Per-Student Pricing</h2>
+            <p className="section-desc">Pay only for what you use. No hidden setup fees, no software maintenance costs.</p>
+
+            {/* Monthly / Yearly Switcher */}
+            <div className="billing-switcher">
+              <span className={`switch-label ${!isYearlyPricing ? 'active' : ''}`}>Monthly Billing</span>
+              <button 
+                className={`switch-toggle ${isYearlyPricing ? 'yearly' : ''}`}
+                onClick={() => setIsYearlyPricing(!isYearlyPricing)}
+                aria-label="Toggle annual billing discount"
+              >
+                <div className="toggle-thumb"></div>
+              </button>
+              <span className={`switch-label ${isYearlyPricing ? 'active' : ''}`}>
+                Annual Billing <span className="discount-badge">2 Months Free (17% Off)</span>
+              </span>
+            </div>
+          </div>
+
+          <div className="pricing-cards-grid">
+            {pricingPlans.map((plan, idx) => (
+              <div key={idx} className={`pricing-card ${plan.popular ? 'featured-card' : ''}`}>
+                {plan.popularBadge && (
+                  <div className="popular-ribbon">{plan.popularBadge}</div>
+                )}
+                
+                <div className="plan-icon-wrap">{plan.icon}</div>
+                <h3 className="plan-name">{plan.name}</h3>
+                <p className="plan-desc">{plan.desc}</p>
+
+                <div className="price-tag-box">
+                  <span className="currency">₹</span>
+                  <span className="amount">{isYearlyPricing ? plan.yearlyPrice : plan.monthlyPrice}</span>
+                  <span className="period">/ student / mo</span>
+                </div>
+
+                <ul className="plan-features">
+                  {plan.features.map((feat, fIdx) => (
+                    <li key={fIdx}>
+                      <div className="feat-check">✓</div>
+                      <span>{feat}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <button 
+                  onClick={scrollToContact} 
+                  className="plan-select-btn"
+                  style={{ background: plan.btnBg, color: '#ffffff' }}
+                >
+                  Select {plan.name} Plan <ArrowRight size={16} />
+                </button>
+              </div>
+            ))}
+          </div>
+
+          <p className="pricing-footnote">
+            All plans include SSL encryption, automated data backups, guided onboarding, and free software updates.
+          </p>
+        </div>
+      </section>
+
+      {/* Why Choose Us Comparison Matrix */}
+      <section className="section-padding">
+        <div className="container">
+          <div className="section-header-center">
+            <div className="pill-tag"><Sparkles size={14} /> WHY MERLINFLOW</div>
+            <h2 className="section-title">How MerlinFlow Compares</h2>
+            <p className="section-desc">See why modern schools choose MerlinFlow over outdated legacy software and manual Excel sheets.</p>
+          </div>
+
+          <div className="comparison-table-wrapper">
+            <table className="comparison-table">
+              <thead>
+                <tr>
+                  <th>Features & Capabilities</th>
+                  <th className="highlight-col">MerlinFlow School IMS</th>
+                  <th>Legacy Software</th>
+                  <th>Manual Spreadsheets</th>
+                </tr>
+              </thead>
+              <tbody>
+                {comparisonRows.map((row, idx) => (
+                  <tr key={idx}>
+                    <td className="feat-col-name">{row.feature}</td>
+                    <td className="highlight-cell">{row.merlin}</td>
+                    <td className="others-cell">{row.others}</td>
+                    <td className="sheets-cell">{row.sheets}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      {/* Security & Infrastructure Section */}
+      <section id="security" className="section-padding bg-light">
+        <div className="container">
+          <div className="security-banner">
+            <div className="sec-header">
+              <div className="pill-tag"><ShieldCheck size={14} /> ZERO-TRUST ARCHITECTURE</div>
+              <h2 className="sec-banner-title">Bank-Grade Security & 99.99% Uptime</h2>
+              <p className="sec-banner-desc">
+                Schools handle sensitive minor student records and financial ledgers daily. MerlinFlow is architected with strict Zero-Trust protocols, automated disaster recovery, and military-grade encryption.
+              </p>
+            </div>
+
+            <div className="sec-grid-cards">
+              <div className="sec-mini-card">
+                <Lock size={24} color="#2563eb" />
+                <h4>Role-Based Access Control</h4>
+                <p>Granular field-level permissions for teachers, accountants, and principals.</p>
+              </div>
+              <div className="sec-mini-card">
+                <Server size={24} color="#2563eb" />
+                <h4>Daily Cloud Backups</h4>
+                <p>Automated database replication every 24 hours with instantaneous point-in-time recovery.</p>
+              </div>
+              <div className="sec-mini-card">
+                <Shield size={24} color="#2563eb" />
+                <h4>AES-256 Bit Encryption</h4>
+                <p>All sensitive PII and fee transaction records are encrypted in transit and at rest.</p>
+              </div>
+              <div className="sec-mini-card">
+                <Smartphone size={24} color="#2563eb" />
+                <h4>App Store & Play Store Packaged</h4>
+                <p>Native compiled iOS & Android applications ready for instant institutional deployment.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Accordion Section */}
+      <section className="section-padding">
+        <div className="container">
+          <div className="section-header-center">
+            <div className="pill-tag"><HelpCircle size={14} /> FAQ SUPPORT</div>
+            <h2 className="section-title">Frequently Asked Questions</h2>
+            <p className="section-desc">Have questions before onboarding? Here are the most common inquiries from school administrators.</p>
+          </div>
+
+          <div className="faq-accordion-list">
+            {faqs.map((faq, idx) => (
+              <div key={idx} className="faq-card-item">
+                <button 
+                  className="faq-toggle-btn"
+                  onClick={() => setOpenFaq(openFaq === idx ? -1 : idx)}
+                  aria-expanded={openFaq === idx}
+                >
+                  <span className="faq-question-text">{faq.q}</span>
+                  <ChevronDown size={18} className={`faq-arrow ${openFaq === idx ? 'open' : ''}`} />
+                </button>
+                <AnimatePresence>
+                  {openFaq === idx && (
+                    <motion.div 
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      className="faq-answer-wrapper"
+                    >
+                      <p className="faq-answer-text">{faq.a}</p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* High-Converting CTA Box */}
       <section className="cta-banner-section">
         <div className="container">
           <div className="cta-box">
-            <span className="cta-pill">AFFORDABLE FOR EVERY INSTITUTION</span>
-            <h2 className="cta-heading">Ready to Transform Your School Operations?</h2>
-            <p className="cta-sub">Join progressive institutions modernizing their workflows with MerlinFlow School IMS.</p>
+            <span className="cta-pill">FREE 14-DAY FULL TRIAL</span>
+            <h2 className="cta-heading">Ready to Join the Future of School Management?</h2>
+            <p className="cta-sub">
+              Experience the difference of a platform built for trust, reliability, and academic excellence. Book a live demo or get started right away.
+            </p>
             <div className="cta-btns">
               <button onClick={scrollToContact} className="btn-white">
                 Book a Live Demo <ArrowRight size={18} />
               </button>
               <a href="tel:+918374373753" className="btn-outline-white">
-                Call Our Specialists (+91 83743 73753)
+                Call Direct: +91 83743 73753
               </a>
             </div>
+            <p className="cta-footnote">No setup fees • Free staff training & support • Self-serve setup in 24 hours</p>
           </div>
         </div>
       </section>
@@ -487,34 +683,101 @@ export default function SchoolImsView() {
         .school-ims-page {
           background-color: #f8fafc;
           color: #0f172a;
-          padding-top: 5rem;
+          padding-top: 4.5rem;
           min-height: 100vh;
           overflow-x: hidden;
         }
 
-        .top-nav-container {
-          padding-top: 2rem;
-          padding-bottom: 1rem;
+        /* STICKY SUB-NAV */
+        .sticky-subnav {
+          position: sticky;
+          top: 64px;
+          z-index: 900;
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          border-bottom: 1px solid #e2e8f0;
+          box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        }
+
+        .subnav-container {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 0.75rem 1rem;
+          gap: 1rem;
         }
 
         .back-link {
           display: inline-flex;
           align-items: center;
-          gap: 0.5rem;
-          font-size: 0.95rem;
-          font-weight: 600;
+          gap: 0.4rem;
+          font-size: 0.88rem;
+          font-weight: 700;
           color: #64748b;
           text-decoration: none;
           transition: color 0.2s;
+          white-space: nowrap;
         }
 
         .back-link:hover {
           color: #2563eb;
         }
 
+        .subnav-tabs {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          overflow-x: auto;
+          scrollbar-width: none;
+        }
+
+        .subnav-tab {
+          padding: 0.45rem 0.9rem;
+          border-radius: 50px;
+          border: none;
+          background: transparent;
+          font-size: 0.84rem;
+          font-weight: 600;
+          color: #64748b;
+          cursor: pointer;
+          transition: all 0.2s;
+          white-space: nowrap;
+        }
+
+        .subnav-tab:hover {
+          color: #0f172a;
+          background: #f1f5f9;
+        }
+
+        .subnav-tab.active {
+          background: #0f172a;
+          color: #ffffff;
+        }
+
+        .subnav-cta-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.4rem;
+          background: #2563eb;
+          color: #ffffff;
+          padding: 0.45rem 1rem;
+          border-radius: 10px;
+          font-size: 0.82rem;
+          font-weight: 700;
+          border: none;
+          cursor: pointer;
+          white-space: nowrap;
+          transition: background 0.2s;
+        }
+
+        .subnav-cta-btn:hover {
+          background: #1d4ed8;
+        }
+
         /* HERO SECTION */
         .hero-section {
-          padding: 3rem 0 5rem;
+          padding: 3.5rem 0 5rem;
           position: relative;
         }
 
@@ -534,7 +797,7 @@ export default function SchoolImsView() {
           border-radius: 50px;
           padding: 0.4rem 1rem;
           font-size: 0.75rem;
-          font-weight: 700;
+          font-weight: 800;
           color: #475569;
           letter-spacing: 0.05em;
           margin-bottom: 1.5rem;
@@ -618,33 +881,44 @@ export default function SchoolImsView() {
           transform: translateY(-2px);
         }
 
-        .trust-badges {
-          display: flex;
-          gap: 2rem;
-          flex-wrap: wrap;
-        }
-
-        .trust-item {
+        .stats-strip {
           display: flex;
           align-items: center;
-          gap: 0.6rem;
-          font-size: 0.88rem;
-          font-weight: 600;
-          color: #475569;
-        }
-
-        .trust-icon {
-          width: 36px;
-          height: 36px;
-          border-radius: 10px;
           background: #ffffff;
           border: 1px solid #e2e8f0;
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          border-radius: 18px;
+          padding: 1.25rem 1.75rem;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+          max-width: 500px;
         }
 
-        /* BROWSER MOCKUP */
+        .stat-card {
+          flex: 1;
+          text-align: center;
+        }
+
+        .stat-number {
+          font-size: 1.8rem;
+          font-weight: 900;
+          color: #2563eb;
+          line-height: 1;
+        }
+
+        .stat-label {
+          font-size: 0.72rem;
+          font-weight: 700;
+          color: #64748b;
+          text-transform: uppercase;
+          margin-top: 0.35rem;
+        }
+
+        .stat-divider {
+          width: 1px;
+          height: 36px;
+          background: #e2e8f0;
+        }
+
+        /* BROWSER DEMO FRAME */
         .browser-window {
           background: #ffffff;
           border-radius: 20px;
@@ -723,8 +997,23 @@ export default function SchoolImsView() {
 
         .section-header-center {
           text-align: center;
-          max-width: 750px;
+          max-width: 800px;
           margin: 0 auto 3.5rem;
+        }
+
+        .pill-tag {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.4rem;
+          background: #eff6ff;
+          color: #2563eb;
+          border: 1px solid #bfdbfe;
+          border-radius: 50px;
+          padding: 0.3rem 0.9rem;
+          font-size: 0.72rem;
+          font-weight: 800;
+          letter-spacing: 0.06em;
+          margin-bottom: 1rem;
         }
 
         .section-title {
@@ -742,492 +1031,611 @@ export default function SchoolImsView() {
           line-height: 1.6;
         }
 
-        /* FEATURES GRID */
-        .features-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 1.75rem;
+        /* CATEGORY FILTER PILLS */
+        .category-filters {
+          display: flex;
+          justify-content: center;
+          gap: 0.6rem;
+          flex-wrap: wrap;
+          margin-top: 1.75rem;
         }
 
-        .feature-card-modern {
+        .cat-pill {
+          padding: 0.5rem 1.1rem;
+          background: #f8fafc;
+          border: 1px solid #e2e8f0;
+          border-radius: 50px;
+          font-size: 0.85rem;
+          font-weight: 600;
+          color: #475569;
+          cursor: pointer;
+          transition: all 0.2s;
+        }
+
+        .cat-pill:hover {
+          border-color: #2563eb;
+          color: #2563eb;
+        }
+
+        .cat-pill.active {
+          background: #2563eb;
+          border-color: #2563eb;
+          color: #ffffff;
+        }
+
+        /* MODULES GRID LARGE */
+        .modules-grid-large {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 1.5rem;
+        }
+
+        .module-large-card {
           background: #ffffff;
           border: 1px solid #e2e8f0;
           border-radius: 18px;
-          padding: 2rem;
-          transition: all 0.3s ease;
-          box-shadow: 0 4px 15px rgba(0,0,0,0.02);
-        }
-
-        .feature-card-modern:hover {
-          transform: translateY(-4px);
-          box-shadow: 0 16px 35px rgba(0,0,0,0.06);
-          border-color: #cbd5e1;
-        }
-
-        .feat-icon-box {
-          width: 52px;
-          height: 52px;
-          border-radius: 14px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin-bottom: 1.25rem;
-        }
-
-        .feat-title {
-          font-size: 1.15rem;
-          font-weight: 700;
-          color: #0f172a;
-          margin-bottom: 0.6rem;
-        }
-
-        .feat-desc {
-          font-size: 0.9rem;
-          color: #64748b;
-          line-height: 1.6;
-        }
-
-        /* DASHBOARD SECTION */
-        .dashboard-preview-grid {
-          display: grid;
-          grid-template-columns: 1fr 1.1fr;
-          gap: 3.5rem;
-          align-items: center;
-        }
-
-        .principal-card-widget {
-          background: #ffffff;
-          border-radius: 24px;
-          border: 1px solid #cbd5e1;
-          padding: 2.25rem;
-          box-shadow: 0 15px 40px rgba(0,0,0,0.06);
-        }
-
-        .widget-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          border-bottom: 1px solid #f1f5f9;
-          padding-bottom: 1.25rem;
-          margin-bottom: 1.5rem;
-        }
-
-        .widget-title {
-          font-size: 1.15rem;
-          font-weight: 800;
-          color: #0f172a;
-          margin: 0;
-        }
-
-        .widget-sub {
-          font-size: 0.8rem;
-          color: #94a3b8;
-          font-weight: 600;
-        }
-
-        .admin-badge {
-          background: #eff6ff;
-          color: #2563eb;
-          border: 1px solid #bfdbfe;
-          border-radius: 6px;
-          font-size: 0.72rem;
-          font-weight: 800;
-          padding: 0.2rem 0.5rem;
-        }
-
-        .metrics-row {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 1.25rem;
-          margin-bottom: 1.5rem;
-        }
-
-        .metric-box {
-          padding: 1.25rem;
-          border-radius: 16px;
-          border: 1px solid;
-        }
-
-        .blue-metric {
-          background: #eff6ff;
-          border-color: #dbeafe;
-        }
-
-        .green-metric {
-          background: #ecfdf5;
-          border-color: #d1fae5;
-        }
-
-        .metric-top {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 0.5rem;
-        }
-
-        .metric-label {
-          font-size: 0.72rem;
-          font-weight: 800;
-          color: #64748b;
-          letter-spacing: 0.05em;
-        }
-
-        .metric-val {
-          font-size: 1.8rem;
-          font-weight: 800;
-          color: #0f172a;
-          line-height: 1.1;
-          margin-bottom: 0.4rem;
-        }
-
-        .metric-trend {
-          font-size: 0.75rem;
-          font-weight: 700;
-          color: #2563eb;
-        }
-
-        .green-trend {
-          color: #059669;
-        }
-
-        .events-box {
-          background: #f8fafc;
-          border-radius: 16px;
-          border: 1px solid #e2e8f0;
-          padding: 1.25rem;
-        }
-
-        .events-title {
-          font-size: 0.75rem;
-          font-weight: 800;
-          color: #64748b;
-          display: flex;
-          align-items: center;
-          gap: 0.4rem;
-          margin-bottom: 1rem;
-        }
-
-        .event-item {
-          display: flex;
-          align-items: center;
-          gap: 1rem;
-          padding: 0.75rem;
-          background: #ffffff;
-          border-radius: 12px;
-          border: 1px solid #e2e8f0;
-          margin-bottom: 0.75rem;
-        }
-
-        .event-item:last-child {
-          margin-bottom: 0;
-        }
-
-        .event-date {
-          width: 44px;
-          height: 44px;
-          background: #eff6ff;
-          border-radius: 10px;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          font-weight: 800;
-          font-size: 0.8rem;
-          color: #2563eb;
-          flex-shrink: 0;
-        }
-
-        .event-name {
-          font-size: 0.88rem;
-          font-weight: 700;
-          color: #1e293b;
-        }
-
-        .event-time {
-          font-size: 0.76rem;
-          color: #64748b;
-        }
-
-        .dashboard-benefits {
-          display: flex;
-          flex-direction: column;
-          gap: 2rem;
-        }
-
-        .benefit-item {
-          display: flex;
-          gap: 1.25rem;
-          align-items: flex-start;
-        }
-
-        .benefit-icon {
-          width: 50px;
-          height: 50px;
-          border-radius: 14px;
-          background: #ffffff;
-          border: 1px solid #e2e8f0;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-shrink: 0;
-          box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-        }
-
-        .benefit-item h3 {
-          font-size: 1.2rem;
-          font-weight: 700;
-          color: #0f172a;
-          margin-bottom: 0.4rem;
-        }
-
-        .benefit-item p {
-          font-size: 0.95rem;
-          color: #64748b;
-          line-height: 1.6;
-        }
-
-        /* ROLES GRID */
-        .roles-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 2rem;
-        }
-
-        .role-card-modern {
-          background: #f8fafc;
-          border: 1px solid #e2e8f0;
-          border-radius: 22px;
-          padding: 2.25rem;
-          transition: all 0.3s ease;
-        }
-
-        .role-card-modern:hover {
-          background: #ffffff;
-          transform: translateY(-4px);
-          box-shadow: 0 15px 35px rgba(0,0,0,0.06);
-          border-color: #cbd5e1;
-        }
-
-        .role-icon-circle {
-          width: 56px;
-          height: 56px;
-          border-radius: 16px;
-          background: #ffffff;
-          border: 1px solid #e2e8f0;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin-bottom: 1.25rem;
-          box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-        }
-
-        .role-name {
-          font-size: 1.3rem;
-          font-weight: 800;
-          color: #0f172a;
-          margin-bottom: 0.6rem;
-        }
-
-        .role-desc {
-          font-size: 0.9rem;
-          color: #64748b;
-          line-height: 1.6;
-          margin-bottom: 1.5rem;
-        }
-
-        .role-points {
-          list-style: none;
-          padding: 0;
-          margin: 0;
-          display: flex;
-          flex-direction: column;
-          gap: 0.75rem;
-        }
-
-        .role-points li {
-          display: flex;
-          align-items: flex-start;
-          gap: 0.6rem;
-          font-size: 0.88rem;
-          font-weight: 600;
-          color: #334155;
-          line-height: 1.45;
-        }
-
-        /* MODULES GRID */
-        .modules-grid {
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 1.5rem;
-        }
-
-        .module-card-item {
-          background: #ffffff;
-          border: 1px solid #e2e8f0;
-          border-radius: 16px;
-          padding: 1.5rem;
+          padding: 1.75rem;
           transition: all 0.25s ease;
+          box-shadow: 0 2px 10px rgba(0,0,0,0.02);
         }
 
-        .module-card-item:hover {
+        .module-large-card:hover {
           border-color: #2563eb;
-          transform: translateY(-3px);
-          box-shadow: 0 10px 25px rgba(37, 99, 235, 0.08);
+          transform: translateY(-4px);
+          box-shadow: 0 12px 30px rgba(37, 99, 235, 0.09);
         }
 
-        .mod-icon-wrapper {
-          width: 44px;
-          height: 44px;
-          border-radius: 10px;
+        .mod-large-icon {
+          width: 48px;
+          height: 48px;
+          border-radius: 12px;
           background: #f8fafc;
           border: 1px solid #e2e8f0;
           display: flex;
           align-items: center;
           justify-content: center;
-          margin-bottom: 1rem;
+          margin-bottom: 1.25rem;
         }
 
-        .mod-name {
-          font-size: 1.05rem;
-          font-weight: 700;
-          color: #0f172a;
-          margin-bottom: 0.4rem;
-        }
-
-        .mod-desc {
-          font-size: 0.82rem;
-          color: #64748b;
-          line-height: 1.5;
-        }
-
-        /* WORKFLOW */
-        .workflow-steps-grid {
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 1.5rem;
-        }
-
-        .workflow-step-card {
-          background: #ffffff;
-          border: 1px solid #e2e8f0;
-          border-radius: 20px;
-          padding: 2rem 1.5rem;
-          text-align: center;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          position: relative;
-        }
-
-        .step-number {
-          font-size: 0.75rem;
-          font-weight: 900;
-          color: #2563eb;
-          background: #eff6ff;
-          padding: 0.25rem 0.6rem;
-          border-radius: 50px;
-          margin-bottom: 1rem;
-        }
-
-        .step-icon-circle {
-          width: 52px;
-          height: 52px;
-          border-radius: 14px;
-          background: #f1f5f9;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: #0f172a;
-          margin-bottom: 1rem;
-        }
-
-        .step-title {
+        .mod-large-name {
           font-size: 1.1rem;
           font-weight: 700;
           color: #0f172a;
           margin-bottom: 0.5rem;
         }
 
-        .step-desc {
+        .mod-large-desc {
           font-size: 0.85rem;
           color: #64748b;
-          line-height: 1.5;
+          line-height: 1.55;
         }
 
-        /* SECURITY */
-        .security-section-grid {
+        /* ROLE SOLUTIONS SECTION */
+        .roles-layout {
           display: grid;
-          grid-template-columns: 1fr 1.3fr;
-          gap: 4rem;
-          align-items: center;
+          grid-template-columns: 300px 1fr;
+          gap: 2.5rem;
+          max-width: 1000px;
+          margin: 0 auto;
         }
 
-        .sec-badge {
+        .roles-nav-pills {
+          display: flex;
+          flex-direction: column;
+          gap: 0.75rem;
+        }
+
+        .role-nav-btn {
+          text-align: left;
+          padding: 1.1rem 1.4rem;
+          background: #ffffff;
+          border: 1px solid #e2e8f0;
+          border-radius: 14px;
+          font-size: 0.95rem;
+          font-weight: 700;
+          color: #475569;
+          cursor: pointer;
+          transition: all 0.2s;
+        }
+
+        .role-nav-btn:hover {
+          border-color: #2563eb;
+          color: #2563eb;
+        }
+
+        .role-nav-btn.active {
+          background: #0f172a;
+          border-color: #0f172a;
+          color: #ffffff;
+          box-shadow: 0 6px 20px rgba(15, 23, 42, 0.15);
+        }
+
+        .role-detail-card {
+          background: #ffffff;
+          border: 1px solid #cbd5e1;
+          border-radius: 24px;
+          padding: 2.5rem;
+          box-shadow: 0 10px 35px rgba(0,0,0,0.04);
+        }
+
+        .role-detail-header {
+          display: flex;
+          align-items: center;
+          gap: 1.5rem;
+          margin-bottom: 1.5rem;
+        }
+
+        .role-icon-box {
+          width: 60px;
+          height: 60px;
+          border-radius: 16px;
+          background: #eff6ff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+        }
+
+        .role-badge-tag {
+          font-size: 0.72rem;
+          font-weight: 800;
+          color: #2563eb;
+          letter-spacing: 0.05em;
+        }
+
+        .role-detail-title {
+          font-size: 1.45rem;
+          font-weight: 800;
+          color: #0f172a;
+          margin: 0.2rem 0;
+        }
+
+        .role-detail-tag {
+          font-size: 0.88rem;
+          color: #64748b;
+          font-weight: 600;
+        }
+
+        .role-detail-desc {
+          font-size: 0.95rem;
+          color: #475569;
+          line-height: 1.65;
+          margin-bottom: 2rem;
+        }
+
+        .role-highlights-title {
+          font-size: 0.75rem;
+          font-weight: 800;
+          color: #94a3b8;
+          letter-spacing: 0.06em;
+          margin-bottom: 1rem;
+        }
+
+        .role-highlights-list {
+          list-style: none;
+          padding: 0;
+          margin: 0 0 2rem 0;
+          display: flex;
+          flex-direction: column;
+          gap: 0.8rem;
+        }
+
+        .role-highlights-list li {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          font-size: 0.92rem;
+          font-weight: 600;
+          color: #334155;
+        }
+
+        .role-request-btn {
           display: inline-flex;
           align-items: center;
-          gap: 0.5rem;
-          background: #eff6ff;
-          color: #2563eb;
-          border: 1px solid #bfdbfe;
+          gap: 0.6rem;
+          color: #ffffff;
+          padding: 0.85rem 1.6rem;
+          border-radius: 12px;
+          font-weight: 700;
+          font-size: 0.92rem;
+          border: none;
+          cursor: pointer;
+          transition: transform 0.2s;
+        }
+
+        .role-request-btn:hover {
+          transform: translateY(-2px);
+          filter: brightness(1.1);
+        }
+
+        /* PRICING PLANS */
+        .billing-switcher {
+          display: inline-flex;
+          align-items: center;
+          gap: 1rem;
+          background: #f1f5f9;
+          padding: 0.5rem 1.25rem;
           border-radius: 50px;
-          padding: 0.35rem 0.9rem;
+          border: 1px solid #e2e8f0;
+          margin-top: 1.5rem;
+        }
+
+        .switch-label {
+          font-size: 0.85rem;
+          font-weight: 700;
+          color: #94a3b8;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
+
+        .switch-label.active {
+          color: #0f172a;
+        }
+
+        .switch-toggle {
+          width: 48px;
+          height: 26px;
+          background: #cbd5e1;
+          border-radius: 50px;
+          border: none;
+          position: relative;
+          cursor: pointer;
+          transition: background 0.2s;
+        }
+
+        .switch-toggle.yearly {
+          background: #059669;
+        }
+
+        .toggle-thumb {
+          width: 20px;
+          height: 20px;
+          background: #ffffff;
+          border-radius: 50%;
+          position: absolute;
+          top: 3px;
+          left: 3px;
+          transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .switch-toggle.yearly .toggle-thumb {
+          transform: translateX(22px);
+        }
+
+        .discount-badge {
+          background: #ecfdf5;
+          color: #059669;
+          font-size: 0.72rem;
+          font-weight: 800;
+          padding: 0.2rem 0.5rem;
+          border-radius: 50px;
+          border: 1px solid #a7f3d0;
+        }
+
+        .pricing-cards-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 2rem;
+          max-width: 1100px;
+          margin: 0 auto;
+        }
+
+        .pricing-card {
+          background: #ffffff;
+          border: 1px solid #e2e8f0;
+          border-radius: 24px;
+          padding: 2.5rem;
+          display: flex;
+          flex-direction: column;
+          position: relative;
+          transition: all 0.3s ease;
+        }
+
+        .pricing-card:hover {
+          transform: translateY(-6px);
+          box-shadow: 0 20px 45px rgba(0,0,0,0.08);
+        }
+
+        .featured-card {
+          border-color: #10b981;
+          box-shadow: 0 15px 40px rgba(16, 185, 129, 0.12);
+        }
+
+        .popular-ribbon {
+          position: absolute;
+          top: -12px;
+          left: 50%;
+          transform: translateX(-50%);
+          background: #059669;
+          color: #ffffff;
           font-size: 0.72rem;
           font-weight: 800;
           letter-spacing: 0.05em;
+          padding: 0.3rem 1rem;
+          border-radius: 50px;
+        }
+
+        .plan-icon-wrap {
+          width: 48px;
+          height: 48px;
+          border-radius: 12px;
+          background: #f8fafc;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           margin-bottom: 1.25rem;
         }
 
-        .sec-heading {
+        .plan-name {
+          font-size: 1.4rem;
+          font-weight: 800;
+          color: #0f172a;
+          margin-bottom: 0.4rem;
+        }
+
+        .plan-desc {
+          font-size: 0.85rem;
+          color: #64748b;
+          line-height: 1.5;
+          margin-bottom: 1.5rem;
+          min-height: 40px;
+        }
+
+        .price-tag-box {
+          display: flex;
+          align-items: baseline;
+          gap: 0.3rem;
+          background: #f8fafc;
+          padding: 1rem 1.25rem;
+          border-radius: 14px;
+          border: 1px solid #e2e8f0;
+          margin-bottom: 2rem;
+        }
+
+        .currency {
+          font-size: 1.3rem;
+          font-weight: 800;
+          color: #0f172a;
+        }
+
+        .amount {
+          font-size: 2.4rem;
+          font-weight: 900;
+          color: #0f172a;
+          line-height: 1;
+        }
+
+        .period {
+          font-size: 0.78rem;
+          font-weight: 700;
+          color: #64748b;
+          text-transform: uppercase;
+        }
+
+        .plan-features {
+          list-style: none;
+          padding: 0;
+          margin: 0 0 2.5rem 0;
+          display: flex;
+          flex-direction: column;
+          gap: 0.8rem;
+          flex-grow: 1;
+        }
+
+        .plan-features li {
+          display: flex;
+          align-items: flex-start;
+          gap: 0.6rem;
+          font-size: 0.86rem;
+          color: #334155;
+          line-height: 1.4;
+        }
+
+        .feat-check {
+          width: 18px;
+          height: 18px;
+          border-radius: 50%;
+          background: #eff6ff;
+          color: #2563eb;
+          font-size: 0.75rem;
+          font-weight: 800;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+          margin-top: 1px;
+        }
+
+        .plan-select-btn {
+          width: 100%;
+          padding: 0.9rem;
+          border-radius: 12px;
+          font-weight: 700;
+          font-size: 0.9rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.5rem;
+          border: none;
+          cursor: pointer;
+          transition: transform 0.2s;
+        }
+
+        .plan-select-btn:hover {
+          transform: translateY(-2px);
+          filter: brightness(1.05);
+        }
+
+        .pricing-footnote {
+          text-align: center;
+          font-size: 0.82rem;
+          color: #94a3b8;
+          margin-top: 2.5rem;
+        }
+
+        /* COMPARISON TABLE */
+        .comparison-table-wrapper {
+          max-width: 1000px;
+          margin: 0 auto;
+          background: #ffffff;
+          border-radius: 20px;
+          border: 1px solid #cbd5e1;
+          overflow: hidden;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        }
+
+        .comparison-table {
+          width: 100%;
+          border-collapse: collapse;
+          text-align: left;
+        }
+
+        .comparison-table th {
+          padding: 1.25rem 1.5rem;
+          font-size: 0.88rem;
+          font-weight: 800;
+          color: #0f172a;
+          background: #f8fafc;
+          border-bottom: 1px solid #e2e8f0;
+        }
+
+        .comparison-table th.highlight-col {
+          background: #eff6ff;
+          color: #2563eb;
+        }
+
+        .comparison-table td {
+          padding: 1.1rem 1.5rem;
+          font-size: 0.88rem;
+          border-bottom: 1px solid #f1f5f9;
+        }
+
+        .feat-col-name {
+          font-weight: 700;
+          color: #1e293b;
+        }
+
+        .highlight-cell {
+          background: #eff6ff;
+          font-weight: 800;
+          color: #2563eb;
+        }
+
+        .others-cell {
+          color: #64748b;
+        }
+
+        .sheets-cell {
+          color: #94a3b8;
+        }
+
+        /* SECURITY BANNER */
+        .security-banner {
+          background: #ffffff;
+          border: 1px solid #cbd5e1;
+          border-radius: 24px;
+          padding: 3.5rem;
+        }
+
+        .sec-header {
+          max-width: 700px;
+          margin-bottom: 3rem;
+        }
+
+        .sec-banner-title {
           font-family: var(--font-heading);
           font-size: 2.2rem;
           font-weight: 800;
           color: #0f172a;
-          line-height: 1.2;
-          margin-bottom: 1.25rem;
+          margin-bottom: 0.8rem;
         }
 
-        .sec-sub {
+        .sec-banner-desc {
           font-size: 1rem;
           color: #64748b;
-          line-height: 1.6;
-          margin-bottom: 2rem;
+          line-height: 1.65;
         }
 
-        .sec-right-grid {
+        .sec-grid-cards {
           display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 1.25rem;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 1.5rem;
         }
 
-        .sec-point-card {
-          background: #ffffff;
+        .sec-mini-card {
+          background: #f8fafc;
           border: 1px solid #e2e8f0;
           border-radius: 16px;
           padding: 1.5rem;
         }
 
-        .sec-pt-icon {
-          width: 40px;
-          height: 40px;
-          border-radius: 10px;
-          background: #eff6ff;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin-bottom: 0.75rem;
-        }
-
-        .sec-pt-title {
-          font-size: 0.95rem;
+        .sec-mini-card h4 {
+          font-size: 1rem;
           font-weight: 700;
           color: #0f172a;
-          margin-bottom: 0.35rem;
+          margin: 0.75rem 0 0.35rem 0;
         }
 
-        .sec-pt-desc {
+        .sec-mini-card p {
           font-size: 0.82rem;
           color: #64748b;
           line-height: 1.5;
+        }
+
+        /* FAQ ACCORDION */
+        .faq-accordion-list {
+          max-width: 800px;
+          margin: 0 auto;
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .faq-card-item {
+          background: #ffffff;
+          border: 1px solid #e2e8f0;
+          border-radius: 16px;
+          overflow: hidden;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+
+        .faq-toggle-btn {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 1.35rem 1.75rem;
+          background: none;
+          border: none;
+          text-align: left;
+          cursor: pointer;
+          font-size: 1rem;
+          font-weight: 700;
+          color: #0f172a;
+        }
+
+        .faq-arrow {
+          color: #94a3b8;
+          transition: transform 0.25s ease;
+          flex-shrink: 0;
+        }
+
+        .faq-arrow.open {
+          transform: rotate(180deg);
+          color: #2563eb;
+        }
+
+        .faq-answer-wrapper {
+          overflow: hidden;
+        }
+
+        .faq-answer-text {
+          padding: 0 1.75rem 1.35rem;
+          font-size: 0.92rem;
+          color: #64748b;
+          line-height: 1.65;
+          margin: 0;
         }
 
         /* CTA BANNER */
@@ -1317,6 +1725,14 @@ export default function SchoolImsView() {
           background: rgba(255, 255, 255, 0.08);
         }
 
+        .cta-footnote {
+          font-size: 0.78rem;
+          color: #94a3b8;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          margin-top: 2rem;
+        }
+
         /* RESPONSIVE */
         @media (max-width: 1024px) {
           .hero-grid {
@@ -1324,37 +1740,26 @@ export default function SchoolImsView() {
             text-align: center;
           }
 
-          .hero-badge, .trust-badges, .hero-cta-group {
-            justify-content: center;
+          .hero-badge, .stats-strip, .hero-cta-group {
+            margin-left: auto;
+            margin-right: auto;
           }
 
-          .features-grid {
+          .modules-grid-large {
             grid-template-columns: repeat(2, 1fr);
           }
 
-          .dashboard-preview-grid {
+          .roles-layout {
             grid-template-columns: 1fr;
           }
 
-          .roles-grid {
+          .pricing-cards-grid {
             grid-template-columns: 1fr;
+            max-width: 500px;
           }
 
-          .modules-grid {
+          .sec-grid-cards {
             grid-template-columns: repeat(2, 1fr);
-          }
-
-          .workflow-steps-grid {
-            grid-template-columns: repeat(2, 1fr);
-          }
-
-          .security-section-grid {
-            grid-template-columns: 1fr;
-            text-align: center;
-          }
-
-          .sec-left .sec-badge {
-            margin: 0 auto 1.25rem;
           }
         }
 
@@ -1363,19 +1768,11 @@ export default function SchoolImsView() {
             font-size: 2.2rem;
           }
 
-          .features-grid {
+          .modules-grid-large {
             grid-template-columns: 1fr;
           }
 
-          .modules-grid {
-            grid-template-columns: 1fr;
-          }
-
-          .workflow-steps-grid {
-            grid-template-columns: 1fr;
-          }
-
-          .sec-right-grid {
+          .sec-grid-cards {
             grid-template-columns: 1fr;
           }
 
@@ -1385,6 +1782,10 @@ export default function SchoolImsView() {
 
           .cta-heading {
             font-size: 2rem;
+          }
+
+          .subnav-tabs {
+            display: none;
           }
         }
       `}</style>
