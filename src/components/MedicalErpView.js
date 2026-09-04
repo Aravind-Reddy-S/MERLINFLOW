@@ -25,7 +25,7 @@ export default function MedicalErpView() {
   const [openFaq, setOpenFaq] = useState(0);
   const [activeRole, setActiveRole] = useState(0);
 
-  // 15+ Purpose-Built Modules categorized internally
+  // 24 Purpose-Built Modules across 4 Core Disciplines (6 per category for balanced grid)
   const moduleCategories = [
     {
       id: "inventory",
@@ -75,6 +75,14 @@ export default function MedicalErpView() {
           iconBg: "#faf5ff",
           borderColor: "#e9d5ff",
           tags: ["1-Click Returns", "Distributor Credit", "Breakage Reconcile"]
+        },
+        { 
+          name: "Rack & Aisle Locator Index", 
+          desc: "Map every medicine down to its physical aisle, shelf, and drawer for instant pick-and-pack dispensing at counters.", 
+          icon: <Layers size={24} color="#059669" />,
+          iconBg: "#ecfdf5",
+          borderColor: "#a7f3d0",
+          tags: ["Shelf Locator", "Fast Dispense", "Bin Mapping"]
         }
       ]
     },
@@ -126,6 +134,14 @@ export default function MedicalErpView() {
           iconBg: "#faf5ff",
           borderColor: "#e9d5ff",
           tags: ["Dynamic QR Code", "Split Payments", "UPI & Cards"]
+        },
+        { 
+          name: "WhatsApp E-Bills & Rx Dosage Alerts", 
+          desc: "Deliver paperless GST tax invoices, dosage frequency guides, and refill reminder notifications straight to patient WhatsApp.", 
+          icon: <Zap size={24} color="#0d9488" />,
+          iconBg: "#f0fdfa",
+          borderColor: "#99f6e4",
+          tags: ["WhatsApp Invoicing", "Refill Alerts", "Paperless POS"]
         }
       ]
     },
@@ -169,6 +185,22 @@ export default function MedicalErpView() {
           iconBg: "#fff7ed",
           borderColor: "#fed7aa",
           tags: ["GSTR-1 & 3B", "HSN Breakdown", "CA Upload Ready"]
+        },
+        { 
+          name: "Cash Float & Shift Handover Khata", 
+          desc: "Audit drawer cash balances during cashier shift changes, record dispenser commissions, and prevent cash counter leakages.", 
+          icon: <Award size={24} color="#7c3aed" />,
+          iconBg: "#faf5ff",
+          borderColor: "#e9d5ff",
+          tags: ["Cash Float", "Staff Bonus", "Shift Handover"]
+        },
+        { 
+          name: "E-Way Bill & B2B Compliance Portal", 
+          desc: "Auto-generate official NIC E-Way bills for bulk B2B distributor deliveries and inter-city branch transfers in seconds.", 
+          icon: <CheckCircle2 size={24} color="#059669" />,
+          iconBg: "#ecfdf5",
+          borderColor: "#a7f3d0",
+          tags: ["E-Way Bill Sync", "NIC Portal", "B2B Audits"]
         }
       ]
     },
@@ -196,10 +228,54 @@ export default function MedicalErpView() {
           iconBg: "#fef2f2",
           borderColor: "#fecaca",
           tags: ["WhatsApp Tracking", "Rider App", "Digital COD"]
+        },
+        { 
+          name: "Smart Salt & Molecule Engine", 
+          desc: "Instant molecule substitute recommendations when brand names are out of stock to preserve counter sales.", 
+          icon: <Sparkles size={24} color="#0d9488" />,
+          iconBg: "#f0fdfa",
+          borderColor: "#99f6e4",
+          tags: ["Molecule Search", "Salt Matching", "AI Alternates"]
+        },
+        { 
+          name: "Chronic Patient Refill Automation", 
+          desc: "Automated WhatsApp bot that predicts when diabetic and hypertensive patients are running low and drafts repeat orders.", 
+          icon: <Clock size={24} color="#2563eb" />,
+          iconBg: "#eff6ff",
+          borderColor: "#bfdbfe",
+          tags: ["WhatsApp Bot", "Monthly Refills", "Auto Reminders"]
+        },
+        { 
+          name: "IoT Vaccine Cold-Chain Monitor", 
+          desc: "Real-time refrigerator temperature logging with instant SMS buzzer alerts whenever temperatures exceed 2°C–8°C safe limits.", 
+          icon: <Activity size={24} color="#059669" />,
+          iconBg: "#ecfdf5",
+          borderColor: "#a7f3d0",
+          tags: ["24/7 Temp Alert", "Vaccine Safety", "IoT Sensor"]
+        },
+        { 
+          name: "Digital Rx Vault & ABDM Locker", 
+          desc: "Secure cloud health locker enabling patients to store lifetime medical bills and digital prescriptions securely.", 
+          icon: <Lock size={24} color="#ea580c" />,
+          iconBg: "#fff7ed",
+          borderColor: "#fed7aa",
+          tags: ["Cloud Rx Vault", "ABDM Ready", "Patient History"]
         }
       ]
     }
   ];
+
+  const handleModuleClick = (categoryId, modName) => {
+    if (categoryId === "inventory") {
+      setPreviewTab("inventory");
+    } else {
+      setPreviewTab("pos");
+    }
+    const el = document.getElementById("overview");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   const displayedCategories = moduleCategory === "all"
     ? moduleCategories
@@ -946,11 +1022,11 @@ export default function MedicalErpView() {
             {/* Category Filter Pills */}
             <div className="category-filters">
               {[
-                { id: "all", label: "All Modules (15+)" },
-                { id: "inventory", label: "Inventory & Stock (5)" },
-                { id: "sales", label: "Sales & Invoicing (5)" },
-                { id: "admin", label: "Admin & Compliance (4)" },
-                { id: "future", label: "Future-Ready (2)" }
+                { id: "all", label: "All Modules (24)" },
+                { id: "inventory", label: "Inventory & Stock (6)" },
+                { id: "sales", label: "Sales & Invoicing (6)" },
+                { id: "admin", label: "Admin & Compliance (6)" },
+                { id: "future", label: "Future-Ready (6)" }
               ].map(cat => (
                 <button 
                   key={cat.id}
@@ -985,6 +1061,9 @@ export default function MedicalErpView() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.25, delay: idx * 0.03 }}
                       className="module-large-card"
+                      onClick={() => handleModuleClick(category.id, mod.name)}
+                      style={{ cursor: "pointer" }}
+                      title={`Click to experience ${mod.name} in live simulator`}
                     >
                       <div className="module-card-top-content">
                         <div className="card-top-row">
