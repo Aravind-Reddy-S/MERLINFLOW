@@ -11,7 +11,7 @@ import {
   Clock, ArrowLeft, Check, Layers, Bus, Library, Bed, 
   Package, Stethoscope, CreditCard, TrendingUp, 
   FileSpreadsheet, AlertTriangle, ChevronDown, Phone,
-  HelpCircle, Award, Crown, Zap, Radio, Globe, BarChart3
+  HelpCircle, Award, Crown, Zap, Radio, Globe, BarChart3, Laptop
 } from "lucide-react";
 import Link from "next/link";
 import ContactSection from "./ContactSection";
@@ -23,56 +23,87 @@ export default function SchoolImsView() {
   const [openFaq, setOpenFaq] = useState(0);
   const [activeRole, setActiveRole] = useState(0);
 
-  // Categorized 45+ Modules
-  const allModules = [
-    // Core
-    { id: 1, category: "core", name: "Student Profiles", desc: "Comprehensive demographic, biometric, academic history, and family records.", icon: <GraduationCap size={22} color="#2563eb" /> },
-    { id: 2, category: "core", name: "Staff Administration", desc: "Track teacher qualifications, biometric logs, payroll, and workload assignments.", icon: <Users size={22} color="#059669" /> },
-    { id: 3, category: "core", name: "Attendance Automation", desc: "Multi-session attendance with automated parent absence voice phone calls.", icon: <UserCheck size={22} color="#ea580c" /> },
-    { id: 4, category: "core", name: "Fees & Collections", desc: "Multi-head fee setup, online UPI/card checkout, installment plans, and automated receipts.", icon: <IndianRupee size={22} color="#e11d48" /> },
-    { id: 5, category: "core", name: "Examinations & Grading", desc: "CBSE/ICSE/State board grading formulas, custom report card generation, and rank lists.", icon: <ClipboardList size={22} color="#7c3aed" /> },
-    { id: 6, category: "core", name: "Timetable Generator", desc: "Auto-generate conflict-free schedules for classes, substitute teachers, and labs.", icon: <Calendar size={22} color="#d97706" /> },
-    { id: 7, category: "core", name: "Digital Diary & Notes", desc: "Daily classroom notes, assignment uploads, file attachments, and submission tracking.", icon: <BookOpen size={22} color="#2563eb" /> },
-    { id: 8, category: "core", name: "Circulars & Notices", desc: "Broadcast urgent school alerts, holiday notices, and circulars with read receipts.", icon: <Bell size={22} color="#059669" /> },
-    { id: 9, category: "core", name: "Teacher-Parent Chat", desc: "Enable secure, direct messaging between staff and parents for academic support.", icon: <MessageSquare size={22} color="#ea580c" /> },
-    { id: 10, category: "core", name: "Transport & GPS", desc: "Optimize routes, track live school bus GPS locations, and manage driver logs.", icon: <Bus size={22} color="#e11d48" /> },
-    { id: 11, category: "core", name: "Library Management", desc: "Barcode catalog inventory, book issue/return tracking, and overdue fine management.", icon: <Library size={22} color="#7c3aed" /> },
-    { id: 12, category: "core", name: "Hostel & Dormitory", desc: "Allocate rooms, track room readiness, and monitor warden logs and visitor entries.", icon: <Bed size={22} color="#d97706" /> },
-    { id: 13, category: "core", name: "Inventory & Assets", desc: "Track school furniture, laboratory equipment procurement, and stock levels.", icon: <Package size={22} color="#2563eb" /> },
-    { id: 14, category: "core", name: "Certificates & TCs", desc: "One-click generation of Transfer Certificates, Bonafides, and Character certificates.", icon: <FileText size={22} color="#059669" /> },
-    { id: 15, category: "core", name: "Smart ID Cards", desc: "Design and print high-resolution QR/Barcode identification cards for staff and students.", icon: <CreditCard size={22} color="#ea580c" /> },
-    { id: 16, category: "core", name: "Infirmary & Health", desc: "Maintain medical checkup logs, vaccination histories, and emergency contacts.", icon: <Stethoscope size={22} color="#e11d48" /> },
-
-    // Academic & Insights
-    { id: 17, category: "academic", name: "Performance Analytics", desc: "Analyze student academic trends and subject-wise progress over terms.", icon: <TrendingUp size={22} color="#2563eb" /> },
-    { id: 18, category: "academic", name: "Digital Report Cards", desc: "Generate customizable term reports and CBSE/ICSE transcripts with digital signatures.", icon: <FileSpreadsheet size={22} color="#059669" /> },
-    { id: 19, category: "academic", name: "Teacher Feedback Matrix", desc: "Collect structured teacher feedback on student behavior, attentiveness, and soft skills.", icon: <MessageSquare size={22} color="#ea580c" /> },
-    { id: 20, category: "academic", name: "Discipline & Merits", desc: "Log disciplinary incidents, merits, and positive reinforcement awards.", icon: <AlertTriangle size={22} color="#e11d48" /> },
-    { id: 21, category: "academic", name: "Lesson Plan Repository", desc: "Standardize curriculum delivery with shared lesson plans and digital media resources.", icon: <BookOpen size={22} color="#7c3aed" /> },
-    { id: 22, category: "academic", name: "Assignments Dropbox", desc: "Digital homework submission with countdown alerts and teacher grading.", icon: <CheckCircle2 size={22} color="#d97706" /> },
-    { id: 23, category: "academic", name: "Syllabus Tracker", desc: "Monitor chapter completion progress against academic calendar milestones.", icon: <Activity size={22} color="#2563eb" /> },
-    { id: 24, category: "academic", name: "Question Bank & Tests", desc: "Create randomized question papers and online assessment quizzes.", icon: <HelpCircle size={22} color="#059669" /> },
-
-    // Admin & Finance
-    { id: 25, category: "finance", name: "Automated Fee Ledger", desc: "Real-time ledger tracking with discounts, sibling concessions, and scholarship waivers.", icon: <IndianRupee size={22} color="#059669" /> },
-    { id: 26, category: "finance", name: "Online Payment Gateway", desc: "Zero-failure smart checkout for UPI, NetBanking, Debit/Credit Cards & EMI.", icon: <CreditCard size={22} color="#2563eb" /> },
-    { id: 27, category: "finance", name: "Staff Payroll & TDS", desc: "Automated monthly salary calculation with PF, ESI, TDS, and salary slip PDF downloads.", icon: <Users size={22} color="#ea580c" /> },
-    { id: 28, category: "finance", name: "Expense & Petty Cash", desc: "Record day-to-day administrative expenses, receipts, and department budget caps.", icon: <FileSpreadsheet size={22} color="#e11d48" /> },
-    { id: 29, category: "finance", name: "Multi-Branch Consolidation", desc: "Manage multiple school branches or trust institutions under a single master admin.", icon: <Globe size={22} color="#7c3aed" /> },
-    { id: 30, category: "finance", name: "Audit & GST Reports", desc: "One-click export of financial statements, balance sheets, and tax audits.", icon: <FileCheck size={22} color="#d97706" /> },
-
-    // Hardware & Integrations
-    { id: 31, category: "hardware", name: "Voice Attendance Calls", desc: "Instant automated voice phone calls dispatched to parents upon student absence.", icon: <Phone size={22} color="#2563eb" /> },
-    { id: 32, category: "hardware", name: "Official WhatsApp Bot", desc: "Verified WhatsApp Business notifications for fee dues, homework, and exam marks.", icon: <MessageSquare size={22} color="#059669" /> },
-    { id: 33, category: "hardware", name: "Biometric Machine Sync", desc: "Direct LAN/Cloud sync with facial recognition and fingerprint hardware devices.", icon: <Lock size={22} color="#ea580c" /> },
-    { id: 34, category: "hardware", name: "GPS Bus Tracking", desc: "Live vehicle tracking with speed alerts, geofencing, and parent arrival push alerts.", icon: <Bus size={22} color="#e11d48" /> },
-    { id: 35, category: "hardware", name: "RFID Turnstiles & Gate", desc: "Automated student entry/exit logging with instant SMS trigger to parents.", icon: <Radio size={22} color="#7c3aed" /> },
-    { id: 36, category: "hardware", name: "SMS Broadcast Gateway", desc: "High-throughput DLT-registered SMS broadcasting with custom sender ID.", icon: <Bell size={22} color="#d97706" /> }
+  // 45+ Purpose-Built Modules categorized internally
+  const moduleCategories = [
+    {
+      id: "core",
+      title: "Core Modules",
+      subtitle: "Essential daily school operations & student lifecycle management",
+      badgeColor: "linear-gradient(135deg, #3b82f6, #6366f1)",
+      modules: [
+        { name: "Student Profiles", desc: "Maintain comprehensive records, academic history, and family details.", icon: <GraduationCap size={22} color="#2563eb" /> },
+        { name: "Staff Administration", desc: "Track teacher qualifications, roles, biometric logs, and workload assignments.", icon: <Users size={22} color="#059669" /> },
+        { name: "Attendance Automation", desc: "Record daily multi-session attendance with automated parent absence phone calls.", icon: <UserCheck size={22} color="#ea580c" /> },
+        { name: "Fees & Collections", desc: "Process collections, track dues, automate reminders, and generate receipts.", icon: <IndianRupee size={22} color="#e11d48" /> },
+        { name: "Examinations & Grading", desc: "Schedule assessments, grade papers, generate report cards, and publish results.", icon: <ClipboardList size={22} color="#7c3aed" /> },
+        { name: "Timetable Generator", desc: "Generate conflict-free schedules for classes, substitute teachers, and labs.", icon: <Calendar size={22} color="#d97706" /> },
+        { name: "Digital Diary & Homework", desc: "Assign homework, syllabus updates, and share class notes with parents.", icon: <BookOpen size={22} color="#2563eb" /> },
+        { name: "Circulars & Notices", desc: "Broadcast official updates and emergency notices to specific groups or school-wide.", icon: <Bell size={22} color="#059669" /> },
+        { name: "Communication Hub", desc: "Enable secure, direct messaging and announcements between staff and parents.", icon: <MessageSquare size={22} color="#ea580c" /> },
+        { name: "Transport & GPS", desc: "Optimize routes, track live school bus GPS locations, and manage driver logs.", icon: <Bus size={22} color="#e11d48" /> },
+        { name: "Library Management", desc: "Catalog inventory, scan barcodes, and track book issues, returns, and overdue fines.", icon: <Library size={22} color="#7c3aed" /> },
+        { name: "Hostel & Dormitory", desc: "Allocate rooms, manage wardens, and monitor student curfews and visitor logs.", icon: <Bed size={22} color="#d97706" /> },
+        { name: "Inventory & Assets", desc: "Track school furniture, lab consumables, procurement orders, and stock balance.", icon: <Package size={22} color="#2563eb" /> },
+        { name: "Certificates & TCs", desc: "Issue Transfer Certificates (TCs), Bonafides, and Character documents in one click.", icon: <FileText size={22} color="#059669" /> },
+        { name: "Smart ID Cards", desc: "Design and print high-resolution identification cards for students and staff.", icon: <CreditCard size={22} color="#ea580c" /> },
+        { name: "Infirmary & Health", desc: "Maintain medical checkup records, allergy logs, and student health histories.", icon: <Stethoscope size={22} color="#e11d48" /> }
+      ]
+    },
+    {
+      id: "academic",
+      title: "Academic & Insights",
+      subtitle: "Track student performance, behavioral metrics & learning outcomes",
+      badgeColor: "linear-gradient(135deg, #0d9488, #10b981)",
+      modules: [
+        { name: "Performance Analytics", desc: "Analyze student academic trends, subject averages, and progress over terms.", icon: <TrendingUp size={22} color="#2563eb" /> },
+        { name: "Digital Report Cards", desc: "Generate customizable term reports and CBSE/ICSE transcripts with digital signatures.", icon: <FileSpreadsheet size={22} color="#059669" /> },
+        { name: "Teacher Feedback Matrix", desc: "Collect structured feedback on student behavior, attentiveness, and soft skills.", icon: <MessageSquare size={22} color="#ea580c" /> },
+        { name: "Discipline & Merits", desc: "Log disciplinary incidents, merits, awards, and positive reinforcement points.", icon: <AlertTriangle size={22} color="#e11d48" /> },
+        { name: "Co-curricular Tracker", desc: "Manage sports teams, cultural clubs, competitions, and extracurricular participation.", icon: <Award size={22} color="#7c3aed" /> },
+        { name: "Student Achievements", desc: "Record academic honors, Olympiad ranks, sports trophies, and special recognitions.", icon: <Crown size={22} color="#d97706" /> },
+        { name: "Online Assessments", desc: "Administer secure computer-based tests, quizzes, and automated evaluation papers.", icon: <Laptop size={22} color="#2563eb" /> },
+        { name: "Student 360 Dossier", desc: "Centralize all student academic, behavioral, attendance, and financial history.", icon: <FileCheck size={22} color="#059669" /> }
+      ]
+    },
+    {
+      id: "admin",
+      title: "Admin & Operations",
+      subtitle: "Streamline campus administration, admissions, compliance & HR",
+      badgeColor: "linear-gradient(135deg, #f59e0b, #ea580c)",
+      modules: [
+        { name: "Role-Based Access Control", desc: "Configure granular permissions for administrative staff, teachers, and accountants.", icon: <Lock size={22} color="#2563eb" /> },
+        { name: "Multi-Branch Management", desc: "Centralize operations, reporting, and finances across multiple school campuses.", icon: <Globe size={22} color="#059669" /> },
+        { name: "Academic Calendar", desc: "Plan terms, examination cycles, holidays, and major institutional events.", icon: <Calendar size={22} color="#ea580c" /> },
+        { name: "Automated Data Backup", desc: "Automate daily cloud backups and ensure continuous disaster recovery.", icon: <Server size={22} color="#e11d48" /> },
+        { name: "Audit & Security Logs", desc: "Monitor system logins, administrative fee edits, and grade modifications.", icon: <ShieldCheck size={22} color="#7c3aed" /> },
+        { name: "Visitor Gate Pass", desc: "Digitize security gate entries and track campus visitors in real time with SMS alerts.", icon: <Users size={22} color="#d97706" /> },
+        { name: "Staff Leave Management", desc: "Process faculty leave requests, casual leaves, and substitute teacher assignments.", icon: <Calendar size={22} color="#2563eb" /> },
+        { name: "Admissions CRM", desc: "Track prospective admission leads, follow-ups, and student campus visits.", icon: <Phone size={22} color="#059669" /> },
+        { name: "Online Admissions Portal", desc: "Accept digital application forms, uploaded certificates, and registration fees.", icon: <Laptop size={22} color="#ea580c" /> },
+        { name: "Staff Work Allocation", desc: "Distribute teaching periods, invigilation duties, and co-curricular charges.", icon: <ClipboardList size={22} color="#e11d48" /> },
+        { name: "U-DISE & Board Compliance", desc: "Generate government and board compliance data reports with one-click export.", icon: <FileCheck size={22} color="#7c3aed" /> },
+        { name: "Student Safety Insurance", desc: "Manage policy enrollments and track student accident insurance claims.", icon: <Shield size={22} color="#d97706" /> }
+      ]
+    },
+    {
+      id: "future",
+      title: "Future-Ready & Hardware IoT",
+      subtitle: "Cutting-edge hardware integrations, mobile apps & automation",
+      badgeColor: "linear-gradient(135deg, #8b5cf6, #ec4899)",
+      modules: [
+        { name: "Virtual Classrooms", desc: "Conduct live remote interactive lectures with Google Meet and Zoom integration.", icon: <Radio size={22} color="#2563eb" /> },
+        { name: "Biometric Hardware Sync", desc: "Sync real-time punch logs from facial recognition and fingerprint LAN devices.", icon: <Lock size={22} color="#059669" /> },
+        { name: "School Media Gallery", desc: "Publish annual day, sports, and celebration photo albums directly to parents.", icon: <Sparkles size={22} color="#ea580c" /> },
+        { name: "Native Mobile Apps", desc: "Custom branded iOS & Android applications ready for App Store and Play Store.", icon: <Smartphone size={22} color="#e11d48" /> },
+        { name: "Multi-Language Localization", desc: "Localize parent interface into regional Indian languages for higher engagement.", icon: <Globe size={22} color="#7c3aed" /> },
+        { name: "Custom Report Builder", desc: "Build tailored analytical datasets, custom exports, and automated CSV digests.", icon: <BarChart3 size={22} color="#d97706" /> }
+      ]
+    }
   ];
 
-  const filteredModules = moduleCategory === "all" 
-    ? allModules 
-    : allModules.filter(m => m.category === moduleCategory);
+  const displayedCategories = moduleCategory === "all"
+    ? moduleCategories
+    : moduleCategories.filter(cat => cat.id === moduleCategory);
 
   const roleSolutions = [
     {
@@ -389,11 +420,11 @@ export default function SchoolImsView() {
             {/* Category Filter Pills */}
             <div className="category-filters">
               {[
-                { id: "all", label: "All Modules (36+)" },
-                { id: "core", label: "Core Operations" },
-                { id: "academic", label: "Academic & Insights" },
-                { id: "finance", label: "Finance & Admin" },
-                { id: "hardware", label: "Hardware & IoT" }
+                { id: "all", label: "All Modules (42+)" },
+                { id: "core", label: "Core Modules (16)" },
+                { id: "academic", label: "Academic & Insights (8)" },
+                { id: "admin", label: "Admin & Operations (12)" },
+                { id: "future", label: "Future-Ready & Hardware IoT (6)" }
               ].map(cat => (
                 <button 
                   key={cat.id}
@@ -406,21 +437,36 @@ export default function SchoolImsView() {
             </div>
           </div>
 
-          <div className="modules-grid-large">
-            {filteredModules.map((mod) => (
-              <motion.div 
-                key={mod.id}
-                layout
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.2 }}
-                className="module-large-card"
-              >
-                <div className="mod-large-icon">{mod.icon}</div>
-                <h3 className="mod-large-name">{mod.name}</h3>
-                <p className="mod-large-desc">{mod.desc}</p>
-              </motion.div>
+          <div className="module-categories-stack">
+            {displayedCategories.map((category) => (
+              <div key={category.id} className="category-group-block">
+                <div className="category-group-header">
+                  <div className="category-group-info">
+                    <div className="category-badge-pill" style={{ background: category.badgeColor }}>
+                      {category.title}
+                    </div>
+                    <p className="category-group-desc">{category.subtitle}</p>
+                  </div>
+                  <span className="category-count-tag">{category.modules.length} Modules</span>
+                </div>
+
+                <div className="modules-grid-large">
+                  {category.modules.map((mod, idx) => (
+                    <motion.div 
+                      key={`${category.id}-${idx}`}
+                      layout
+                      initial={{ opacity: 0, y: 15 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.25, delay: idx * 0.02 }}
+                      className="module-large-card"
+                    >
+                      <div className="mod-large-icon">{mod.icon}</div>
+                      <h3 className="mod-large-name">{mod.name}</h3>
+                      <p className="mod-large-desc">{mod.desc}</p>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
         </div>
@@ -1061,6 +1107,66 @@ export default function SchoolImsView() {
           background: #2563eb;
           border-color: #2563eb;
           color: #ffffff;
+        }
+
+        /* CATEGORY GROUPINGS */
+        .module-categories-stack {
+          display: flex;
+          flex-direction: column;
+          gap: 3.5rem;
+          margin-top: 1rem;
+        }
+
+        .category-group-block {
+          background: rgba(255, 255, 255, 0.6);
+          border: 1px solid #e2e8f0;
+          border-radius: 24px;
+          padding: 2rem;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+        }
+
+        .category-group-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 2rem;
+          padding-bottom: 1rem;
+          border-bottom: 1px solid #e2e8f0;
+          flex-wrap: wrap;
+          gap: 1rem;
+        }
+
+        .category-group-info {
+          display: flex;
+          align-items: center;
+          gap: 1.25rem;
+          flex-wrap: wrap;
+        }
+
+        .category-badge-pill {
+          padding: 0.4rem 1.25rem;
+          border-radius: 50px;
+          color: #ffffff;
+          font-weight: 700;
+          font-size: 0.95rem;
+          letter-spacing: -0.01em;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .category-group-desc {
+          font-size: 0.95rem;
+          color: #64748b;
+          margin: 0;
+        }
+
+        .category-count-tag {
+          font-size: 0.85rem;
+          font-weight: 700;
+          color: #2563eb;
+          background: #eff6ff;
+          border: 1px solid #dbeafe;
+          padding: 0.35rem 0.9rem;
+          border-radius: 50px;
         }
 
         /* MODULES GRID LARGE */
