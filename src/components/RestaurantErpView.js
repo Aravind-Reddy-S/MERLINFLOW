@@ -341,10 +341,74 @@ export default function RestaurantErpView() {
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
+  const scrollToSection = (id) => {
+    setActiveNav(id);
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <div className="restaurant-erp-page">
+      {/* Top Breadcrumb & Sub Navigation */}
+      <div className="sticky-subnav">
+        <div className="container subnav-container">
+          <Link href="/#products" className="back-link">
+            <ArrowLeft size={16} /> Back to Products
+          </Link>
+
+          <div className="subnav-tabs">
+            <button 
+              className={`subnav-tab ${activeNav === 'overview' ? 'active' : ''}`}
+              onClick={() => scrollToSection('overview')}
+            >
+              Overview
+            </button>
+            <button 
+              className={`subnav-tab ${activeNav === 'modules' ? 'active' : ''}`}
+              onClick={() => scrollToSection('modules')}
+            >
+              12+ Modules
+            </button>
+            <button 
+              className={`subnav-tab ${activeNav === 'qr-workflow' ? 'active' : ''}`}
+              onClick={() => scrollToSection('qr-workflow')}
+            >
+              QR Workflow
+            </button>
+            <button 
+              className={`subnav-tab ${activeNav === 'kds-manager' ? 'active' : ''}`}
+              onClick={() => scrollToSection('kds-manager')}
+            >
+              KDS & Manager
+            </button>
+            <button 
+              className={`subnav-tab ${activeNav === 'calculator' ? 'active' : ''}`}
+              onClick={() => scrollToSection('calculator')}
+            >
+              ROI Calculator
+            </button>
+            <button 
+              className={`subnav-tab ${activeNav === 'pricing' ? 'active' : ''}`}
+              onClick={() => scrollToSection('pricing')}
+            >
+              Pricing
+            </button>
+            <button 
+              className={`subnav-tab ${activeNav === 'faq' ? 'active' : ''}`}
+              onClick={() => scrollToSection('faq')}
+            >
+              FAQ
+            </button>
+          </div>
+
+          <button onClick={scrollToContact} className="subnav-cta-btn">
+            Book Demo <ArrowRight size={14} />
+          </button>
+        </div>
+      </div>
+
       {/* Hero Section */}
-      <section className="restaurant-hero">
+      <section id="overview" className="restaurant-hero">
         <div className="hero-bg-container" aria-hidden="true">
           <div className="hero-bg-image" />
           <div className="hero-bg-overlay" />
@@ -568,7 +632,7 @@ export default function RestaurantErpView() {
       </section>
 
       {/* Interactive Dashboard Preview */}
-      <section className="section-padding">
+      <section id="kds-manager" className="section-padding">
         <div className="container">
           <div className="section-header-center">
             <div className="pill-tag"><Sliders size={14} /> LIVE SYSTEM PREVIEW</div>
@@ -737,7 +801,7 @@ export default function RestaurantErpView() {
       </section>
 
       {/* Interactive ROI Calculator */}
-      <section className="section-padding">
+      <section id="calculator" className="section-padding">
         <div className="container">
           <div className="calculator-panel-box">
             <div className="calculator-layout">
@@ -958,7 +1022,7 @@ export default function RestaurantErpView() {
       </section>
 
       {/* FAQ Section */}
-      <section className="section-padding">
+      <section id="faq" className="section-padding">
         <div className="container">
           <div className="section-header-center">
             <div className="pill-tag"><HelpCircle size={14} /> FREQUENTLY ASKED QUESTIONS</div>
@@ -1017,10 +1081,99 @@ export default function RestaurantErpView() {
           border-bottom: 1px solid #e2e8f0;
         }
 
+        /* STICKY SUB NAVIGATION */
+        .sticky-subnav {
+          position: sticky;
+          top: 68px;
+          z-index: 40;
+          background: rgba(255, 255, 255, 0.94);
+          backdrop-filter: blur(12px);
+          border-bottom: 1px solid #fed7aa;
+          padding: 0.6rem 0;
+          box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+        }
+
+        .subnav-container {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 1rem;
+        }
+
+        .back-link {
+          display: flex;
+          align-items: center;
+          gap: 0.45rem;
+          font-size: 0.85rem;
+          font-weight: 600;
+          color: #64748b;
+          text-decoration: none;
+          transition: color 0.2s;
+        }
+
+        .back-link:hover {
+          color: #ea580c;
+        }
+
+        .subnav-tabs {
+          display: flex;
+          align-items: center;
+          gap: 0.35rem;
+          background: #fff7ed;
+          padding: 0.25rem;
+          border-radius: 50px;
+          flex-wrap: wrap;
+          border: 1px solid #ffedd5;
+        }
+
+        .subnav-tab {
+          padding: 0.35rem 0.85rem;
+          border-radius: 50px;
+          font-size: 0.8rem;
+          font-weight: 600;
+          color: #64748b;
+          background: transparent;
+          border: none;
+          cursor: pointer;
+          transition: all 0.2s;
+        }
+
+        .subnav-tab:hover {
+          color: #0f172a;
+        }
+
+        .subnav-tab.active {
+          background: #ffffff;
+          color: #ea580c;
+          box-shadow: 0 2px 6px rgba(234, 88, 12, 0.15);
+        }
+
+        .subnav-cta-btn {
+          display: flex;
+          align-items: center;
+          gap: 0.4rem;
+          background: linear-gradient(135deg, #ea580c, #c2410c);
+          color: #ffffff;
+          border: none;
+          border-radius: 50px;
+          padding: 0.45rem 1.1rem;
+          font-size: 0.85rem;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.2s;
+          white-space: nowrap;
+          box-shadow: 0 2px 8px rgba(234, 88, 12, 0.25);
+        }
+
+        .subnav-cta-btn:hover {
+          filter: brightness(1.08);
+          transform: translateY(-1px);
+        }
+
         /* HERO SECTION */
         .restaurant-hero {
           position: relative;
-          padding: 8.5rem 0 4.5rem;
+          padding: 5.5rem 0 4.5rem;
           overflow: hidden;
           background-color: #fcfbf9;
         }
