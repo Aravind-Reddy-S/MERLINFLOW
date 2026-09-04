@@ -21,14 +21,47 @@ export default function ContactSection() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate sending
-    setTimeout(() => {
+
+    const form = e.target;
+    const firstName = form.firstName?.value || "";
+    const lastName = form.lastName?.value || "";
+    const email = form.email?.value || "";
+    const phone = form.phone?.value || "";
+    const company = form.company?.value || "";
+    const message = form.message?.value || "";
+
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/hello@merlinflow.in", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify({
+          _subject: `New Contact Inquiry from ${firstName} ${lastName} (${company})`,
+          "First Name": firstName,
+          "Last Name": lastName,
+          "Email": email,
+          "Phone": phone,
+          "Company": company,
+          "Interested In": interest,
+          "Budget Range": budget,
+          "Message": message,
+        }),
+      });
+
+      if (response.ok) {
+        setIsSubmitted(true);
+        form.reset();
+        setTimeout(() => setIsSubmitted(false), 5000);
+      } else {
+        alert("Oops! Something went wrong while sending your message. Please try again.");
+      }
+    } catch (error) {
+      alert("Oops! A network error occurred. Please check your connection and try again.");
+    } finally {
       setIsSubmitting(false);
-      setIsSubmitted(true);
-      setTimeout(() => setIsSubmitted(false), 5000);
-      e.target.reset();
-    }, 1500);
+    }
   };
 
   return (
