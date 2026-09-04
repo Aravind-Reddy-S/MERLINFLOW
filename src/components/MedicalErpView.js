@@ -3985,6 +3985,60 @@ export default function MedicalErpView() {
             font-size: 0.78rem !important;
           }
 
+          .section-padding {
+            padding: 3rem 0 !important;
+            scroll-margin-top: 85px !important;
+          }
+
+          .calculator-layout {
+            grid-template-columns: 1fr !important;
+            gap: 1.75rem !important;
+          }
+
+          .calculator-inputs-card {
+            padding: 1.5rem 1rem !important;
+            border-radius: 18px !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+          }
+
+          .calc-label-row {
+            flex-wrap: wrap !important;
+            gap: 0.25rem !important;
+            justify-content: space-between !important;
+          }
+
+          .calc-label {
+            font-size: 0.88rem !important;
+          }
+
+          .calc-val-badge {
+            font-size: 0.82rem !important;
+            padding: 0.2rem 0.6rem !important;
+          }
+
+          .calc-range-slider {
+            width: 100% !important;
+            box-sizing: border-box !important;
+            margin: 0.35rem 0 !important;
+          }
+
+          .calculator-results-card {
+            padding: 1.5rem 1rem !important;
+            border-radius: 18px !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+          }
+
+          .results-big-num {
+            font-size: clamp(2rem, 7vw, 2.75rem) !important;
+          }
+
+          .results-metrics-grid {
+            grid-template-columns: 1fr !important;
+            gap: 0.75rem !important;
+          }
+
           .pricing-cards-grid {
             grid-template-columns: 1fr !important;
             max-width: 100% !important;

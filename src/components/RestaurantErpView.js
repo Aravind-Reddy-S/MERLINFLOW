@@ -2764,6 +2764,11 @@ export default function RestaurantErpView() {
             font-size: 0.58rem !important;
           }
 
+          .section-padding {
+            padding: 3rem 0 !important;
+            scroll-margin-top: 85px !important;
+          }
+
           .comparison-table-wrapper {
             overflow-x: auto !important;
             -webkit-overflow-scrolling: touch !important;
@@ -2790,8 +2795,82 @@ export default function RestaurantErpView() {
           }
 
           .calculator-panel-box {
-            padding: 1.25rem !important;
-            border-radius: 16px !important;
+            padding: 1.5rem 1rem !important;
+            border-radius: 18px !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+          }
+
+          .calculator-layout {
+            grid-template-columns: 1fr !important;
+            gap: 1.75rem !important;
+          }
+
+          .calc-title {
+            font-size: clamp(1.4rem, 4.8vw, 1.85rem) !important;
+            line-height: 1.25 !important;
+            word-break: break-word !important;
+            overflow-wrap: break-word !important;
+          }
+
+          .calc-desc {
+            font-size: 0.88rem !important;
+            line-height: 1.5 !important;
+            margin-bottom: 1.5rem !important;
+          }
+
+          .slider-item {
+            margin-bottom: 1.25rem !important;
+          }
+
+          .slider-header {
+            display: flex !important;
+            flex-direction: row !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            flex-wrap: wrap !important;
+            gap: 0.25rem !important;
+            font-size: 0.84rem !important;
+          }
+
+          .slider-val-highlight {
+            font-size: 0.88rem !important;
+            font-weight: 800 !important;
+            white-space: nowrap !important;
+          }
+
+          .calc-range-slider {
+            width: 100% !important;
+            box-sizing: border-box !important;
+            margin: 0.35rem 0 !important;
+          }
+
+          .roi-result-card {
+            padding: 1.5rem 1rem !important;
+            border-radius: 18px !important;
+          }
+
+          .roi-label {
+            font-size: 0.75rem !important;
+          }
+
+          .roi-big-num {
+            font-size: clamp(2rem, 7vw, 2.75rem) !important;
+          }
+
+          .roi-secondary-stat {
+            font-size: 0.82rem !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            gap: 0.25rem !important;
+          }
+
+          .calc-action-btn {
+            width: 100% !important;
+            justify-content: center !important;
+            font-size: 0.85rem !important;
+            padding: 0.8rem 1rem !important;
+            box-sizing: border-box !important;
           }
         }
       `}</style>
