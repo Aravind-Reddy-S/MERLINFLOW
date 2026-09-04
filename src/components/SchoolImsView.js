@@ -11,7 +11,8 @@ import {
   Clock, ArrowLeft, Check, Layers, Bus, Library, Bed, 
   Package, Stethoscope, CreditCard, TrendingUp, 
   FileSpreadsheet, AlertTriangle, ChevronDown, Phone,
-  HelpCircle, Award, Crown, Zap, Radio, Globe, BarChart3, Laptop
+  HelpCircle, Award, Crown, Zap, Radio, Globe, BarChart3, Laptop,
+  Send, MapPin, Navigation, Search, CheckCircle, RefreshCw, SmartphoneNfc, AlertCircle
 } from "lucide-react";
 import Link from "next/link";
 import ContactSection from "./ContactSection";
@@ -22,6 +23,131 @@ export default function SchoolImsView() {
   const [isYearlyPricing, setIsYearlyPricing] = useState(false);
   const [openFaq, setOpenFaq] = useState(0);
   const [activeRole, setActiveRole] = useState(0);
+
+  // In-Website Interactive School Demo States
+  const [demoTab, setDemoTab] = useState("cockpit"); // 'cockpit', 'students', 'fees', 'transport', 'attendance'
+  const [toastMessage, setToastMessage] = useState(null);
+  const [selectedStudent, setSelectedStudent] = useState(0);
+  const [feeReminderSent, setFeeReminderSent] = useState({});
+  const [busLocationStep, setBusLocationStep] = useState(2);
+  const [rfidScans, setRfidScans] = useState([
+    { id: 1, name: "Aarav Sharma", grade: "Class 10-A", roll: "14", time: "08:12 AM", status: "Gate In", mode: "RFID Smart Card" },
+    { id: 2, name: "Diya Patel", grade: "Class 08-B", roll: "22", time: "08:14 AM", status: "Gate In", mode: "Face Biometric" },
+    { id: 3, name: "Kavya Reddy", grade: "Class 12-C", roll: "09", time: "08:18 AM", status: "Gate In", mode: "RFID Smart Card" },
+  ]);
+
+  const studentsData = [
+    {
+      name: "Ananya Sharma",
+      grade: "Grade 10-A",
+      roll: "CBSE-10018",
+      blood: "O+",
+      gpa: "9.6 / 10",
+      gradeLevel: "A1 Distinction",
+      attendance: "98.4%",
+      daysPresent: "168 / 170 Days",
+      parent: "Rajesh Sharma",
+      phone: "+91 98450 •••••",
+      feeStatus: "Paid (Receipt #MF-7712)",
+      feeStatusColor: "#10b981",
+      subjects: [
+        { name: "Mathematics", score: "98/100", grade: "A+" },
+        { name: "Physics & Chem", score: "95/100", grade: "A+" },
+        { name: "Computer Science", score: "100/100", grade: "A+" },
+        { name: "English Lit", score: "92/100", grade: "A" }
+      ]
+    },
+    {
+      name: "Rohan Gupta",
+      grade: "Grade 09-B",
+      roll: "CBSE-09042",
+      blood: "B+",
+      gpa: "9.2 / 10",
+      gradeLevel: "A1 Distinction",
+      attendance: "96.5%",
+      daysPresent: "164 / 170 Days",
+      parent: "Sunil Gupta",
+      phone: "+91 97312 •••••",
+      feeStatus: "Term 2 Pending (₹12,500)",
+      feeStatusColor: "#f59e0b",
+      subjects: [
+        { name: "Mathematics", score: "91/100", grade: "A" },
+        { name: "Science", score: "94/100", grade: "A+" },
+        { name: "Social Science", score: "88/100", grade: "B+" },
+        { name: "English", score: "95/100", grade: "A+" }
+      ]
+    },
+    {
+      name: "Diya Patel",
+      grade: "Grade 11-Sci",
+      roll: "CBSE-11007",
+      blood: "A+",
+      gpa: "9.8 / 10",
+      gradeLevel: "School Topper",
+      attendance: "99.1%",
+      daysPresent: "169 / 170 Days",
+      parent: "Kiran Patel",
+      phone: "+91 99014 •••••",
+      feeStatus: "Paid (Receipt #MF-8104)",
+      feeStatusColor: "#10b981",
+      subjects: [
+        { name: "Advanced Math", score: "100/100", grade: "A+" },
+        { name: "Physics", score: "97/100", grade: "A+" },
+        { name: "Chemistry", score: "96/100", grade: "A+" },
+        { name: "AI & Python", score: "99/100", grade: "A+" }
+      ]
+    }
+  ];
+
+  const pendingFeeStudents = [
+    { id: 1, name: "Rahul Verma", grade: "Class 8-A", amount: "₹12,500", due: "Term 2 Tuition", parent: "Vikas Verma" },
+    { id: 2, name: "Sneha Nair", grade: "Class 10-B", amount: "₹18,000", due: "Transport + Lab", parent: "Girish Nair" },
+    { id: 3, name: "Vikram Rao", grade: "Class 12-A", amount: "₹24,500", due: "Board Exam & Term", parent: "Ramesh Rao" },
+    { id: 4, name: "Tanvi Kulkarni", grade: "Class 6-C", amount: "₹9,800", due: "Activity Fee", parent: "Anand Kulkarni" },
+  ];
+
+  const busRouteStops = [
+    { name: "Koramangala 4th Block", time: "07:45 AM", status: "Departed" },
+    { name: "Sony World Junction", time: "08:00 AM", status: "Departed" },
+    { name: "Indiranagar 100ft Road", time: "08:15 AM", status: "Current Stop" },
+    { name: "Domlur Flyover", time: "08:25 AM", status: "Next Stop" },
+    { name: "MerlinFlow Campus Main Gate", time: "08:40 AM", status: "Destination" },
+  ];
+
+  const triggerToast = (msg) => {
+    setToastMessage(msg);
+    setTimeout(() => {
+      setToastMessage(null);
+    }, 3500);
+  };
+
+  const handleSendReminder = (id, name, amount) => {
+    setFeeReminderSent(prev => ({ ...prev, [id]: true }));
+    triggerToast(`📲 WhatsApp & SMS fee reminder sent to ${name}'s parent for ${amount}!`);
+  };
+
+  const handleSimulateRfid = () => {
+    const names = ["Tanmay Joshi (8-A)", "Meera Sen (11-B)", "Rishi Kapoor (10-C)", "Ananya Rao (7-B)"];
+    const randomStudent = names[Math.floor(Math.random() * names.length)];
+    const timeNow = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const newScan = {
+      id: Date.now(),
+      name: randomStudent,
+      grade: "Gate Main",
+      roll: `ID-${Math.floor(1000 + Math.random() * 9000)}`,
+      time: timeNow,
+      status: "Gate In",
+      mode: "Smart RFID Scan"
+    };
+    setRfidScans(prev => [newScan, ...prev.slice(0, 4)]);
+    triggerToast(`🔔 RFID Scan Verified: ${randomStudent} entered campus. Parent notified!`);
+  };
+
+  const handleAdvanceBus = () => {
+    setBusLocationStep(prev => (prev + 1) % busRouteStops.length);
+    const nextStopName = busRouteStops[(busLocationStep + 1) % busRouteStops.length].name;
+    triggerToast(`🚌 Bus #04 GPS Ping Updated: Approaching ${nextStopName} (Speed: 38 km/h). Parent tracking synced!`);
+  };
 
   // 45+ Purpose-Built Modules categorized internally
   const moduleCategories = [
@@ -426,30 +552,489 @@ export default function SchoolImsView() {
               className="hero-demo-col"
             >
               <div className="browser-window">
+                {/* Mac Browser Header */}
                 <div className="browser-header">
                   <div className="traffic-lights">
                     <span className="dot red"></span>
                     <span className="dot yellow"></span>
                     <span className="dot green"></span>
                   </div>
-                  <a 
-                    href="https://default.nexsyrus.com" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="browser-url-bar"
-                    title="Open live interactive demo in a new tab"
-                  >
-                    <span>https://default.nexsyrus.com</span>
-                    <ExternalLink size={12} className="ext-icon" />
-                  </a>
+                  <div className="browser-url-bar">
+                    <div className="url-lock-group">
+                      <Lock size={12} className="text-emerald" />
+                      <span>school.merlinflow.in/portal/dashboard</span>
+                    </div>
+                    <div className="url-badge-group">
+                      <span className="live-pulse-dot"></span>
+                      <span className="live-status-text">Live System • AY 2025-26</span>
+                    </div>
+                  </div>
                 </div>
-                <div className="browser-body">
-                  <iframe 
-                    src="https://default.nexsyrus.com" 
-                    title="MerlinFlow School IMS Live System Demo" 
-                    className="demo-iframe"
-                    sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
-                  />
+
+                {/* Interactive Demo Navigation Tab Switcher */}
+                <div className="demo-nav-bar">
+                  <button 
+                    className={`demo-tab-btn ${demoTab === 'cockpit' ? 'active' : ''}`}
+                    onClick={() => setDemoTab('cockpit')}
+                  >
+                    <BarChart3 size={13} />
+                    <span>Cockpit</span>
+                  </button>
+                  <button 
+                    className={`demo-tab-btn ${demoTab === 'students' ? 'active' : ''}`}
+                    onClick={() => setDemoTab('students')}
+                  >
+                    <GraduationCap size={13} />
+                    <span>Student SIS</span>
+                  </button>
+                  <button 
+                    className={`demo-tab-btn ${demoTab === 'fees' ? 'active' : ''}`}
+                    onClick={() => setDemoTab('fees')}
+                  >
+                    <CreditCard size={13} />
+                    <span>Fee Automation</span>
+                  </button>
+                  <button 
+                    className={`demo-tab-btn ${demoTab === 'transport' ? 'active' : ''}`}
+                    onClick={() => setDemoTab('transport')}
+                  >
+                    <Bus size={13} />
+                    <span>Smart Bus GPS</span>
+                  </button>
+                  <button 
+                    className={`demo-tab-btn ${demoTab === 'attendance' ? 'active' : ''}`}
+                    onClick={() => setDemoTab('attendance')}
+                  >
+                    <SmartphoneNfc size={13} />
+                    <span>RFID Tap</span>
+                  </button>
+                </div>
+
+                {/* Interactive Demo Body */}
+                <div className="browser-body school-demo-container">
+                  {/* TAB 1: PRINCIPAL COCKPIT */}
+                  {demoTab === 'cockpit' && (
+                    <div className="demo-pane">
+                      <div className="demo-pane-header">
+                        <div>
+                          <div className="demo-sub-tag">INSTITUTIONAL DASHBOARD</div>
+                          <h4 className="demo-pane-title">MerlinFlow Campus Cockpit</h4>
+                        </div>
+                        <span className="demo-live-badge">
+                          <span className="pulsing-green-dot"></span> All 45 Modules Synced
+                        </span>
+                      </div>
+
+                      {/* 4 Stat KPI Cards */}
+                      <div className="demo-kpi-grid">
+                        <div className="demo-kpi-card">
+                          <div className="demo-kpi-head">
+                            <span className="demo-kpi-label">Today Attendance</span>
+                            <span className="demo-kpi-badge success">+1.4% vs avg</span>
+                          </div>
+                          <div className="demo-kpi-num">96.8%</div>
+                          <span className="demo-kpi-foot">1,374 / 1,420 Students Present</span>
+                        </div>
+
+                        <div className="demo-kpi-card">
+                          <div className="demo-kpi-head">
+                            <span className="demo-kpi-label">Term 2 Fee Collected</span>
+                            <span className="demo-kpi-badge primary">89.2%</span>
+                          </div>
+                          <div className="demo-kpi-num text-emerald">₹24.8L</div>
+                          <span className="demo-kpi-foot">Auto-reconciled via UPI / Gateway</span>
+                        </div>
+
+                        <div className="demo-kpi-card">
+                          <div className="demo-kpi-head">
+                            <span className="demo-kpi-label">Bus GPS Fleet</span>
+                            <span className="demo-kpi-badge info">12 / 12 Active</span>
+                          </div>
+                          <div className="demo-kpi-num">0 Delays</div>
+                          <span className="demo-kpi-foot">All routes on schedule</span>
+                        </div>
+
+                        <div className="demo-kpi-card">
+                          <div className="demo-kpi-head">
+                            <span className="demo-kpi-label">Faculty On Duty</span>
+                            <span className="demo-kpi-badge success">Biometric</span>
+                          </div>
+                          <div className="demo-kpi-num">84 / 88</div>
+                          <span className="demo-kpi-foot">4 Approved Casual Leaves</span>
+                        </div>
+                      </div>
+
+                      {/* Interactive Action Bar */}
+                      <div className="demo-action-bar">
+                        <button 
+                          className="demo-action-btn primary"
+                          onClick={() => triggerToast("📢 Emergency Broadcast dispatched to 1,420 parents & staff via WhatsApp & SMS!")}
+                        >
+                          <Send size={13} /> Broadcast Parent Alert
+                        </button>
+                        <button 
+                          className="demo-action-btn secondary"
+                          onClick={() => triggerToast("📄 CBSE Board compliant daily attendance digest exported as PDF!")}
+                        >
+                          <FileText size={13} /> Export CBSE Daily Digest
+                        </button>
+                        <button 
+                          className="demo-action-btn accent"
+                          onClick={handleSimulateRfid}
+                        >
+                          <SmartphoneNfc size={13} /> Simulate RFID Tap
+                        </button>
+                      </div>
+
+                      {/* Live Activity Feed */}
+                      <div className="demo-activity-box">
+                        <div className="demo-activity-title">
+                          <Clock size={13} className="text-primary" />
+                          <span>Real-Time Campus Activity Feed</span>
+                        </div>
+                        <div className="activity-items">
+                          <div className="activity-item">
+                            <span className="activity-time">10:14 AM</span>
+                            <span className="activity-desc"><strong>Bus #04 (North Express)</strong> arrived safely at Gate B with 42 students.</span>
+                          </div>
+                          <div className="activity-item">
+                            <span className="activity-time">09:45 AM</span>
+                            <span className="activity-desc"><strong>Class 10-A Math Mid-Term</strong> grading completed & marks synchronized.</span>
+                          </div>
+                          <div className="activity-item">
+                            <span className="activity-time">09:12 AM</span>
+                            <span className="activity-desc"><strong>₹45,000 Fee Payment</strong> received via UPI (Auto-Receipt #MF-9821 issued).</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* TAB 2: STUDENT 360 & SIS */}
+                  {demoTab === 'students' && (
+                    <div className="demo-pane">
+                      <div className="demo-pane-header">
+                        <div>
+                          <div className="demo-sub-tag">STUDENT INFORMATION SYSTEM</div>
+                          <h4 className="demo-pane-title">Student 360° Academic Dossier</h4>
+                        </div>
+                        <div className="student-selector">
+                          {studentsData.map((s, idx) => (
+                            <button
+                              key={s.name}
+                              className={`student-select-pill ${selectedStudent === idx ? 'active' : ''}`}
+                              onClick={() => setSelectedStudent(idx)}
+                            >
+                              {s.name.split(" ")[0]}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Selected Student Profile Box */}
+                      {(() => {
+                        const cur = studentsData[selectedStudent];
+                        return (
+                          <div className="student-dossier-card">
+                            <div className="student-top-banner">
+                              <div className="student-avatar-col">
+                                <div className="student-avatar">{cur.name.charAt(0)}</div>
+                                <div>
+                                  <div className="student-name-row">
+                                    <h5>{cur.name}</h5>
+                                    <span className="badge-grade">{cur.grade}</span>
+                                  </div>
+                                  <span className="student-roll-id">Roll No: {cur.roll} • Blood: {cur.blood}</span>
+                                </div>
+                              </div>
+                              <div className="student-status-right">
+                                <div className="student-gpa-badge">
+                                  <span className="gpa-score">{cur.gpa}</span>
+                                  <span className="gpa-label">{cur.gradeLevel}</span>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Metrics Strip */}
+                            <div className="student-stats-row">
+                              <div className="s-stat-box">
+                                <span className="s-stat-lbl">Attendance</span>
+                                <span className="s-stat-val text-emerald">{cur.attendance}</span>
+                                <span className="s-stat-sub">{cur.daysPresent}</span>
+                              </div>
+                              <div className="s-stat-box">
+                                <span className="s-stat-lbl">Fee Status</span>
+                                <span className="s-stat-val" style={{ color: cur.feeStatusColor }}>{cur.feeStatus.split(" ")[0]}</span>
+                                <span className="s-stat-sub">{cur.feeStatus}</span>
+                              </div>
+                              <div className="s-stat-box">
+                                <span className="s-stat-lbl">Parent / Guardian</span>
+                                <span className="s-stat-val">{cur.parent}</span>
+                                <span className="s-stat-sub">{cur.phone}</span>
+                              </div>
+                            </div>
+
+                            {/* Subject Marks Grid */}
+                            <div className="student-subjects-grid">
+                              {cur.subjects.map(subj => (
+                                <div key={subj.name} className="subject-score-card">
+                                  <span className="subj-name">{subj.name}</span>
+                                  <div className="subj-score-row">
+                                    <span className="subj-score">{subj.score}</span>
+                                    <span className="subj-grade-badge">{subj.grade}</span>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+
+                            {/* Action Buttons */}
+                            <div className="demo-action-bar" style={{ marginTop: '0.9rem' }}>
+                              <button 
+                                className="demo-action-btn primary"
+                                onClick={() => triggerToast(`📑 Official CBSE Term Report Card generated for ${cur.name}!`)}
+                              >
+                                <FileSpreadsheet size={13} /> Generate CBSE Report Card
+                              </button>
+                              <button 
+                                className="demo-action-btn secondary"
+                                onClick={() => triggerToast(`💬 WhatsApp parent notification sent to ${cur.parent} (${cur.phone})!`)}
+                              >
+                                <MessageSquare size={13} /> WhatsApp Parent
+                              </button>
+                            </div>
+                          </div>
+                        );
+                      })()}
+                    </div>
+                  )}
+
+                  {/* TAB 3: FEE AUTOMATION */}
+                  {demoTab === 'fees' && (
+                    <div className="demo-pane">
+                      <div className="demo-pane-header">
+                        <div>
+                          <div className="demo-sub-tag">AUTOMATED BILLING & RECOVERY</div>
+                          <h4 className="demo-pane-title">Smart Fee Invoicing & WhatsApp Dues</h4>
+                        </div>
+                        <button 
+                          className="demo-action-btn primary compact"
+                          onClick={() => {
+                            const updated = {};
+                            pendingFeeStudents.forEach(s => { updated[s.id] = true; });
+                            setFeeReminderSent(updated);
+                            triggerToast("⚡ Bulk WhatsApp fee reminders dispatched to all 4 pending parents with UPI payment links!");
+                          }}
+                        >
+                          <Zap size={13} /> 1-Click Dispatches (All Dues)
+                        </button>
+                      </div>
+
+                      {/* Fee Collection Summary Bar */}
+                      <div className="fee-progress-card">
+                        <div className="fee-progress-head">
+                          <div>
+                            <span className="fee-prog-label">AY 2025-26 Term 2 Collection</span>
+                            <div className="fee-prog-figures">
+                              <strong>₹24,80,000</strong> <span className="fee-total">/ ₹28,00,000</span>
+                            </div>
+                          </div>
+                          <span className="fee-percentage-pill">89% Collected</span>
+                        </div>
+                        <div className="fee-bar-track">
+                          <div className="fee-bar-fill" style={{ width: '89%' }}></div>
+                        </div>
+                      </div>
+
+                      {/* Pending Fee Ledger */}
+                      <div className="fee-table-container">
+                        <div className="fee-table-header">
+                          <span>Student & Class</span>
+                          <span>Due Particulars</span>
+                          <span>Amount</span>
+                          <span>WhatsApp Action</span>
+                        </div>
+                        <div className="fee-table-body">
+                          {pendingFeeStudents.map(student => {
+                            const isSent = feeReminderSent[student.id];
+                            return (
+                              <div key={student.id} className="fee-table-row">
+                                <div className="fee-student-info">
+                                  <div className="fee-avatar">{student.name.charAt(0)}</div>
+                                  <div>
+                                    <div className="fee-s-name">{student.name}</div>
+                                    <span className="fee-s-class">{student.grade} • {student.parent}</span>
+                                  </div>
+                                </div>
+                                <span className="fee-due-tag">{student.due}</span>
+                                <span className="fee-amt-val">{student.amount}</span>
+                                <div>
+                                  {isSent ? (
+                                    <span className="fee-sent-pill">
+                                      <CheckCircle2 size={12} /> Reminder Sent
+                                    </span>
+                                  ) : (
+                                    <button 
+                                      className="btn-send-whatsapp-fee"
+                                      onClick={() => handleSendReminder(student.id, student.name, student.amount)}
+                                    >
+                                      <MessageSquare size={12} /> Send WhatsApp
+                                    </button>
+                                  )}
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* TAB 4: SMART BUS GPS */}
+                  {demoTab === 'transport' && (
+                    <div className="demo-pane">
+                      <div className="demo-pane-header">
+                        <div>
+                          <div className="demo-sub-tag">RFID & FLEET TELEMATICS</div>
+                          <h4 className="demo-pane-title">Live School Bus GPS Tracking</h4>
+                        </div>
+                        <button 
+                          className="demo-action-btn secondary compact"
+                          onClick={handleAdvanceBus}
+                        >
+                          <RefreshCw size={13} /> Simulate GPS Ping
+                        </button>
+                      </div>
+
+                      {/* Bus Hero Telemetry Card */}
+                      <div className="bus-telemetry-card">
+                        <div className="bus-telemetry-top">
+                          <div className="bus-id-group">
+                            <div className="bus-icon-circle"><Bus size={18} /></div>
+                            <div>
+                              <h5>Bus #04 • North Campus Express</h5>
+                              <span className="bus-sub-info">Driver: Suresh Kumar • +91 98765 43210</span>
+                            </div>
+                          </div>
+                          <div className="bus-speed-badge">
+                            <span className="speed-val">38 km/h</span>
+                            <span className="speed-status text-emerald">● Safe Speed</span>
+                          </div>
+                        </div>
+
+                        <div className="bus-stat-pills">
+                          <span className="bus-pill"><strong>42 / 45</strong> Students Onboard</span>
+                          <span className="bus-pill"><strong>Next Stop:</strong> {busRouteStops[busLocationStep].name}</span>
+                          <span className="bus-pill text-emerald"><strong>ETA:</strong> 4 Mins</span>
+                        </div>
+                      </div>
+
+                      {/* Step-by-Step Route Tracker */}
+                      <div className="route-tracker-card">
+                        <div className="route-tracker-title">
+                          <MapPin size={13} className="text-primary" />
+                          <span>Route Stops & Real-Time Proximity Alert</span>
+                        </div>
+                        <div className="route-stops-list">
+                          {busRouteStops.map((stop, idx) => {
+                            const isCurrent = idx === busLocationStep;
+                            const isPassed = idx < busLocationStep;
+                            return (
+                              <div key={stop.name} className={`route-stop-item ${isCurrent ? 'current' : ''} ${isPassed ? 'passed' : ''}`}>
+                                <div className="stop-marker-col">
+                                  <div className={`stop-dot ${isCurrent ? 'current-pulse' : ''} ${isPassed ? 'passed' : ''}`}>
+                                    {isPassed && <Check size={10} color="#fff" />}
+                                  </div>
+                                  {idx !== busRouteStops.length - 1 && <div className="stop-line"></div>}
+                                </div>
+                                <div className="stop-info-col">
+                                  <div className="stop-name-row">
+                                    <span className="stop-name">{stop.name}</span>
+                                    <span className="stop-time-tag">{stop.time}</span>
+                                  </div>
+                                  <span className="stop-status-label">
+                                    {isCurrent ? "📍 Approaching Stop - Parent WhatsApp Alerts Sent" : isPassed ? "✓ Departed on schedule" : "Upcoming Scheduled Stop"}
+                                  </span>
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* TAB 5: RFID & BIOMETRIC GATE TAP */}
+                  {demoTab === 'attendance' && (
+                    <div className="demo-pane">
+                      <div className="demo-pane-header">
+                        <div>
+                          <div className="demo-sub-tag">IOT HARDWARE & GATE PASS</div>
+                          <h4 className="demo-pane-title">Smart RFID & Face ID Attendance</h4>
+                        </div>
+                        <button 
+                          className="demo-action-btn primary compact"
+                          onClick={handleSimulateRfid}
+                        >
+                          <SmartphoneNfc size={13} /> Tap RFID Card
+                        </button>
+                      </div>
+
+                      {/* Gate Terminal Status Banner */}
+                      <div className="gate-terminal-banner">
+                        <div className="gate-status-left">
+                          <span className="pulsing-green-dot"></span>
+                          <div>
+                            <strong>Terminal Gate 01 - Main Entrance</strong>
+                            <span className="gate-sub">Hardware Connected • 1,374 Cards Processed Today</span>
+                          </div>
+                        </div>
+                        <span className="badge-sync-ok">Zero Delay SMS Sync</span>
+                      </div>
+
+                      {/* Live RFID Event Logs Table */}
+                      <div className="rfid-logs-table">
+                        <div className="rfid-table-head">
+                          <span>Student & ID</span>
+                          <span>Scan Time</span>
+                          <span>Gate Status</span>
+                          <span>Parent SMS Status</span>
+                        </div>
+                        <div className="rfid-table-rows">
+                          {rfidScans.map(scan => (
+                            <div key={scan.id} className="rfid-row-item">
+                              <div className="rfid-student-col">
+                                <div className="rfid-avatar">{scan.name.charAt(0)}</div>
+                                <div>
+                                  <span className="rfid-name">{scan.name}</span>
+                                  <span className="rfid-id-tag">{scan.roll} • {scan.mode}</span>
+                                </div>
+                              </div>
+                              <span className="rfid-time">{scan.time}</span>
+                              <span className="rfid-status-badge">{scan.status}</span>
+                              <span className="rfid-sms-ok">
+                                <CheckCircle2 size={12} /> SMS Dispatched
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Floating Action Toast */}
+                  <AnimatePresence>
+                    {toastMessage && (
+                      <motion.div 
+                        initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 15, scale: 0.95 }}
+                        className="demo-toast-popup"
+                      >
+                        <Sparkles size={14} className="text-emerald" />
+                        <span>{toastMessage}</span>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               </div>
             </motion.div>
@@ -1012,23 +1597,24 @@ export default function SchoolImsView() {
           background: #e2e8f0;
         }
 
-        /* BROWSER DEMO FRAME */
+        /* BROWSER DEMO FRAME & INTERACTIVE SCHOOL DEMO */
         .browser-window {
           background: #ffffff;
           border-radius: 20px;
           border: 1px solid #cbd5e1;
-          box-shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
+          box-shadow: 0 25px 60px -15px rgba(15, 23, 42, 0.16);
           overflow: hidden;
-          height: 520px;
+          height: 570px;
           display: flex;
           flex-direction: column;
+          position: relative;
         }
 
         .browser-header {
           display: flex;
           align-items: center;
           gap: 1rem;
-          padding: 0.75rem 1.25rem;
+          padding: 0.7rem 1.15rem;
           background: #f8fafc;
           border-bottom: 1px solid #e2e8f0;
         }
@@ -1039,8 +1625,8 @@ export default function SchoolImsView() {
         }
 
         .traffic-lights .dot {
-          width: 11px;
-          height: 11px;
+          width: 10px;
+          height: 10px;
           border-radius: 50%;
         }
 
@@ -1050,34 +1636,991 @@ export default function SchoolImsView() {
 
         .browser-url-bar {
           flex: 1;
-          background: #e2e8f0;
+          background: #eef2f6;
           border-radius: 8px;
-          padding: 0.35rem 0.8rem;
-          font-size: 0.78rem;
+          padding: 0.35rem 0.85rem;
+          font-size: 0.75rem;
           font-weight: 600;
-          color: #475569;
+          color: #334155;
           display: flex;
           align-items: center;
           justify-content: space-between;
-          text-decoration: none;
-          transition: background 0.2s;
+          border: 1px solid #e2e8f0;
         }
 
-        .browser-url-bar:hover {
-          background: #cbd5e1;
+        .url-lock-group {
+          display: flex;
+          align-items: center;
+          gap: 0.45rem;
+        }
+
+        .url-badge-group {
+          display: flex;
+          align-items: center;
+          gap: 0.4rem;
+        }
+
+        .live-pulse-dot {
+          width: 7px;
+          height: 7px;
+          border-radius: 50%;
+          background: #10b981;
+          box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25);
+          animation: pulseGreen 2s infinite;
+        }
+
+        .live-status-text {
+          font-size: 0.68rem;
+          font-weight: 700;
+          color: #059669;
+        }
+
+        /* DEMO NAVIGATION TABS */
+        .demo-nav-bar {
+          display: flex;
+          background: #f1f5f9;
+          padding: 0.35rem 0.6rem;
+          gap: 0.35rem;
+          border-bottom: 1px solid #e2e8f0;
+          overflow-x: auto;
+        }
+
+        .demo-tab-btn {
+          display: flex;
+          align-items: center;
+          gap: 0.4rem;
+          padding: 0.4rem 0.75rem;
+          border-radius: 7px;
+          border: none;
+          background: transparent;
+          color: #64748b;
+          font-size: 0.74rem;
+          font-weight: 700;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          white-space: nowrap;
+        }
+
+        .demo-tab-btn:hover {
           color: #0f172a;
+          background: rgba(255, 255, 255, 0.6);
+        }
+
+        .demo-tab-btn.active {
+          background: #ffffff;
+          color: #2563eb;
+          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
         }
 
         .browser-body {
           flex: 1;
           position: relative;
-          background: #ffffff;
+          background: #f8fafc;
+          overflow: hidden;
         }
 
-        .demo-iframe {
-          width: 100%;
+        .school-demo-container {
           height: 100%;
+          display: flex;
+          flex-direction: column;
+          position: relative;
+        }
+
+        .demo-pane {
+          flex: 1;
+          padding: 1.15rem;
+          display: flex;
+          flex-direction: column;
+          gap: 0.85rem;
+          overflow-y: auto;
+        }
+
+        .demo-pane-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 0.5rem;
+        }
+
+        .demo-sub-tag {
+          font-size: 0.64rem;
+          font-weight: 800;
+          letter-spacing: 0.08em;
+          color: #2563eb;
+          text-transform: uppercase;
+        }
+
+        .demo-pane-title {
+          font-size: 1.05rem;
+          font-weight: 800;
+          color: #0f172a;
+          margin: 0.1rem 0 0;
+        }
+
+        .demo-live-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.4rem;
+          background: #ecfdf5;
+          color: #059669;
+          border: 1px solid #a7f3d0;
+          padding: 0.25rem 0.65rem;
+          border-radius: 50px;
+          font-size: 0.68rem;
+          font-weight: 700;
+        }
+
+        .pulsing-green-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: #10b981;
+          display: inline-block;
+        }
+
+        /* KPI GRID */
+        .demo-kpi-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 0.65rem;
+        }
+
+        .demo-kpi-card {
+          background: #ffffff;
+          border: 1px solid #e2e8f0;
+          border-radius: 12px;
+          padding: 0.75rem 0.85rem;
+          box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+        }
+
+        .demo-kpi-head {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 0.25rem;
+        }
+
+        .demo-kpi-label {
+          font-size: 0.68rem;
+          font-weight: 700;
+          color: #64748b;
+          text-transform: uppercase;
+        }
+
+        .demo-kpi-badge {
+          font-size: 0.62rem;
+          font-weight: 700;
+          padding: 0.15rem 0.45rem;
+          border-radius: 4px;
+        }
+
+        .demo-kpi-badge.success { background: #dcfce7; color: #15803d; }
+        .demo-kpi-badge.primary { background: #eff6ff; color: #1d4ed8; }
+        .demo-kpi-badge.info { background: #f0fdfa; color: #0f766e; }
+
+        .demo-kpi-num {
+          font-size: 1.25rem;
+          font-weight: 800;
+          color: #0f172a;
+          line-height: 1.2;
+        }
+
+        .demo-kpi-foot {
+          font-size: 0.65rem;
+          color: #94a3b8;
+          font-weight: 500;
+          margin-top: 0.2rem;
+          display: block;
+        }
+
+        /* ACTION BAR */
+        .demo-action-bar {
+          display: flex;
+          gap: 0.5rem;
+          flex-wrap: wrap;
+        }
+
+        .demo-action-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.4rem;
+          padding: 0.45rem 0.85rem;
+          border-radius: 8px;
+          font-size: 0.74rem;
+          font-weight: 700;
           border: none;
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+
+        .demo-action-btn.primary {
+          background: #2563eb;
+          color: #ffffff;
+        }
+        .demo-action-btn.primary:hover {
+          background: #1d4ed8;
+          transform: translateY(-1px);
+        }
+
+        .demo-action-btn.secondary {
+          background: #ffffff;
+          color: #334155;
+          border: 1px solid #cbd5e1;
+        }
+        .demo-action-btn.secondary:hover {
+          background: #f1f5f9;
+        }
+
+        .demo-action-btn.accent {
+          background: #ecfdf5;
+          color: #059669;
+          border: 1px solid #a7f3d0;
+        }
+        .demo-action-btn.accent:hover {
+          background: #d1fae5;
+        }
+
+        .demo-action-btn.compact {
+          padding: 0.35rem 0.7rem;
+          font-size: 0.7rem;
+        }
+
+        /* ACTIVITY FEED */
+        .demo-activity-box {
+          background: #ffffff;
+          border: 1px solid #e2e8f0;
+          border-radius: 12px;
+          padding: 0.75rem 0.9rem;
+        }
+
+        .demo-activity-title {
+          display: flex;
+          align-items: center;
+          gap: 0.45rem;
+          font-size: 0.72rem;
+          font-weight: 800;
+          color: #334155;
+          margin-bottom: 0.5rem;
+          text-transform: uppercase;
+        }
+
+        .activity-items {
+          display: flex;
+          flex-direction: column;
+          gap: 0.45rem;
+        }
+
+        .activity-item {
+          display: flex;
+          align-items: flex-start;
+          gap: 0.6rem;
+          font-size: 0.72rem;
+          color: #475569;
+          line-height: 1.35;
+        }
+
+        .activity-time {
+          font-size: 0.65rem;
+          font-weight: 700;
+          color: #2563eb;
+          background: #eff6ff;
+          padding: 0.15rem 0.45rem;
+          border-radius: 4px;
+          white-space: nowrap;
+        }
+
+        /* STUDENT 360 DOSSIER */
+        .student-selector {
+          display: flex;
+          gap: 0.35rem;
+        }
+
+        .student-select-pill {
+          padding: 0.25rem 0.65rem;
+          border-radius: 50px;
+          border: 1px solid #cbd5e1;
+          background: #ffffff;
+          font-size: 0.7rem;
+          font-weight: 700;
+          color: #64748b;
+          cursor: pointer;
+          transition: all 0.2s;
+        }
+
+        .student-select-pill.active {
+          background: #2563eb;
+          color: #ffffff;
+          border-color: #2563eb;
+        }
+
+        .student-dossier-card {
+          background: #ffffff;
+          border: 1px solid #e2e8f0;
+          border-radius: 14px;
+          padding: 0.9rem;
+          box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+          display: flex;
+          flex-direction: column;
+          gap: 0.75rem;
+        }
+
+        .student-top-banner {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+
+        .student-avatar-col {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+        }
+
+        .student-avatar {
+          width: 38px;
+          height: 38px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, #3b82f6, #6366f1);
+          color: #ffffff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: 800;
+          font-size: 1rem;
+        }
+
+        .student-name-row {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
+
+        .student-name-row h5 {
+          font-size: 0.95rem;
+          font-weight: 800;
+          color: #0f172a;
+          margin: 0;
+        }
+
+        .badge-grade {
+          background: #eff6ff;
+          color: #2563eb;
+          font-size: 0.65rem;
+          font-weight: 800;
+          padding: 0.15rem 0.5rem;
+          border-radius: 4px;
+        }
+
+        .student-roll-id {
+          font-size: 0.68rem;
+          color: #64748b;
+        }
+
+        .student-gpa-badge {
+          text-align: right;
+        }
+
+        .gpa-score {
+          display: block;
+          font-size: 1.15rem;
+          font-weight: 900;
+          color: #059669;
+          line-height: 1;
+        }
+
+        .gpa-label {
+          font-size: 0.62rem;
+          font-weight: 700;
+          color: #059669;
+          text-transform: uppercase;
+        }
+
+        .student-stats-row {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 0.5rem;
+          background: #f8fafc;
+          border-radius: 10px;
+          padding: 0.6rem 0.75rem;
+        }
+
+        .s-stat-lbl {
+          font-size: 0.62rem;
+          font-weight: 700;
+          color: #64748b;
+          text-transform: uppercase;
+          display: block;
+        }
+
+        .s-stat-val {
+          font-size: 0.85rem;
+          font-weight: 800;
+          color: #0f172a;
+          display: block;
+          margin-top: 0.1rem;
+        }
+
+        .s-stat-sub {
+          font-size: 0.62rem;
+          color: #94a3b8;
+          display: block;
+        }
+
+        .student-subjects-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 0.45rem;
+        }
+
+        .subject-score-card {
+          background: #f8fafc;
+          border: 1px solid #e2e8f0;
+          border-radius: 8px;
+          padding: 0.45rem 0.55rem;
+        }
+
+        .subj-name {
+          font-size: 0.62rem;
+          font-weight: 700;
+          color: #64748b;
+          display: block;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        .subj-score-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-top: 0.2rem;
+        }
+
+        .subj-score {
+          font-size: 0.78rem;
+          font-weight: 800;
+          color: #0f172a;
+        }
+
+        .subj-grade-badge {
+          font-size: 0.6rem;
+          font-weight: 800;
+          color: #059669;
+          background: #dcfce7;
+          padding: 0.05rem 0.35rem;
+          border-radius: 3px;
+        }
+
+        /* FEE AUTOMATION PANE */
+        .fee-progress-card {
+          background: #ffffff;
+          border: 1px solid #e2e8f0;
+          border-radius: 12px;
+          padding: 0.75rem 0.9rem;
+        }
+
+        .fee-progress-head {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 0.45rem;
+        }
+
+        .fee-prog-label {
+          font-size: 0.68rem;
+          font-weight: 700;
+          color: #64748b;
+          text-transform: uppercase;
+        }
+
+        .fee-prog-figures {
+          font-size: 1rem;
+          color: #0f172a;
+          margin-top: 0.1rem;
+        }
+
+        .fee-prog-figures strong {
+          color: #059669;
+          font-weight: 800;
+        }
+
+        .fee-total {
+          font-size: 0.75rem;
+          color: #94a3b8;
+        }
+
+        .fee-percentage-pill {
+          background: #dcfce7;
+          color: #15803d;
+          font-size: 0.68rem;
+          font-weight: 800;
+          padding: 0.2rem 0.55rem;
+          border-radius: 50px;
+        }
+
+        .fee-bar-track {
+          width: 100%;
+          height: 7px;
+          background: #e2e8f0;
+          border-radius: 10px;
+          overflow: hidden;
+        }
+
+        .fee-bar-fill {
+          height: 100%;
+          background: linear-gradient(90deg, #10b981, #059669);
+          border-radius: 10px;
+          transition: width 0.6s ease;
+        }
+
+        .fee-table-container {
+          background: #ffffff;
+          border: 1px solid #e2e8f0;
+          border-radius: 12px;
+          overflow: hidden;
+        }
+
+        .fee-table-header {
+          display: grid;
+          grid-template-columns: 1.6fr 1.2fr 0.9fr 1.3fr;
+          padding: 0.5rem 0.75rem;
+          background: #f1f5f9;
+          font-size: 0.65rem;
+          font-weight: 800;
+          color: #64748b;
+          text-transform: uppercase;
+        }
+
+        .fee-table-body {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .fee-table-row {
+          display: grid;
+          grid-template-columns: 1.6fr 1.2fr 0.9fr 1.3fr;
+          align-items: center;
+          padding: 0.55rem 0.75rem;
+          border-bottom: 1px solid #f1f5f9;
+          font-size: 0.72rem;
+        }
+
+        .fee-table-row:last-child {
+          border-bottom: none;
+        }
+
+        .fee-student-info {
+          display: flex;
+          align-items: center;
+          gap: 0.45rem;
+        }
+
+        .fee-avatar {
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          background: #eff6ff;
+          color: #2563eb;
+          font-weight: 800;
+          font-size: 0.68rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .fee-s-name {
+          font-weight: 700;
+          color: #0f172a;
+          line-height: 1.2;
+        }
+
+        .fee-s-class {
+          font-size: 0.62rem;
+          color: #64748b;
+        }
+
+        .fee-due-tag {
+          font-size: 0.65rem;
+          color: #475569;
+          font-weight: 600;
+        }
+
+        .fee-amt-val {
+          font-weight: 800;
+          color: #e11d48;
+        }
+
+        .btn-send-whatsapp-fee {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.35rem;
+          background: #25d366;
+          color: #ffffff;
+          border: none;
+          padding: 0.3rem 0.55rem;
+          border-radius: 6px;
+          font-size: 0.65rem;
+          font-weight: 700;
+          cursor: pointer;
+          transition: all 0.2s;
+        }
+
+        .btn-send-whatsapp-fee:hover {
+          background: #1eb956;
+        }
+
+        .fee-sent-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.3rem;
+          background: #ecfdf5;
+          color: #059669;
+          font-size: 0.65rem;
+          font-weight: 700;
+          padding: 0.25rem 0.5rem;
+          border-radius: 6px;
+        }
+
+        /* SMART BUS GPS PANE */
+        .bus-telemetry-card {
+          background: #ffffff;
+          border: 1px solid #e2e8f0;
+          border-radius: 12px;
+          padding: 0.8rem 0.9rem;
+        }
+
+        .bus-telemetry-top {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 0.6rem;
+        }
+
+        .bus-id-group {
+          display: flex;
+          align-items: center;
+          gap: 0.6rem;
+        }
+
+        .bus-icon-circle {
+          width: 34px;
+          height: 34px;
+          border-radius: 50%;
+          background: #eff6ff;
+          color: #2563eb;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .bus-id-group h5 {
+          font-size: 0.88rem;
+          font-weight: 800;
+          color: #0f172a;
+          margin: 0;
+        }
+
+        .bus-sub-info {
+          font-size: 0.64rem;
+          color: #64748b;
+        }
+
+        .bus-speed-badge {
+          text-align: right;
+        }
+
+        .speed-val {
+          font-size: 0.95rem;
+          font-weight: 900;
+          color: #0f172a;
+          display: block;
+        }
+
+        .speed-status {
+          font-size: 0.62rem;
+          font-weight: 700;
+        }
+
+        .bus-stat-pills {
+          display: flex;
+          gap: 0.45rem;
+          flex-wrap: wrap;
+        }
+
+        .bus-pill {
+          background: #f8fafc;
+          border: 1px solid #e2e8f0;
+          padding: 0.25rem 0.6rem;
+          border-radius: 6px;
+          font-size: 0.65rem;
+          color: #475569;
+        }
+
+        .route-tracker-card {
+          background: #ffffff;
+          border: 1px solid #e2e8f0;
+          border-radius: 12px;
+          padding: 0.8rem 0.9rem;
+        }
+
+        .route-tracker-title {
+          display: flex;
+          align-items: center;
+          gap: 0.4rem;
+          font-size: 0.7rem;
+          font-weight: 800;
+          color: #334155;
+          text-transform: uppercase;
+          margin-bottom: 0.6rem;
+        }
+
+        .route-stops-list {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .route-stop-item {
+          display: flex;
+          gap: 0.75rem;
+          min-height: 38px;
+        }
+
+        .stop-marker-col {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: 16px;
+        }
+
+        .stop-dot {
+          width: 14px;
+          height: 14px;
+          border-radius: 50%;
+          background: #e2e8f0;
+          border: 2px solid #cbd5e1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 2;
+        }
+
+        .stop-dot.passed {
+          background: #10b981;
+          border-color: #10b981;
+        }
+
+        .stop-dot.current-pulse {
+          background: #2563eb;
+          border-color: #93c5fd;
+          box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
+          animation: pulseBlue 1.8s infinite;
+        }
+
+        .stop-line {
+          width: 2px;
+          flex: 1;
+          background: #e2e8f0;
+          margin: 2px 0;
+        }
+
+        .stop-info-col {
+          flex: 1;
+          padding-bottom: 0.5rem;
+        }
+
+        .stop-name-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+
+        .stop-name {
+          font-size: 0.74rem;
+          font-weight: 700;
+          color: #0f172a;
+        }
+
+        .route-stop-item.current .stop-name {
+          color: #2563eb;
+          font-weight: 800;
+        }
+
+        .stop-time-tag {
+          font-size: 0.62rem;
+          font-weight: 700;
+          color: #64748b;
+        }
+
+        .stop-status-label {
+          font-size: 0.62rem;
+          color: #94a3b8;
+          display: block;
+        }
+
+        .route-stop-item.current .stop-status-label {
+          color: #2563eb;
+          font-weight: 600;
+        }
+
+        /* RFID & BIOMETRIC GATE PANE */
+        .gate-terminal-banner {
+          background: #ffffff;
+          border: 1px solid #e2e8f0;
+          border-radius: 10px;
+          padding: 0.65rem 0.85rem;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+
+        .gate-status-left {
+          display: flex;
+          align-items: center;
+          gap: 0.55rem;
+        }
+
+        .gate-status-left strong {
+          font-size: 0.78rem;
+          color: #0f172a;
+          display: block;
+        }
+
+        .gate-sub {
+          font-size: 0.62rem;
+          color: #64748b;
+          display: block;
+        }
+
+        .badge-sync-ok {
+          background: #ecfdf5;
+          color: #059669;
+          font-size: 0.62rem;
+          font-weight: 800;
+          padding: 0.2rem 0.55rem;
+          border-radius: 50px;
+        }
+
+        .rfid-logs-table {
+          background: #ffffff;
+          border: 1px solid #e2e8f0;
+          border-radius: 12px;
+          overflow: hidden;
+        }
+
+        .rfid-table-head {
+          display: grid;
+          grid-template-columns: 1.8fr 1fr 1fr 1.2fr;
+          padding: 0.5rem 0.75rem;
+          background: #f1f5f9;
+          font-size: 0.65rem;
+          font-weight: 800;
+          color: #64748b;
+          text-transform: uppercase;
+        }
+
+        .rfid-table-rows {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .rfid-row-item {
+          display: grid;
+          grid-template-columns: 1.8fr 1fr 1fr 1.2fr;
+          align-items: center;
+          padding: 0.55rem 0.75rem;
+          border-bottom: 1px solid #f1f5f9;
+          font-size: 0.72rem;
+        }
+
+        .rfid-row-item:last-child {
+          border-bottom: none;
+        }
+
+        .rfid-student-col {
+          display: flex;
+          align-items: center;
+          gap: 0.45rem;
+        }
+
+        .rfid-avatar {
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          background: #eff6ff;
+          color: #2563eb;
+          font-size: 0.68rem;
+          font-weight: 800;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .rfid-name {
+          font-weight: 700;
+          color: #0f172a;
+          display: block;
+          line-height: 1.2;
+        }
+
+        .rfid-id-tag {
+          font-size: 0.62rem;
+          color: #64748b;
+        }
+
+        .rfid-time {
+          font-weight: 600;
+          color: #334155;
+        }
+
+        .rfid-status-badge {
+          background: #dcfce7;
+          color: #15803d;
+          font-size: 0.62rem;
+          font-weight: 800;
+          padding: 0.15rem 0.45rem;
+          border-radius: 4px;
+          display: inline-block;
+          width: fit-content;
+        }
+
+        .rfid-sms-ok {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.3rem;
+          color: #059669;
+          font-size: 0.65rem;
+          font-weight: 700;
+        }
+
+        /* FLOATING TOAST POPUP */
+        .demo-toast-popup {
+          position: absolute;
+          bottom: 1rem;
+          left: 1rem;
+          right: 1rem;
+          background: rgba(15, 23, 42, 0.95);
+          backdrop-filter: blur(12px);
+          color: #ffffff;
+          padding: 0.65rem 1rem;
+          border-radius: 10px;
+          font-size: 0.75rem;
+          font-weight: 600;
+          display: flex;
+          align-items: center;
+          gap: 0.6rem;
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          z-index: 50;
+        }
+
+        @keyframes pulseGreen {
+          0%, 100% { transform: scale(1); opacity: 1; }
+          50% { transform: scale(1.3); opacity: 0.7; }
+        }
+
+        @keyframes pulseBlue {
+          0%, 100% { transform: scale(1); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25); }
+          50% { transform: scale(1.15); box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.15); }
         }
 
         /* COMMON SECTION STYLES */

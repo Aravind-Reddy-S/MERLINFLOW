@@ -764,17 +764,14 @@ export default function MedicalErpView() {
                   </div>
                   <div className="mac-address-bar">
                     <Lock size={12} className="text-emerald-500" />
-                    <span>medicalerp.nexsyrus.com</span>
+                    <span>medical.merlinflow.in/pos/billing</span>
                   </div>
-                  <a 
-                    href="https://medicalerp.nexsyrus.com" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
+                  <div 
                     className="mac-open-ext"
-                    title="Open live system in new tab"
+                    title="Live MerlinFlow System Active"
                   >
-                    <ExternalLink size={14} />
-                  </a>
+                    <Activity size={14} className="text-emerald-500" />
+                  </div>
                 </div>
 
                 {/* Switcher Bar inside Mac Window */}
@@ -845,14 +842,12 @@ export default function MedicalErpView() {
                       </div>
 
                       <div className="dash-bottom-actions">
-                        <a 
-                          href="https://medicalerp.nexsyrus.com" 
-                          target="_blank" 
-                          rel="noopener noreferrer"
+                        <button 
+                          onClick={scrollToContact}
                           className="btn-live-launch"
                         >
-                          Launch Live Interactive Medical ERP <ArrowRight size={14} />
-                        </a>
+                          Request Live Pharmacy ERP Demo <ArrowRight size={14} />
+                        </button>
                       </div>
                     </div>
                   ) : (
@@ -906,14 +901,12 @@ export default function MedicalErpView() {
                       </div>
 
                       <div className="dash-bottom-actions">
-                        <a 
-                          href="https://medicalerp.nexsyrus.com" 
-                          target="_blank" 
-                          rel="noopener noreferrer"
+                        <button 
+                          onClick={scrollToContact}
                           className="btn-live-launch"
                         >
-                          Launch Live Interactive Medical ERP <ArrowRight size={14} />
-                        </a>
+                          Request Live Pharmacy ERP Demo <ArrowRight size={14} />
+                        </button>
                       </div>
                     </div>
                   )}
