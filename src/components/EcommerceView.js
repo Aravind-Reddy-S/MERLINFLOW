@@ -312,7 +312,7 @@ export default function EcommerceView() {
         </div>
 
         <div className="container hero-content-wrap">
-          <div className="hero-text-block">
+          <div className="hero-glass-panel">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -1051,38 +1051,33 @@ export default function EcommerceView() {
           inset: 0;
           background-image: url('/images/ecommerce_hero_bg.jpg');
           background-size: cover;
-          background-position: left 25%;
+          background-position: center top;
           background-repeat: no-repeat;
-          opacity: 0.70;
-          filter: saturate(1.15) brightness(0.88);
+          opacity: 0.65;
+          filter: saturate(1.15) brightness(0.90);
         }
 
         .ecommerce-hero-bg-overlay {
           position: absolute;
           inset: 0;
           background: linear-gradient(
-            90deg,
-            rgba(248, 250, 252, 0.15) 0%,
-            rgba(248, 250, 252, 0.38) 32%,
-            rgba(248, 250, 252, 0.82) 65%,
-            rgba(248, 250, 252, 0.96) 100%
-          ),
-          linear-gradient(
             180deg,
-            rgba(248, 250, 252, 0.2) 0%,
-            transparent 40%,
+            rgba(248, 250, 252, 0.35) 0%,
+            rgba(248, 250, 252, 0.55) 45%,
+            rgba(248, 250, 252, 0.94) 85%,
             #f8fafc 100%
           );
         }
 
         .hero-glow-orb {
           position: absolute;
-          top: 5%;
-          right: 15%;
-          width: 600px;
-          height: 350px;
+          top: 10%;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 800px;
+          height: 400px;
           border-radius: 50%;
-          background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, rgba(59, 130, 246, 0) 70%);
+          background: radial-gradient(circle, rgba(59, 130, 246, 0.12) 0%, rgba(59, 130, 246, 0) 70%);
           filter: blur(80px);
         }
 
@@ -1091,12 +1086,20 @@ export default function EcommerceView() {
           z-index: 10;
         }
 
-        .hero-text-block {
-          max-width: 720px;
-          margin-left: auto;
-          margin-right: 0;
-          text-align: left;
-          padding-left: 1.5rem;
+        .hero-glass-panel {
+          max-width: 860px;
+          margin: 0 auto;
+          background: rgba(255, 255, 255, 0.88);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border: 1.5px solid rgba(255, 255, 255, 0.95);
+          border-radius: 28px;
+          padding: 3rem 3.5rem;
+          box-shadow: 0 20px 50px -10px rgba(15, 23, 42, 0.10), 0 0 0 1px rgba(226, 232, 240, 0.6);
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
         }
 
         .container {
@@ -1232,13 +1235,13 @@ export default function EcommerceView() {
         }
 
         .hero-title {
-          font-size: 3.15rem;
+          font-size: 3.25rem;
           line-height: 1.15;
           font-weight: 800;
           color: #0f172a;
           margin-bottom: 1.5rem;
           letter-spacing: -0.03em;
-          text-align: left;
+          text-align: center;
         }
 
         .gradient-text {
@@ -1248,19 +1251,19 @@ export default function EcommerceView() {
         }
 
         .hero-description {
-          font-size: 1.15rem;
+          font-size: 1.2rem;
           line-height: 1.6;
           color: #475569;
-          max-width: 680px;
-          margin: 0 0 2.5rem 0;
-          text-align: left;
+          max-width: 720px;
+          margin: 0 auto 2.5rem;
+          text-align: center;
         }
 
         .hero-ctas {
           display: flex;
           gap: 1.25rem;
-          justify-content: flex-start;
-          margin-bottom: 2.5rem;
+          justify-content: center;
+          margin-bottom: 2.25rem;
           flex-wrap: wrap;
         }
 
@@ -1308,7 +1311,7 @@ export default function EcommerceView() {
         .trust-badges {
           display: flex;
           gap: 2rem;
-          justify-content: flex-start;
+          justify-content: center;
           flex-wrap: wrap;
         }
 
