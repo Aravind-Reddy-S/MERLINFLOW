@@ -7,6 +7,20 @@ import { Quote, Star, Send, X } from "lucide-react";
 export default function Testimonials() {
   const initialTestimonials = [
     {
+      quote: "MerlinFlow built a custom CRM website for Nestinfra Developers that completely modernized our lead management and property inquiry workflows. The site visit scheduling and automated client follow-ups have supercharged our sales team.",
+      author: "Sai Kishore",
+      role: "Nestinfra Developers",
+      industry: "Real Estate & CRM",
+      rating: 5
+    },
+    {
+      quote: "The e-commerce platform built by MerlinFlow exceeded all our expectations. From ultra-smooth 1-click checkout to integrated logistics and WhatsApp delivery alerts, our online store conversions grew tremendously.",
+      author: "Kalaakshi",
+      role: "E-Commerce Brand",
+      industry: "E-Commerce & D2C",
+      rating: 5
+    },
+    {
       quote: "MerlinFlow ERP transformed how we manage our 3,000+ students. The fee collection and parent portal modules alone saved us hundreds of hours.",
       author: "Dr. Sarah Jenkins",
       role: "Principal, Oakridge International",
@@ -21,7 +35,7 @@ export default function Testimonials() {
       rating: 5
     },
     {
-      quote: "HIPAA compliance was our biggest hurdle. MerlinFlow provided an incredibly secure EHR system that our doctors actually love using.",
+      quote: "Zero-expiry radar and lightning-fast barcode billing saved us over 3.5% in dead stock annually. Our multi-branch pharmacy runs like clockwork.",
       author: "Dr. Elena Rodriguez",
       role: "Chief Medical Officer, City Health",
       industry: "Hospitals & Clinics",
