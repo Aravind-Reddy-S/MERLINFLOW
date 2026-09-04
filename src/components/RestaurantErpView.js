@@ -2557,37 +2557,163 @@ export default function RestaurantErpView() {
         }
 
         @media (max-width: 768px) {
+          .restaurant-erp-page {
+            padding-top: 4.5rem !important;
+            width: 100% !important;
+            max-width: 100vw !important;
+            overflow-x: hidden !important;
+          }
+
           .sticky-subnav {
             position: relative !important;
             top: auto !important;
             z-index: 20 !important;
+            box-shadow: none !important;
+            background: #ffffff !important;
+            border-bottom: 1px solid #fed7aa !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
           }
-          .subnav-tabs {
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            max-width: 100%;
-            padding-bottom: 4px;
-          }
-          .subnav-tab {
-            white-space: nowrap;
-            flex-shrink: 0;
-          }
-        }
 
-        @media (max-width: 640px) {
+          .subnav-container {
+            padding: 0.5rem 0.75rem !important;
+            gap: 0.5rem !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+            justify-content: space-between !important;
+          }
+
+          .subnav-tabs {
+            display: none !important;
+          }
+
+          .subnav-cta-btn {
+            padding: 0.4rem 0.75rem !important;
+            font-size: 0.78rem !important;
+          }
+
+          .restaurant-hero {
+            padding: 2.25rem 0 3rem !important;
+            overflow: hidden !important;
+            width: 100% !important;
+          }
+
+          .hero-text-block {
+            width: 100% !important;
+            max-width: 100% !important;
+            box-sizing: border-box !important;
+            text-align: center !important;
+            padding: 0 !important;
+            margin: 0 auto !important;
+          }
+
+          .hero-top-badge {
+            margin: 0 auto 1.25rem auto !important;
+            font-size: 0.72rem !important;
+            padding: 0.35rem 0.85rem !important;
+            max-width: 95% !important;
+          }
+
           .hero-heading {
-            font-size: clamp(1.85rem, 5.5vw, 2.5rem);
-            word-break: break-word;
-            overflow-wrap: break-word;
+            font-size: clamp(1.45rem, 5vw, 2.1rem) !important;
+            line-height: 1.25 !important;
+            word-break: break-word !important;
+            overflow-wrap: break-word !important;
+            hyphens: auto !important;
+            margin: 0 auto 1.2rem auto !important;
+            text-align: center !important;
+            max-width: 100% !important;
           }
-          .hero-stats-grid, .cards-grid-3, .cards-grid-4, .roadmap-cards-grid, .dash-metrics-row, .kds-cards-grid {
-            grid-template-columns: 1fr;
+
+          .gradient-text {
+            display: inline !important;
           }
+
+          .hero-subtext {
+            font-size: 0.95rem !important;
+            line-height: 1.55 !important;
+            margin: 0 auto 1.75rem auto !important;
+            text-align: center !important;
+            max-width: 100% !important;
+          }
+
+          .hero-actions {
+            display: flex !important;
+            flex-direction: column !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            gap: 0.75rem !important;
+            margin: 0 auto 2rem auto !important;
+          }
+
+          .hero-btn-primary, .hero-btn-secondary {
+            width: 100% !important;
+            justify-content: center !important;
+            font-size: 0.9rem !important;
+            padding: 0.8rem 1.25rem !important;
+            box-sizing: border-box !important;
+          }
+
+          .hero-stats-grid {
+            display: grid !important;
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 0.5rem !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            padding: 0.85rem 0.5rem !important;
+            margin: 0 auto !important;
+            box-sizing: border-box !important;
+            border-radius: 14px !important;
+          }
+
+          .hero-stat-box {
+            padding: 0.75rem !important;
+            text-align: center !important;
+          }
+
+          .hero-stat-num {
+            font-size: clamp(1.1rem, 3.8vw, 1.4rem) !important;
+            font-weight: 800 !important;
+          }
+
+          .hero-stat-label {
+            font-size: 0.65rem !important;
+            line-height: 1.15 !important;
+          }
+
+          .comparison-table-wrapper {
+            overflow-x: auto !important;
+            -webkit-overflow-scrolling: touch !important;
+            border-radius: 14px !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            margin: 0 !important;
+            box-sizing: border-box !important;
+          }
+
+          .comparison-table {
+            min-width: 480px !important;
+            width: 100% !important;
+          }
+
+          .comparison-table th, .comparison-table td {
+            padding: 0.75rem 0.65rem !important;
+            font-size: 0.78rem !important;
+          }
+
+          .cards-grid-3, .cards-grid-4, .roadmap-cards-grid, .dash-metrics-row, .kds-cards-grid {
+            grid-template-columns: 1fr !important;
+            gap: 0.85rem !important;
+          }
+
           .table-boxes-grid {
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 0.5rem !important;
           }
+
           .calculator-panel-box {
-            padding: 1.5rem;
+            padding: 1.25rem !important;
+            border-radius: 16px !important;
           }
         }
       `}</style>
