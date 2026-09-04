@@ -15,8 +15,8 @@ export default function Testimonials() {
     },
     {
       quote: "The e-commerce platform built by MerlinFlow exceeded all our expectations. From ultra-smooth 1-click checkout to integrated logistics and WhatsApp delivery alerts, our online store conversions grew tremendously.",
-      author: "Kalaakshi",
-      role: "E-Commerce Brand",
+      author: "Arun Kumar",
+      role: "Kalaakshi",
       industry: "E-Commerce & D2C",
       rating: 5
     },
