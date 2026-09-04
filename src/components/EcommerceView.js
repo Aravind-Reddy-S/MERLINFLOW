@@ -234,10 +234,6 @@ export default function EcommerceView() {
     <div className="ecommerce-page">
       {/* Background Animated SVG Roadmaps & Glow Orbs */}
       <div className="bg-decorations" aria-hidden="true">
-        {/* E-Commerce Hero Background Image & Gradient Layer */}
-        <div className="ecommerce-hero-bg-image" />
-        <div className="ecommerce-hero-bg-overlay" />
-
         {/* Glowing radial ambient lights */}
         <div className="glow-orb orb-1" />
         <div className="glow-orb orb-2" />
@@ -305,78 +301,91 @@ export default function EcommerceView() {
             <span>MerlinFlow Commerce Engine Active</span>
           </div>
         </div>
+      </div>
 
-        {/* HERO SECTION */}
-        <section className="hero-section">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="hero-badge"
-          >
-            <span className="badge-pulse" />
-            <span className="badge-text">v2.0 Now Live</span>
-            <span className="badge-divider">•</span>
-            <span className="badge-sub">The Automation-first E-Commerce OS</span>
-          </motion.div>
+      {/* HERO SECTION */}
+      <section className="hero-section">
+        <div className="hero-bg-container" aria-hidden="true">
+          <div className="ecommerce-hero-bg-image" />
+          <div className="ecommerce-hero-bg-overlay" />
+          <div className="hero-glow-orb" />
+        </div>
 
-          <motion.h1 
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="hero-title"
-          >
-            Stop doing manual tasks. <br />
-            <span className="gradient-text">Run Your E-Commerce On Autopilot.</span>
-          </motion.h1>
+        <div className="container hero-content-wrap">
+          <div className="hero-text-block">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="hero-badge"
+            >
+              <span className="badge-pulse" />
+              <span className="badge-text">v2.0 Now Live</span>
+              <span className="badge-divider">•</span>
+              <span className="badge-sub">The Automation-first E-Commerce OS</span>
+            </motion.div>
 
-          <motion.p 
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="hero-description"
-          >
-            From 1-click accelerated checkout to Shiprocket automated logistics and real-time omnichannel inventory sync — we automate every repetitive operation for fast-growing Indian D2C brands.
-          </motion.p>
+            <motion.h1 
+              initial={{ opacity: 0, y: 25 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="hero-title"
+            >
+              Stop doing manual tasks. <br />
+              <span className="gradient-text">Run Your E-Commerce On Autopilot.</span>
+            </motion.h1>
 
-          {/* CTA Group */}
-          <motion.div 
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="hero-ctas"
-          >
-            <a href="#calculator" className="btn-primary">
-              <Sparkles size={18} />
-              <span>Calculate Your ROI</span>
-            </a>
-            <a href="#contact" className="btn-secondary">
-              <span>Book Interactive Demo</span>
-              <ArrowRight size={16} />
-            </a>
-          </motion.div>
+            <motion.p 
+              initial={{ opacity: 0, y: 25 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="hero-description"
+            >
+              From 1-click accelerated checkout to Shiprocket automated logistics and real-time omnichannel inventory sync — we automate every repetitive operation for fast-growing Indian D2C brands.
+            </motion.p>
 
-          {/* Trust Guarantees */}
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="trust-badges"
-          >
-            <div className="trust-item">
-              <CheckCircle2 size={16} className="text-emerald-500" />
-              <span>No credit card required</span>
-            </div>
-            <div className="trust-item">
-              <CheckCircle2 size={16} className="text-emerald-500" />
-              <span>14-day full feature trial</span>
-            </div>
-            <div className="trust-item">
-              <CheckCircle2 size={16} className="text-emerald-500" />
-              <span>1-click Shopify/Woo migration</span>
-            </div>
-          </motion.div>
-        </section>
+            {/* CTA Group */}
+            <motion.div 
+              initial={{ opacity: 0, y: 25 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="hero-ctas"
+            >
+              <a href="#calculator" className="btn-primary">
+                <Sparkles size={18} />
+                <span>Calculate Your ROI</span>
+              </a>
+              <a href="#contact" className="btn-secondary">
+                <span>Book Interactive Demo</span>
+                <ArrowRight size={16} />
+              </a>
+            </motion.div>
+
+            {/* Trust Guarantees */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="trust-badges"
+            >
+              <div className="trust-item">
+                <CheckCircle2 size={16} className="text-emerald-500" />
+                <span>No credit card required</span>
+              </div>
+              <div className="trust-item">
+                <CheckCircle2 size={16} className="text-emerald-500" />
+                <span>14-day full feature trial</span>
+              </div>
+              <div className="trust-item">
+                <CheckCircle2 size={16} className="text-emerald-500" />
+                <span>1-click Shopify/Woo migration</span>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      <div className="container relative z-10">
 
         {/* INTERACTIVE COMMAND DASHBOARD PREVIEW */}
         <motion.section 
@@ -1020,36 +1029,74 @@ export default function EcommerceView() {
           z-index: 0;
         }
 
+        /* Hero Section */
+        .hero-section {
+          position: relative;
+          padding: 6.5rem 0 4.5rem;
+          overflow: hidden;
+          background-color: #f8fafc;
+          margin-bottom: 2rem;
+        }
+
+        .hero-bg-container {
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          z-index: 1;
+          overflow: hidden;
+        }
+
         .ecommerce-hero-bg-image {
           position: absolute;
-          top: 15px;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 86%;
-          max-width: 1150px;
-          height: 640px;
+          inset: 0;
           background-image: url('/images/ecommerce_hero_bg.jpg');
-          background-size: contain;
-          background-position: center top;
+          background-size: cover;
+          background-position: left 25%;
           background-repeat: no-repeat;
-          opacity: 0.58;
-          filter: saturate(1.15) brightness(0.75);
-          border-radius: 28px;
+          opacity: 0.70;
+          filter: saturate(1.15) brightness(0.88);
         }
 
         .ecommerce-hero-bg-overlay {
           position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          height: 700px;
+          inset: 0;
           background: linear-gradient(
+            90deg,
+            rgba(248, 250, 252, 0.15) 0%,
+            rgba(248, 250, 252, 0.38) 32%,
+            rgba(248, 250, 252, 0.82) 65%,
+            rgba(248, 250, 252, 0.96) 100%
+          ),
+          linear-gradient(
             180deg,
-            rgba(248, 250, 252, 0.30) 0%,
-            rgba(248, 250, 252, 0.55) 45%,
-            rgba(248, 250, 252, 0.94) 80%,
+            rgba(248, 250, 252, 0.2) 0%,
+            transparent 40%,
             #f8fafc 100%
           );
+        }
+
+        .hero-glow-orb {
+          position: absolute;
+          top: 5%;
+          right: 15%;
+          width: 600px;
+          height: 350px;
+          border-radius: 50%;
+          background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, rgba(59, 130, 246, 0) 70%);
+          filter: blur(80px);
+        }
+
+        .hero-content-wrap {
+          position: relative;
+          z-index: 10;
+        }
+
+        .hero-text-block {
+          max-width: 720px;
+          margin-left: auto;
+          margin-right: 0;
+          text-align: left;
+          padding-left: 1.5rem;
         }
 
         .container {
@@ -1150,17 +1197,6 @@ export default function EcommerceView() {
           box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
         }
 
-        /* Hero */
-        .hero-section {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          text-align: center;
-          padding: 2rem 1rem 4rem;
-          max-width: 900px;
-          margin: 0 auto;
-        }
-
         .hero-badge {
           display: inline-flex;
           align-items: center;
@@ -1196,12 +1232,13 @@ export default function EcommerceView() {
         }
 
         .hero-title {
-          font-size: 3.6rem;
+          font-size: 3.15rem;
           line-height: 1.15;
           font-weight: 800;
           color: #0f172a;
           margin-bottom: 1.5rem;
           letter-spacing: -0.03em;
+          text-align: left;
         }
 
         .gradient-text {
@@ -1211,17 +1248,18 @@ export default function EcommerceView() {
         }
 
         .hero-description {
-          font-size: 1.25rem;
+          font-size: 1.15rem;
           line-height: 1.6;
           color: #475569;
-          max-width: 740px;
-          margin-bottom: 2.5rem;
+          max-width: 680px;
+          margin: 0 0 2.5rem 0;
+          text-align: left;
         }
 
         .hero-ctas {
           display: flex;
           gap: 1.25rem;
-          justify-content: center;
+          justify-content: flex-start;
           margin-bottom: 2.5rem;
           flex-wrap: wrap;
         }
@@ -1270,7 +1308,7 @@ export default function EcommerceView() {
         .trust-badges {
           display: flex;
           gap: 2rem;
-          justify-content: center;
+          justify-content: flex-start;
           flex-wrap: wrap;
         }
 
