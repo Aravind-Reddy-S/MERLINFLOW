@@ -9,14 +9,18 @@ import {
   Shield, FileCheck, ArrowRight, LayoutGrid, Target, 
   UserCheck, Heart, Sparkles, Clock, ArrowLeft, 
   Check, Layers, ChevronDown, Phone, HelpCircle, 
-  Award, Zap, Globe, IndianRupee, AlertCircle, ExternalLink
+  Award, Zap, Globe, IndianRupee, AlertCircle, ExternalLink,
+  Calculator, CheckCircle2, X, Sliders, TrendingUp, Search
 } from "lucide-react";
 import Link from "next/link";
 import ContactSection from "./ContactSection";
 
 export default function MedicalErpView() {
-  const [activeTab, setActiveTab] = useState("overview"); // overview, modules, solutions, roadmap, pricing, security
+  const [activeTab, setActiveTab] = useState("overview"); // overview, modules, solutions, roadmap, calculator, compare, pricing, security
   const [moduleCategory, setModuleCategory] = useState("all");
+  const [previewTab, setPreviewTab] = useState("pos"); // pos, inventory
+  const [monthlySales, setMonthlySales] = useState(500000); // 5 Lakhs default for ROI calculator
+  const [dailyBills, setDailyBills] = useState(120);
   const [isYearlyPricing, setIsYearlyPricing] = useState(false);
   const [openFaq, setOpenFaq] = useState(0);
   const [activeRole, setActiveRole] = useState(0);
@@ -25,89 +29,94 @@ export default function MedicalErpView() {
   const moduleCategories = [
     {
       id: "inventory",
-      title: "Inventory & Stock",
-      subtitle: "Core pharmacy stock management, medicine catalog & expiry prevention",
+      title: "Inventory & Stock Control",
+      subtitle: "Core pharmacy stock management, medicine catalog & zero-expiry loss",
       badgeColor: "linear-gradient(135deg, #10b981, #059669)",
       modules: [
         { 
           name: "Medicine Master", 
-          desc: "Centralized database for all medicines with salt composition, batch numbers, HSN codes, and category tags.", 
+          desc: "Centralized database for all medicines with generic salt composition, batch numbers, HSN codes, and category tags.", 
           icon: <Pill size={22} color="#059669" /> 
         },
         { 
-          name: "Expiry Alerts & Batch Tracking", 
-          desc: "Auto-notifications for nearing expiry batches (30/60/90 days) to prevent dead stock and minimize wastage.", 
+          name: "Expiry Radar & Batch Tracking", 
+          desc: "Proactive 30/60/90-day expiry notifications with automated batch blocking to eliminate dead stock.", 
           icon: <History size={22} color="#0d9488" /> 
         },
         { 
-          name: "Low Stock & Reorder Alerts", 
-          desc: "Never run out of essential life-saving inventory with proactive minimum threshold stock monitoring.", 
+          name: "Low Stock & Smart Reorder", 
+          desc: "Never run out of essential life-saving drugs with predictive threshold alerts and automated vendor PO drafts.", 
           icon: <Activity size={22} color="#ea580c" /> 
         },
         { 
-          name: "Supplier Management", 
-          desc: "Manage purchase orders, track supplier credit ledgers, procurement history, and accounts payable.", 
+          name: "Supplier Ledger Management", 
+          desc: "Manage purchase orders, track supplier credit balances, procurement timelines, and accounts payable ledgers.", 
           icon: <Truck size={22} color="#2563eb" /> 
         },
         { 
-          name: "Purchase Returns", 
-          desc: "Seamlessly process and record returns to distributors for damaged, near-expiry, or recalled batches.", 
+          name: "Purchase & Breakage Returns", 
+          desc: "Process and reconcile returns to distributors for damaged, near-expiry, or recalled medicine batches in one click.", 
           icon: <FileText size={22} color="#7c3aed" /> 
         }
       ]
     },
     {
       id: "sales",
-      title: "Sales & Invoicing",
-      subtitle: "Lightning-fast billing, customer credit accounts & schedule drug records",
+      title: "Sales & Invoicing (POS)",
+      subtitle: "Lightning-fast barcode checkout, customer credit accounts & schedule drug records",
       badgeColor: "linear-gradient(135deg, #0d9488, #0284c7)",
       modules: [
         { 
           name: "Fast Barcode Billing (POS)", 
-          desc: "Complete counter checkout in seconds with barcode scanning, automated GST computation, and instant thermal printing.", 
+          desc: "Complete counter checkout in under 5 seconds with barcode scanning, auto GST computation, and instant thermal printing.", 
           icon: <Receipt size={22} color="#059669" /> 
         },
         { 
-          name: "Sales & Revenue Analytics", 
-          desc: "Identify top-selling drugs, peak sales hours, daily revenue trends, and profit margins in real time.", 
+          name: "Sales & Gross Margin Analytics", 
+          desc: "Identify fast-moving medicines, peak counter hours, daily net revenue, and gross profit margins in real time.", 
           icon: <BarChart3 size={22} color="#2563eb" /> 
         },
         { 
-          name: "Customer Profiles & Credit Accounts", 
-          desc: "Maintain patient purchase histories, manage chronic medicine refill lists, and track customer credit balances.", 
+          name: "Patient Profiles & Credit Accounts", 
+          desc: "Maintain customer purchase history, manage chronic medication refill lists, and track credit balance khata.", 
           icon: <Users size={22} color="#ea580c" /> 
         },
         { 
-          name: "Prescription Records & Schedule H", 
-          desc: "Digitally attach and record doctor prescriptions for Schedule H and H1 narcotics compliance.", 
+          name: "Schedule H/H1 Prescription Records", 
+          desc: "Digitally attach and record doctor prescriptions for Schedule H, H1, and narcotic drugs for complete regulatory audits.", 
           icon: <Stethoscope size={22} color="#e11d48" /> 
         },
         { 
           name: "Multi-Mode Split Payments", 
-          desc: "Accept split transactions across UPI (PhonePe, GPay), credit/debit cards, credit ledger, and cash seamlessly.", 
+          desc: "Accept split transactions across UPI (PhonePe, GPay, Paytm), credit/debit cards, patient credit, and cash seamlessly.", 
           icon: <CreditCard size={22} color="#7c3aed" /> 
         }
       ]
     },
     {
       id: "admin",
-      title: "Admin & Compliance",
-      subtitle: "Business administration, tax audit preparedness & data security",
+      title: "Admin, Multi-Store & Compliance",
+      subtitle: "Business administration, tax audit preparedness & enterprise data security",
       badgeColor: "linear-gradient(135deg, #f59e0b, #d97706)",
       modules: [
         { 
-          name: "Granular Role-Based Access Control", 
-          desc: "Configure role-specific permissions for Pharmacists, Store Managers, and Billing Cashiers with audit logs.", 
+          name: "Granular Role-Based Access (RBAC)", 
+          desc: "Configure role-specific permissions for Pharmacists, Store Managers, and Billing Cashiers with immutable audit logs.", 
           icon: <ShieldCheck size={22} color="#059669" /> 
         },
         { 
+          name: "Multi-Branch & Warehouse Sync", 
+          desc: "Synchronize stock levels, manage inter-branch transfers, and view consolidated sales across all your pharmacy outlets.", 
+          icon: <Globe size={22} color="#0d9488" /> 
+        },
+        { 
           name: "Automated Cloud Data Backups", 
-          desc: "Automated daily cloud backups with encrypted snapshots to ensure zero data loss and continuous business uptime.", 
+          desc: "Automated daily cloud backups with 256-bit encrypted snapshots ensuring zero data loss and business continuity.", 
           icon: <Database size={22} color="#2563eb" /> 
         },
         { 
           name: "One-Click GST & Tax Returns", 
-          desc: "Generate pre-formatted GSTR-1, GSTR-3B, and HSN summary spreadsheets ready for CA upload in seconds.", 
+          desc: "Generate pre-formatted GSTR-1, GSTR-3B, and HSN summary spreadsheets ready for instant CA upload.", 
           icon: <FileText size={22} color="#ea580c" /> 
         }
       ]
@@ -115,17 +124,17 @@ export default function MedicalErpView() {
     {
       id: "future",
       title: "Future-Ready & Modern Retail",
-      subtitle: "Digital consultations, doorstep delivery & omnichannel pharmacy",
+      subtitle: "Tele-doctor consultations, doorstep delivery & omnichannel pharmacy",
       badgeColor: "linear-gradient(135deg, #8b5cf6, #ec4899)",
       modules: [
         { 
-          name: "Tele-Consultation Integration", 
-          desc: "Connect walk-in customers with certified online doctors directly from your pharmacy counter kiosk.", 
+          name: "Tele-Consultation Kiosk", 
+          desc: "Connect walk-in customers with certified online physicians directly from your pharmacy counter console.", 
           icon: <PhoneCall size={22} color="#7c3aed" /> 
         },
         { 
           name: "Doorstep Delivery & Dispatch Tracker", 
-          desc: "Organize local home delivery orders, assign delivery staff, and track customer delivery statuses in real time.", 
+          desc: "Organize home deliveries, assign delivery staff, send WhatsApp status alerts, and collect digital COD receipts.", 
           icon: <Truck size={22} color="#e11d48" /> 
         }
       ]
@@ -194,7 +203,7 @@ export default function MedicalErpView() {
     {
       step: "02",
       title: "Inventory Stocking",
-      desc: "Receive medicine batches with automatic barcode indexing, HSN code tagging, and expiry tracking.",
+      desc: "Receive medicine batches with automatic barcode indexing, HSN code tagging, and FEFO expiry tracking.",
       icon: <Database size={24} color="#0d9488" />
     },
     {
@@ -210,6 +219,54 @@ export default function MedicalErpView() {
       icon: <FileCheck size={24} color="#7c3aed" />
     }
   ];
+
+  const comparisonFeatures = [
+    {
+      feature: "Barcode POS Billing Speed",
+      legacy: "Slow legacy desktop software (30-45s per bill)",
+      merlinflow: "Instant Cloud & LAN POS (< 5s per bill)"
+    },
+    {
+      feature: "Expiry & Wastage Prevention",
+      legacy: "Manual shelf audits; high expired batch losses",
+      merlinflow: "Automated 30/60/90-day radar + batch lock"
+    },
+    {
+      feature: "GST & Tax Compliance",
+      legacy: "Manual data exports, prone to mismatches",
+      merlinflow: "1-Click automated GSTR-1, 3B & HSN filing"
+    },
+    {
+      feature: "Multi-Store & Chain Sync",
+      legacy: "Requires separate database and slow night sync",
+      merlinflow: "Real-time live multi-branch inventory & ledger sync"
+    },
+    {
+      feature: "Generic Salt Substitutes",
+      legacy: "Manual lookup; lost sales during stock-outs",
+      merlinflow: "Instant salt/molecule recommendations on POS"
+    },
+    {
+      feature: "Schedule H & Prescription Audits",
+      legacy: "Paper registers with high regulatory audit risks",
+      merlinflow: "Digitized prescription attachment & doctor logs"
+    },
+    {
+      feature: "Data Backup & Recovery",
+      legacy: "Manual pen-drive backups; high ransomware risk",
+      merlinflow: "Automated daily multi-zone cloud snapshots"
+    },
+    {
+      feature: "Setup Cost & Hardware Lock-in",
+      legacy: "₹25,000 - ₹50,000 upfront license + server",
+      merlinflow: "₹0 Setup Cost; works on any PC, laptop, or tablet"
+    }
+  ];
+
+  // Dynamic ROI Calculations
+  const calculatedSavings = Math.round(monthlySales * 0.035); // ~3.5% saved from expiry reduction & dead-stock avoidance
+  const calculatedHoursSaved = Math.round((dailyBills * 30 * 25) / 3600); // 25s saved per bill converted to hours/mo
+  const annualBenefit = Math.round((calculatedSavings * 12) + (calculatedHoursSaved * 12 * 250));
 
   const pricingPlans = [
     {
@@ -308,7 +365,7 @@ export default function MedicalErpView() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['overview', 'modules', 'solutions', 'roadmap', 'pricing', 'security'];
+      const sections = ['overview', 'modules', 'solutions', 'roadmap', 'calculator', 'compare', 'pricing', 'security'];
       const scrollPos = window.scrollY + 140;
       for (const s of sections) {
         const el = document.getElementById(s);
@@ -379,10 +436,22 @@ export default function MedicalErpView() {
               Workflow
             </button>
             <button 
+              className={`subnav-tab ${activeTab === 'calculator' ? 'active' : ''}`}
+              onClick={() => scrollToSection('calculator')}
+            >
+              ROI Calculator
+            </button>
+            <button 
+              className={`subnav-tab ${activeTab === 'compare' ? 'active' : ''}`}
+              onClick={() => scrollToSection('compare')}
+            >
+              Compare
+            </button>
+            <button 
               className={`subnav-tab ${activeTab === 'pricing' ? 'active' : ''}`}
               onClick={() => scrollToSection('pricing')}
             >
-              Pricing Plans
+              Pricing
             </button>
             <button 
               className={`subnav-tab ${activeTab === 'security' ? 'active' : ''}`}
@@ -452,6 +521,16 @@ export default function MedicalErpView() {
                 <div className="stat-divider"></div>
                 <div 
                   className="stat-card"
+                  onClick={() => scrollToSection('calculator')}
+                  style={{ cursor: "pointer" }}
+                  title="Click to view ROI calculator"
+                >
+                  <div className="stat-number">5x</div>
+                  <div className="stat-label">Faster Checkout</div>
+                </div>
+                <div className="stat-divider"></div>
+                <div 
+                  className="stat-card"
                   onClick={() => scrollToSection('pricing')}
                   style={{ cursor: "pointer" }}
                   title="Click to view pricing plans"
@@ -490,67 +569,147 @@ export default function MedicalErpView() {
                     <ExternalLink size={14} />
                   </a>
                 </div>
+
+                {/* Switcher Bar inside Mac Window */}
+                <div className="preview-tab-switcher">
+                  <button 
+                    className={`preview-tab-btn ${previewTab === 'pos' ? 'active' : ''}`}
+                    onClick={() => setPreviewTab('pos')}
+                  >
+                    <Receipt size={14} /> POS & Rapid Billing
+                  </button>
+                  <button 
+                    className={`preview-tab-btn ${previewTab === 'inventory' ? 'active' : ''}`}
+                    onClick={() => setPreviewTab('inventory')}
+                  >
+                    <Activity size={14} /> Stock & Expiry Radar
+                  </button>
+                </div>
+
                 <div className="mac-browser-body">
-                  {/* Interactive Live ERP Dashboard Mock */}
-                  <div className="live-preview-dashboard">
-                    <div className="dashboard-top-row">
-                      <div className="dash-title-block">
-                        <div className="dash-badge">LIVE PHARMACY POS</div>
-                        <h4 className="dash-h4">Daily Counter Operations</h4>
-                      </div>
-                      <span className="live-status-pill">
-                        <span className="live-dot"></span> System Online
-                      </span>
-                    </div>
-
-                    <div className="kpi-cards-grid">
-                      <div className="kpi-card sales-kpi">
-                        <div className="kpi-header">
-                          <span className="kpi-label">Today's Sales</span>
-                          <span className="kpi-growth">↑ 12% vs yest.</span>
+                  {previewTab === 'pos' ? (
+                    /* POS VIEW */
+                    <div className="live-preview-dashboard">
+                      <div className="dashboard-top-row">
+                        <div className="dash-title-block">
+                          <div className="dash-badge">FAST COUNTER POS</div>
+                          <h4 className="dash-h4">Sub-Second Barcode Dispensing</h4>
                         </div>
-                        <div className="kpi-val">₹42,500</div>
-                        <span className="kpi-sub">86 Invoices Billed</span>
+                        <span className="live-status-pill">
+                          <span className="live-dot"></span> Barcode Scanner Ready
+                        </span>
                       </div>
 
-                      <div className="kpi-card expiry-kpi">
-                        <div className="kpi-header">
-                          <span className="kpi-label">Expiring Soon</span>
-                          <span className="kpi-tag alert">Action req.</span>
-                        </div>
-                        <div className="kpi-val text-rose">14 Items</div>
-                        <span className="kpi-sub">Within next 30 days</span>
+                      {/* Fake POS search item */}
+                      <div className="pos-search-mock">
+                        <Search size={14} className="text-slate-400" />
+                        <span className="pos-search-input">Scan Barcode or Search "Paracetamol 650"...</span>
+                        <span className="pos-badge-shortcut">F2</span>
                       </div>
-                    </div>
 
-                    <div className="low-stock-box">
-                      <div className="low-stock-title">
-                        <AlertCircle size={14} className="text-amber" />
-                        <span>Low Stock Monitoring</span>
-                      </div>
-                      <div className="stock-items-row">
-                        <div className="stock-item-badge">
-                          <span className="stock-qty alert">3 QTY</span>
-                          <span className="stock-name">Paracetamol 500mg</span>
+                      <div className="kpi-cards-grid">
+                        <div className="kpi-card sales-kpi">
+                          <div className="kpi-header">
+                            <span className="kpi-label">Today's Counter Sales</span>
+                            <span className="kpi-growth">↑ 12% vs yest.</span>
+                          </div>
+                          <div className="kpi-val">₹42,500</div>
+                          <span className="kpi-sub">86 GST Invoices Issued</span>
                         </div>
-                        <div className="stock-item-badge">
-                          <span className="stock-qty alert">6 QTY</span>
-                          <span className="stock-name">Vitamin C Tablets</span>
-                        </div>
-                      </div>
-                    </div>
 
-                    <div className="dash-bottom-actions">
-                      <a 
-                        href="https://medicalerp.nexsyrus.com" 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="btn-live-launch"
-                      >
-                        Launch Interactive Medical ERP <ArrowRight size={14} />
-                      </a>
+                        <div className="kpi-card split-kpi">
+                          <div className="kpi-header">
+                            <span className="kpi-label">Payment Split</span>
+                            <span className="kpi-tag success">Auto-Reconciled</span>
+                          </div>
+                          <div className="split-bars">
+                            <span className="split-text">UPI: 68% • Cash: 22% • Cards: 10%</span>
+                          </div>
+                          <span className="kpi-sub">Zero end-of-day mismatch</span>
+                        </div>
+                      </div>
+
+                      <div className="generic-sub-box">
+                        <div className="generic-title">
+                          <Sparkles size={14} className="text-emerald" />
+                          <span>Smart Generic Salt Recommendations</span>
+                        </div>
+                        <p className="generic-desc">Dolo 650 out of stock? Suggested substitute: <strong>Calpol 650mg</strong> (₹30.50/strip - 24 Strips in stock).</p>
+                      </div>
+
+                      <div className="dash-bottom-actions">
+                        <a 
+                          href="https://medicalerp.nexsyrus.com" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="btn-live-launch"
+                        >
+                          Launch Live Interactive Medical ERP <ArrowRight size={14} />
+                        </a>
+                      </div>
                     </div>
-                  </div>
+                  ) : (
+                    /* INVENTORY & EXPIRY RADAR VIEW */
+                    <div className="live-preview-dashboard">
+                      <div className="dashboard-top-row">
+                        <div className="dash-title-block">
+                          <div className="dash-badge">EXPIRY & FEFO RADAR</div>
+                          <h4 className="dash-h4">Intelligent Stock Optimization</h4>
+                        </div>
+                        <span className="live-status-pill alert">
+                          <span className="live-dot-red"></span> Expiry Watchdog Active
+                        </span>
+                      </div>
+
+                      <div className="kpi-cards-grid">
+                        <div className="kpi-card expiry-kpi">
+                          <div className="kpi-header">
+                            <span className="kpi-label">Expiring in 30 Days</span>
+                            <span className="kpi-tag alert">Action Required</span>
+                          </div>
+                          <div className="kpi-val text-rose">14 Batches</div>
+                          <span className="kpi-sub">Locked for returns / clearance</span>
+                        </div>
+
+                        <div className="kpi-card lowstock-kpi">
+                          <div className="kpi-header">
+                            <span className="kpi-label">Low Stock Alerts</span>
+                            <span className="kpi-tag warning">Auto PO Drafted</span>
+                          </div>
+                          <div className="kpi-val text-amber">6 Items</div>
+                          <span className="kpi-sub">Below minimum threshold</span>
+                        </div>
+                      </div>
+
+                      <div className="low-stock-box">
+                        <div className="low-stock-title">
+                          <AlertCircle size={14} className="text-amber" />
+                          <span>Priority Batches to Return to Distributor</span>
+                        </div>
+                        <div className="stock-items-row">
+                          <div className="stock-item-badge">
+                            <span className="stock-qty alert">BATCH #B204</span>
+                            <span className="stock-name">Amoxicillin 500mg (Expiry: 28 Days)</span>
+                          </div>
+                          <div className="stock-item-badge">
+                            <span className="stock-qty alert">BATCH #V109</span>
+                            <span className="stock-name">Cough Syrup 100ml (Expiry: 32 Days)</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="dash-bottom-actions">
+                        <a 
+                          href="https://medicalerp.nexsyrus.com" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="btn-live-launch"
+                        >
+                          Launch Live Interactive Medical ERP <ArrowRight size={14} />
+                        </a>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </motion.div>
@@ -564,7 +723,7 @@ export default function MedicalErpView() {
           <div className="section-header-center">
             <div className="pill-tag"><Layers size={14} /> COMPLETE SUITE</div>
             <h2 className="section-title">15+ Purpose-Built Pharmacy Modules</h2>
-            <p className="section-desc">Modular, customizable, and seamlessly integrated for modern medical shops and hospital pharmacies.</p>
+            <p className="section-desc">Modular, customizable, and seamlessly integrated for modern medical shops, retail chains, and hospital pharmacies.</p>
 
             {/* Category Filter Pills */}
             <div className="category-filters">
@@ -572,7 +731,7 @@ export default function MedicalErpView() {
                 { id: "all", label: "All Modules (15+)" },
                 { id: "inventory", label: "Inventory & Stock (5)" },
                 { id: "sales", label: "Sales & Invoicing (5)" },
-                { id: "admin", label: "Admin & Compliance (3)" },
+                { id: "admin", label: "Admin & Compliance (4)" },
                 { id: "future", label: "Future-Ready (2)" }
               ].map(cat => (
                 <button 
@@ -701,6 +860,130 @@ export default function MedicalErpView() {
         </div>
       </section>
 
+      {/* Interactive Pharmacy ROI & Efficiency Calculator */}
+      <section id="calculator" className="section-padding">
+        <div className="container">
+          <div className="section-header-center">
+            <div className="pill-tag"><Calculator size={14} /> ROI & EFFICIENCY ESTIMATOR</div>
+            <h2 className="section-title">Calculate Your Annual Pharmacy Savings</h2>
+            <p className="section-desc">Adjust your store's monthly sales volume and daily counter bills to see how much revenue leakage MerlinFlow eliminates.</p>
+          </div>
+
+          <div className="calculator-layout">
+            <div className="calculator-inputs-card">
+              <div className="calc-input-group">
+                <div className="calc-label-row">
+                  <label className="calc-label">Monthly Store Sales Volume</label>
+                  <span className="calc-val-badge">₹{(monthlySales / 100000).toFixed(1)} Lakhs / mo</span>
+                </div>
+                <input 
+                  type="range" 
+                  min="100000" 
+                  max="2500000" 
+                  step="50000"
+                  value={monthlySales}
+                  onChange={(e) => setMonthlySales(Number(e.target.value))}
+                  className="calc-range-slider"
+                />
+                <div className="range-bounds">
+                  <span>₹1 Lakh</span>
+                  <span>₹10 Lakhs</span>
+                  <span>₹25 Lakhs</span>
+                </div>
+              </div>
+
+              <div className="calc-input-group mt-6">
+                <div className="calc-label-row">
+                  <label className="calc-label">Average Daily Invoices Issued</label>
+                  <span className="calc-val-badge">{dailyBills} Bills / Day</span>
+                </div>
+                <input 
+                  type="range" 
+                  min="30" 
+                  max="400" 
+                  step="10"
+                  value={dailyBills}
+                  onChange={(e) => setDailyBills(Number(e.target.value))}
+                  className="calc-range-slider"
+                />
+                <div className="range-bounds">
+                  <span>30 bills</span>
+                  <span>200 bills</span>
+                  <span>400+ bills</span>
+                </div>
+              </div>
+
+              <div className="calc-assumptions">
+                <p>⚡ Calculated using actual benchmarks: 3.5% dead-stock / expiry elimination + 25 seconds saved per barcode counter checkout.</p>
+              </div>
+            </div>
+
+            <div className="calculator-results-card">
+              <span className="results-badge">ESTIMATED ANNUAL VALUE</span>
+              <div className="results-big-num">₹{annualBenefit.toLocaleString("en-IN")}</div>
+              <p className="results-sub">Direct Profit Impact & Staff Productivity Gained / Year</p>
+
+              <div className="results-metrics-grid">
+                <div className="res-metric-item">
+                  <span className="res-metric-label">Expiry Wastage Saved</span>
+                  <span className="res-metric-val">₹{calculatedSavings.toLocaleString("en-IN")} / mo</span>
+                </div>
+                <div className="res-metric-item">
+                  <span className="res-metric-label">Staff Hours Saved</span>
+                  <span className="res-metric-val">{calculatedHoursSaved} Hours / mo</span>
+                </div>
+              </div>
+
+              <button onClick={scrollToContact} className="btn-calc-cta">
+                Unlock These Savings Today <ArrowRight size={16} />
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Traditional Legacy Software vs MerlinFlow Comparison Matrix */}
+      <section id="compare" className="section-padding bg-light">
+        <div className="container">
+          <div className="section-header-center">
+            <div className="pill-tag"><CheckCircle2 size={14} /> WHY WE COMPARE</div>
+            <h2 className="section-title">Traditional Desktop Software vs MerlinFlow Medical ERP</h2>
+            <p className="section-desc">See why modern pharmacies are replacing legacy offline software with our next-generation cloud infrastructure.</p>
+          </div>
+
+          <div className="comparison-table-wrapper">
+            <table className="comparison-table">
+              <thead>
+                <tr>
+                  <th className="th-feature">Operational Capability</th>
+                  <th className="th-legacy">Traditional Legacy Software</th>
+                  <th className="th-merlinflow">MerlinFlow Medical ERP</th>
+                </tr>
+              </thead>
+              <tbody>
+                {comparisonFeatures.map((row, idx) => (
+                  <tr key={idx} className={idx % 2 === 0 ? "row-even" : "row-odd"}>
+                    <td className="td-feature">{row.feature}</td>
+                    <td className="td-legacy">
+                      <div className="cell-content">
+                        <X size={16} className="text-rose shrink-0" />
+                        <span>{row.legacy}</span>
+                      </div>
+                    </td>
+                    <td className="td-merlinflow">
+                      <div className="cell-content">
+                        <Check size={16} className="text-emerald shrink-0" />
+                        <span className="font-semibold text-slate-900">{row.merlinflow}</span>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
       {/* Pricing Plans Section */}
       <section id="pricing" className="section-padding">
         <div className="container">
@@ -791,15 +1074,15 @@ export default function MedicalErpView() {
               <div className="security-badges-row">
                 <div className="sec-trust-item">
                   <Check size={18} className="text-emerald" />
-                  <span>256-Bit SSL/TLS Encryption</span>
+                  <span>256-Bit SSL/TLS End-to-End Encryption</span>
                 </div>
                 <div className="sec-trust-item">
                   <Check size={18} className="text-emerald" />
-                  <span>Daily Automated Cloud Backups</span>
+                  <span>Daily Automated Cloud Backups with Snapshots</span>
                 </div>
                 <div className="sec-trust-item">
                   <Check size={18} className="text-emerald" />
-                  <span>Schedule H Audit Ready</span>
+                  <span>Schedule H & H1 Regulatory Audit Preparedness</span>
                 </div>
               </div>
             </div>
@@ -990,16 +1273,17 @@ export default function MedicalErpView() {
         .subnav-tabs {
           display: flex;
           align-items: center;
-          gap: 0.4rem;
+          gap: 0.35rem;
           background: #f1f5f9;
           padding: 0.25rem;
           border-radius: 50px;
+          flex-wrap: wrap;
         }
 
         .subnav-tab {
-          padding: 0.4rem 1rem;
+          padding: 0.35rem 0.85rem;
           border-radius: 50px;
-          font-size: 0.85rem;
+          font-size: 0.8rem;
           font-weight: 600;
           color: #64748b;
           background: transparent;
@@ -1031,6 +1315,7 @@ export default function MedicalErpView() {
           font-weight: 600;
           cursor: pointer;
           transition: all 0.2s;
+          white-space: nowrap;
         }
 
         .subnav-cta-btn:hover {
@@ -1047,7 +1332,7 @@ export default function MedicalErpView() {
 
         .hero-grid {
           display: grid;
-          grid-template-columns: 1.1fr 0.9fr;
+          grid-template-columns: 1.05fr 0.95fr;
           gap: 3.5rem;
           align-items: center;
         }
@@ -1150,9 +1435,10 @@ export default function MedicalErpView() {
         .stats-strip {
           display: flex;
           align-items: center;
-          gap: 2rem;
+          gap: 1.5rem;
           padding-top: 2rem;
           border-top: 1px solid #e2e8f0;
+          flex-wrap: wrap;
         }
 
         .stat-card {
@@ -1164,7 +1450,7 @@ export default function MedicalErpView() {
         }
 
         .stat-number {
-          font-size: 1.85rem;
+          font-size: 1.75rem;
           font-weight: 900;
           color: #0f172a;
           line-height: 1;
@@ -1172,7 +1458,7 @@ export default function MedicalErpView() {
         }
 
         .stat-label {
-          font-size: 0.85rem;
+          font-size: 0.8rem;
           font-weight: 600;
           color: #64748b;
         }
@@ -1240,6 +1526,34 @@ export default function MedicalErpView() {
           color: #059669;
         }
 
+        .preview-tab-switcher {
+          display: flex;
+          background: #f1f5f9;
+          border-bottom: 1px solid #e2e8f0;
+        }
+
+        .preview-tab-btn {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.5rem;
+          padding: 0.65rem 1rem;
+          font-size: 0.8rem;
+          font-weight: 700;
+          color: #64748b;
+          background: transparent;
+          border: none;
+          cursor: pointer;
+          transition: all 0.2s;
+        }
+
+        .preview-tab-btn.active {
+          background: #ffffff;
+          color: #059669;
+          border-bottom: 2px solid #059669;
+        }
+
         .mac-browser-body {
           padding: 1.5rem;
           background: #fdfdfd;
@@ -1248,7 +1562,7 @@ export default function MedicalErpView() {
         .live-preview-dashboard {
           display: flex;
           flex-direction: column;
-          gap: 1.25rem;
+          gap: 1.15rem;
         }
 
         .dashboard-top-row {
@@ -1284,11 +1598,50 @@ export default function MedicalErpView() {
           border-radius: 50px;
         }
 
+        .live-status-pill.alert {
+          color: #e11d48;
+          background: #ffe4e6;
+          border-color: #fecdd3;
+        }
+
         .live-dot {
           width: 6px;
           height: 6px;
           border-radius: 50%;
           background: #059669;
+        }
+
+        .live-dot-red {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: #e11d48;
+        }
+
+        .pos-search-mock {
+          background: #ffffff;
+          border: 1px solid #cbd5e1;
+          border-radius: 10px;
+          padding: 0.5rem 0.75rem;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+        }
+
+        .pos-search-input {
+          font-size: 0.8rem;
+          color: #64748b;
+          flex: 1;
+        }
+
+        .pos-badge-shortcut {
+          font-size: 0.7rem;
+          font-weight: 800;
+          color: #475569;
+          background: #f1f5f9;
+          padding: 0.15rem 0.4rem;
+          border-radius: 4px;
         }
 
         .kpi-cards-grid {
@@ -1313,7 +1666,7 @@ export default function MedicalErpView() {
         }
 
         .kpi-label {
-          font-size: 0.75rem;
+          font-size: 0.72rem;
           font-weight: 700;
           color: #64748b;
           text-transform: uppercase;
@@ -1325,11 +1678,29 @@ export default function MedicalErpView() {
           color: #059669;
         }
 
+        .kpi-tag.success {
+          font-size: 0.65rem;
+          font-weight: 700;
+          color: #059669;
+          background: #ecfdf5;
+          padding: 0.15rem 0.4rem;
+          border-radius: 4px;
+        }
+
         .kpi-tag.alert {
           font-size: 0.65rem;
           font-weight: 700;
           color: #e11d48;
           background: #ffe4e6;
+          padding: 0.15rem 0.4rem;
+          border-radius: 4px;
+        }
+
+        .kpi-tag.warning {
+          font-size: 0.65rem;
+          font-weight: 700;
+          color: #b45309;
+          background: #fef3c7;
           padding: 0.15rem 0.4rem;
           border-radius: 4px;
         }
@@ -1346,61 +1717,99 @@ export default function MedicalErpView() {
           color: #e11d48;
         }
 
+        .kpi-val.text-amber {
+          color: #d97706;
+        }
+
         .kpi-sub {
-          font-size: 0.75rem;
+          font-size: 0.72rem;
           color: #94a3b8;
+        }
+
+        .split-bars {
+          margin: 0.35rem 0;
+        }
+
+        .split-text {
+          font-size: 0.75rem;
+          font-weight: 700;
+          color: #0f172a;
+        }
+
+        .generic-sub-box {
+          background: #f0fdf4;
+          border: 1px solid #bbf7d0;
+          border-radius: 12px;
+          padding: 0.75rem 1rem;
+        }
+
+        .generic-title {
+          display: flex;
+          align-items: center;
+          gap: 0.4rem;
+          font-size: 0.75rem;
+          font-weight: 800;
+          color: #166534;
+          margin-bottom: 0.25rem;
+        }
+
+        .generic-desc {
+          font-size: 0.75rem;
+          color: #15803d;
+          margin: 0;
+          line-height: 1.4;
         }
 
         .low-stock-box {
           background: #f8fafc;
           border: 1px solid #e2e8f0;
           border-radius: 14px;
-          padding: 1rem;
+          padding: 0.85rem;
         }
 
         .low-stock-title {
           display: flex;
           align-items: center;
           gap: 0.4rem;
-          font-size: 0.8rem;
+          font-size: 0.75rem;
           font-weight: 700;
           color: #475569;
-          margin-bottom: 0.75rem;
+          margin-bottom: 0.5rem;
         }
 
         .stock-items-row {
           display: flex;
           flex-direction: column;
-          gap: 0.5rem;
+          gap: 0.4rem;
         }
 
         .stock-item-badge {
           display: flex;
           align-items: center;
-          gap: 0.75rem;
+          gap: 0.6rem;
           background: #ffffff;
           border: 1px solid #e2e8f0;
-          padding: 0.4rem 0.75rem;
+          padding: 0.35rem 0.65rem;
           border-radius: 8px;
         }
 
         .stock-qty.alert {
-          background: #fef3c7;
-          color: #b45309;
-          font-size: 0.7rem;
+          background: #fee2e2;
+          color: #991b1b;
+          font-size: 0.65rem;
           font-weight: 800;
-          padding: 0.2rem 0.5rem;
-          border-radius: 6px;
+          padding: 0.15rem 0.4rem;
+          border-radius: 4px;
         }
 
         .stock-name {
-          font-size: 0.85rem;
+          font-size: 0.78rem;
           font-weight: 600;
           color: #1e293b;
         }
 
         .dash-bottom-actions {
-          padding-top: 0.5rem;
+          padding-top: 0.25rem;
         }
 
         .btn-live-launch {
@@ -1411,10 +1820,10 @@ export default function MedicalErpView() {
           background: #0f172a;
           color: #ffffff;
           text-decoration: none;
-          padding: 0.75rem;
+          padding: 0.7rem;
           border-radius: 10px;
           font-weight: 700;
-          font-size: 0.85rem;
+          font-size: 0.82rem;
           transition: all 0.2s;
         }
 
@@ -1830,6 +2239,238 @@ export default function MedicalErpView() {
           color: #64748b;
           line-height: 1.5;
           margin: 0;
+        }
+
+        /* ROI CALCULATOR */
+        .calculator-layout {
+          display: grid;
+          grid-template-columns: 1.15fr 0.85fr;
+          gap: 2.5rem;
+          align-items: stretch;
+          max-width: 1100px;
+          margin: 0 auto;
+        }
+
+        .calculator-inputs-card {
+          background: #ffffff;
+          border: 1px solid #e2e8f0;
+          border-radius: 24px;
+          padding: 2.5rem;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+        }
+
+        .calc-input-group {
+          display: flex;
+          flex-direction: column;
+          gap: 0.75rem;
+        }
+
+        .calc-label-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+
+        .calc-label {
+          font-size: 1rem;
+          font-weight: 700;
+          color: #0f172a;
+        }
+
+        .calc-val-badge {
+          font-size: 0.95rem;
+          font-weight: 800;
+          color: #059669;
+          background: #ecfdf5;
+          border: 1px solid #a7f3d0;
+          padding: 0.3rem 0.8rem;
+          border-radius: 50px;
+        }
+
+        .calc-range-slider {
+          width: 100%;
+          height: 8px;
+          border-radius: 5px;
+          background: #e2e8f0;
+          outline: none;
+          accent-color: #059669;
+          cursor: pointer;
+        }
+
+        .range-bounds {
+          display: flex;
+          justify-content: space-between;
+          font-size: 0.75rem;
+          font-weight: 600;
+          color: #94a3b8;
+        }
+
+        .calc-assumptions {
+          margin-top: 2rem;
+          padding-top: 1.5rem;
+          border-top: 1px solid #e2e8f0;
+        }
+
+        .calc-assumptions p {
+          font-size: 0.8rem;
+          color: #64748b;
+          line-height: 1.5;
+          margin: 0;
+        }
+
+        .calculator-results-card {
+          background: linear-gradient(145deg, #0f172a 0%, #064e3b 100%);
+          border-radius: 24px;
+          padding: 2.5rem;
+          color: #ffffff;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          box-shadow: 0 20px 40px -10px rgba(6, 78, 59, 0.3);
+        }
+
+        .results-badge {
+          font-size: 0.75rem;
+          font-weight: 800;
+          letter-spacing: 0.06em;
+          color: #6ee7b7;
+          text-transform: uppercase;
+        }
+
+        .results-big-num {
+          font-size: 3rem;
+          font-weight: 900;
+          color: #ffffff;
+          line-height: 1;
+          margin: 0.75rem 0 0.5rem 0;
+          letter-spacing: -0.02em;
+        }
+
+        .results-sub {
+          font-size: 0.85rem;
+          color: #cbd5e1;
+          margin-bottom: 2rem;
+        }
+
+        .results-metrics-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1rem;
+          background: rgba(255, 255, 255, 0.08);
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          border-radius: 16px;
+          padding: 1.25rem;
+          margin-bottom: 2rem;
+        }
+
+        .res-metric-item {
+          display: flex;
+          flex-direction: column;
+          gap: 0.25rem;
+        }
+
+        .res-metric-label {
+          font-size: 0.75rem;
+          color: #94a3b8;
+        }
+
+        .res-metric-val {
+          font-size: 1.1rem;
+          font-weight: 800;
+          color: #6ee7b7;
+        }
+
+        .btn-calc-cta {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.5rem;
+          background: #ffffff;
+          color: #0f172a;
+          padding: 0.9rem;
+          border-radius: 14px;
+          font-weight: 700;
+          font-size: 0.95rem;
+          border: none;
+          cursor: pointer;
+          transition: all 0.2s;
+        }
+
+        .btn-calc-cta:hover {
+          background: #f1f5f9;
+          transform: translateY(-2px);
+        }
+
+        /* COMPARISON TABLE */
+        .comparison-table-wrapper {
+          background: #ffffff;
+          border: 1px solid #e2e8f0;
+          border-radius: 24px;
+          overflow: hidden;
+          box-shadow: 0 4px 25px rgba(0,0,0,0.02);
+        }
+
+        .comparison-table {
+          width: 100%;
+          border-collapse: collapse;
+          text-align: left;
+        }
+
+        .comparison-table th {
+          padding: 1.25rem 1.75rem;
+          font-size: 0.9rem;
+          font-weight: 800;
+          text-transform: uppercase;
+          letter-spacing: 0.04em;
+          border-bottom: 2px solid #e2e8f0;
+        }
+
+        .th-feature {
+          background: #f8fafc;
+          color: #475569;
+          width: 30%;
+        }
+
+        .th-legacy {
+          background: #fff1f2;
+          color: #be123c;
+          width: 35%;
+        }
+
+        .th-merlinflow {
+          background: #ecfdf5;
+          color: #047857;
+          width: 35%;
+        }
+
+        .comparison-table td {
+          padding: 1.1rem 1.75rem;
+          font-size: 0.9rem;
+          border-bottom: 1px solid #e2e8f0;
+        }
+
+        .row-even {
+          background: #ffffff;
+        }
+
+        .row-odd {
+          background: #fbfcfe;
+        }
+
+        .td-feature {
+          font-weight: 700;
+          color: #0f172a;
+        }
+
+        .cell-content {
+          display: flex;
+          align-items: center;
+          gap: 0.6rem;
+          color: #475569;
+        }
+
+        .text-rose {
+          color: #e11d48;
         }
 
         /* PRICING SECTION */
@@ -2342,6 +2983,10 @@ export default function MedicalErpView() {
             grid-template-columns: repeat(2, 1fr);
           }
 
+          .calculator-layout {
+            grid-template-columns: 1fr;
+          }
+
           .pricing-cards-grid {
             grid-template-columns: 1fr;
           }
@@ -2376,6 +3021,15 @@ export default function MedicalErpView() {
 
           .subnav-tabs {
             display: none;
+          }
+
+          .comparison-table-wrapper {
+            overflow-x: auto;
+          }
+
+          .comparison-table th, .comparison-table td {
+            padding: 0.85rem 1rem;
+            font-size: 0.8rem;
           }
         }
       `}</style>
