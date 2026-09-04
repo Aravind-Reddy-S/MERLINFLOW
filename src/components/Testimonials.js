@@ -19,34 +19,6 @@ export default function Testimonials() {
       role: "Kalaakshi",
       industry: "E-Commerce & D2C",
       rating: 5
-    },
-    {
-      quote: "MerlinFlow ERP transformed how we manage our 3,000+ students. The fee collection and parent portal modules alone saved us hundreds of hours.",
-      author: "Dr. Sarah Jenkins",
-      role: "Principal, Oakridge International",
-      industry: "Education",
-      rating: 5
-    },
-    {
-      quote: "Managing a 5-star resort requires flawless execution. The seamless PMS to POS integration means our guests never experience delays.",
-      author: "Michael Chang",
-      role: "General Manager, The Azure Resort",
-      industry: "Hotels & Resorts",
-      rating: 5
-    },
-    {
-      quote: "Zero-expiry radar and lightning-fast barcode billing saved us over 3.5% in dead stock annually. Our multi-branch pharmacy runs like clockwork.",
-      author: "Dr. Elena Rodriguez",
-      role: "Chief Medical Officer, City Health",
-      industry: "Hospitals & Clinics",
-      rating: 5
-    },
-    {
-      quote: "The analytics tools provided by MerlinFlow ERP gave us the exact insights we needed to optimize our supply chain and cut costs by 15%.",
-      author: "James Peterson",
-      role: "Operations Director, Global Logistics",
-      industry: "Corporate",
-      rating: 5
     }
   ];
 
@@ -248,44 +220,32 @@ export default function Testimonials() {
 
         .testimonials-grid {
           display: flex;
-          overflow-x: auto;
-          gap: 1.5rem;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 2rem;
           margin-bottom: 4rem;
-          padding: 1rem 0 2rem 0; /* Add padding to prevent hover effects from clipping */
-          scroll-behavior: smooth;
-          scroll-snap-type: x mandatory;
-          -webkit-overflow-scrolling: touch;
+          padding: 1rem 0 2rem 0;
           width: 100%;
-          max-width: 100%;
-        }
-        
-        .testimonials-grid::-webkit-scrollbar {
-          height: 8px;
-        }
-        
-        .testimonials-grid::-webkit-scrollbar-track {
-          background: rgba(255, 255, 255, 0.05);
-          border-radius: 4px;
-        }
-        
-        .testimonials-grid::-webkit-scrollbar-thumb {
-          background: rgba(59, 130, 246, 0.5);
-          border-radius: 4px;
+          max-width: 1100px;
+          margin-left: auto;
+          margin-right: auto;
         }
 
         .testimonial-card {
-          flex: 0 0 min(350px, 85vw);
-          scroll-snap-align: center;
-          padding: 1.5rem;
+          flex: 1 1 420px;
+          max-width: 500px;
+          padding: 2.25rem 2rem;
           position: relative;
           display: flex;
           flex-direction: column;
-          transition: transform 0.3s;
+          border-radius: 20px;
+          transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
         }
 
         .testimonial-card:hover {
-          transform: translateY(-10px);
-          border-color: rgba(59, 130, 246, 0.3);
+          transform: translateY(-8px);
+          border-color: rgba(59, 130, 246, 0.4);
+          box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15);
         }
 
         .quote-icon {
