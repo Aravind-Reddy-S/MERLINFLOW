@@ -234,8 +234,19 @@ export default function EcommerceView() {
     }
   ];
 
+  const scrollToContact = () => {
+    const el = document.getElementById("contact");
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const scrollToSection = (id) => {
+    setActiveNav(id);
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
-    <div className="ecommerce-page">
+    <div className="ecommerce-page" style={{ paddingTop: "5.5rem" }}>
       {/* Background Animated SVG Roadmaps & Glow Orbs */}
       <div className="bg-decorations" aria-hidden="true">
         {/* Glowing radial ambient lights */}
@@ -294,21 +305,66 @@ export default function EcommerceView() {
         <div className="grid-overlay" />
       </div>
 
-      <div className="container relative z-10">
-        {/* Top Back Navigation Bar */}
-        <div className="top-nav-bar">
+      {/* Top Breadcrumb & Sub Navigation */}
+      <div className="sticky-subnav" style={{ position: "sticky", top: "76px", zIndex: 900 }}>
+        <div className="container subnav-container">
           <Link href="/#products" className="back-link">
             <ArrowLeft size={16} /> Back to Products
           </Link>
-          <div className="live-pill">
-            <span className="live-dot" />
-            <span>MerlinFlow Commerce Engine Active</span>
+
+          <div className="subnav-tabs">
+            <button 
+              className={`subnav-tab ${activeNav === 'overview' ? 'active' : ''}`}
+              onClick={() => scrollToSection('overview')}
+            >
+              Overview
+            </button>
+            <button 
+              className={`subnav-tab ${activeNav === 'capabilities' ? 'active' : ''}`}
+              onClick={() => scrollToSection('capabilities')}
+            >
+              Capabilities
+            </button>
+            <button 
+              className={`subnav-tab ${activeNav === 'workflow' ? 'active' : ''}`}
+              onClick={() => scrollToSection('workflow')}
+            >
+              D2C Workflow
+            </button>
+            <button 
+              className={`subnav-tab ${activeNav === 'calculator' ? 'active' : ''}`}
+              onClick={() => scrollToSection('calculator')}
+            >
+              ROI Calculator
+            </button>
+            <button 
+              className={`subnav-tab ${activeNav === 'industries' ? 'active' : ''}`}
+              onClick={() => scrollToSection('industries')}
+            >
+              Industries
+            </button>
+            <button 
+              className={`subnav-tab ${activeNav === 'pricing' ? 'active' : ''}`}
+              onClick={() => scrollToSection('pricing')}
+            >
+              Pricing
+            </button>
+            <button 
+              className={`subnav-tab ${activeNav === 'faq' ? 'active' : ''}`}
+              onClick={() => scrollToSection('faq')}
+            >
+              FAQ
+            </button>
           </div>
+
+          <button onClick={scrollToContact} className="subnav-cta-btn">
+            Request Demo <ArrowRight size={14} />
+          </button>
         </div>
       </div>
 
       {/* HERO SECTION */}
-      <section className="hero-section">
+      <section id="overview" className="hero-section">
         <div className="hero-bg-container" aria-hidden="true">
           <div className="ecommerce-hero-bg-image" />
           <div className="ecommerce-hero-bg-overlay" />
@@ -658,7 +714,7 @@ export default function EcommerceView() {
         </motion.section>
 
         {/* 4 CORE CAPABILITIES (Using Established Premium 1.5px Card Layout) */}
-        <section className="capabilities-section">
+        <section id="capabilities" className="capabilities-section">
           <div className="section-header text-center">
             <span className="section-eyebrow">BUILT FOR SCALE</span>
             <h2 className="section-title">Everything You Need To Scale To 50,000+ Orders</h2>
@@ -714,7 +770,7 @@ export default function EcommerceView() {
         </section>
 
         {/* 3-STEP AUTOMATED WORKFLOW */}
-        <section className="workflow-section">
+        <section id="workflow" className="workflow-section">
           <div className="section-header text-center">
             <span className="section-eyebrow">SEAMLESS AUTOMATION</span>
             <h2 className="section-title">How MerlinFlow Automates Every Order in Seconds</h2>
@@ -867,7 +923,7 @@ export default function EcommerceView() {
         </section>
 
         {/* TARGET INDUSTRY VERTICALS */}
-        <section className="industries-section">
+        <section id="industries" className="industries-section">
           <div className="section-header text-center">
             <span className="section-eyebrow">TAILORED FOR YOUR NICHE</span>
             <h2 className="section-title">Built For The Complexities of Your Vertical</h2>
@@ -967,7 +1023,7 @@ export default function EcommerceView() {
         </section>
 
         {/* FAQ ACCORDION */}
-        <section className="faq-section">
+        <section id="faq" className="faq-section">
           <div className="section-header text-center">
             <span className="section-eyebrow">FREQUENTLY ASKED QUESTIONS</span>
             <h2 className="section-title">Everything You Need To Know</h2>
@@ -1012,7 +1068,7 @@ export default function EcommerceView() {
         <ContactSection />
       </div>
 
-      <style jsx>{`
+      <style jsx global>{`
         .ecommerce-page {
           min-height: 100vh;
           padding-top: 5.5rem;
@@ -1033,10 +1089,100 @@ export default function EcommerceView() {
           z-index: 0;
         }
 
+        /* STICKY SUB NAVIGATION */
+        .sticky-subnav {
+          position: sticky;
+          top: 76px;
+          z-index: 900;
+          background: rgba(255, 255, 255, 0.94);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          border-bottom: 1px solid #e9d5ff;
+          padding: 0.65rem 0;
+          box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+
+        .subnav-container {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 1rem;
+        }
+
+        .back-link {
+          display: flex;
+          align-items: center;
+          gap: 0.45rem;
+          font-size: 0.85rem;
+          font-weight: 600;
+          color: #64748b;
+          text-decoration: none;
+          transition: color 0.2s;
+        }
+
+        .back-link:hover {
+          color: #7c3aed;
+        }
+
+        .subnav-tabs {
+          display: flex;
+          align-items: center;
+          gap: 0.35rem;
+          background: #faf5ff;
+          padding: 0.25rem;
+          border-radius: 50px;
+          flex-wrap: wrap;
+          border: 1px solid #f3e8ff;
+        }
+
+        .subnav-tab {
+          padding: 0.35rem 0.85rem;
+          border-radius: 50px;
+          font-size: 0.8rem;
+          font-weight: 600;
+          color: #64748b;
+          background: transparent;
+          border: none;
+          cursor: pointer;
+          transition: all 0.2s;
+        }
+
+        .subnav-tab:hover {
+          color: #0f172a;
+        }
+
+        .subnav-tab.active {
+          background: #ffffff;
+          color: #7c3aed;
+          box-shadow: 0 2px 6px rgba(124, 58, 237, 0.15);
+        }
+
+        .subnav-cta-btn {
+          display: flex;
+          align-items: center;
+          gap: 0.4rem;
+          background: linear-gradient(135deg, #7c3aed, #a855f7);
+          color: #ffffff;
+          border: none;
+          border-radius: 50px;
+          padding: 0.45rem 1.1rem;
+          font-size: 0.85rem;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.2s;
+          white-space: nowrap;
+          box-shadow: 0 2px 8px rgba(124, 58, 237, 0.25);
+        }
+
+        .subnav-cta-btn:hover {
+          filter: brightness(1.08);
+          transform: translateY(-1px);
+        }
+
         /* Hero Section */
         .hero-section {
           position: relative;
-          padding: 6.5rem 0 4.5rem;
+          padding: 5.5rem 0 4.5rem;
           overflow: hidden;
           background-color: #f8fafc;
           margin-bottom: 2rem;
