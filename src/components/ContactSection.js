@@ -18,7 +18,7 @@ export default function ContactSection() {
     { q: "Do you work with businesses outside Telangana?", a: "Yes, we serve clients across India and globally." }
   ];
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
@@ -30,38 +30,24 @@ export default function ContactSection() {
     const company = form.company?.value || "";
     const message = form.message?.value || "";
 
-    try {
-      const response = await fetch("https://formsubmit.co/ajax/hello@merlinflow.in", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-        },
-        body: JSON.stringify({
-          _subject: `New Contact Inquiry from ${firstName} ${lastName} (${company})`,
-          "First Name": firstName,
-          "Last Name": lastName,
-          "Email": email,
-          "Phone": phone,
-          "Company": company,
-          "Interested In": interest,
-          "Budget Range": budget,
-          "Message": message,
-        }),
-      });
+    const subject = encodeURIComponent(`Contact Inquiry: ${firstName} ${lastName} (${company})`);
+    const body = encodeURIComponent(
+      `Name: ${firstName} ${lastName}\n` +
+      `Email: ${email}\n` +
+      `Phone: ${phone}\n` +
+      `Company: ${company}\n` +
+      `Interested In: ${interest}\n` +
+      `Budget Range: ${budget}\n\n` +
+      `Message:\n${message}`
+    );
 
-      if (response.ok) {
-        setIsSubmitted(true);
-        form.reset();
-        setTimeout(() => setIsSubmitted(false), 5000);
-      } else {
-        alert("Oops! Something went wrong while sending your message. Please try again.");
-      }
-    } catch (error) {
-      alert("Oops! A network error occurred. Please check your connection and try again.");
-    } finally {
-      setIsSubmitting(false);
-    }
+    // Direct mail compose without third-party activation
+    window.location.href = `mailto:hello@merlinflow.in?subject=${subject}&body=${body}`;
+
+    setIsSubmitting(false);
+    setIsSubmitted(true);
+    form.reset();
+    setTimeout(() => setIsSubmitted(false), 6000);
   };
 
   return (
