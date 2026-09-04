@@ -1430,7 +1430,7 @@ export default function SchoolImsView() {
         .school-ims-page {
           background-color: #f8fafc;
           color: #0f172a;
-          padding-top: 4.5rem;
+          padding-top: 5.75rem;
           min-height: 100vh;
           overflow-x: hidden;
         }
@@ -1438,7 +1438,7 @@ export default function SchoolImsView() {
         /* STICKY SUB-NAV */
         .sticky-subnav {
           position: sticky;
-          top: 64px;
+          top: 76px;
           z-index: 900;
           background: rgba(255, 255, 255, 0.95);
           backdrop-filter: blur(12px);

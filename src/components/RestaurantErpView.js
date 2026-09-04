@@ -1063,6 +1063,7 @@ export default function RestaurantErpView() {
           background-color: #ffffff;
           color: #0f172a;
           font-family: inherit;
+          padding-top: 5.75rem;
         }
 
         .container {
@@ -1084,13 +1085,14 @@ export default function RestaurantErpView() {
         /* STICKY SUB NAVIGATION */
         .sticky-subnav {
           position: sticky;
-          top: 68px;
-          z-index: 40;
+          top: 76px;
+          z-index: 900;
           background: rgba(255, 255, 255, 0.94);
           backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
           border-bottom: 1px solid #fed7aa;
-          padding: 0.6rem 0;
-          box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+          padding: 0.65rem 0;
+          box-shadow: 0 2px 10px rgba(0,0,0,0.03);
         }
 
         .subnav-container {
