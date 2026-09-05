@@ -3936,25 +3936,150 @@ export default function MedicalErpView() {
             border-radius: 16px !important;
           }
 
+          .role-switcher-tabs {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 0.65rem !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            margin: 1.5rem auto 0 !important;
+            box-sizing: border-box !important;
+          }
+
+          .role-tab-pill {
+            width: 100% !important;
+            box-sizing: border-box !important;
+            padding: 0.85rem 1rem !important;
+            border-radius: 14px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            gap: 0.5rem !important;
+          }
+
+          .role-tab-left {
+            display: flex !important;
+            align-items: center !important;
+            gap: 0.5rem !important;
+            min-width: 0 !important;
+            flex: 1 !important;
+          }
+
+          .role-tab-name {
+            font-size: 0.86rem !important;
+            line-height: 1.25 !important;
+            word-break: break-word !important;
+            overflow-wrap: break-word !important;
+          }
+
+          .role-tab-badge {
+            font-size: 0.62rem !important;
+            padding: 0.2rem 0.5rem !important;
+            flex-shrink: 0 !important;
+          }
+
           .role-portal-container {
-            padding: 1.5rem 1.15rem !important;
-            border-radius: 18px !important;
+            padding: 1.35rem 1rem !important;
+            border-radius: 20px !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            margin-top: 1.5rem !important;
+            box-sizing: border-box !important;
+            overflow: hidden !important;
           }
 
           .role-portal-top {
             flex-direction: column !important;
             align-items: flex-start !important;
-            gap: 0.75rem !important;
+            gap: 1.25rem !important;
+            padding-bottom: 1.5rem !important;
+            margin-bottom: 1.5rem !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+          }
+
+          .role-portal-info {
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: 0 !important;
+            box-sizing: border-box !important;
+          }
+
+          .role-badge {
+            font-size: 0.68rem !important;
+            padding: 0.25rem 0.65rem !important;
+            margin-bottom: 0.65rem !important;
+            white-space: normal !important;
+            word-break: break-word !important;
+          }
+
+          .role-portal-heading {
+            font-size: clamp(1.4rem, 5.5vw, 1.9rem) !important;
+            line-height: 1.2 !important;
+            word-break: break-word !important;
+            overflow-wrap: break-word !important;
+            hyphens: auto !important;
+            margin-bottom: 0.35rem !important;
+          }
+
+          .role-portal-tagline {
+            font-size: 0.92rem !important;
+            line-height: 1.4 !important;
+            margin-bottom: 0.65rem !important;
+            word-break: break-word !important;
+            overflow-wrap: break-word !important;
+          }
+
+          .role-portal-desc {
+            font-size: 0.88rem !important;
+            line-height: 1.55 !important;
+            word-break: break-word !important;
+            overflow-wrap: break-word !important;
+          }
+
+          .role-portal-action {
+            width: 100% !important;
+            max-width: 100% !important;
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 0.65rem !important;
+            box-sizing: border-box !important;
+          }
+
+          .role-request-btn, .role-contact-secondary-btn {
+            width: 100% !important;
+            justify-content: center !important;
+            font-size: 0.85rem !important;
+            padding: 0.75rem 1rem !important;
+            box-sizing: border-box !important;
+            white-space: normal !important;
+            text-align: center !important;
+            border-radius: 12px !important;
           }
 
           .role-internal-cards-grid {
             grid-template-columns: 1fr !important;
             gap: 0.75rem !important;
+            width: 100% !important;
           }
 
-          .role-request-btn {
+          .role-internal-card {
+            padding: 1.15rem 1rem !important;
+            border-radius: 16px !important;
             width: 100% !important;
-            justify-content: center !important;
+            box-sizing: border-box !important;
+          }
+
+          .internal-card-title {
+            font-size: 1rem !important;
+            line-height: 1.3 !important;
+            word-break: break-word !important;
+          }
+
+          .internal-card-desc {
+            font-size: 0.82rem !important;
+            line-height: 1.5 !important;
+            word-break: break-word !important;
           }
 
           .roadmap-grid {
