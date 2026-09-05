@@ -9,6 +9,18 @@ export default function Hero() {
   const [isDemoOpen, setIsDemoOpen] = useState(false);
   const [selectedERP, setSelectedERP] = useState(null);
 
+  const handleProceedToContact = (e) => {
+    e.preventDefault();
+    setIsDemoOpen(false);
+    setSelectedERP(null);
+    const contactElem = document.getElementById('contact');
+    if (contactElem) {
+      contactElem.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      window.location.href = '/contact';
+    }
+  };
+
   return (
     <div className="hero-wrapper">
       <section className="hero-container">
@@ -82,19 +94,19 @@ export default function Hero() {
 
               {!selectedERP ? (
                 <div className="demo-options-grid">
-                  <button onClick={() => setSelectedERP({ title: 'Educational ERP', link: 'https://calendly.com/temp-educational' })} className="demo-card">
+                  <button onClick={() => setSelectedERP({ title: 'Educational ERP' })} className="demo-card">
                     <GraduationCap size={32} className="card-icon" />
                     <h4>Educational ERP</h4>
                   </button>
-                  <button onClick={() => setSelectedERP({ title: 'Hotel ERP', link: 'https://calendly.com/temp-hotel' })} className="demo-card">
+                  <button onClick={() => setSelectedERP({ title: 'Hotel ERP' })} className="demo-card">
                     <Building size={32} className="card-icon" />
                     <h4>Hotel ERP</h4>
                   </button>
-                  <button onClick={() => setSelectedERP({ title: 'Hospital ERP', link: 'https://calendly.com/temp-hospital' })} className="demo-card">
+                  <button onClick={() => setSelectedERP({ title: 'Hospital ERP' })} className="demo-card">
                     <HeartPulse size={32} className="card-icon" />
                     <h4>Hospital ERP</h4>
                   </button>
-                  <button onClick={() => setSelectedERP({ title: 'E-Commerce', link: 'https://calendly.com/temp-ecommerce' })} className="demo-card">
+                  <button onClick={() => setSelectedERP({ title: 'E-Commerce' })} className="demo-card">
                     <ShoppingCart size={32} className="card-icon" />
                     <h4>E-Commerce</h4>
                   </button>
@@ -111,7 +123,12 @@ export default function Hero() {
                       allowFullScreen
                     ></iframe>
                   </div>
-                  <a href={selectedERP.link} target="_blank" rel="noreferrer" className="btn-primary" style={{ display: 'block', width: '100%', textAlign: 'center' }}>
+                  <a 
+                    href="#contact" 
+                    onClick={handleProceedToContact}
+                    className="btn-primary" 
+                    style={{ display: 'block', width: '100%', textAlign: 'center', cursor: 'pointer' }}
+                  >
                     Proceed to Book Live Demo
                   </a>
                 </div>
