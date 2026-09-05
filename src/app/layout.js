@@ -2,6 +2,7 @@ import "./globals.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import AccessibilityWidget from "../components/AccessibilityWidget";
+import ChatbotWidget from "../components/ChatbotWidget";
 
 import Preloader from "../components/Preloader";
 import Script from "next/script";
@@ -75,6 +76,7 @@ export default function RootLayout({ children }) {
         
         {/* Global Floating Widgets */}
         <AccessibilityWidget />
+        <ChatbotWidget />
 
       </body>
     </html>
