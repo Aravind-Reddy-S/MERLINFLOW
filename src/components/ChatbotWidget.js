@@ -140,18 +140,18 @@ export default function ChatbotWidget() {
       <div className="merlin-chat-launcher-wrap">
         <motion.button
           onClick={() => setIsOpen(!isOpen)}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+          whileHover={{ scale: 1.04 }}
+          whileTap={{ scale: 0.96 }}
           className="merlin-chat-launcher"
           aria-label="Open Merlin AI Assistant"
         >
           <div className="launcher-pulse-ring"></div>
           {isOpen ? (
-            <X size={22} className="text-white" />
+            <X size={18} className="text-white" />
           ) : (
-            <div className="flex items-center gap-2">
-              <Sparkles size={18} className="text-amber-300 animate-pulse" />
-              <Bot size={22} className="text-white" />
+            <div className="flex items-center gap-1.5">
+              <Sparkles size={14} className="text-amber-300 animate-pulse" />
+              <Bot size={18} className="text-white" />
             </div>
           )}
           {!isOpen && (
@@ -164,17 +164,17 @@ export default function ChatbotWidget() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 30, scale: 0.94 }}
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 30, scale: 0.94 }}
-            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
             className="merlin-chat-window"
           >
             {/* Window Header */}
             <div className="chat-window-header">
               <div className="header-left">
                 <div className="avatar-wrap">
-                  <Bot size={18} className="text-emerald-400" />
+                  <Bot size={16} className="text-emerald-400" />
                   <span className="status-dot"></span>
                 </div>
                 <div>
@@ -193,7 +193,7 @@ export default function ChatbotWidget() {
                   title="Reset conversation"
                   aria-label="Reset conversation"
                 >
-                  <RotateCcw size={15} />
+                  <RotateCcw size={13} />
                 </button>
                 <button
                   onClick={() => setIsOpen(false)}
@@ -201,7 +201,7 @@ export default function ChatbotWidget() {
                   title="Close chat"
                   aria-label="Close chat"
                 >
-                  <X size={17} />
+                  <X size={15} />
                 </button>
               </div>
             </div>
@@ -229,23 +229,23 @@ export default function ChatbotWidget() {
               {messages.map((msg, idx) => (
                 <motion.div
                   key={idx}
-                  initial={{ opacity: 0, y: 8 }}
+                  initial={{ opacity: 0, y: 6 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.2 }}
+                  transition={{ duration: 0.18 }}
                   className={`chat-message-row ${msg.role === 'user' ? 'user' : 'assistant'}`}
                 >
                   <div className="message-avatar">
                     {msg.role === 'user' ? (
-                      <User size={14} className="text-slate-200" />
+                      <User size={12} className="text-slate-200" />
                     ) : (
-                      <Bot size={14} className="text-emerald-400" />
+                      <Bot size={12} className="text-emerald-400" />
                     )}
                   </div>
                   <div className={`message-bubble ${msg.role === 'user' ? 'user-bubble' : 'assistant-bubble'}`}>
                     {msg.role === 'user' ? (
                       <p className="whitespace-pre-wrap">{msg.content}</p>
                     ) : (
-                      <div className="formatted-content text-slate-200 text-sm">
+                      <div className="formatted-content text-slate-200 text-xs sm:text-sm">
                         {formatMessageText(msg.content)}
                       </div>
                     )}
@@ -256,7 +256,7 @@ export default function ChatbotWidget() {
               {isLoading && (
                 <div className="chat-message-row assistant">
                   <div className="message-avatar">
-                    <Bot size={14} className="text-emerald-400" />
+                    <Bot size={12} className="text-emerald-400" />
                   </div>
                   <div className="message-bubble assistant-bubble typing-bubble">
                     <div className="typing-dots">
@@ -284,7 +284,7 @@ export default function ChatbotWidget() {
                   type="text"
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
-                  placeholder="Ask Merlin AI anything about our ERP..."
+                  placeholder="Ask Merlin AI anything..."
                   className="chat-input-field"
                   disabled={isLoading}
                 />
@@ -294,7 +294,7 @@ export default function ChatbotWidget() {
                   className="chat-send-btn"
                   aria-label="Send message"
                 >
-                  <Send size={16} />
+                  <Send size={14} />
                 </button>
               </form>
 
@@ -313,8 +313,8 @@ export default function ChatbotWidget() {
         /* LAUNCHER BUTTON */
         .merlin-chat-launcher-wrap {
           position: fixed;
-          bottom: 24px;
-          right: 24px;
+          bottom: 20px;
+          right: 20px;
           z-index: 9999;
         }
 
@@ -322,30 +322,30 @@ export default function ChatbotWidget() {
           position: relative;
           display: flex;
           align-items: center;
-          gap: 0.6rem;
+          gap: 0.45rem;
           background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #059669 100%);
-          border: 1.5px solid rgba(52, 211, 153, 0.4);
+          border: 1.25px solid rgba(52, 211, 153, 0.4);
           color: #ffffff;
-          padding: 0.75rem 1.15rem;
+          padding: 0.52rem 0.95rem;
           border-radius: 50px;
-          box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35), 0 0 15px rgba(5, 150, 105, 0.3);
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3), 0 0 12px rgba(5, 150, 105, 0.25);
           cursor: pointer;
           font-weight: 700;
-          font-size: 0.9rem;
+          font-size: 0.82rem;
           transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .merlin-chat-launcher:hover {
           border-color: #34d399;
-          box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45), 0 0 25px rgba(16, 185, 129, 0.5);
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), 0 0 18px rgba(16, 185, 129, 0.4);
           transform: translateY(-2px);
         }
 
         .launcher-pulse-ring {
           position: absolute;
-          inset: -4px;
+          inset: -3px;
           border-radius: 50px;
-          background: radial-gradient(circle, rgba(16, 185, 129, 0.4) 0%, rgba(16, 185, 129, 0) 70%);
+          background: radial-gradient(circle, rgba(16, 185, 129, 0.35) 0%, rgba(16, 185, 129, 0) 70%);
           animation: pulseRing 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
           z-index: -1;
           pointer-events: none;
@@ -353,34 +353,35 @@ export default function ChatbotWidget() {
 
         @keyframes pulseRing {
           0%, 100% {
-            opacity: 0.4;
+            opacity: 0.35;
             transform: scale(0.98);
           }
           50% {
-            opacity: 0.8;
+            opacity: 0.75;
             transform: scale(1.04);
           }
         }
 
         .launcher-label {
           letter-spacing: 0.01em;
+          font-size: 0.8rem;
         }
 
         /* CHAT WINDOW */
         .merlin-chat-window {
           position: fixed;
-          bottom: 90px;
-          right: 24px;
-          width: 410px;
-          max-width: calc(100vw - 32px);
-          height: 600px;
-          max-height: calc(100vh - 120px);
+          bottom: 76px;
+          right: 20px;
+          width: 350px;
+          max-width: calc(100vw - 28px);
+          height: 480px;
+          max-height: calc(100vh - 100px);
           background: rgba(15, 23, 42, 0.96);
-          backdrop-filter: blur(24px);
-          -webkit-backdrop-filter: blur(24px);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
           border: 1.5px solid rgba(255, 255, 255, 0.12);
-          box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.6), 0 0 30px rgba(5, 150, 105, 0.15);
-          border-radius: 24px;
+          box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.6), 0 0 24px rgba(5, 150, 105, 0.15);
+          border-radius: 20px;
           display: flex;
           flex-direction: column;
           overflow: hidden;
@@ -391,7 +392,7 @@ export default function ChatbotWidget() {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding: 1rem 1.25rem;
+          padding: 0.75rem 1rem;
           background: rgba(30, 41, 59, 0.6);
           border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
@@ -399,14 +400,14 @@ export default function ChatbotWidget() {
         .header-left {
           display: flex;
           align-items: center;
-          gap: 0.75rem;
+          gap: 0.65rem;
         }
 
         .avatar-wrap {
           position: relative;
-          width: 38px;
-          height: 38px;
-          border-radius: 12px;
+          width: 32px;
+          height: 32px;
+          border-radius: 10px;
           background: rgba(16, 185, 129, 0.15);
           border: 1px solid rgba(52, 211, 153, 0.3);
           display: flex;
@@ -416,18 +417,18 @@ export default function ChatbotWidget() {
 
         .status-dot {
           position: absolute;
-          bottom: -2px;
-          right: -2px;
-          width: 10px;
-          height: 10px;
+          bottom: -1px;
+          right: -1px;
+          width: 8px;
+          height: 8px;
           border-radius: 50%;
           background: #10b981;
-          border: 2px solid #0f172a;
-          box-shadow: 0 0 6px #10b981;
+          border: 1.5px solid #0f172a;
+          box-shadow: 0 0 5px #10b981;
         }
 
         .header-title {
-          font-size: 0.95rem;
+          font-size: 0.88rem;
           font-weight: 800;
           color: #ffffff;
           line-height: 1.2;
@@ -435,18 +436,18 @@ export default function ChatbotWidget() {
         }
 
         .copilot-badge {
-          font-size: 0.62rem;
+          font-size: 0.58rem;
           font-weight: 800;
           background: linear-gradient(135deg, #059669, #0d9488);
           color: #ffffff;
-          padding: 0.15rem 0.45rem;
+          padding: 0.12rem 0.4rem;
           border-radius: 50px;
           letter-spacing: 0.04em;
           text-transform: uppercase;
         }
 
         .header-sub {
-          font-size: 0.7rem;
+          font-size: 0.65rem;
           color: #94a3b8;
           margin: 0;
         }
@@ -454,13 +455,13 @@ export default function ChatbotWidget() {
         .header-actions {
           display: flex;
           align-items: center;
-          gap: 0.4rem;
+          gap: 0.35rem;
         }
 
         .header-icon-btn {
-          width: 30px;
-          height: 30px;
-          border-radius: 8px;
+          width: 26px;
+          height: 26px;
+          border-radius: 7px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -478,23 +479,23 @@ export default function ChatbotWidget() {
 
         /* SUGGESTIONS */
         .quick-suggestions-wrap {
-          padding: 0.65rem 1rem;
+          padding: 0.5rem 0.85rem;
           background: rgba(15, 23, 42, 0.4);
           border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .suggestions-label {
-          font-size: 0.68rem;
+          font-size: 0.62rem;
           font-weight: 700;
           color: #64748b;
           text-transform: uppercase;
           letter-spacing: 0.05em;
-          margin-bottom: 0.4rem;
+          margin-bottom: 0.3rem;
         }
 
         .suggestions-scroll {
           display: flex;
-          gap: 0.45rem;
+          gap: 0.35rem;
           overflow-x: auto;
           -webkit-overflow-scrolling: touch;
           padding-bottom: 2px;
@@ -511,12 +512,12 @@ export default function ChatbotWidget() {
 
         .suggestion-chip {
           white-space: nowrap;
-          font-size: 0.72rem;
+          font-size: 0.68rem;
           font-weight: 600;
           color: #cbd5e1;
           background: rgba(255, 255, 255, 0.06);
           border: 1px solid rgba(255, 255, 255, 0.1);
-          padding: 0.35rem 0.75rem;
+          padding: 0.25rem 0.65rem;
           border-radius: 50px;
           cursor: pointer;
           transition: all 0.2s;
@@ -534,26 +535,26 @@ export default function ChatbotWidget() {
         .chat-messages-container {
           flex: 1;
           overflow-y: auto;
-          padding: 1.25rem 1rem;
+          padding: 0.9rem 0.85rem;
           display: flex;
           flex-direction: column;
-          gap: 1rem;
+          gap: 0.75rem;
         }
 
         .chat-messages-container::-webkit-scrollbar {
-          width: 5px;
+          width: 4px;
         }
 
         .chat-messages-container::-webkit-scrollbar-thumb {
           background: rgba(255, 255, 255, 0.15);
-          border-radius: 5px;
+          border-radius: 4px;
         }
 
         .chat-message-row {
           display: flex;
-          gap: 0.65rem;
+          gap: 0.5rem;
           align-items: flex-start;
-          max-width: 90%;
+          max-width: 92%;
         }
 
         .chat-message-row.user {
@@ -566,9 +567,9 @@ export default function ChatbotWidget() {
         }
 
         .message-avatar {
-          width: 26px;
-          height: 26px;
-          border-radius: 8px;
+          width: 22px;
+          height: 22px;
+          border-radius: 7px;
           background: rgba(255, 255, 255, 0.08);
           border: 1px solid rgba(255, 255, 255, 0.1);
           display: flex;
@@ -579,10 +580,10 @@ export default function ChatbotWidget() {
         }
 
         .message-bubble {
-          padding: 0.85rem 1rem;
-          border-radius: 16px;
-          font-size: 0.88rem;
-          line-height: 1.5;
+          padding: 0.65rem 0.85rem;
+          border-radius: 14px;
+          font-size: 0.82rem;
+          line-height: 1.45;
           word-break: break-word;
           overflow-wrap: break-word;
         }
@@ -590,28 +591,28 @@ export default function ChatbotWidget() {
         .user-bubble {
           background: linear-gradient(135deg, #059669 0%, #0d9488 100%);
           color: #ffffff;
-          border-bottom-right-radius: 4px;
-          box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25);
+          border-bottom-right-radius: 3px;
+          box-shadow: 0 3px 10px rgba(5, 150, 105, 0.25);
         }
 
         .assistant-bubble {
           background: rgba(30, 41, 59, 0.85);
           border: 1px solid rgba(255, 255, 255, 0.08);
           color: #e2e8f0;
-          border-bottom-left-radius: 4px;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+          border-bottom-left-radius: 3px;
+          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
         }
 
         .typing-dots {
           display: flex;
           align-items: center;
-          gap: 5px;
-          padding: 0.2rem 0.4rem;
+          gap: 4px;
+          padding: 0.15rem 0.3rem;
         }
 
         .typing-dots span {
-          width: 6px;
-          height: 6px;
+          width: 5px;
+          height: 5px;
           border-radius: 50%;
           background: #10b981;
           animation: bounceDots 1.4s infinite ease-in-out both;
@@ -631,7 +632,7 @@ export default function ChatbotWidget() {
 
         /* INPUT AREA */
         .chat-input-area {
-          padding: 0.85rem 1rem 0.75rem 1rem;
+          padding: 0.65rem 0.85rem 0.55rem 0.85rem;
           background: rgba(15, 23, 42, 0.8);
           border-top: 1px solid rgba(255, 255, 255, 0.08);
         }
@@ -639,17 +640,17 @@ export default function ChatbotWidget() {
         .chat-input-form {
           display: flex;
           align-items: center;
-          gap: 0.5rem;
+          gap: 0.4rem;
           background: rgba(30, 41, 59, 0.9);
           border: 1.5px solid rgba(255, 255, 255, 0.12);
-          border-radius: 14px;
-          padding: 0.35rem 0.45rem 0.35rem 0.9rem;
+          border-radius: 12px;
+          padding: 0.25rem 0.35rem 0.25rem 0.75rem;
           transition: border-color 0.2s;
         }
 
         .chat-input-form:focus-within {
           border-color: #10b981;
-          box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+          box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.15);
         }
 
         .chat-input-field {
@@ -658,7 +659,7 @@ export default function ChatbotWidget() {
           border: none;
           outline: none;
           color: #ffffff;
-          font-size: 0.85rem;
+          font-size: 0.8rem;
         }
 
         .chat-input-field::placeholder {
@@ -666,9 +667,9 @@ export default function ChatbotWidget() {
         }
 
         .chat-send-btn {
-          width: 34px;
-          height: 34px;
-          border-radius: 10px;
+          width: 28px;
+          height: 28px;
+          border-radius: 8px;
           background: #10b981;
           color: #ffffff;
           border: none;
@@ -693,21 +694,21 @@ export default function ChatbotWidget() {
 
         .chat-footer-note {
           text-align: center;
-          font-size: 0.65rem;
+          font-size: 0.62rem;
           color: #64748b;
-          margin-top: 0.45rem;
+          margin-top: 0.35rem;
         }
 
         /* MOBILE ADJUSTMENTS */
         @media (max-width: 640px) {
           .merlin-chat-launcher-wrap {
-            bottom: 16px;
-            right: 16px;
+            bottom: 14px;
+            right: 14px;
           }
 
           .merlin-chat-launcher {
-            padding: 0.65rem 0.95rem;
-            font-size: 0.82rem;
+            padding: 0.5rem 0.75rem;
+            font-size: 0.78rem;
           }
 
           .launcher-label {
@@ -715,14 +716,14 @@ export default function ChatbotWidget() {
           }
 
           .merlin-chat-window {
-            bottom: 76px;
-            right: 12px;
-            left: 12px;
+            bottom: 68px;
+            right: 10px;
+            left: 10px;
             width: auto;
             max-width: none;
-            height: calc(100vh - 100px);
-            max-height: 560px;
-            border-radius: 20px;
+            height: calc(100vh - 110px);
+            max-height: 490px;
+            border-radius: 18px;
           }
         }
       `}</style>
