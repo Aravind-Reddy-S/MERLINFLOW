@@ -35,6 +35,7 @@ export default function ClientShowcase() {
       id: "oneclickbiz-smart-networking-saas",
       title: "OneClickBiz - Digital Business Card (vCard), NFC & WhatsApp Store SaaS",
       client: "OneClickBiz",
+      logo: "/images/logos/oneclickbiz.png",
       liveUrl: "https://oneclickbiz.in",
       displayUrl: "oneclickbiz.in",
       location: "India & Global",
@@ -60,6 +61,7 @@ export default function ClientShowcase() {
       id: "nestinfra-real-estate-crm",
       title: "Nest Infra Developers - Real Estate CRM & Sales Automation Model",
       client: "Nest Infra Developers",
+      logo: "/images/logos/nestinfra.png",
       liveUrl: "https://crm.nestinfradevelopers.in",
       displayUrl: "crm.nestinfradevelopers.in",
       location: "Hyderabad & Telangana",
@@ -85,6 +87,7 @@ export default function ClientShowcase() {
       id: "kalaakshi-culture-events-ecommerce",
       title: "Kalaakshi - Culture, Heritage & Event Show Bookings Platform",
       client: "Kalaakshi",
+      logo: "/images/logos/kalaakshi.jpg",
       liveUrl: "https://www.kalaakshi.com",
       displayUrl: "www.kalaakshi.com",
       location: "India",
@@ -110,6 +113,7 @@ export default function ClientShowcase() {
       id: "himastech-growth-proptech",
       title: "HimasTech - Performance Marketing, Training Academy & Enterprise PropTech",
       client: "HimasTech (Synergy with MerlinFlow)",
+      logo: "/images/logos/himastech.png",
       liveUrl: "https://himastech.com",
       displayUrl: "himastech.com",
       location: "India & Global",
@@ -119,16 +123,16 @@ export default function ClientShowcase() {
       featured: true,
       summary: "High-impact performance marketing engine, Generative AI Search Optimization (GEO) architecture, digital talent training academy, and integrated MerlinFlow enterprise SaaS solutions ecosystem.",
       metrics: [
-        { label: "Client ROAS Boost", value: "4.8x Avg" },
-        { label: "CAC Reduction", value: "-48%" },
-        { label: "Trained Marketers", value: "1,200+ Alumni" }
+        { label: "Ad ROAS Generated", value: "4.8x Avg" },
+        { label: "Talent Upskilled", value: "1,200+ Pros" },
+        { label: "Organic Search Lift", value: "+280%" }
       ],
-      techStack: ["Next.js App Router", "Tailwind CSS v4", "Generative Engine Optimization (GEO)", "Server-Side CAPI", "Interactive ROI Simulator"],
+      techStack: ["Next.js Enterprise", "GEO Marketing Engine", "LMS Portal & Video CDN", "CRM Lead Sync", "Real-Time Tracking"],
       keyFeatures: [
-        "Generative Engine Optimization (GEO) & Search Marketing for AI Overviews & ChatGPT",
-        "Paid Media & Demand Gen with Server-Side Conversions API (CAPI) attribution",
-        "Cohort-Based Digital Marketing Training Academy with live sandbox ad budgets",
-        "Seamless deployment of MerlinFlow Enterprise Software (Real Estate, Healthcare, ERP)"
+        "Full-funnel digital realty marketing workflows with multi-channel attribution",
+        "AI-driven Generative Engine Optimization (GEO) for modern conversational search",
+        "Structured curriculum academy with batch management, assignments & certificates",
+        "Direct CRM sync routing warm buyer inquiries into MerlinFlow PropTech pipelines"
       ]
     }
   ];
@@ -237,7 +241,14 @@ export default function ClientShowcase() {
             {filteredProjects.map((project) => (
               <div key={project.id} className="deployment-card">
                 <div className="card-top-row">
-                  <span className="category-tag">{project.categoryLabel}</span>
+                  <div className="card-logo-tag-group">
+                    {project.logo && (
+                      <div className="card-brand-thumb">
+                        <img src={project.logo} alt={`${project.client} logo`} className="card-brand-thumb-img" />
+                      </div>
+                    )}
+                    <span className="category-tag">{project.categoryLabel}</span>
+                  </div>
                   <span className="badge-tag">{project.badge}</span>
                 </div>
 
@@ -471,7 +482,36 @@ export default function ClientShowcase() {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          margin-bottom: 0.5rem;
+          margin-bottom: 0.65rem;
+          gap: 0.5rem;
+        }
+
+        .card-logo-tag-group {
+          display: flex;
+          align-items: center;
+          gap: 0.6rem;
+        }
+
+        .card-brand-thumb {
+          width: 32px;
+          height: 32px;
+          border-radius: 8px;
+          background: #ffffff;
+          border: 1px solid #e2e8f0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+          padding: 2px;
+          box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+          flex-shrink: 0;
+        }
+
+        .card-brand-thumb-img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          display: block;
         }
 
         .category-tag {
