@@ -141,16 +141,24 @@ export default function IndustryFeatures() {
 
         .tabs-container {
           display: flex;
-          justify-content: center;
+          justify-content: flex-start;
           align-items: center;
           flex-wrap: nowrap;
           gap: 0.55rem;
           margin-bottom: 2.5rem;
           max-width: 100%;
           overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
           scrollbar-width: none;
           -ms-overflow-style: none;
-          padding: 0.35rem 0.5rem;
+          padding: 0.5rem 1rem;
+        }
+
+        @media (min-width: 1024px) {
+          .tabs-container {
+            justify-content: center;
+            padding: 0.35rem 0.5rem;
+          }
         }
 
         .tabs-container::-webkit-scrollbar {
