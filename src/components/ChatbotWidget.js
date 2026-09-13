@@ -95,41 +95,138 @@ export default function ChatbotWidget() {
     ]);
   };
 
-  const formatMessageText = (content) => {
-    // Basic Markdown formatting helper
-    const parts = content.split('\n');
-    return parts.map((line, idx) => {
-      let formatted = line;
-      
-      // Bold text **text**
+  const formatInlineText = (text, lineIdx) => {
+    // Replace markdown links [title](url) and bold **text**
+    const linkRegex = /\[(.*?)\]\((.*?)\)/g;
+    const segments = [];
+    let lastIndex = 0;
+    let linkMatch;
+
+    // Helper for bold rendering
+    const renderBold = (str, keyPrefix) => {
       const boldRegex = /\*\*(.*?)\*\*/g;
-      const elements = [];
-      let lastIdx = 0;
-      let match;
+      const bSegments = [];
+      let bLastIndex = 0;
+      let bMatch;
 
-      while ((match = boldRegex.exec(formatted)) !== null) {
-        if (match.index > lastIdx) {
-          elements.push(formatted.substring(lastIdx, match.index));
+      while ((bMatch = boldRegex.exec(str)) !== null) {
+        if (bMatch.index > bLastIndex) {
+          bSegments.push(str.substring(bLastIndex, bMatch.index));
         }
-        elements.push(<strong key={`${idx}-${match.index}`} className="font-bold text-white">{match[1]}</strong>);
-        lastIdx = boldRegex.lastIndex;
+        bSegments.push(
+          <strong key={`${keyPrefix}-b-${bMatch.index}`} className="font-semibold text-white">
+            {bMatch[1]}
+          </strong>
+        );
+        bLastIndex = boldRegex.lastIndex;
       }
-      if (lastIdx < formatted.length) {
-        elements.push(formatted.substring(lastIdx));
+      if (bLastIndex < str.length) {
+        bSegments.push(str.substring(bLastIndex));
+      }
+      return bSegments.length > 0 ? bSegments : str;
+    };
+
+    while ((linkMatch = linkRegex.exec(text)) !== null) {
+      if (linkMatch.index > lastIndex) {
+        segments.push(renderBold(text.substring(lastIndex, linkMatch.index), `${lineIdx}-${lastIndex}`));
+      }
+      const label = linkMatch[1];
+      const url = linkMatch[2];
+      segments.push(
+        <a
+          key={`${lineIdx}-link-${linkMatch.index}`}
+          href={url}
+          target={url.startsWith('http') ? '_blank' : '_self'}
+          rel="noopener noreferrer"
+          className="text-emerald-400 hover:text-emerald-300 underline font-medium inline-flex items-center gap-0.5"
+        >
+          {label}
+        </a>
+      );
+      lastIndex = linkRegex.lastIndex;
+    }
+
+    if (lastIndex < text.length) {
+      segments.push(renderBold(text.substring(lastIndex), `${lineIdx}-${lastIndex}`));
+    }
+
+    return segments.length > 0 ? segments : text;
+  };
+
+  const formatMessageText = (content) => {
+    if (!content) return null;
+    const lines = content.split('\n');
+    
+    return lines.map((line, idx) => {
+      const trimmed = line.trim();
+      if (!trimmed) {
+        return <div key={idx} className="h-2" />;
       }
 
-      if (line.startsWith('- ') || line.startsWith('• ')) {
+      // Ignore markdown table border lines like |---|---|
+      if (/^\|[-|\s]+\|$/.test(trimmed)) {
+        return null;
+      }
+
+      // Markdown Headings
+      if (trimmed.startsWith('### ')) {
         return (
-          <div key={idx} className="flex items-start gap-1.5 my-1">
-            <span className="text-emerald-400 font-bold">•</span>
-            <span>{elements.length > 0 ? elements : line.substring(2)}</span>
+          <h4 key={idx} className="text-sm font-bold text-emerald-400 mt-2.5 mb-1">
+            {formatInlineText(trimmed.replace('### ', ''), idx)}
+          </h4>
+        );
+      }
+      if (trimmed.startsWith('## ') || trimmed.startsWith('# ')) {
+        return (
+          <h3 key={idx} className="text-sm sm:text-base font-extrabold text-white mt-3 mb-1.5 border-b border-white/10 pb-1">
+            {formatInlineText(trimmed.replace(/^#+\s/, ''), idx)}
+          </h3>
+        );
+      }
+
+      // Bullet list items
+      if (trimmed.startsWith('- ') || trimmed.startsWith('* ') || trimmed.startsWith('• ')) {
+        const itemText = trimmed.replace(/^[-*•]\s+/, '');
+        return (
+          <div key={idx} className="flex items-start gap-1.5 my-1 pl-1">
+            <span className="text-emerald-400 font-bold text-xs mt-0.5">●</span>
+            <div className="flex-1 leading-relaxed text-slate-200">
+              {formatInlineText(itemText, idx)}
+            </div>
+          </div>
+        );
+      }
+
+      // Numbered list items
+      const numMatch = trimmed.match(/^(\d+)\.\s+(.*)/);
+      if (numMatch) {
+        return (
+          <div key={idx} className="flex items-start gap-1.5 my-1 pl-1">
+            <span className="text-emerald-400 font-bold text-xs mt-0.5">{numMatch[1]}.</span>
+            <div className="flex-1 leading-relaxed text-slate-200">
+              {formatInlineText(numMatch[2], idx)}
+            </div>
+          </div>
+        );
+      }
+
+      // Table rows formatting
+      if (trimmed.startsWith('|') && trimmed.endsWith('|')) {
+        const cells = trimmed.split('|').map(c => c.trim()).filter(Boolean);
+        return (
+          <div key={idx} className="flex flex-wrap gap-2 my-1 py-1 px-2 bg-slate-800/40 rounded border border-white/5 text-xs">
+            {cells.map((cell, cIdx) => (
+              <span key={cIdx} className="leading-tight">
+                {formatInlineText(cell, `${idx}-${cIdx}`)}
+              </span>
+            ))}
           </div>
         );
       }
 
       return (
-        <p key={idx} className={line.trim() === '' ? 'h-2' : 'my-1 leading-relaxed'}>
-          {elements.length > 0 ? elements : line}
+        <p key={idx} className="my-1 leading-relaxed text-slate-200">
+          {formatInlineText(trimmed, idx)}
         </p>
       );
     });
