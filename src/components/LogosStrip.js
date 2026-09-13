@@ -46,13 +46,13 @@ export default function LogosStrip() {
       isImage: true
     },
     {
-      name: "Razorpay",
+      name: "Cashfree Payments",
       tagline: "Instant Payment Gateway Sync",
       domain: "Automated Collections",
       category: "Fintech Partner",
-      themeColor: "#0284c7",
+      themeColor: "#0066ff",
       isImage: false,
-      badgeText: "₹ Gateway"
+      badgeText: "Cashfree"
     },
     {
       name: "WhatsApp Cloud API",

@@ -226,7 +226,7 @@ export default function EcommerceView() {
     },
     {
       q: "Does this support Indian payment gateways and GST invoicing?",
-      a: "Yes, fully native. We support Razorpay, Cashfree, PayU, PhonePe, Paytm, and UPI QR codes with automated reconciliation. Every order automatically produces a downloadable, GST-compliant B2C/B2B tax invoice with HSN code breakdown."
+      a: "Yes, fully native. We support Cashfree Payments, UPI QR codes, and multi-mode digital checkout with automated reconciliation. Every order automatically produces a downloadable, GST-compliant B2C/B2B tax invoice with HSN code breakdown."
     },
     {
       q: "What are the WhatsApp messaging costs?",

@@ -49,7 +49,7 @@ export default function ClientShowcase() {
         { label: "Contact Save Rate", value: "88.4%" },
         { label: "WhatsApp Store Leads", value: "3.8x Boost" }
       ],
-      techStack: ["Next.js Architecture", "Dynamic NFC Routing", "WhatsApp Order Engine", "Razorpay Multi-Gateway", "Real-Time Analytics"],
+      techStack: ["Next.js Architecture", "Dynamic NFC Routing", "WhatsApp Order Engine", "Cashfree Multi-Gateway", "Real-Time Analytics"],
       keyFeatures: [
         "Dynamic NFC & QR Smart Profiles with 1-click 'Save Contact (.vcf)'",
         "Integrated WhatsApp Mini-Store with direct cart-to-chat order routing",
@@ -101,7 +101,7 @@ export default function ClientShowcase() {
         { label: "Cultural Events Hosted", value: "180+ Shows" },
         { label: "Audience Engagement", value: "+340%" }
       ],
-      techStack: ["Event Ticketing Engine", "Next.js 15", "Seat Reservation Matrix", "Razorpay / UPI Gateway", "QR Show Pass Generator"],
+      techStack: ["Event Ticketing Engine", "Next.js 15", "Seat Reservation Matrix", "Cashfree / UPI Gateway", "QR Show Pass Generator"],
       keyFeatures: [
         "Live interactive seat-tier selection & instant QR digital show pass dispatch",
         "Cultural event discovery with artist profiles, performance trailers & schedules",

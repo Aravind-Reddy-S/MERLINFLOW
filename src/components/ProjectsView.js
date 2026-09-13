@@ -51,7 +51,7 @@ export default function ProjectsView() {
         { label: "Contact Save Rate", value: "88.4%" },
         { label: "WhatsApp Store Leads", value: "3.8x Boost" }
       ],
-      techStack: ["Next.js Architecture", "Dynamic NFC Routing", "WhatsApp Order Engine", "Razorpay / Stripe Multi-Gateway", "Real-Time Analytics"],
+      techStack: ["Next.js Architecture", "Dynamic NFC Routing", "WhatsApp Order Engine", "Cashfree Multi-Gateway", "Real-Time Analytics"],
       challenge: "Legacy vCard scripts suffered from bloated hybrid script loading (Bootstrap, jQuery, and Livewire), generic stock template design, and sluggish mobile responsiveness, restricting enterprise adoption and conversion rates.",
       solution: "Modernized into a high-performance Digital Identity & Networking ecosystem featuring sub-second NFC/QR tap interactions, bespoke company-branded NFC physical cards, automated WhatsApp checkout dispatch, and multi-tier SaaS monetization.",
       keyFeatures: [
@@ -119,7 +119,7 @@ export default function ProjectsView() {
         { label: "Cultural Events Hosted", value: "180+ Shows" },
         { label: "Audience Engagement", value: "+340%" }
       ],
-      techStack: ["Event Ticketing Engine", "Next.js 15", "Seat Reservation Matrix", "Razorpay / UPI Gateway", "QR Show Pass Generator"],
+      techStack: ["Event Ticketing Engine", "Next.js 15", "Seat Reservation Matrix", "Cashfree / UPI Gateway", "QR Show Pass Generator"],
       challenge: "Promoting traditional culture, classical arts, and heritage events required an intuitive, modern digital ticketing platform to replace disjointed offline show pass distribution and manual seat management.",
       solution: "Created an immersive cultural e-commerce ecosystem with rich multimedia event previews, instant seat-tier bookings, automated QR ticket generation, and integrated heritage merchandise.",
       keyFeatures: [

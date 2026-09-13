@@ -28,7 +28,7 @@ export default function IntegrationsSection() {
       color: "#3b82f6",
       tagline: "Instant multi-mode payments & automated settlement",
       description: "Seamlessly accept fee payments, billing invoices, and subscriptions via cards, UPI, net banking, and international gateways with automated ledger reconciliation.",
-      providers: ["Razorpay", "Stripe", "Paytm", "UPI", "PayPal", "BillDesk"],
+      providers: ["Cashfree Payments", "UPI", "Stripe", "Paytm", "PayPal", "BillDesk"],
       features: [
         "Automated digital invoice & receipt generation",
         "Instant settlement with zero-failure smart routing",
