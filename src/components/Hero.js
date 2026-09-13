@@ -691,18 +691,49 @@ export default function Hero() {
           }
         }
 
+        @media (max-width: 768px) {
+          .hero-overlay {
+            background: linear-gradient(
+              180deg,
+              rgba(6, 10, 24, 0.32) 0%,
+              rgba(4, 7, 18, 0.42) 50%,
+              rgba(6, 10, 24, 0.65) 100%
+            ) !important;
+          }
+          .hero-video-element {
+            filter: brightness(1.15) contrast(1.05);
+          }
+          .hero-heading {
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.9), 0 4px 35px rgba(0, 0, 0, 0.75);
+          }
+          .hero-badge-pill {
+            background: rgba(15, 23, 42, 0.9);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7), 0 0 15px rgba(56, 189, 248, 0.35);
+          }
+        }
+
         @media (max-width: 640px) {
           .hero-section {
             padding: 6.5rem 1rem 3.5rem 1rem;
             min-height: 90vh;
           }
+          .hero-overlay {
+            background: linear-gradient(
+              180deg,
+              rgba(6, 10, 24, 0.25) 0%,
+              rgba(4, 7, 18, 0.35) 50%,
+              rgba(6, 10, 24, 0.58) 100%
+            ) !important;
+          }
           .hero-video-element {
             object-fit: cover;
             object-position: center;
+            filter: brightness(1.22) contrast(1.08);
           }
           .hero-heading {
             font-size: clamp(2rem, 7.5vw, 2.75rem);
             margin-bottom: 1.5rem;
+            text-shadow: 0 2px 25px rgba(0, 0, 0, 0.95), 0 4px 35px rgba(0, 0, 0, 0.85);
           }
           .hero-demo-panel {
             padding: 1.25rem !important;
