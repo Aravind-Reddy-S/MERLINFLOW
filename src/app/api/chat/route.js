@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 const SYSTEM_PROMPT = `You are "Merlin AI", the official lead solutions architect and product consultant for MerlinFlow Technologies Pvt Ltd (merlinflow.in).
-Your mission is to provide ultra-accurate, highly specific, articulate, and actionable answers to website visitors, clients, and business owners.
+Your mission is to provide ultra-accurate, highly specific, articulate, and actionable answers to website visitors, prospective clients, and business owners.
 
 ### COMPANY PROFILE:
 - Official Name: MerlinFlow Technologies Pvt Ltd
@@ -66,47 +66,55 @@ Your mission is to provide ultra-accurate, highly specific, articulate, and acti
    - Abandoned Cart WhatsApp Recovery: Automated targeted discounts that recover 20%+ lost carts.
    - Pricing: Launch (₹3,499/mo), Scale (₹7,499/mo), Enterprise (Custom).
 
-### CRITICAL RULES:
-1. STRICT DOMAIN RELEVANCE: You are strictly the consultant for MerlinFlow Technologies. If the user query is unrelated to MerlinFlow, our website, our SaaS products, features, pricing, architecture, company location/contact, or booking a demo (for example: general knowledge questions, jokes, politics, weather, recipes, code writing unrelated to our APIs, or random gibberish), DO NOT answer the off-topic query. Politely state:
+### CRITICAL INSTRUCTIONS:
+1. GREETINGS & BASIC WEBSITE QUESTIONS: If the user says "hey", "hi", "hello", "what is this website about", "who are you", "what do you do", or asks general questions about MerlinFlow, provide a warm, informative response explaining our company and the 6 vertical SaaS solutions we provide.
+2. STRICT UNRELATED TOPIC REJECTION: If the user query is completely unrelated to MerlinFlow, our website, SaaS products, features, pricing, architecture, company location/contact, or booking a demo (e.g., cooking recipes, weather, movies, politics, personal questions, code debugging unrelated to our tools, or gibberish), DO NOT answer the off-topic question. Politely respond:
 "Please enter your query related to the website and MerlinFlow SaaS products (Real Estate CRM, Enterprise ERP, Medical ERP, School IMS, Restaurant POS, E-Commerce), features, pricing, or scheduling a live demo."
-2. CONTINUOUS CONTEXTUAL SUGGESTIONS: At the very end of EVERY response, include exactly 3 clickable follow-up suggestion questions on a single JSON line formatted exactly like this:
+3. CONTINUOUS CONTEXTUAL SUGGESTIONS: At the very end of EVERY response, on a single JSON line, output exactly 3 clickable follow-up suggestion questions formatted as:
 SUGGESTIONS: ["Question 1", "Question 2", "Question 3"]
-3. ACCURACY: Always use the exact company address: "Bollepalli, Gudur, Mahabubabad, Telangana, 506134, India." and phone numbers +91 83743 73753 / +91 82477 16878.`;
+4. ACCURACY: Always use the exact company address: "Bollepalli, Gudur, Mahabubabad, Telangana, 506134, India." and phone numbers +91 83743 73753 / +91 82477 16878.`;
 
 // Intelligent Knowledge Fallback Engine
 function generateAccurateFallbackResponse(userPrompt) {
   const query = (userPrompt || '').trim().toLowerCase();
 
-  // Check for off-topic or gibberish inputs
-  const relevantKeywords = [
-    'merlin', 'flow', 'real estate', 'estate', 'proptech', 'builder', 'rera', '3d inventory', 'unit', 'property',
-    'enterprise', 'erp', 'crm', 'gst', 'e-invoice', 'hrms', 'procurement', 'accounting', 'payroll',
-    'school', 'ims', 'college', 'education', 'attendance', 'student', 'timetable', 'report card', 'fee', 'rfid', 'bus',
-    'medical', 'pharmacy', 'medicine', 'fefo', 'expiry', 'schedule h', 'drug', 'prescription', 'salt', 'hsn',
-    'restaurant', 'dining', 'cafe', 'food', 'kds', 'table', 'waiter', 'swiggy', 'zomato', 'kitchen', 'recipe',
-    'ecommerce', 'e-commerce', 'store', 'shop', 'cart', 'shipping', 'delhivery', 'shiprocket', 'retail',
-    'price', 'pricing', 'cost', 'plan', 'subscription', 'discount',
-    'contact', 'call', 'phone', 'email', 'demo', 'book', 'location', 'address', 'office', 'where', 'city', 'state', 'telangana', 'founder', 'team',
-    'client', 'customer', 'kalaakshi', 'nest infra', 'himastech', 'oneclickbiz', 'review', 'portfolio', 'case study',
-    'cashfree', 'payment', 'upi', 'gateway', 'feature', 'features', 'help', 'hi', 'hello', 'hey', 'start'
-  ];
+  // 1. Common Greetings & Basic Website Questions
+  const isGreeting = /^(hi|hey|hello|good\s*(morning|afternoon|evening)|namaste|hola|yo|sup)(\s+.*)?$/.test(query) || query === 'hi' || query === 'hey' || query === 'hello';
+  const isAboutWebsite = query.includes('what is this website') || 
+    query.includes('what is merlinflow') || 
+    query.includes('about this website') || 
+    query.includes('what do you do') || 
+    query.includes('who are you') || 
+    query.includes('tell me about') || 
+    query.includes('what is this company') ||
+    query.includes('how does this work') ||
+    query.includes('overview');
 
-  const isRelevant = relevantKeywords.some(kw => query.includes(kw));
-
-  // If the query is off-topic or empty/gibberish
-  if (!isRelevant && query.length > 0) {
+  if (isGreeting || isAboutWebsite) {
     return {
-      content: `Please enter your query related to the website and MerlinFlow SaaS products (**Real Estate CRM**, **Enterprise ERP**, **Medical ERP**, **School IMS**, **Restaurant POS**, **E-Commerce Suite**), features, pricing, or scheduling a live demo.\n\nHere are some popular topics to explore:`,
+      content: `### 👋 Welcome to MerlinFlow Technologies!
+
+**MerlinFlow** is a modern, cloud-native Enterprise & Vertical SaaS operating system designed to replace outdated legacy desktop software.
+
+We provide **6 Specialized Industry Platforms**:
+- 🏢 **Real Estate CRM & PropTech OS**: 3D unit inventory grid, RERA milestone billing, and Channel Partner portal.
+- 💼 **Enterprise ERP & Multi-GST CRM**: Automated E-Invoicing, E-Way bills, Procurement 3-way matching, and Biometric HRMS.
+- 🎓 **School IMS**: Automated fee receipts with UPI QR, RFID attendance, and CCE report card builder.
+- 💊 **Medical ERP & Pharmacy OS**: Sub-second barcode POS dispensing, FEFO expiry watchdog, and Schedule H1 vault.
+- 🍽️ **Restaurant POS & Dining ERP**: Color-coded live table floor map, sub-second Kitchen Display System (KDS), and recipe costing.
+- 🛒 **E-Commerce Suite**: Omnichannel stock sync, 1-click Cashfree checkout, and automated courier dispatch.
+
+How can I help you take your business to the next level today?`,
       suggestions: [
         "🏢 How does Real Estate 3D inventory & RERA billing work?",
-        "💼 What are Enterprise ERP & multi-GST features?",
+        "💼 What are Enterprise ERP & Multi-GST capabilities?",
         "💰 What are your pricing plans for all products?"
       ]
     };
   }
 
-  // 1. Address & Location & Contact
-  if (query.includes('address') || query.includes('location') || query.includes('where') || query.includes('office') || query.includes('city') || query.includes('contact') || query.includes('phone') || query.includes('email') || query.includes('call')) {
+  // 2. Address & Location & Contact
+  if (query.includes('address') || query.includes('location') || query.includes('where') || query.includes('office') || query.includes('city') || query.includes('contact') || query.includes('phone') || query.includes('email') || query.includes('call') || query.includes('telangana')) {
     return {
       content: `### 📍 MerlinFlow Technologies Pvt Ltd - Contact & Location
 
@@ -126,8 +134,8 @@ Would you like to schedule a 1-on-1 personalized live screen demo?`,
     };
   }
 
-  // 2. Real Estate CRM
-  if (query.includes('real estate') || query.includes('proptech') || query.includes('builder') || query.includes('rera') || query.includes('3d inventory') || query.includes('channel partner') || query.includes('nest infra')) {
+  // 3. Real Estate CRM
+  if (query.includes('real estate') || query.includes('proptech') || query.includes('builder') || query.includes('rera') || query.includes('3d inventory') || query.includes('channel partner') || query.includes('nest infra') || query.includes('property') || query.includes('site visit')) {
     return {
       content: `### 🏢 MerlinFlow Real Estate CRM & PropTech OS
 
@@ -152,8 +160,8 @@ Our **Real Estate CRM** is engineered specifically for builders, developers, and
     };
   }
 
-  // 3. Enterprise ERP & CRM
-  if (query.includes('enterprise') || query.includes('gst') || query.includes('e-invoice') || query.includes('hrms') || query.includes('procurement') || query.includes('accounting') || query.includes('oneclickbiz') || query.includes('himastech')) {
+  // 4. Enterprise ERP & CRM
+  if (query.includes('enterprise') || query.includes('gst') || query.includes('e-invoice') || query.includes('hrms') || query.includes('procurement') || query.includes('accounting') || query.includes('oneclickbiz') || query.includes('himastech') || query.includes('payroll') || query.includes('rfq')) {
     return {
       content: `### 💼 MerlinFlow Enterprise ERP & Unified CRM
 
@@ -178,8 +186,8 @@ A cloud-native operating system for manufacturers, distributors, and multi-branc
     };
   }
 
-  // 4. School IMS
-  if (query.includes('school') || query.includes('college') || query.includes('education') || query.includes('attendance') || query.includes('student') || query.includes('timetable') || query.includes('report card') || query.includes('fee') || query.includes('rfid')) {
+  // 5. School IMS
+  if (query.includes('school') || query.includes('college') || query.includes('education') || query.includes('attendance') || query.includes('student') || query.includes('timetable') || query.includes('report card') || query.includes('fee') || query.includes('rfid') || query.includes('bus')) {
     return {
       content: `### 🎓 MerlinFlow School IMS (Integrated Management System)
 
@@ -203,8 +211,8 @@ Complete campus operating system for modern educational institutions:
     };
   }
 
-  // 5. Medical ERP
-  if (query.includes('medical') || query.includes('pharmacy') || query.includes('medicine') || query.includes('fefo') || query.includes('expiry') || query.includes('schedule h') || query.includes('drug')) {
+  // 6. Medical ERP
+  if (query.includes('medical') || query.includes('pharmacy') || query.includes('medicine') || query.includes('fefo') || query.includes('expiry') || query.includes('schedule h') || query.includes('drug') || query.includes('prescription')) {
     return {
       content: `### 💊 MerlinFlow Medical ERP (Pharmacy & Dispensary OS)
 
@@ -228,8 +236,8 @@ High-speed billing and regulatory compliance software for retail pharmacies and 
     };
   }
 
-  // 6. Restaurant ERP
-  if (query.includes('restaurant') || query.includes('dining') || query.includes('cafe') || query.includes('food') || query.includes('kds') || query.includes('table') || query.includes('waiter') || query.includes('swiggy') || query.includes('zomato')) {
+  // 7. Restaurant ERP
+  if (query.includes('restaurant') || query.includes('dining') || query.includes('cafe') || query.includes('food') || query.includes('kds') || query.includes('table') || query.includes('waiter') || query.includes('swiggy') || query.includes('zomato') || query.includes('kitchen') || query.includes('recipe')) {
     return {
       content: `### 🍽️ MerlinFlow Restaurant ERP & POS Suite
 
@@ -254,8 +262,8 @@ Complete dining and cloud kitchen management system:
     };
   }
 
-  // 7. E-Commerce Suite
-  if (query.includes('ecommerce') || query.includes('e-commerce') || query.includes('store') || query.includes('shop') || query.includes('cart') || query.includes('shipping') || query.includes('delhivery') || query.includes('shiprocket') || query.includes('kalaakshi')) {
+  // 8. E-Commerce Suite
+  if (query.includes('ecommerce') || query.includes('e-commerce') || query.includes('store') || query.includes('shop') || query.includes('cart') || query.includes('shipping') || query.includes('delhivery') || query.includes('shiprocket') || query.includes('kalaakshi') || query.includes('retail')) {
     return {
       content: `### 🛒 MerlinFlow E-Commerce Suite & Omnichannel Retail
 
@@ -280,8 +288,8 @@ Engineered for D2C brands, online stores, and omnichannel retailers:
     };
   }
 
-  // 8. Pricing overall
-  if (query.includes('price') || query.includes('pricing') || query.includes('cost') || query.includes('plan') || query.includes('subscription')) {
+  // 9. Pricing overall
+  if (query.includes('price') || query.includes('pricing') || query.includes('cost') || query.includes('plan') || query.includes('subscription') || query.includes('discount')) {
     return {
       content: `### 💰 MerlinFlow Transparent Pricing Overview
 
@@ -303,7 +311,7 @@ Here are our monthly subscription plans across all core platforms:
     };
   }
 
-  // 9. Clients / Testimonials
+  // 10. Clients / Testimonials
   if (query.includes('client') || query.includes('customer') || query.includes('review') || query.includes('portfolio') || query.includes('case study')) {
     return {
       content: `### 🌟 Our Proven Enterprise Deployments
@@ -322,25 +330,42 @@ MerlinFlow powers mission-critical operations for industry leaders:
     };
   }
 
-  // Default Greeting / Overview
+  // 11. Check general relevant keywords
+  const relevantKeywords = [
+    'merlin', 'flow', 'software', 'saas', 'app', 'product', 'products', 'system', 'cloud', 'feature', 'features',
+    'demo', 'book', 'support', 'help', 'login', 'signup', 'integration', 'cashfree', 'payment', 'api', 'gst', 'rera'
+  ];
+  const isBroadlyRelevant = relevantKeywords.some(kw => query.includes(kw));
+
+  if (isBroadlyRelevant) {
+    return {
+      content: `### 🚀 MerlinFlow Technologies SaaS Solutions
+
+MerlinFlow provides high-performance cloud operating systems built to scale:
+
+- 🏢 **Real Estate CRM** (/products/real-estate)
+- 💼 **Enterprise ERP & CRM** (/products/enterprise)
+- 🎓 **School IMS** (/products/edu)
+- 💊 **Medical ERP** (/products/health)
+- 🍽️ **Restaurant POS** (/products/stay)
+- 🛒 **E-Commerce Suite** (/products/ecommerce)
+
+Which industry or feature would you like to explore?`,
+      suggestions: [
+        "🏢 Real Estate CRM features",
+        "💼 Enterprise ERP multi-GST",
+        "💰 Transparent pricing plans"
+      ]
+    };
+  }
+
+  // 12. Off-Topic / Unrelated Query Rejection
   return {
-    content: `### 👋 Welcome to MerlinFlow Technologies!
-
-I'm **Merlin AI**, your 24/7 intelligent SaaS solutions consultant.
-
-How can I assist your business today?
-- 🏢 **Real Estate CRM & PropTech OS** (3D inventory locks, RERA billing, CP portal)
-- 💼 **Enterprise ERP & Multi-GST CRM** (E-Invoicing, RFQ procurement, Biometric HRMS)
-- 🎓 **School IMS** (Automated fee receipts, RFID attendance, Report card builder)
-- 💊 **Medical ERP & Pharmacy OS** (Sub-second POS, Expiry watchdog, Schedule H vault)
-- 🍽️ **Restaurant POS & Dining ERP** (Live table map, KDS routing, Recipe costing)
-- 🛒 **E-Commerce Suite** (Multi-channel sync, Automated courier dispatch)
-
-You can also reach our team at **+91 83743 73753** or **hello@merlinflow.in**!`,
+    content: `Please enter your query related to the website and MerlinFlow SaaS products (**Real Estate CRM**, **Enterprise ERP**, **Medical ERP**, **School IMS**, **Restaurant POS**, **E-Commerce Suite**), features, pricing, or scheduling a live demo.\n\nHere are some popular topics to explore:`,
     suggestions: [
-      "🏢 How does Real Estate 3D inventory work?",
-      "💼 What are Enterprise ERP & CRM features?",
-      "💰 What are your pricing plans?"
+      "🏢 How does Real Estate 3D inventory & RERA billing work?",
+      "💼 What are Enterprise ERP & Multi-GST capabilities?",
+      "💰 What are your pricing plans for all products?"
     ]
   };
 }
@@ -356,7 +381,6 @@ function extractSuggestions(rawContent, userPrompt) {
       suggestions = JSON.parse(suggestionMatch[1]);
       cleanedContent = rawContent.replace(/SUGGESTIONS:\s*\[.*?\]/s, '').trim();
     } catch (e) {
-      // Fallback parser if JSON parse fails
       cleanedContent = rawContent.replace(/SUGGESTIONS:.*$/s, '').trim();
     }
   }

@@ -3,25 +3,23 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  MessageSquare, 
   X, 
   Send, 
   Sparkles, 
   RotateCcw, 
   Bot, 
   User, 
-  ExternalLink, 
-  ArrowRight,
-  ChevronDown
+  ArrowRight
 } from 'lucide-react';
 
 const INITIAL_SUGGESTIONS = [
-  "🏢 Real Estate 3D inventory & RERA billing",
-  "💼 Enterprise ERP & Multi-GST capabilities",
-  "🎓 School IMS core modules & fee collection",
-  "💊 Medical ERP & FEFO expiry watchdog",
-  "🍽️ Restaurant ERP live table grid & KDS",
-  "💰 Pricing plans overview"
+  "🏢 What is this website about?",
+  "🏢 How does Real Estate 3D inventory & RERA billing work?",
+  "💼 What are Enterprise ERP & Multi-GST capabilities?",
+  "🎓 What are School IMS core modules?",
+  "💊 How does Medical ERP prevent expiry losses?",
+  "🍽️ How does Restaurant ERP table billing work?",
+  "💰 What are your pricing plans?"
 ];
 
 export default function ChatbotWidget() {
@@ -29,10 +27,15 @@ export default function ChatbotWidget() {
   const [messages, setMessages] = useState([
     {
       role: 'assistant',
-      content: "Hello! 👋 I'm **Merlin AI**, your 24/7 intelligent solutions consultant for **MerlinFlow Technologies**.\n\nHow can I help you today? You can ask me about our **Real Estate CRM**, **Enterprise ERP**, **School IMS**, **Medical ERP**, **Restaurant POS**, **E-Commerce Suite**, pricing, or schedule a live demo!"
+      content: "Hello! 👋 I'm **Merlin AI**, your 24/7 intelligent solutions consultant for **MerlinFlow Technologies**.\n\nHow can I help you today? You can ask me about our **Real Estate CRM**, **Enterprise ERP**, **School IMS**, **Medical ERP**, **Restaurant POS**, **E-Commerce Suite**, pricing, or schedule a live demo!",
+      suggestions: [
+        "🏢 What is this website about?",
+        "🏢 Real Estate 3D inventory & RERA billing",
+        "💼 Enterprise ERP & Multi-GST features",
+        "💰 Pricing plans overview"
+      ]
     }
   ]);
-  const [suggestions, setSuggestions] = useState(INITIAL_SUGGESTIONS);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef(null);
@@ -47,7 +50,7 @@ export default function ChatbotWidget() {
       scrollToBottom();
       setTimeout(() => inputRef.current?.focus(), 150);
     }
-  }, [isOpen, messages, isLoading, suggestions]);
+  }, [isOpen, messages, isLoading]);
 
   const handleSend = async (textToSend) => {
     const query = typeof textToSend === 'string' ? textToSend : inputValue;
@@ -72,24 +75,29 @@ export default function ChatbotWidget() {
       }
 
       const data = await response.json();
-      setMessages((prev) => [...prev, { role: 'assistant', content: data.content }]);
-      
-      if (data.suggestions && Array.isArray(data.suggestions) && data.suggestions.length > 0) {
-        setSuggestions(data.suggestions);
-      }
+      setMessages((prev) => [
+        ...prev, 
+        { 
+          role: 'assistant', 
+          content: data.content,
+          suggestions: Array.isArray(data.suggestions) && data.suggestions.length > 0 
+            ? data.suggestions 
+            : []
+        }
+      ]);
     } catch (err) {
       console.error(err);
       setMessages((prev) => [
         ...prev,
         {
           role: 'assistant',
-          content: "I ran into a temporary connection issue. You can reach our team directly at **+91 83743 73753** / **+91 82477 16878** or **hello@merlinflow.in** for immediate assistance!"
+          content: "I ran into a temporary connection issue. You can reach our team directly at **+91 83743 73753** / **+91 82477 16878** or **hello@merlinflow.in** for immediate assistance!",
+          suggestions: [
+            "📅 How can I book a live demo?",
+            "🏢 Show Real Estate CRM features",
+            "💰 Pricing plans overview"
+          ]
         }
-      ]);
-      setSuggestions([
-        "📅 How can I book a live demo?",
-        "🏢 Show Real Estate CRM features",
-        "💰 Pricing plans overview"
       ]);
     } finally {
       setIsLoading(false);
@@ -100,20 +108,23 @@ export default function ChatbotWidget() {
     setMessages([
       {
         role: 'assistant',
-        content: "Chat reset! How can I assist you with MerlinFlow today?"
+        content: "Chat reset! How can I assist you with MerlinFlow today?",
+        suggestions: [
+          "🏢 What is this website about?",
+          "🏢 Real Estate CRM & RERA billing",
+          "💼 Enterprise ERP multi-GST",
+          "💰 Transparent pricing plans"
+        ]
       }
     ]);
-    setSuggestions(INITIAL_SUGGESTIONS);
   };
 
   const formatInlineText = (text, lineIdx) => {
-    // Replace markdown links [title](url) and bold **text**
     const linkRegex = /\[(.*?)\]\((.*?)\)/g;
     const segments = [];
     let lastIndex = 0;
     let linkMatch;
 
-    // Helper for bold rendering
     const renderBold = (str, keyPrefix) => {
       const boldRegex = /\*\*(.*?)\*\*/g;
       const bSegments = [];
@@ -174,7 +185,6 @@ export default function ChatbotWidget() {
         return <div key={idx} className="h-2" />;
       }
 
-      // Ignore markdown table border lines like |---|---|
       if (/^\|[-|\s]+\|$/.test(trimmed)) {
         return null;
       }
@@ -332,12 +342,38 @@ export default function ChatbotWidget() {
                       <Bot size={12} className="text-emerald-400" />
                     )}
                   </div>
-                  <div className={`message-bubble ${msg.role === 'user' ? 'user-bubble' : 'assistant-bubble'}`}>
-                    {msg.role === 'user' ? (
-                      <p className="whitespace-pre-wrap">{msg.content}</p>
-                    ) : (
-                      <div className="formatted-content text-slate-200 text-xs sm:text-sm">
-                        {formatMessageText(msg.content)}
+
+                  <div className="message-content-wrapper">
+                    <div className={`message-bubble ${msg.role === 'user' ? 'user-bubble' : 'assistant-bubble'}`}>
+                      {msg.role === 'user' ? (
+                        <p className="whitespace-pre-wrap">{msg.content}</p>
+                      ) : (
+                        <div className="formatted-content text-slate-200 text-xs sm:text-sm">
+                          {formatMessageText(msg.content)}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Suggestions Inside the Chat Stream Under Assistant Response */}
+                    {msg.role === 'assistant' && msg.suggestions && msg.suggestions.length > 0 && (
+                      <div className="in-chat-suggestions-block">
+                        <div className="in-chat-suggestions-title">
+                          <Sparkles size={11} className="text-emerald-400" />
+                          <span>Suggested follow-ups:</span>
+                        </div>
+                        <div className="in-chat-suggestions-chips">
+                          {msg.suggestions.map((sug, sIdx) => (
+                            <button
+                              key={sIdx}
+                              disabled={isLoading}
+                              onClick={() => handleSend(sug)}
+                              className="in-chat-suggestion-chip"
+                            >
+                              <span>{sug}</span>
+                              <ArrowRight size={11} className="chip-arrow" />
+                            </button>
+                          ))}
+                        </div>
                       </div>
                     )}
                   </div>
@@ -360,28 +396,6 @@ export default function ChatbotWidget() {
               )}
               <div ref={messagesEndRef} />
             </div>
-
-            {/* Continuous Interactive Suggestions Strip */}
-            {suggestions && suggestions.length > 0 && (
-              <div className="dynamic-suggestions-bar">
-                <div className="suggestions-header">
-                  <Sparkles size={11} className="text-emerald-400" />
-                  <span>Suggested Follow-ups</span>
-                </div>
-                <div className="suggestions-scroll">
-                  {suggestions.map((sug, idx) => (
-                    <button
-                      key={idx}
-                      disabled={isLoading}
-                      onClick={() => handleSend(sug)}
-                      className="suggestion-chip"
-                    >
-                      {sug}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
 
             {/* Input Bar */}
             <div className="chat-input-area">
@@ -412,7 +426,7 @@ export default function ChatbotWidget() {
               </form>
 
               <div className="chat-footer-note">
-                <span>Direct Support: </span>
+                <span>Support: </span>
                 <a href="tel:+918374373753" className="text-emerald-400 hover:underline font-medium">
                   +91 83743 73753
                 </a>
@@ -601,7 +615,7 @@ export default function ChatbotWidget() {
           padding: 0.9rem 0.85rem;
           display: flex;
           flex-direction: column;
-          gap: 0.75rem;
+          gap: 0.85rem;
         }
 
         .chat-messages-container::-webkit-scrollbar {
@@ -617,16 +631,25 @@ export default function ChatbotWidget() {
           display: flex;
           gap: 0.5rem;
           align-items: flex-start;
-          max-width: 92%;
+          max-width: 95%;
         }
 
         .chat-message-row.user {
           align-self: flex-end;
           flex-direction: row-reverse;
+          max-width: 88%;
         }
 
         .chat-message-row.assistant {
           align-self: flex-start;
+          width: 100%;
+        }
+
+        .message-content-wrapper {
+          display: flex;
+          flex-direction: column;
+          gap: 0.45rem;
+          flex: 1;
         }
 
         .message-avatar {
@@ -693,64 +716,67 @@ export default function ChatbotWidget() {
           }
         }
 
-        /* CONTINUOUS DYNAMIC SUGGESTIONS */
-        .dynamic-suggestions-bar {
-          padding: 0.4rem 0.85rem 0.45rem 0.85rem;
-          background: rgba(15, 23, 42, 0.7);
-          border-top: 1px solid rgba(255, 255, 255, 0.06);
+        /* IN-CHAT SUGGESTIONS DIRECTLY UNDER ASSISTANT BUBBLE */
+        .in-chat-suggestions-block {
+          display: flex;
+          flex-direction: column;
+          gap: 0.3rem;
+          margin-top: 0.1rem;
         }
 
-        .suggestions-header {
+        .in-chat-suggestions-title {
           display: flex;
           align-items: center;
-          gap: 0.35rem;
+          gap: 0.3rem;
           font-size: 0.62rem;
           font-weight: 700;
           color: #94a3b8;
           text-transform: uppercase;
-          letter-spacing: 0.05em;
-          margin-bottom: 0.3rem;
+          letter-spacing: 0.04em;
         }
 
-        .suggestions-scroll {
+        .in-chat-suggestions-chips {
           display: flex;
-          gap: 0.35rem;
-          overflow-x: auto;
-          -webkit-overflow-scrolling: touch;
-          padding-bottom: 3px;
+          flex-direction: column;
+          gap: 0.3rem;
         }
 
-        .suggestions-scroll::-webkit-scrollbar {
-          height: 3px;
-        }
-
-        .suggestions-scroll::-webkit-scrollbar-thumb {
-          background: rgba(255, 255, 255, 0.15);
-          border-radius: 3px;
-        }
-
-        .suggestion-chip {
-          white-space: nowrap;
-          font-size: 0.68rem;
+        .in-chat-suggestion-chip {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          text-align: left;
+          gap: 0.5rem;
+          font-size: 0.72rem;
           font-weight: 600;
           color: #cbd5e1;
-          background: rgba(255, 255, 255, 0.06);
-          border: 1px solid rgba(255, 255, 255, 0.12);
-          padding: 0.28rem 0.7rem;
-          border-radius: 50px;
+          background: rgba(30, 41, 59, 0.65);
+          border: 1px solid rgba(52, 211, 153, 0.25);
+          padding: 0.35rem 0.65rem;
+          border-radius: 8px;
           cursor: pointer;
           transition: all 0.2s;
+        }
+
+        .in-chat-suggestion-chip:hover:not(:disabled) {
+          background: rgba(16, 185, 129, 0.18);
+          border-color: rgba(52, 211, 153, 0.6);
+          color: #ffffff;
+          transform: translateX(2px);
+        }
+
+        .in-chat-suggestion-chip:hover:not(:disabled) .chip-arrow {
+          color: #34d399;
+          transform: translateX(2px);
+        }
+
+        .chip-arrow {
+          color: #64748b;
+          transition: transform 0.2s, color 0.2s;
           flex-shrink: 0;
         }
 
-        .suggestion-chip:hover:not(:disabled) {
-          background: rgba(16, 185, 129, 0.18);
-          border-color: rgba(52, 211, 153, 0.5);
-          color: #ffffff;
-          transform: translateY(-1px);
-        }
-
-        .suggestion-chip:disabled {
+        .in-chat-suggestion-chip:disabled {
           opacity: 0.5;
           cursor: not-allowed;
         }
