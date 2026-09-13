@@ -1944,7 +1944,7 @@ export default function EnterpriseCrmView() {
 
         .pricing-card {
           border-radius: 24px;
-          padding: 2.5rem 2rem;
+          padding: 3rem 2rem 2.5rem;
           border: 1px solid var(--glass-border);
           display: flex;
           flex-direction: column;
@@ -1965,14 +1965,18 @@ export default function EnterpriseCrmView() {
           color: white;
           padding: 0.35rem 1rem;
           border-radius: 20px;
-          font-size: 0.75rem;
+          font-size: 0.72rem;
           font-weight: 700;
-          letter-spacing: 1px;
+          letter-spacing: 0.8px;
+          white-space: nowrap;
+          z-index: 5;
+          box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
         }
 
         .plan-name {
           font-size: 1.4rem;
           font-weight: 700;
+          margin-top: 0.25rem;
           margin-bottom: 0.5rem;
           color: var(--text-color);
         }
@@ -2526,8 +2530,19 @@ export default function EnterpriseCrmView() {
           }
 
           .pricing-card {
-            padding: 1.75rem 1.25rem;
+            padding: 2.75rem 1.25rem 1.75rem;
             border-radius: 18px;
+          }
+
+          .popular-ribbon {
+            font-size: 0.68rem;
+            padding: 0.28rem 0.85rem;
+            top: -10px;
+          }
+
+          .plan-name {
+            font-size: 1.25rem;
+            margin-top: 0.35rem;
           }
 
           .faq-section {
