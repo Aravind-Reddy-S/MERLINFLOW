@@ -15,13 +15,13 @@ import {
   ChevronDown
 } from 'lucide-react';
 
-const SUGGESTED_QUESTIONS = [
-  "🏢 How does Real Estate 3D inventory & RERA billing work?",
-  "💼 What are Enterprise ERP & CRM multi-GST capabilities?",
-  "🎓 What are School IMS core modules?",
-  "💊 How does Medical ERP prevent expiry losses?",
-  "🍽️ How does Restaurant ERP table billing work?",
-  "💰 What are your pricing plans?"
+const INITIAL_SUGGESTIONS = [
+  "🏢 Real Estate 3D inventory & RERA billing",
+  "💼 Enterprise ERP & Multi-GST capabilities",
+  "🎓 School IMS core modules & fee collection",
+  "💊 Medical ERP & FEFO expiry watchdog",
+  "🍽️ Restaurant ERP live table grid & KDS",
+  "💰 Pricing plans overview"
 ];
 
 export default function ChatbotWidget() {
@@ -29,9 +29,10 @@ export default function ChatbotWidget() {
   const [messages, setMessages] = useState([
     {
       role: 'assistant',
-      content: "Hello! 👋 I'm **Merlin AI**, your 24/7 intelligent SaaS consultant.\n\nHow can I help you today? Feel free to ask about our **Real Estate CRM**, **Enterprise & CRMs**, **School IMS**, **Medical ERP**, **Restaurant ERP**, or **E-Commerce Suite**."
+      content: "Hello! 👋 I'm **Merlin AI**, your 24/7 intelligent solutions consultant for **MerlinFlow Technologies**.\n\nHow can I help you today? You can ask me about our **Real Estate CRM**, **Enterprise ERP**, **School IMS**, **Medical ERP**, **Restaurant POS**, **E-Commerce Suite**, pricing, or schedule a live demo!"
     }
   ]);
+  const [suggestions, setSuggestions] = useState(INITIAL_SUGGESTIONS);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef(null);
@@ -46,7 +47,7 @@ export default function ChatbotWidget() {
       scrollToBottom();
       setTimeout(() => inputRef.current?.focus(), 150);
     }
-  }, [isOpen, messages]);
+  }, [isOpen, messages, isLoading, suggestions]);
 
   const handleSend = async (textToSend) => {
     const query = typeof textToSend === 'string' ? textToSend : inputValue;
@@ -72,14 +73,23 @@ export default function ChatbotWidget() {
 
       const data = await response.json();
       setMessages((prev) => [...prev, { role: 'assistant', content: data.content }]);
+      
+      if (data.suggestions && Array.isArray(data.suggestions) && data.suggestions.length > 0) {
+        setSuggestions(data.suggestions);
+      }
     } catch (err) {
       console.error(err);
       setMessages((prev) => [
         ...prev,
         {
           role: 'assistant',
-          content: "I ran into a temporary issue connecting to the AI engine. You can reach our team directly at **+91 83743 73753** or **info@merlinflow.in** for immediate assistance!"
+          content: "I ran into a temporary connection issue. You can reach our team directly at **+91 83743 73753** / **+91 82477 16878** or **hello@merlinflow.in** for immediate assistance!"
         }
+      ]);
+      setSuggestions([
+        "📅 How can I book a live demo?",
+        "🏢 Show Real Estate CRM features",
+        "💰 Pricing plans overview"
       ]);
     } finally {
       setIsLoading(false);
@@ -93,6 +103,7 @@ export default function ChatbotWidget() {
         content: "Chat reset! How can I assist you with MerlinFlow today?"
       }
     ]);
+    setSuggestions(INITIAL_SUGGESTIONS);
   };
 
   const formatInlineText = (text, lineIdx) => {
@@ -171,14 +182,14 @@ export default function ChatbotWidget() {
       // Markdown Headings
       if (trimmed.startsWith('### ')) {
         return (
-          <h4 key={idx} className="text-sm font-bold text-emerald-400 mt-2.5 mb-1">
+          <h4 key={idx} className="text-sm font-bold text-emerald-400 mt-2 mb-1">
             {formatInlineText(trimmed.replace('### ', ''), idx)}
           </h4>
         );
       }
       if (trimmed.startsWith('## ') || trimmed.startsWith('# ')) {
         return (
-          <h3 key={idx} className="text-sm sm:text-base font-extrabold text-white mt-3 mb-1.5 border-b border-white/10 pb-1">
+          <h3 key={idx} className="text-sm sm:text-base font-extrabold text-white mt-2.5 mb-1 border-b border-white/10 pb-0.5">
             {formatInlineText(trimmed.replace(/^#+\s/, ''), idx)}
           </h3>
         );
@@ -280,7 +291,7 @@ export default function ChatbotWidget() {
                     <h3 className="header-title">Merlin AI</h3>
                     <span className="copilot-badge">Copilot</span>
                   </div>
-                  <p className="header-sub">Ultra-Fast • Powered by Groq</p>
+                  <p className="header-sub">MerlinFlow Technologies • Telangana</p>
                 </div>
               </div>
 
@@ -303,24 +314,6 @@ export default function ChatbotWidget() {
                 </button>
               </div>
             </div>
-
-            {/* Quick Suggestions Strip */}
-            {messages.length <= 2 && (
-              <div className="quick-suggestions-wrap">
-                <div className="suggestions-label">Quick Starters:</div>
-                <div className="suggestions-scroll">
-                  {SUGGESTED_QUESTIONS.map((suggestion, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => handleSend(suggestion)}
-                      className="suggestion-chip"
-                    >
-                      {suggestion}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
 
             {/* Messages Area */}
             <div className="chat-messages-container">
@@ -368,6 +361,28 @@ export default function ChatbotWidget() {
               <div ref={messagesEndRef} />
             </div>
 
+            {/* Continuous Interactive Suggestions Strip */}
+            {suggestions && suggestions.length > 0 && (
+              <div className="dynamic-suggestions-bar">
+                <div className="suggestions-header">
+                  <Sparkles size={11} className="text-emerald-400" />
+                  <span>Suggested Follow-ups</span>
+                </div>
+                <div className="suggestions-scroll">
+                  {suggestions.map((sug, idx) => (
+                    <button
+                      key={idx}
+                      disabled={isLoading}
+                      onClick={() => handleSend(sug)}
+                      className="suggestion-chip"
+                    >
+                      {sug}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* Input Bar */}
             <div className="chat-input-area">
               <form
@@ -382,7 +397,7 @@ export default function ChatbotWidget() {
                   type="text"
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
-                  placeholder="Ask Merlin AI anything..."
+                  placeholder="Ask Merlin AI anything about our products..."
                   className="chat-input-field"
                   disabled={isLoading}
                 />
@@ -397,9 +412,13 @@ export default function ChatbotWidget() {
               </form>
 
               <div className="chat-footer-note">
-                <span>Free instant walkthroughs • Call </span>
-                <a href="tel:+918374373753" className="text-emerald-400 hover:underline">
+                <span>Direct Support: </span>
+                <a href="tel:+918374373753" className="text-emerald-400 hover:underline font-medium">
                   +91 83743 73753
+                </a>
+                <span> • </span>
+                <a href="tel:+918247716878" className="text-emerald-400 hover:underline font-medium">
+                  +91 82477 16878
                 </a>
               </div>
             </div>
@@ -470,9 +489,9 @@ export default function ChatbotWidget() {
           position: fixed;
           bottom: 76px;
           right: 20px;
-          width: 350px;
+          width: 360px;
           max-width: calc(100vw - 28px);
-          height: 480px;
+          height: 520px;
           max-height: calc(100vh - 100px);
           background: rgba(15, 23, 42, 0.96);
           backdrop-filter: blur(20px);
@@ -575,60 +594,6 @@ export default function ChatbotWidget() {
           color: #ffffff;
         }
 
-        /* SUGGESTIONS */
-        .quick-suggestions-wrap {
-          padding: 0.5rem 0.85rem;
-          background: rgba(15, 23, 42, 0.4);
-          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .suggestions-label {
-          font-size: 0.62rem;
-          font-weight: 700;
-          color: #64748b;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-          margin-bottom: 0.3rem;
-        }
-
-        .suggestions-scroll {
-          display: flex;
-          gap: 0.35rem;
-          overflow-x: auto;
-          -webkit-overflow-scrolling: touch;
-          padding-bottom: 2px;
-        }
-
-        .suggestions-scroll::-webkit-scrollbar {
-          height: 3px;
-        }
-
-        .suggestions-scroll::-webkit-scrollbar-thumb {
-          background: rgba(255, 255, 255, 0.15);
-          border-radius: 3px;
-        }
-
-        .suggestion-chip {
-          white-space: nowrap;
-          font-size: 0.68rem;
-          font-weight: 600;
-          color: #cbd5e1;
-          background: rgba(255, 255, 255, 0.06);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          padding: 0.25rem 0.65rem;
-          border-radius: 50px;
-          cursor: pointer;
-          transition: all 0.2s;
-          flex-shrink: 0;
-        }
-
-        .suggestion-chip:hover {
-          background: rgba(16, 185, 129, 0.15);
-          border-color: rgba(52, 211, 153, 0.4);
-          color: #ffffff;
-          transform: translateY(-1px);
-        }
-
         /* MESSAGES */
         .chat-messages-container {
           flex: 1;
@@ -728,10 +693,72 @@ export default function ChatbotWidget() {
           }
         }
 
+        /* CONTINUOUS DYNAMIC SUGGESTIONS */
+        .dynamic-suggestions-bar {
+          padding: 0.4rem 0.85rem 0.45rem 0.85rem;
+          background: rgba(15, 23, 42, 0.7);
+          border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .suggestions-header {
+          display: flex;
+          align-items: center;
+          gap: 0.35rem;
+          font-size: 0.62rem;
+          font-weight: 700;
+          color: #94a3b8;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          margin-bottom: 0.3rem;
+        }
+
+        .suggestions-scroll {
+          display: flex;
+          gap: 0.35rem;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+          padding-bottom: 3px;
+        }
+
+        .suggestions-scroll::-webkit-scrollbar {
+          height: 3px;
+        }
+
+        .suggestions-scroll::-webkit-scrollbar-thumb {
+          background: rgba(255, 255, 255, 0.15);
+          border-radius: 3px;
+        }
+
+        .suggestion-chip {
+          white-space: nowrap;
+          font-size: 0.68rem;
+          font-weight: 600;
+          color: #cbd5e1;
+          background: rgba(255, 255, 255, 0.06);
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          padding: 0.28rem 0.7rem;
+          border-radius: 50px;
+          cursor: pointer;
+          transition: all 0.2s;
+          flex-shrink: 0;
+        }
+
+        .suggestion-chip:hover:not(:disabled) {
+          background: rgba(16, 185, 129, 0.18);
+          border-color: rgba(52, 211, 153, 0.5);
+          color: #ffffff;
+          transform: translateY(-1px);
+        }
+
+        .suggestion-chip:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+
         /* INPUT AREA */
         .chat-input-area {
-          padding: 0.65rem 0.85rem 0.55rem 0.85rem;
-          background: rgba(15, 23, 42, 0.8);
+          padding: 0.6rem 0.85rem 0.55rem 0.85rem;
+          background: rgba(15, 23, 42, 0.85);
           border-top: 1px solid rgba(255, 255, 255, 0.08);
         }
 
@@ -820,7 +847,7 @@ export default function ChatbotWidget() {
             width: auto;
             max-width: none;
             height: calc(100vh - 110px);
-            max-height: 490px;
+            max-height: 520px;
             border-radius: 18px;
           }
         }
