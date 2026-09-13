@@ -1168,48 +1168,42 @@ export default function RealEstateView() {
           border-color: #0284c7;
         }
 
-        :global(.stats-strip) {
-          display: flex !important;
-          flex-direction: row !important;
-          flex-wrap: nowrap !important;
-          justify-content: space-between !important;
-          align-items: stretch !important;
-          gap: 1.25rem !important;
-          width: 100% !important;
-          max-width: 1150px !important;
-          margin: 2.5rem auto 0 !important;
-          align-self: stretch !important;
+        .stats-strip {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 1.25rem;
+          width: 100%;
+          max-width: 1150px;
+          margin: 2.5rem auto 0;
         }
 
-        :global(.stats-strip .stat-card) {
-          flex: 1 1 0px !important;
-          min-width: 0 !important;
-          background: #ffffff !important;
-          border: 1px solid rgba(2, 132, 199, 0.25) !important;
-          padding: 1.5rem 1rem !important;
-          border-radius: 16px !important;
-          text-align: center !important;
-          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
-          transition: transform 0.2s, box-shadow 0.2s !important;
+        .stats-strip .stat-card {
+          background: #ffffff;
+          border: 1px solid rgba(2, 132, 199, 0.25);
+          padding: 1.5rem 1rem;
+          border-radius: 16px;
+          text-align: center;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+          transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        :global(.stats-strip .stat-card:hover) {
-          transform: translateY(-3px) !important;
-          box-shadow: 0 10px 25px rgba(2, 132, 199, 0.15) !important;
+        .stats-strip .stat-card:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 10px 25px rgba(2, 132, 199, 0.15);
         }
 
-        :global(.stats-strip .stat-number) {
-          font-size: 2.2rem !important;
-          font-weight: 800 !important;
-          color: #0284c7 !important;
-          margin-bottom: 0.3rem !important;
-          line-height: 1.1 !important;
+        .stats-strip .stat-number {
+          font-size: 2.2rem;
+          font-weight: 800;
+          color: #0284c7;
+          margin-bottom: 0.3rem;
+          line-height: 1.1;
         }
 
-        :global(.stats-strip .stat-desc) {
-          font-size: 0.85rem !important;
-          color: #334155 !important;
-          font-weight: 600 !important;
+        .stats-strip .stat-desc {
+          font-size: 0.85rem;
+          color: #334155;
+          font-weight: 600;
         }
 
         /* Sandbox Section */
@@ -2455,11 +2449,339 @@ export default function RealEstateView() {
           .sitevisits-grid { grid-template-columns: 1fr; }
         }
 
-        @media (max-width: 640px) {
-          .stats-strip { grid-template-columns: 1fr; }
-          .units-grid { grid-template-columns: 1fr; }
-          .cost-breakdown-grid { grid-template-columns: 1fr 1fr; }
-          .calc-metrics { grid-template-columns: 1fr; }
+        @media (max-width: 768px) {
+          .product-hero {
+            margin-bottom: 3.5rem;
+          }
+
+          .hero-title {
+            font-size: clamp(1.85rem, 6.5vw, 2.6rem);
+            margin-bottom: 1rem;
+          }
+
+          .hero-subtitle {
+            font-size: 0.95rem;
+            margin-bottom: 1.75rem;
+          }
+
+          .hero-actions {
+            flex-direction: column;
+            width: 100%;
+            max-width: 320px;
+            margin: 0 auto 2.5rem;
+            gap: 0.75rem;
+          }
+
+          .btn-primary, .btn-secondary {
+            width: 100%;
+            justify-content: center;
+            text-align: center;
+          }
+
+          .stats-strip {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+          }
+
+          .stats-strip .stat-card {
+            padding: 1rem 0.75rem;
+            border-radius: 12px;
+          }
+
+          .stats-strip .stat-number {
+            font-size: 1.75rem;
+          }
+
+          .stats-strip .stat-desc {
+            font-size: 0.78rem;
+          }
+
+          .sandbox-section {
+            margin-bottom: 3.5rem;
+          }
+
+          .sandbox-header {
+            margin-bottom: 1.5rem;
+          }
+
+          .section-title {
+            font-size: clamp(1.5rem, 5vw, 2rem);
+          }
+
+          .section-subtitle {
+            font-size: 0.9rem;
+            margin-bottom: 1.25rem;
+          }
+
+          .sandbox-tabs {
+            justify-content: flex-start;
+            gap: 0.5rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 0.5rem;
+            scrollbar-width: none;
+          }
+
+          .sandbox-tabs::-webkit-scrollbar {
+            display: none;
+          }
+
+          .sandbox-tab {
+            white-space: nowrap;
+            padding: 0.6rem 1rem;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+          }
+
+          .sandbox-window {
+            border-radius: 14px;
+          }
+
+          .window-topbar {
+            padding: 0.6rem 1rem;
+            font-size: 0.75rem;
+          }
+
+          .sandbox-content {
+            padding: 1.25rem 0.85rem;
+          }
+
+          .inventory-toolbar {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+          }
+
+          .project-select-group {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 0.35rem;
+          }
+
+          .custom-select {
+            width: 100%;
+          }
+
+          .status-filters {
+            width: 100%;
+            gap: 0.35rem;
+          }
+
+          .filter-btn {
+            padding: 0.35rem 0.65rem;
+            font-size: 0.72rem;
+          }
+
+          .units-grid {
+            grid-template-columns: 1fr;
+            gap: 0.85rem;
+          }
+
+          .selected-unit-modal {
+            padding: 1rem;
+            border-radius: 12px;
+            margin-top: 1rem;
+          }
+
+          .cost-breakdown-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.6rem;
+            padding: 0.75rem;
+          }
+
+          .modal-actions {
+            flex-direction: column;
+            gap: 0.5rem;
+          }
+
+          .btn-modal-action {
+            width: 100%;
+            justify-content: center;
+          }
+
+          .leads-stats-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+          }
+
+          .lead-stat-badge {
+            padding: 0.5rem 0.65rem;
+            font-size: 0.78rem;
+            flex-direction: column;
+            gap: 0.2rem;
+          }
+
+          .leads-table-container {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 0 -0.85rem;
+            padding: 0 0.85rem;
+          }
+
+          .leads-table {
+            min-width: 580px;
+            font-size: 0.82rem;
+          }
+
+          .leads-table th, .leads-table td {
+            padding: 0.65rem 0.75rem;
+          }
+
+          .sitevisits-grid {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+          }
+
+          .sitevisit-card {
+            padding: 1rem;
+          }
+
+          .sv-actions {
+            flex-direction: column;
+            gap: 0.5rem;
+          }
+
+          .btn-sv {
+            width: 100%;
+          }
+
+          .rera-top-banner {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 0.75rem;
+          }
+
+          .btn-demand-all {
+            width: 100%;
+            justify-content: center;
+          }
+
+          .milestones-table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 0 -0.85rem;
+            padding: 0 0.85rem;
+          }
+
+          .milestones-table {
+            min-width: 520px;
+            font-size: 0.82rem;
+          }
+
+          .milestones-table th, .milestones-table td {
+            padding: 0.65rem 0.75rem;
+          }
+
+          .capabilities-section {
+            margin-bottom: 3.5rem;
+          }
+
+          .cap-card {
+            padding: 1.4rem 1.15rem;
+            border-radius: 14px;
+          }
+
+          .cap-header {
+            gap: 0.85rem;
+            margin-bottom: 1rem;
+          }
+
+          .cap-icon-wrapper {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+          }
+
+          .cap-title {
+            font-size: 1.15rem;
+          }
+
+          .calculator-section {
+            padding: 1.5rem 1rem;
+            border-radius: 16px;
+            margin-bottom: 3.5rem;
+          }
+
+          .calc-header {
+            margin-bottom: 1.5rem;
+          }
+
+          .calc-body {
+            gap: 1.75rem;
+          }
+
+          .calc-results-card {
+            padding: 1.25rem 1rem;
+            border-radius: 14px;
+          }
+
+          .calc-metrics {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.6rem;
+            margin-bottom: 1.25rem;
+          }
+
+          .pricing-section {
+            margin-bottom: 3.5rem;
+          }
+
+          .pricing-grid {
+            margin-top: 2rem;
+            gap: 1.5rem;
+          }
+
+          .pricing-card {
+            padding: 1.75rem 1.25rem;
+            border-radius: 18px;
+          }
+
+          .faq-section {
+            margin-bottom: 3.5rem;
+          }
+
+          .faq-item {
+            padding: 1rem 1.15rem;
+          }
+
+          .product-deployments-section {
+            margin-bottom: 3.5rem;
+          }
+
+          .prop-deployment-card {
+            padding: 1.15rem 1rem;
+            border-radius: 12px;
+          }
+
+          .p-dep-metrics {
+            padding: 0.45rem;
+            gap: 0.25rem;
+          }
+
+          .p-metric .val {
+            font-size: 0.95rem;
+          }
+
+          .p-metric .lbl {
+            font-size: 0.6rem;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .stats-strip {
+            grid-template-columns: 1fr;
+          }
+
+          .cost-breakdown-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .calc-metrics {
+            grid-template-columns: 1fr;
+          }
         }
       `}</style>
     </div>
