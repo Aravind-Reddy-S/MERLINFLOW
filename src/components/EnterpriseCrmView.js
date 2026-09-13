@@ -676,7 +676,7 @@ export default function EnterpriseCrmView() {
               </div>
               <h3 className="p-dep-title">Nest Infra Developers — Real Estate CRM & Broker Operations</h3>
               <div className="p-dep-meta">
-                <strong>Nest Infra Developers</strong> • <span className="p-domain">crm.nestinfradevelopers.com</span> • Hyderabad & Telangana
+                <strong>Nest Infra Developers</strong> • <span className="p-domain">crm.nestinfradevelopers.in</span> • Hyderabad & Telangana
               </div>
               <p className="p-dep-desc">
                 Specialized CRM architecture automating channel partner broker lead attribution, site-visit tracking, live unit inventory matrix, and customer payment milestone schedules.
@@ -696,12 +696,12 @@ export default function EnterpriseCrmView() {
                 </div>
               </div>
               <a 
-                href="https://crm.nestinfradevelopers.com" 
+                href="https://crm.nestinfradevelopers.in" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="p-dep-btn"
               >
-                <span>Visit Live Platform (crm.nestinfradevelopers.com)</span>
+                <span>Visit Live Platform (crm.nestinfradevelopers.in)</span>
                 <ExternalLink size={15} />
               </a>
             </div>
