@@ -818,15 +818,15 @@ export default function EcommerceView() {
               </a>
             </div>
 
-            {/* Project 2: Kalaakashi */}
+            {/* Project 2: Kalaakshi */}
             <div className="prop-deployment-card">
               <div className="p-dep-top">
                 <span className="p-dep-tag">Cultural E-Commerce</span>
                 <span className="p-dep-badge">Live System</span>
               </div>
-              <h3 className="p-dep-title">Kalaakashi — Culture, Heritage & Event Show Bookings</h3>
+              <h3 className="p-dep-title">Kalaakshi — Culture, Heritage & Event Show Bookings</h3>
               <div className="p-dep-meta">
-                <strong>Kalaakashi</strong> • <span className="p-domain">kalaakashi.com</span> • India
+                <strong>Kalaakshi</strong> • <span className="p-domain">www.kalaakshi.com</span> • India
               </div>
               <p className="p-dep-desc">
                 Dynamic cultural event ticketing, traditional show bookings, and Indian heritage promotion e-commerce platform with live interactive seat tier selection and QR pass generation.
@@ -846,12 +846,12 @@ export default function EcommerceView() {
                 </div>
               </div>
               <a 
-                href="https://kalaakashi.com" 
+                href="https://www.kalaakshi.com" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="p-dep-btn"
               >
-                <span>Visit Live Platform (kalaakashi.com)</span>
+                <span>Visit Live Platform (www.kalaakshi.com)</span>
                 <ExternalLink size={15} />
               </a>
             </div>

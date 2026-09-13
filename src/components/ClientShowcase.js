@@ -82,11 +82,11 @@ export default function ClientShowcase() {
       ]
     },
     {
-      id: "kalaakashi-culture-events-ecommerce",
-      title: "Kalaakashi - Culture, Heritage & Event Show Bookings Platform",
-      client: "Kalaakashi",
-      liveUrl: "https://kalaakashi.com",
-      displayUrl: "kalaakashi.com",
+      id: "kalaakshi-culture-events-ecommerce",
+      title: "Kalaakshi - Culture, Heritage & Event Show Bookings Platform",
+      client: "Kalaakshi",
+      liveUrl: "https://www.kalaakshi.com",
+      displayUrl: "www.kalaakshi.com",
       location: "India",
       category: "ecommerce",
       categoryLabel: "Cultural E-Commerce",
