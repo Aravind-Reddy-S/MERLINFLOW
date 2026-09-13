@@ -44,56 +44,20 @@ export default function LogosStrip() {
       category: "Growth & PropTech",
       themeColor: "#f59e0b",
       isImage: true
-    },
-    {
-      name: "Cashfree Payments",
-      tagline: "Instant Payment Gateway Sync",
-      domain: "Automated Collections",
-      category: "Fintech Partner",
-      themeColor: "#0066ff",
-      isImage: false,
-      badgeText: "Cashfree"
-    },
-    {
-      name: "WhatsApp Cloud API",
-      tagline: "Verified Business Dispatcher",
-      domain: "Sub-second Alerts",
-      category: "Communication",
-      themeColor: "#25d366",
-      isImage: false,
-      badgeText: "WhatsApp"
-    },
-    {
-      name: "Shiprocket",
-      tagline: "Automated Logistics & COD",
-      domain: "29,000+ Pincodes",
-      category: "Supply Chain",
-      themeColor: "#8b5cf6",
-      isImage: false,
-      badgeText: "Logistics"
-    },
-    {
-      name: "AWS Cloud",
-      tagline: "99.99% Enterprise Uptime",
-      domain: "Zero-Trust Infrastructure",
-      category: "Cloud Scale",
-      themeColor: "#ff9900",
-      isImage: false,
-      badgeText: "AWS Cloud"
     }
   ];
 
-  // Duplicate for seamless infinite loop
-  const marqueeItems = [...clientLogos, ...clientLogos];
+  // Repeat for continuous seamless infinite loop
+  const marqueeItems = [...clientLogos, ...clientLogos, ...clientLogos, ...clientLogos];
 
   return (
     <section className="logos-ticker-section">
       <div className="ticker-header container">
         <div className="ticker-label-badge">
           <Sparkles size={13} className="sparkle-icon" />
-          <span>TRUSTED CLIENT DEPLOYMENTS & PARTNERS</span>
+          <span>PROVEN CLIENT DEPLOYMENTS</span>
         </div>
-        <p className="ticker-sub">Powering high-growth real estate developers, SaaS platforms, and digital enterprises</p>
+        <p className="ticker-sub">Explore live production systems, PropTech CRMs, and SaaS platforms built by MerlinFlow</p>
       </div>
 
       <div className="marquee-wrapper" aria-label="Client logos scrolling banner">
