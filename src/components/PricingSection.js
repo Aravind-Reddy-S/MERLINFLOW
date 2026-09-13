@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Check, X, ShoppingCart, Hotel, GraduationCap, Hospital } from "lucide-react";
+import { Check, X, ShoppingCart, Hotel, GraduationCap, Hospital, Building2, Briefcase } from "lucide-react";
 
 export default function PricingSection() {
   const plans = [
@@ -76,18 +76,48 @@ export default function PricingSection() {
         { text: "Multi-Store Central Inventory Sync", included: true },
         { text: "One-Click GSTR-1, 3B & HSN Export", included: true },
       ]
+    },
+    {
+      name: "Real Estate CRM & ERP",
+      desc: "3D real-time unit inventory, 99acres/MagicBricks lead sync, site visit cab dispatch, and RERA demand notes.",
+      price: "₹6,999",
+      period: "/project/mo",
+      popular: false,
+      icon: Building2,
+      color: "#0284c7",
+      bgLight: "#f0f9ff",
+      features: [
+        { text: "3D Live Unit Matrix & Double-Booking Lock", included: true },
+        { text: "99acres & MagicBricks Webhook Pipelines", included: true },
+        { text: "Site Visit Cab Dispatch & Visitor Gate Pass", included: true },
+        { text: "RERA Milestone Demand Notes & Receipts", included: true },
+        { text: "Channel Partner (CP) Mobile Portal", included: true },
+        { text: "Cloud Telephony & Call Recording", included: true },
+      ]
+    },
+    {
+      name: "Enterprise ERP & CRM Suite",
+      desc: "Multi-branch accounting, automated GSTR-1/3B, omnichannel sales deals Kanban, and biometric HRMS.",
+      price: "₹11,999",
+      period: "/month",
+      popular: false,
+      icon: Briefcase,
+      color: "#6366f1",
+      bgLight: "#eef2ff",
+      features: [
+        { text: "Omnichannel CRM Deals & CPQ Quotations", included: true },
+        { text: "Multi-Entity Consolidated GST Accounting", included: true },
+        { text: "E-Way Bill & Sub-1s E-Invoicing IRN", included: true },
+        { text: "Procurement, Vendor RFQ & 3-Way Match", included: true },
+        { text: "Biometric HRMS & Automated Payroll", included: true },
+        { text: "Visual Low-Code Workflow Automation", included: true },
+      ]
     }
   ];
 
-  // Unique entrance animations for each card based on index
+  // Entrance animations for cards based on index
   const getCardAnimation = (index) => {
-    switch(index) {
-      case 0: return { initial: { opacity: 0, y: 30 }, whileInView: { opacity: 1, y: 0 } };
-      case 1: return { initial: { opacity: 0, y: 30, scale: 0.9 }, whileInView: { opacity: 1, y: 0, scale: 1 } };
-      case 2: return { initial: { opacity: 0, y: 30, scale: 0.9 }, whileInView: { opacity: 1, y: 0, scale: 1 } };
-      case 3: return { initial: { opacity: 0, y: 30 }, whileInView: { opacity: 1, y: 0 } };
-      default: return { initial: { opacity: 0, y: 30 }, whileInView: { opacity: 1, y: 0 } };
-    }
+    return { initial: { opacity: 0, y: 30 }, whileInView: { opacity: 1, y: 0 } };
   };
 
   return (
@@ -105,7 +135,7 @@ export default function PricingSection() {
             Affordable Plans for Every <span className="text-gradient">Industry.</span>
           </h2>
           <p style={{ color: "var(--text-muted)", fontSize: "1.1rem", maxWidth: "800px", margin: "0 auto 2rem auto", lineHeight: "1.6" }}>
-            Whether you are running an e-commerce brand, restaurant, school, or pharmacy, our all-in-one software suites are priced affordably in Indian Rupees to scale with your business.
+            Whether you are running an e-commerce brand, restaurant, school, pharmacy, real estate project, or multi-branch enterprise, our all-in-one software suites are priced affordably in Indian Rupees to scale with your business.
           </p>
         </motion.div>
 
@@ -208,10 +238,10 @@ export default function PricingSection() {
 
         .pricing-grid {
           display: grid;
-          grid-template-columns: repeat(4, 1fr);
+          grid-template-columns: repeat(3, 1fr);
           grid-auto-rows: 1fr;
           gap: 2rem;
-          max-width: 1400px;
+          max-width: 1350px;
           margin: 0 auto;
         }
 
@@ -369,7 +399,7 @@ export default function PricingSection() {
           border: 1px solid var(--glass-border);
         }
 
-        @media (max-width: 1200px) {
+        @media (max-width: 1100px) {
           .pricing-grid {
             grid-template-columns: repeat(2, 1fr);
             max-width: 900px;
@@ -379,7 +409,7 @@ export default function PricingSection() {
           }
         }
 
-        @media (max-width: 640px) {
+        @media (max-width: 680px) {
           .pricing-section {
             padding: 4rem 0;
           }

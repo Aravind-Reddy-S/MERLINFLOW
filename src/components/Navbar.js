@@ -23,22 +23,27 @@ export default function Navbar() {
 
 
   const navLinks = [
-    { name: "Home", href: "#hero" },
-    { name: "About Us", href: "#about" },
-    { name: "Products", href: "#products" },
-    { name: "Features", href: "#features" },
-    { name: "How It Works", href: "#how-it-works" },
-    { name: "Integrations", href: "#integrations" },
-    { name: "Pricing", href: "#pricing" },
-    { name: "Contact", href: "#contact" },
+    { name: "Home", href: "/#hero" },
+    { name: "About Us", href: "/#about" },
+    { name: "Solutions", href: "/#features" },
+    { name: "Products", href: "/#products" },
+    { name: "Deployments", href: "/#deployments" },
+    { name: "Integrations", href: "/#integrations" },
+    { name: "Pricing", href: "/#pricing" },
+    { name: "Contact", href: "/#contact" },
   ];
 
   const handleLinkClick = (e, href) => {
-    e.preventDefault();
     setMobileOpen(false);
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    if (href.startsWith("/#") || href.startsWith("#")) {
+      const targetHash = href.replace(/^\//, "");
+      const element = document.querySelector(targetHash);
+      if (element) {
+        e.preventDefault();
+        element.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        // If element is not on current page, let normal navigation happen to /#target
+      }
     }
   };
 
@@ -46,7 +51,7 @@ export default function Navbar() {
     <>
       <nav className={`navbar ${isScrolled ? "scrolled" : ""}`}>
         <div className="container nav-content">
-          <a href="#hero" onClick={(e) => handleLinkClick(e, '#hero')} className="logo-link">
+          <a href="/#hero" onClick={(e) => handleLinkClick(e, '/#hero')} className="logo-link">
             <Image 
               src={merlinflowLogo}
               alt="MerlinFlow Logo"
@@ -125,16 +130,19 @@ export default function Navbar() {
           width: 100%;
           z-index: 1000;
           transition: all 0.3s ease;
-          padding: 1.5rem 0;
+          padding: 1rem 0;
+          background: #ffffff;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+          border-bottom: 1px solid #e2e8f0;
         }
 
         .navbar.scrolled {
-          padding: 1rem 0;
-          background: var(--glass-bg);
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
-          border-bottom: 1px solid var(--glass-border);
-          box-shadow: var(--glass-shadow);
+          padding: 0.75rem 0;
+          background: rgba(255, 255, 255, 0.98);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border-bottom: 1px solid #cbd5e1;
+          box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
         }
 
         .nav-content {
@@ -177,9 +185,9 @@ export default function Navbar() {
         }
 
         .nav-link {
-          font-weight: 500;
+          font-weight: 600;
           font-size: 1.05rem;
-          color: var(--text-color);
+          color: #0f172a;
           transition: color 0.2s;
         }
 
@@ -191,20 +199,20 @@ export default function Navbar() {
           display: flex;
           align-items: center;
           justify-content: center;
-          background: transparent;
-          border: none;
-          color: var(--text-color);
+          background: #f1f5f9;
+          border: 1px solid #cbd5e1;
+          color: #0f172a;
           cursor: pointer;
           transition: transform 0.2s;
-          width: 40px;
-          height: 40px;
+          width: 42px;
+          height: 42px;
           border-radius: 50%;
         }
 
         .mobile-toggle:hover, .theme-toggle:hover {
-          transform: scale(1.1);
+          transform: scale(1.05);
           color: var(--primary);
-          background: var(--bg-alpha-light);
+          background: #e2e8f0;
         }
 
         :global(.dashboard-backdrop) {

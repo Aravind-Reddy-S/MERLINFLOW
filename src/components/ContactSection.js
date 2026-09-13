@@ -166,7 +166,7 @@ export default function ContactSection() {
                   <div className="selection-group">
                     <label className="group-label">I'M INTERESTED IN</label>
                     <div className="pills-wrapper">
-                      {['School ERP', 'Hospital ERP', 'Restaurant', 'E-Commerce', 'General Inquiry'].map(opt => (
+                      {['School IMS', 'Medical ERP', 'Restaurant ERP', 'E-Commerce', 'Real Estate CRM', 'Enterprise ERP & CRMs', 'General Inquiry'].map(opt => (
                         <button type="button" key={opt} className={`selection-pill ${interest === opt ? 'active' : ''}`} onClick={() => setInterest(opt)}>
                           {opt}
                         </button>

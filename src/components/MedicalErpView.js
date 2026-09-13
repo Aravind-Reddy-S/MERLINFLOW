@@ -703,7 +703,7 @@ export default function MedicalErpView() {
   };
 
   return (
-    <div className="medical-erp-page" style={{ paddingTop: "5.5rem" }}>
+    <div className="medical-erp-page" style={{ paddingTop: "7.5rem" }}>
       {/* Top Breadcrumb & Sub Navigation */}
       <div className="sticky-subnav">
         <div className="container subnav-container">

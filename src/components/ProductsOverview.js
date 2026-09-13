@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ShoppingCart, GraduationCap, Hospital, Hotel, ArrowRight } from "lucide-react";
+import { ShoppingCart, GraduationCap, Hospital, Hotel, Building2, Briefcase, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 export default function ProductsOverview() {
@@ -45,6 +45,26 @@ export default function ProductsOverview() {
       color: "#a855f7",
       bgLight: "#faf5ff",
       btnText: "Explore E-commerce"
+    },
+    {
+      id: "real-estate",
+      name: "Real Estate CRM & ERP",
+      tag: "PropTech, Accelerated",
+      desc: "All-in-one PropTech OS for builders and brokers. 3D unit inventory, automated portal lead routing (99acres/MagicBricks), site-visits, and RERA billing.",
+      icon: <Building2 size={28} color="#0284c7" />,
+      color: "#0284c7",
+      bgLight: "#f0f9ff",
+      btnText: "Explore Real Estate"
+    },
+    {
+      id: "enterprise",
+      name: "Enterprise & CRMs",
+      tag: "Operations, Unified",
+      desc: "Unified multi-branch ERP and AI-powered CRM. Omnichannel deal pipeline, multi-GST financial accounting, supply chain PO engine, and automated HRMS.",
+      icon: <Briefcase size={28} color="#6366f1" />,
+      color: "#6366f1",
+      bgLight: "#eef2ff",
+      btnText: "Explore Enterprise ERP"
     }
   ];
 
@@ -133,10 +153,10 @@ export default function ProductsOverview() {
 
         .products-grid {
           display: grid;
-          grid-template-columns: repeat(2, 1fr);
+          grid-template-columns: repeat(3, 1fr);
           grid-auto-rows: 1fr;
           gap: 2rem;
-          max-width: 1200px;
+          max-width: 1280px;
           margin: 0 auto;
         }
 
@@ -216,6 +236,12 @@ export default function ProductsOverview() {
           transform: translateY(-2px);
           opacity: 0.95;
           box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+        }
+
+        @media (max-width: 1024px) {
+          .products-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
         }
 
         @media (max-width: 768px) {

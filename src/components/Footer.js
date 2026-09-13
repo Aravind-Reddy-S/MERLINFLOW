@@ -7,10 +7,14 @@ import merlinflowLogo from "../../public/images/company.png";
 
 export default function Footer() {
   const handleLinkClick = (e, href) => {
-    e.preventDefault();
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    if (href.startsWith('#')) {
+      const element = document.querySelector(href);
+      if (element) {
+        e.preventDefault();
+        element.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        // Allow default navigation to /#section if not on homepage
+      }
     }
   };
 
@@ -52,6 +56,8 @@ export default function Footer() {
               <li><Link href="/products/health">Medical ERP</Link></li>
               <li><Link href="/products/stay">Restaurant ERP</Link></li>
               <li><Link href="/products/ecommerce">E-commerce Platform</Link></li>
+              <li><Link href="/products/real-estate">Real Estate CRM</Link></li>
+              <li><Link href="/products/enterprise">Enterprise & CRMs</Link></li>
               <li><a href="#integrations" onClick={(e) => handleLinkClick(e, '#integrations')}>Integrations</a></li>
               <li><a href="#pricing" onClick={(e) => handleLinkClick(e, '#pricing')}>Pricing</a></li>
             </ul>
@@ -60,10 +66,11 @@ export default function Footer() {
           <div className="footer-links">
             <h3>Company</h3>
             <ul>
-              <li><a href="#about" onClick={(e) => handleLinkClick(e, '#about')}>About Us</a></li>
-              <li><a href="#testimonials" onClick={(e) => handleLinkClick(e, '#testimonials')}>Success Stories</a></li>
-              <li><a href="#contact" onClick={(e) => handleLinkClick(e, '#contact')}>FAQ</a></li>
-              <li><a href="#contact" onClick={(e) => handleLinkClick(e, '#contact')}>Contact</a></li>
+              <li><a href="/#deployments" onClick={(e) => handleLinkClick(e, '#deployments')}>Live Deployments</a></li>
+              <li><a href="/#about" onClick={(e) => handleLinkClick(e, '#about')}>About Us</a></li>
+              <li><a href="/#testimonials" onClick={(e) => handleLinkClick(e, '#testimonials')}>Success Stories</a></li>
+              <li><a href="/#contact" onClick={(e) => handleLinkClick(e, '#contact')}>FAQ</a></li>
+              <li><a href="/#contact" onClick={(e) => handleLinkClick(e, '#contact')}>Contact</a></li>
               <li><a href="/privacy-policy">Privacy Policy</a></li>
             </ul>
           </div>

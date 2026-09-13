@@ -5,6 +5,7 @@ import WhyMerlinFlow from "../components/WhyMerlinFlow";
 import HowItWorks from "../components/HowItWorks";
 import IndustryFeatures from "../components/IndustryFeatures";
 import ProductsOverview from "../components/ProductsOverview";
+import ClientShowcase from "../components/ClientShowcase";
 import IntegrationsSection from "../components/IntegrationsSection";
 import Testimonials from "../components/Testimonials";
 import SecuritySection from "../components/SecuritySection";
@@ -21,6 +22,7 @@ export default function Home() {
       <HowItWorks />
       <IndustryFeatures />
       <ProductsOverview />
+      <ClientShowcase />
       <IntegrationsSection />
       <SecuritySection />
       <PricingSection />
@@ -29,3 +31,4 @@ export default function Home() {
     </main>
   );
 }
+

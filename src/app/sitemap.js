@@ -5,6 +5,7 @@ export default function sitemap() {
     '',
     '/about',
     '/products',
+    '/projects',
     '/features',
     '/how-it-works',
     '/integrations',

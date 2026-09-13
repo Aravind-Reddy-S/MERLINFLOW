@@ -11,7 +11,7 @@ import {
   HelpCircle, Sliders, Calculator, X, Globe, 
   ArrowLeft, ArrowUpRight, Box, MessageSquare, 
   Clock, Flame, Send, CheckCheck, MapPin, Search,
-  Compass, Radio, Cpu, Share2, Tag, Shield
+  Compass, Radio, Cpu, Share2, Tag, Shield, ExternalLink
 } from "lucide-react";
 import Link from "next/link";
 import ContactSection from "./ContactSection";
@@ -246,7 +246,7 @@ export default function EcommerceView() {
   };
 
   return (
-    <div className="ecommerce-page" style={{ paddingTop: "5.5rem" }}>
+    <div className="ecommerce-page" style={{ paddingTop: "7.5rem" }}>
       {/* Background Animated SVG Roadmaps & Glow Orbs */}
       <div className="bg-decorations" aria-hidden="true">
         {/* Glowing radial ambient lights */}
@@ -766,6 +766,95 @@ export default function EcommerceView() {
                 </div>
               </motion.div>
             ))}
+          </div>
+        </section>
+
+        {/* Live Client Deployments in E-Commerce & SaaS */}
+        <section className="product-deployments-section">
+          <div className="section-header text-center">
+            <span className="section-eyebrow">LIVE PRODUCTION DEPLOYMENTS</span>
+            <h2 className="section-title">Proven E-Commerce & Digital Storefronts</h2>
+            <p className="section-subtitle">
+              See how modern digital storefronts, smart networking platforms, and cultural ticketing engines scale on MerlinFlow.
+            </p>
+          </div>
+
+          <div className="product-deployments-grid">
+            {/* Project 1: OneClickBiz */}
+            <div className="prop-deployment-card">
+              <div className="p-dep-top">
+                <span className="p-dep-tag">WhatsApp Store & SaaS</span>
+                <span className="p-dep-badge">Live Platform</span>
+              </div>
+              <h3 className="p-dep-title">OneClickBiz — Digital Business Card & WhatsApp Store SaaS</h3>
+              <div className="p-dep-meta">
+                <strong>OneClickBiz</strong> • <span className="p-domain">oneclickbiz.in</span> • India & Global
+              </div>
+              <p className="p-dep-desc">
+                Full-featured digital storefront SaaS combining interactive vCards, dynamic NFC smart cards, 1-click contact downloads (.vcf), and direct cart-to-WhatsApp order dispatch.
+              </p>
+              <div className="p-dep-metrics">
+                <div className="p-metric">
+                  <span className="val">250,000+</span>
+                  <span className="lbl">Profile Taps</span>
+                </div>
+                <div className="p-metric">
+                  <span className="val">88.4%</span>
+                  <span className="lbl">Contact Save Rate</span>
+                </div>
+                <div className="p-metric">
+                  <span className="val">3.8x Boost</span>
+                  <span className="lbl">Store Leads</span>
+                </div>
+              </div>
+              <a 
+                href="https://oneclickbiz.in" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="p-dep-btn"
+              >
+                <span>Visit Live Platform (oneclickbiz.in)</span>
+                <ExternalLink size={15} />
+              </a>
+            </div>
+
+            {/* Project 2: Kalaakashi */}
+            <div className="prop-deployment-card">
+              <div className="p-dep-top">
+                <span className="p-dep-tag">Cultural E-Commerce</span>
+                <span className="p-dep-badge">Live System</span>
+              </div>
+              <h3 className="p-dep-title">Kalaakashi — Culture, Heritage & Event Show Bookings</h3>
+              <div className="p-dep-meta">
+                <strong>Kalaakashi</strong> • <span className="p-domain">kalaakashi.com</span> • India
+              </div>
+              <p className="p-dep-desc">
+                Dynamic cultural event ticketing, traditional show bookings, and Indian heritage promotion e-commerce platform with live interactive seat tier selection and QR pass generation.
+              </p>
+              <div className="p-dep-metrics">
+                <div className="p-metric">
+                  <span className="val">35,000+</span>
+                  <span className="lbl">Show Tickets</span>
+                </div>
+                <div className="p-metric">
+                  <span className="val">180+</span>
+                  <span className="lbl">Shows Hosted</span>
+                </div>
+                <div className="p-metric">
+                  <span className="val">+340%</span>
+                  <span className="lbl">Engagement</span>
+                </div>
+              </div>
+              <a 
+                href="https://kalaakashi.com" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="p-dep-btn"
+              >
+                <span>Visit Live Platform (kalaakashi.com)</span>
+                <ExternalLink size={15} />
+              </a>
+            </div>
           </div>
         </section>
 
@@ -2762,6 +2851,147 @@ export default function EcommerceView() {
             padding: 0.75rem 0.65rem !important;
             font-size: 0.78rem !important;
           }
+        }
+
+        /* Product Deployments Section */
+        .product-deployments-section {
+          margin-bottom: 5rem;
+          position: relative;
+          z-index: 2;
+        }
+
+        .product-deployments-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1.35rem;
+          max-width: 1200px;
+          margin: 0 auto;
+        }
+
+        .prop-deployment-card {
+          background: #ffffff;
+          border: 1px solid #cbd5e1;
+          border-radius: 14px;
+          padding: 1.35rem 1.4rem;
+          display: flex;
+          flex-direction: column;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+          transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .prop-deployment-card:hover {
+          transform: translateY(-3px);
+          border-color: #3b82f6;
+          box-shadow: 0 10px 30px rgba(59, 130, 246, 0.1);
+        }
+
+        .p-dep-top {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 0.5rem;
+        }
+
+        .p-dep-tag {
+          font-size: 0.7rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.6px;
+          color: #3b82f6;
+          background: rgba(59, 130, 246, 0.08);
+          padding: 0.22rem 0.6rem;
+          border-radius: 50px;
+        }
+
+        .p-dep-badge {
+          font-size: 0.68rem;
+          font-weight: 700;
+          color: #059669;
+          background: rgba(16, 185, 129, 0.08);
+          border: 1px solid rgba(16, 185, 129, 0.25);
+          padding: 0.2rem 0.55rem;
+          border-radius: 50px;
+        }
+
+        .p-dep-title {
+          font-size: 1.12rem;
+          font-weight: 700;
+          line-height: 1.35;
+          margin: 0 0 0.35rem 0;
+          color: #0f172a;
+        }
+
+        .p-dep-meta {
+          font-size: 0.8rem;
+          color: #64748b;
+          margin-bottom: 0.65rem;
+        }
+
+        .p-domain {
+          color: #3b82f6;
+          font-weight: 600;
+        }
+
+        .p-dep-desc {
+          font-size: 0.84rem;
+          color: #475569;
+          line-height: 1.5;
+          margin-bottom: 0.85rem;
+          flex-grow: 1;
+        }
+
+        .p-dep-metrics {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 0.4rem;
+          background: #f8fafc;
+          padding: 0.55rem 0.65rem;
+          border-radius: 8px;
+          border: 1px solid #e2e8f0;
+          margin-bottom: 1rem;
+          text-align: center;
+        }
+
+        .p-metric .val {
+          display: block;
+          font-size: 1.05rem;
+          font-weight: 800;
+          color: #3b82f6;
+        }
+
+        .p-metric .lbl {
+          display: block;
+          font-size: 0.65rem;
+          color: #64748b;
+          margin-top: 0.1rem;
+          font-weight: 600;
+        }
+
+        .p-dep-btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.45rem;
+          width: 100%;
+          padding: 0.6rem 1.1rem;
+          border-radius: 8px;
+          background: #3b82f6;
+          color: #ffffff;
+          font-size: 0.82rem;
+          font-weight: 600;
+          text-decoration: none;
+          transition: all 0.2s ease;
+          box-shadow: 0 3px 10px rgba(59, 130, 246, 0.18);
+          margin-top: auto;
+        }
+
+        .p-dep-btn:hover {
+          background: #2563eb;
+          transform: translateY(-1px);
+        }
+
+        @media (max-width: 992px) {
+          .product-deployments-grid { grid-template-columns: 1fr; }
         }
       `}</style>
     </div>

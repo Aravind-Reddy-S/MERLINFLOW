@@ -16,11 +16,12 @@ import {
 } from 'lucide-react';
 
 const SUGGESTED_QUESTIONS = [
+  "🏢 How does Real Estate 3D inventory & RERA billing work?",
+  "💼 What are Enterprise ERP & CRM multi-GST capabilities?",
   "🎓 What are School IMS core modules?",
   "💊 How does Medical ERP prevent expiry losses?",
   "🍽️ How does Restaurant ERP table billing work?",
-  "💰 What are your pricing plans?",
-  "📅 How do I schedule a live demo?"
+  "💰 What are your pricing plans?"
 ];
 
 export default function ChatbotWidget() {
@@ -28,7 +29,7 @@ export default function ChatbotWidget() {
   const [messages, setMessages] = useState([
     {
       role: 'assistant',
-      content: "Hello! 👋 I'm **Merlin AI**, your 24/7 intelligent SaaS consultant.\n\nHow can I help you today? Feel free to ask about our **School IMS**, **Medical ERP**, **Restaurant ERP**, or **E-Commerce Suite**."
+      content: "Hello! 👋 I'm **Merlin AI**, your 24/7 intelligent SaaS consultant.\n\nHow can I help you today? Feel free to ask about our **Real Estate CRM**, **Enterprise & CRMs**, **School IMS**, **Medical ERP**, **Restaurant ERP**, or **E-Commerce Suite**."
     }
   ]);
   const [inputValue, setInputValue] = useState('');

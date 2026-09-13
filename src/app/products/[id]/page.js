@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ShoppingCart, GraduationCap, Hospital, Hotel, ArrowLeft, CheckCircle2 } from "lucide-react";
+import { ShoppingCart, GraduationCap, Hospital, Hotel, Building2, Briefcase, ArrowLeft, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 import { use, useEffect } from "react";
 import ContactSection from "../../../components/ContactSection";
@@ -9,6 +9,8 @@ import SchoolImsView from "../../../components/SchoolImsView";
 import MedicalErpView from "../../../components/MedicalErpView";
 import RestaurantErpView from "../../../components/RestaurantErpView";
 import EcommerceView from "../../../components/EcommerceView";
+import RealEstateView from "../../../components/RealEstateView";
+import EnterpriseCrmView from "../../../components/EnterpriseCrmView";
 import { notFound } from "next/navigation";
 
 // Data mapping for all products
@@ -78,6 +80,58 @@ const PRODUCT_DATA = {
       { title: "Omnichannel Notification Hub", desc: "Automated multi-channel notification microservice broadcasting order confirmations, tracking links, and abandoned cart recovery alerts via WhatsApp." },
       { title: "Master Inventory Management", desc: "Complete structural management of multi-warehouse inventory levels, featuring predictive low-stock alerts and advanced demand forecasting analytics." }
     ]
+  },
+  "real-estate": {
+    name: "Real Estate CRM & ERP",
+    tag: "PropTech, Accelerated",
+    desc: "All-in-one PropTech OS for builders and brokers. 3D unit inventory, automated portal lead routing (99acres/MagicBricks), site-visits, and RERA billing.",
+    icon: Building2,
+    color: "#0284c7",
+    bgLight: "#f0f9ff",
+    features: [
+      { title: "3D Real-Time Inventory Grid", desc: "Interactive unit booking matrix preventing double-bookings across 500+ channel partners and site sales executives." },
+      { title: "Omnichannel Lead Ingestion", desc: "Instant webhook capture and round-robin allocation for 99acres, MagicBricks, Meta Ads, and Google Ads." },
+      { title: "Site Visit & Cab Dispatcher", desc: "Automated Uber/Ola cab booking, WhatsApp geolocated gate passes, and field representative GPS check-ins." },
+      { title: "RERA Milestone Demand Notes", desc: "Automated construction stage demand letters with integrated digital payment gateways and escrow accounting." }
+    ]
+  },
+  realestate: {
+    name: "Real Estate CRM & ERP",
+    tag: "PropTech, Accelerated",
+    desc: "All-in-one PropTech OS for builders and brokers. 3D unit inventory, automated portal lead routing (99acres/MagicBricks), site-visits, and RERA billing.",
+    icon: Building2,
+    color: "#0284c7",
+    bgLight: "#f0f9ff",
+  },
+  enterprise: {
+    name: "Enterprise & CRMs",
+    tag: "Operations, Unified",
+    desc: "Unified multi-branch ERP and AI-powered CRM. Omnichannel deal pipeline, multi-GST financial accounting, supply chain PO engine, and automated HRMS.",
+    icon: Briefcase,
+    color: "#6366f1",
+    bgLight: "#eef2ff",
+    features: [
+      { title: "Omnichannel Deals Kanban", desc: "Visual multi-stage deal tracking with AI win probability scoring, CPQ quotation builder, and sales rep commission split." },
+      { title: "Multi-Entity GST & E-Invoicing", desc: "Consolidated multi-branch financial accounting with instant GSTR-1, 3B, E-Way Bill, and government IRN generation." },
+      { title: "End-to-End Supply Chain", desc: "Automated RFQ vendor bidding, 3-way matching (PO, GRN, Vendor Bill), and multi-warehouse batch tracking." },
+      { title: "Low-Code Workflow Engine", desc: "Visual IF-THEN approval hierarchies triggering instant WhatsApp and mobile app authorizations for big-ticket decisions." }
+    ]
+  },
+  "enterprise-crm": {
+    name: "Enterprise & CRMs",
+    tag: "Operations, Unified",
+    desc: "Unified multi-branch ERP and AI-powered CRM. Omnichannel deal pipeline, multi-GST financial accounting, supply chain PO engine, and automated HRMS.",
+    icon: Briefcase,
+    color: "#6366f1",
+    bgLight: "#eef2ff",
+  },
+  crm: {
+    name: "Enterprise & CRMs",
+    tag: "Operations, Unified",
+    desc: "Unified multi-branch ERP and AI-powered CRM. Omnichannel deal pipeline, multi-GST financial accounting, supply chain PO engine, and automated HRMS.",
+    icon: Briefcase,
+    color: "#6366f1",
+    bgLight: "#eef2ff",
   }
 };
 
@@ -103,6 +157,14 @@ export default function ProductPage({ params }) {
 
   if (id === "ecommerce" || id === "e-commerce") {
     return <EcommerceView />;
+  }
+
+  if (id === "real-estate" || id === "realestate" || id === "property") {
+    return <RealEstateView />;
+  }
+
+  if (id === "enterprise" || id === "enterprise-crm" || id === "crm" || id === "erp") {
+    return <EnterpriseCrmView />;
   }
 
   const product = PRODUCT_DATA[id];

@@ -8,10 +8,12 @@ export default function IndustryFeatures() {
   const [activeTab, setActiveTab] = useState("education");
 
   const industries = [
-    { id: "education", label: "Education", icon: <GraduationCap size={20} /> },
-    { id: "hotels", label: "Hotels & Resorts", icon: <Bed size={20} /> },
-    { id: "healthcare", label: "Hospitals & Clinics", icon: <Stethoscope size={20} /> },
-    { id: "corporate", label: "Corporate ERP", icon: <Briefcase size={20} /> }
+    { id: "education", label: "Education", icon: <GraduationCap size={18} /> },
+    { id: "hotels", label: "Hotels & Resorts", icon: <Bed size={18} /> },
+    { id: "healthcare", label: "Hospitals & Clinics", icon: <Stethoscope size={18} /> },
+    { id: "realestate", label: "Real Estate", icon: <Building2 size={18} /> },
+    { id: "enterprise_crm", label: "Enterprise & CRMs", icon: <Briefcase size={18} /> },
+    { id: "corporate", label: "Corporate ERP", icon: <BarChart size={18} /> }
   ];
 
   const featuresData = {
@@ -38,6 +40,22 @@ export default function IndustryFeatures() {
       { title: "Insurance & Billing", desc: "Streamline claims processing and out-of-pocket patient invoicing.", icon: <BarChart size={24} color="#eab308" />, color: "#eab308", bgLight: "#fef9c3" },
       { title: "Telemedicine Ready", desc: "Integrated video consultations and remote patient monitoring.", icon: <Activity size={24} color="#ef4444" />, color: "#ef4444", bgLight: "#fef2f2" },
       { title: "Compliance & Security", desc: "HIPAA compliant infrastructure ensuring strict data privacy.", icon: <ShieldCheck size={24} color="#6366f1" />, color: "#6366f1", bgLight: "#e0e7ff" }
+    ],
+    realestate: [
+      { title: "3D Unit Inventory Matrix", desc: "Real-time color-coded unit grid with atomic reservation locking and zero double bookings.", icon: <Building2 size={24} color="#0284c7" />, color: "#0284c7", bgLight: "#f0f9ff" },
+      { title: "Omnichannel Lead Ingestion", desc: "Direct webhook pipelines for 99acres, MagicBricks, Meta Ads with sub-3s round-robin routing.", icon: <Users size={24} color="#059669" />, color: "#059669", bgLight: "#ecfdf5" },
+      { title: "Site Visit & Cab Dispatch", desc: "Automated Uber/Ola dispatch, Google Maps GPS pins, and instant WhatsApp QR visitor passes.", icon: <Calendar size={24} color="#d97706" />, color: "#d97706", bgLight: "#fffbeb" },
+      { title: "RERA Milestone Demand Notes", desc: "Stage-wise construction progress billing with engineer certification and instant payment links.", icon: <FileText size={24} color="#6366f1" />, color: "#6366f1", bgLight: "#eef2ff" },
+      { title: "Channel Partner (CP) Portal", desc: "Dedicated mobile broker workspace with 60-day client protection and live commission ledgers.", icon: <ShieldCheck size={24} color="#ec4899" />, color: "#ec4899", bgLight: "#fdf2f8" },
+      { title: "Executive Sales BI", desc: "Real-time tower absorption velocity, source-wise CAC analysis, and unsold holding cost tracker.", icon: <BarChart size={24} color="#8b5cf6" />, color: "#8b5cf6", bgLight: "#f5f3ff" }
+    ],
+    enterprise_crm: [
+      { title: "Visual Deal Pipeline & CPQ", desc: "AI-backed win rate forecasting, multi-stage sales Kanban, and automated Configure-Price-Quote.", icon: <BarChart size={24} color="#6366f1" />, color: "#6366f1", bgLight: "#eef2ff" },
+      { title: "Multi-Entity GST & E-Invoicing", desc: "Direct NIC portal sync with sub-second IRN, E-Way bills, and consolidated multi-branch ledgers.", icon: <FileText size={24} color="#059669" />, color: "#059669", bgLight: "#ecfdf5" },
+      { title: "Workflow Approval Engine", desc: "Multi-tier approval matrices for contract discounts, purchase requisitions, and credit limits.", icon: <Activity size={24} color="#d97706" />, color: "#d97706", bgLight: "#fffbeb" },
+      { title: "Procurement & Vendor Portal", desc: "Complete PO lifecycle management, 3-way invoice matching, GRN logs, and supplier ratings.", icon: <Briefcase size={24} color="#0284c7" />, color: "#0284c7", bgLight: "#f0f9ff" },
+      { title: "Centralized HRMS & Payroll", desc: "Biometric hardware sync, shift rosters, automated statutory compliance (PF/ESI/TDS), and self-service.", icon: <Users size={24} color="#ec4899" />, color: "#ec4899", bgLight: "#fdf2f8" },
+      { title: "360° Customer Timeline", desc: "Omnichannel communication trail uniting email, WhatsApp API, and cloud telephony call audits.", icon: <ShieldCheck size={24} color="#8b5cf6" />, color: "#8b5cf6", bgLight: "#f5f3ff" }
     ],
     corporate: [
       { title: "Human Resources (HRMS)", desc: "Manage payroll, attendance, leave, and employee lifecycles.", icon: <Users size={24} color="#3b82f6" />, color: "#3b82f6", bgLight: "#eff6ff" },
@@ -124,36 +142,50 @@ export default function IndustryFeatures() {
         .tabs-container {
           display: flex;
           justify-content: center;
-          flex-wrap: wrap;
-          gap: 0.75rem;
+          align-items: center;
+          flex-wrap: nowrap;
+          gap: 0.55rem;
           margin-bottom: 2.5rem;
+          max-width: 100%;
+          overflow-x: auto;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+          padding: 0.35rem 0.5rem;
+        }
+
+        .tabs-container::-webkit-scrollbar {
+          display: none;
         }
 
         .tab-button {
-          display: flex;
+          display: inline-flex;
           align-items: center;
-          gap: 0.5rem;
-          padding: 0.65rem 1.25rem;
-          background: rgba(255, 255, 255, 0.05);
-          border: 1px solid var(--glass-border);
+          gap: 0.45rem;
+          padding: 0.55rem 1.05rem;
+          background: #ffffff;
+          border: 1px solid #cbd5e1;
           border-radius: 50px;
-          color: var(--text-muted);
+          color: #475569;
           font-weight: 600;
-          font-size: 0.92rem;
+          font-size: 0.86rem;
           cursor: pointer;
-          transition: all 0.3s;
+          white-space: nowrap;
+          flex-shrink: 0;
+          transition: all 0.2s ease;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.02);
         }
 
         .tab-button:hover {
-          background: rgba(255, 255, 255, 0.1);
-          color: var(--text-color);
+          background: #f8fafc;
+          color: var(--primary);
+          border-color: #3b82f6;
         }
 
         .tab-button.active {
           background: var(--primary);
-          color: white;
+          color: #ffffff;
           border-color: var(--primary);
-          box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+          box-shadow: 0 4px 15px rgba(59, 130, 246, 0.35);
         }
 
         .tab-content-wrapper {
